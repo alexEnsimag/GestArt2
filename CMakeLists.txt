@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 2.6)
 
-project(Fenetre)
+project(Gest-Art_App)
 
 find_package(PkgConfig)
 pkg_check_modules(GTKMM gtkmm-3.0)
@@ -23,11 +23,11 @@ file(
 )
 
 add_executable(
-    Fenetre
+    Gest-Art_App
     ${source_files}
 )
 
 target_link_libraries(
-    Fenetre
+    Gest-Art_App
     ${GTKMM_LIBRARIES}
 )
