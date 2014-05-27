@@ -8,7 +8,7 @@ help(){
   echo    "h: help"
   echo    "c: Compilation uniquement"
   echo    "e: Execution uniquement"
-  echo    "r: reset : recréation des dossier necessaires à la compilation\n"
+  echo    "r: Création ou Recréation des dossier necessaires à la compilation\n"
   exit
 }
 
@@ -34,12 +34,14 @@ if test "$opt_R" = "true"
 then
 	rm -r build/
 	mkdir build
+	cd build
+	cmake ..
+	cd ..
 fi
 
 if test "$opt_E" != "true"
 then
 	cd build
-	cmake ..
 	make
 	cd ..
 fi

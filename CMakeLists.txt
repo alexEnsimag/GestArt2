@@ -12,6 +12,7 @@ endif()
 link_directories(
     ${GTKMM_LIBRARY_DIRS}
 )
+
 include_directories(
     ${GTKMM_INCLUDE_DIRS}
 )
@@ -19,7 +20,7 @@ include_directories(
 file(
     GLOB_RECURSE
     source_files
-    src/Controler/Base/*
+    src/*
 )
 
 add_executable(
