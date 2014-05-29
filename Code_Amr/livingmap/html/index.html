@@ -1,0 +1,372 @@
+<html>
+    <head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8" />
+    <title>Living map</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/modernizr.js"></script>
+    <script type="text/javascript" src="js/jquery-ui.js"></script>
+    <script type="text/javascript" src="js/collision.js"></script>
+    <script type="text/javascript" src="js/screenfull.js"></script>
+    <script type="text/javascript" src="js/jquery.jplayer.min.js"></script>
+    <script type="text/javascript" src="js/jplayer.playlist.min.js"></script>
+    <script type="text/javascript" src="js/jquery.jplayer.inspector.js"></script>
+    
+    <link href="css/fonts/fontskit.css" rel="stylesheet"/>
+    <link href="css/style.css" rel="stylesheet"/>
+
+    <script>
+
+	    var websocket;
+	    $(document).ready(function(){
+	    	//fullscreen
+	    	/*
+	    	$('body').click(function(){
+	    	screenfull.request( $('body')[0] );
+	    	});
+	    	*/
+	    	
+	    
+			var myPlaylist = new jPlayerPlaylist({
+					jPlayer: "#jpId"
+					}, [
+					{
+						mp3:"mp3/1.mp3"
+					},
+										{
+						mp3:"mp3/2.mp3"
+					},
+										{
+						mp3:"mp3/3.mp3"
+					},
+										{
+						mp3:"mp3/4.mp3"
+					},
+										{
+						mp3:"mp3/5.mp3"
+					},
+										{
+						mp3:"mp3/6.mp3"
+					},
+										{
+						mp3:"mp3/7.mp3"
+					},
+										{
+						mp3:"mp3/8.mp3"},
+										{
+						mp3:"mp3/9.mp3"
+					},
+										{
+						mp3:"mp3/10.mp3"
+					},
+										{
+						mp3:"mp3/11.mp3"
+					},
+										{
+						mp3:"mp3/12.mp3"
+					},
+										{
+						mp3:"mp3/13.mp3"
+					},		
+										{
+						mp3:"mp3/14.mp3"
+					},
+										{
+						mp3:"mp3/15.mp3"
+					},
+										{
+						mp3:"mp3/16.mp3"
+					},
+										{
+						mp3:"mp3/17.mp3"
+					}
+				], {
+					playlistOptions: {
+						enableRemoveControls: true
+					},
+					supplied: "mp3",
+					keyEnabled: true
+					}
+				);
+					$("#jplayer_inspector_1").jPlayerInspector({jPlayer:$("#jpId")});
+					
+			/*
+			raiseToHighestZindex = function(elem) {
+			    var highest_index = 0;
+			    $("*").each(function() {
+			        var cur_zindex= $(this).css("z-index");
+			        if (cur_zindex > highest_index) {
+			            highest_index = cur_zindex;
+			            $(elem).css("z-index", cur_zindex + 1);
+			        }
+			    });
+			    return highest_index;
+			}; 
+			*/
+
+		    var idStand = "";		
+		    var nomStand = "";		
+		    var structuresStand = "";		
+		    var isInfos=false;
+		    var cat="";
+		    var catComplet="";
+		    var isDesc = false;
+		    var isCom = false;
+
+			var ws = null;
+			var host = "127.0.0.1"
+			var port = 8080
+			var socket = "p5websocket"
+			var x,y,z
+
+					
+			console.log("trying to open a websocket")
+			var _socket = (undefined == socket)?"":"/"+socket
+			ws = new WebSocket("ws://"+host+":"+port+_socket)
+			url = "message origin=ws://"+host+":"+port+_socket+",";
+	
+			ws.onopen = function () {
+			  console.log("opened")
+			  ws.send('Ping');
+			};
+			ws.onerror = function (e) {console.log('WebSocket did close ',e);};
+			ws.onerror = function (error) {console.log('WebSocket Error ' + error);	};
+			ws.onmessage = function (e) {
+				data = e.data;
+	            msg = e.data.substring(0, e.data.indexOf(' ')).toLowerCase();
+	            switch(msg){
+	                case 'push' :
+	                	push();
+	                	break;
+	                case 'move' :
+	                	move(data); 
+	                	break;
+	                case 'start' :
+	                	console.log(msg);
+	                	$("#say_hello figure").fadeOut(600, function(){
+							$("#say_hello").fadeOut(600);
+							$("#cursor").fadeIn(600);
+							$("#map").fadeIn(600);
+						});
+	                	break;
+	                case 'end' :
+	                	console.log(msg);
+						$("#say_hello, #say_hello figure").fadeIn(800);
+						$("#cursor").fadeOut(600);
+						$("#infos").fadeOut(600);
+	                	break;
+	                case 'right' :
+	                	console.log(msg);
+	                	break;
+	                case 'left' :
+	                	console.log(msg);
+	                	break;
+	            }
+	            
+	            function changeIframe(q,id,iframe){
+		            var url = 'http://experimenta.designvillefontaine.com/get.php?q='+q+'&id='+id;
+		            $('#'+iframe).html('<iframe width="660px" height="800px" id="myFrame" name="myFrame" ALLOWTRANSPARENCY="true" src='+url+' />');
+		        }
+		        
+
+	            function push(){
+	            if(cat!='autre'){
+	                console.log("PUSH : "+idStand);
+	                changeIframe('comments',idStand,'liste_commentaires');
+	                changeIframe('likes',idStand,'likes');
+	                changeIframe('description',idStand,'txt_description');
+	                $("#infos").fadeToggle(600);         
+	                if(cat=='villes'){
+		                catComplet='Villes contemporaines et numériques';
+	                }else if(cat=='atelier'){
+		                catComplet='Processus Arts-Sciences';
+	                }else if(cat=='objets'){
+		                catComplet='Objets interactifs et communicants';
+	                }else if(cat=='immersive'){
+		                catComplet='Expériences immersives';
+	                }
+	                $("#infos header").html('<h3><img align="middle" src="css/img/picto_'+cat+'_w.png" />'+catComplet+'</h3>');
+	                $("#infos").css('background-image', 'url(css/img/' + idStand + '.jpg)');   
+	                $("#infos header").addClass(cat);   
+	                $("#infos #home h1").html(nomStand);   
+	                $("#infos #home h3").html(structuresStand);   
+					$("#cross").fadeToggle(600);
+					
+										
+					if(isInfos==false){	
+						myPlaylist.select(idStand-1);
+						myPlaylist.play();
+					}else{
+						myPlaylist.pause();						
+					}
+					
+					
+					isInfos=!isInfos;
+					isDesc=true;
+					isCom=true;
+					console.log(isDesc+'/'+isCom)
+					}
+				}
+					
+	            function move(data){
+	                splitmsg = data.split(" ");
+	            	//console.log(splitmsg[1]+" | "+splitmsg[2]+" | "+splitmsg[3]+" | "+splitmsg[4]);
+	            	$("#cursor").css({"left":splitmsg[1]*100/640+"%","top":splitmsg[2]*100/240+"%"});
+	            	var offset = $("#cursor").offset()
+	            	$("#cross").css({"left":offset.left+40,"top":offset.top-8});
+	            	$("#xy").html(Math.round(offset.left)+"/"+Math.round(offset.top));
+	            	
+	            	// This is the Collision-Function
+	            	if(isInfos==false){
+						$('#map div').touch({
+							// When any .crusher hits any .target
+							'intersector' : '#cursor',
+							// Do stuff with the Objects
+							'action' : function(target) {
+								// hide the .crusher
+								target.addClass('survol');
+								idStand = parseInt(target.attr('title'));
+								var arraycat = target.attr('class').split(' ');
+								cat = arraycat[0];
+								var infosStand = target.attr('name').split('&');
+								nomStand = infosStand[0];
+								structuresStand = infosStand[1];
+								if(cat=='villes'){
+					                catComplet='Villes contemporaines et numériques';
+				                }else if(cat=='atelier'){
+					                catComplet='Processus Arts-Sciences';
+				                }else if(cat=='objets'){
+					                catComplet='Objets interactifs et communicants';
+				                }else if(cat=='immersive'){
+					                catComplet='Expériences immersives';
+				                }
+								$('#slide_titre').html('<h4>'+catComplet+'</h4><h1>'+nomStand+'</h1><h3>'+structuresStand+'</h3>');
+							},
+							// Do stuff with the Objects
+							'stop' : function(target) {
+								// hide the .crusher
+								target.removeClass('survol');
+							}
+	
+						});
+					}
+
+					if(isInfos==true){
+					$('#description').touch({
+						// When any .crusher hits any .target
+						'intersector' : '#cursor',
+						// Do stuff with the Objects
+						'action' : function(target2) {
+							// hide the .crusher
+								target2.addClass('descd');
+							}
+						,
+						// Do stuff with the Objects
+						'stop' : function(target2) {
+							// hide the .crusher
+							target2.removeClass('descd');
+						}
+
+					});
+					
+					$('#commentaires').touch({
+						// When any .crusher hits any .target
+						'intersector' : '#cursor',
+						// Do stuff with the Objects
+						'action' : function(target3) {
+							// hide the .crusher
+							target3.addClass('descc');
+							
+						},
+						// Do stuff with the Objects
+						'stop' : function(target3) {
+							// hide the .crusher
+							target3.removeClass('descc');
+						}
+
+					});
+					}
+
+										
+	            }
+	            }	
+
+
+		    
+		});
+				
+    </script>
+
+    </head>
+    <body>
+        <div class="wrapper">
+             		<div id="slide_titre">
+             		</div>
+
+        	<div id="say_hello">
+	        	<figure>
+	        		<img src="css/img/hello.png" width="200" />
+	        		<figcaption>Saluez l'écran pour commencer l'expérience</figcaption>
+	        		<img src="css/img/deplacement.png" width="200" />
+	        		<figcaption>Déplacez votre main pour naviguer</figcaption>
+	        		<img src="css/img/push.png" width="200" />
+	        		<figcaption>Poussez votre main en avant pour sélectionner un projet</figcaption>
+	        	</figure>
+        		<h1 id="logo"><img src="css/img/logo.png" /></h1>
+        	</div>
+        	<div id="menu">
+        	</div>
+			<div id="map">
+				<div id="aas" name="L’Atelier Arts Sciences&Hexagone Scène Nationale Arts Sciences - Meylan, CEA, CCSTI Grenoble-La Casemate" title="13" class="atelier"><span>Atelier Art Science</span></div>
+				<div id="accueil" name="Accueil et vestiaire" class="autre"><span>Accueil - vestiaire</span></div>
+				<div id="airstar" name="Waves&Collectif Coin • Maxime Houot et Kamel Makhloufi" title="14" class="atelier"><span>Waves</span></div>
+				<div id="anahata" name="AnahataEmo&Jacopo Baboni Schilingi" title="12" class="immersive"><span>AnahataEmo</span></div>
+				<div id="appsgate" name="AppsGate ou Comment rendre sa maison intelligente ?&Equipe ADELE, équipe IIHM, équipe PRIMA du LIG" title="16" class="objets"><span>AppsGate</span></div>
+				<div id="bms" title="3" name="Building management system&Polytech" class="objets"><span>Building Management System</span></div>
+				<div id="cinqsommeil" name="Cinquième Sommeil&Balthazar Auxietre" title="15" class="immersive"><span>Cinquième Sommeil</span></div>
+				<div id="ccsti" name="CCSTI - La Casemate" class="autre"><span>CCSTI - Living lab</span></div>
+     			<div id="dasein" title="7" name="Maquette urbaine interactive&Dasein interactions" class="villes"><span>Dasein Interactions</span></div>
+				<div id="exohr" name="Vitre informative&ExOhr" title="11" class="immersive"><span>Vitre Informative</span></div>
+				<div id="extrapolis" title="2" name="ExtraPolis&Olivier Bonhomme, David Chanel,Johnathan Richer, Etienne Guiol" class="villes grand"><span>ExtraPolis</span></div>
+				<div id="fabter" name="Le Récitoire – Fab Ter&DéTOUR, Institut d’Urbanisme de Grenoble (IUG), Laboratoire d’informatique de Grenoble (LIG), SFR ”Territoires en réseaux”" title="6" class="villes"><span>Le Récitoire – Fab Ter</span></div>
+				<div id="infrarouge" name="Reflet&Lionel Palun" title="9" class="immersive"><span>Reflet</span></div>
+				<div id="inria" name="Jeu en réalité augmentée&INRIA" title="4" class="villes"><span>INRIA</span></div>
+				<div id="livingmap" name="Living Map, signalétique numérique interactive&Pôle supérieur design villefontaine + Polytech Grenoble" title="1" class="villes"><span>LivingMap</span></div>
+				<div id="malik" name="Flûte ! Quelle équation ?!&Magic Malik" title="17" class="atelier"><span>Flûte ! Quelle équation ?!</span></div>
+				<div id="modernes" class="autre"><span>Librairie Les Modernes</span></div>
+				<div id="orange"name="Orange Labs&Hubway" title="5" class="villes"><span>Orange Labs</span></div>
+				<div id="robair" name="RobAIR&Polytech Grenoble, Ensimag, Pôle Supérieur de Design de villefontaine" title="8" class="immersive"><span>RobAIR</span></div>
+				<div id="thero" name="ThéRo/Gnômôn&Clément-Marie Mathieu" title="10" class="immersive grand"><span>ThéRo/Gnômôn</span></div>
+			</div>
+			        		<h1 id="logo"><img src="css/img/logo.png" /></h1>
+
+						<div id="cross">Pousser la main pour revenir au plan</div>
+
+			<div id="infos">
+					<header>
+						<h1></h1>
+					</header>
+					<div id="home">
+						<h3></h3>
+						<h1></h1>
+					</div>
+                    <div id="description">
+                    <h1>LE PROJET</h1>
+                    <div id="txt_description">
+                    </div>
+                    </div>
+                  <div id="commentaires">
+                                    <h1>						<div id="likes"></div>
+</h1>
+                                    <span id="likes2"></span>
+                                    <div id="liste_commentaires">
+                                    </div>
+                                    </div> 
+			</div>
+            
+     		<div class="ici"></div>
+
+			<div id="cursor"></div>
+			<div id="jpId"></div>
+			<div id="jplayer_inspector_1"></div>
+        </body>
+</html>

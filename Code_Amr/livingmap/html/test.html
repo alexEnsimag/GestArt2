@@ -1,0 +1,39 @@
+<html>
+    <head>
+    <meta http-equiv=Content-Type content="text/html; charset=utf-8" />
+    <title>Living map</title>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+
+	 <script type="text/javascript" src="js/jquery-ui.js"></script>
+
+    <script>
+
+
+$(document).ready(function () {
+
+function changeIframe(q,id){
+var url = 'http://experimenta.designvillefontaine.com/get.php?q='+q+'&id='+id;
+$('#test').html('<iframe id="myFrame" name="myFrame" src='+url+' />');
+}
+$(".clic").click(function(){
+changeIframe('comments',1);
+});
+
+$(".clic2").click(function(){
+changeIframe('likes',1);
+});
+
+});
+
+
+
+</script>
+
+    </head>
+    <body>
+    <a class="clic">lien</a> / 
+    <a class="clic2">lien</a>
+    <div id="test">
+    </div>
+	</body>
+</html>
