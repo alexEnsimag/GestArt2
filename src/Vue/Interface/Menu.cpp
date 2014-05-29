@@ -1,7 +1,6 @@
 #include <gtkmm/main.h>
 #include "Menu.hpp"
 
-bool full =false;
 Menu::Menu(){
 		set_title("Gest-Art Application");
 		set_icon_from_file("Images/icon.png");
@@ -17,23 +16,23 @@ Menu::Menu(){
 		boxVG = new Gtk::VBox(false ,10);
 		boxVD = new Gtk::VBox(false ,10);
 
-		screen = new Gtk::Button("Plein Ecran");
-		screen->signal_clicked().connect(sigc::mem_fun(*this, &Menu::fullsc));
+		screen = new Gtk::CheckButton("Plein Ecran");
+		screen->signal_toggled().connect(sigc::mem_fun(*this, &Menu::fullsc));
 		jouer = new Gtk::Button("JOUER");
 		login = new Gtk::Button("S'identifier");
-		quitter = new Gtk::Button("Quitter");
+		quitter = new Gtk::Button(Gtk::Stock::QUIT);
 		quitter->signal_clicked().connect(sigc::ptr_fun(&Gtk::Main::quit));
-		pi = new Gtk::Button("calculer pi");
+		img = new Gtk::Image("Images/menu.png");
 
 		//Ajout des Widgets
-		boxH->pack_start(*boxVG,Gtk::PACK_SHRINK);
-		boxH->pack_start(*jouer);
 		boxH->pack_start(*boxVD,Gtk::PACK_SHRINK);
+		boxH->pack_start(*boxVG);
 
-		boxVG->pack_start(*pi);
-		boxVG->pack_start(*screen, Gtk::PACK_SHRINK);
+		boxVG->pack_start(*img);
+		boxVG->pack_start(*jouer);
 
 		boxVD->pack_start(*login);
+		boxVD->pack_start(*screen, Gtk::PACK_SHRINK);
 		boxVD->pack_start(*quitter,Gtk::PACK_SHRINK);
 
 		boxH->show();
@@ -44,7 +43,7 @@ Menu::~Menu(){
 	delete jouer;
 	delete login;
 	delete quitter;
-	delete pi;
+	delete img;
 	delete screen;
 	delete boxVD;
 	delete boxVG;
@@ -52,12 +51,9 @@ Menu::~Menu(){
 }
 
 void Menu::fullsc(){
-	if(full){
-		full = false;
-		this->unfullscreen();
-	}else{
-		full = true;
+	if(screen->get_active()){
 		this->fullscreen();
+	}else{
+		this->unfullscreen();
 	}
 }
-		

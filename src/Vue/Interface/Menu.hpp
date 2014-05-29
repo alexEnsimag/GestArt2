@@ -3,7 +3,9 @@
 
 #include <gtkmm/window.h>  
 #include <gtkmm/button.h>
+#include <gtkmm/checkbutton.h>
 #include <gtkmm/stock.h>
+#include <gtkmm/image.h>
 #include <gtkmm/box.h>
 
 class Menu : public Gtk::Window {
@@ -17,8 +19,8 @@ class Menu : public Gtk::Window {
 		Gtk::Button *jouer;
 		Gtk::Button *login;
 		Gtk::Button *quitter;
-		Gtk::Button *pi;
-		Gtk::Button *screen;
+		Gtk::CheckButton *screen;
+		Gtk::Image *img;
 	
 		void fullsc();
 };
