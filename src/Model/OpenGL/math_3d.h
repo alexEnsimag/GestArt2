@@ -38,5 +38,20 @@ struct Vector3f
     }
 };
 
+
+class Segment{
+	public:
+	float p1[3];
+	float p2[3];
+	Segment(float* a, float* b){
+		p1[0] = a[0];
+		p1[1] = a[1];
+		p1[2] = a[2];
+		p2[0]=b[0];
+		p2[1]=b[1];
+		p2[2]=b[2];
+	}
+};
+
 #endif	/* MATH_3D_H */
 

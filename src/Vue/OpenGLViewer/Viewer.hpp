@@ -10,7 +10,7 @@ class Viewer {
 		~Viewer();
 		void launch();
 	private:
-		Squelette *squelette;
+	//	Squelette *squelette;
 };
 
 #endif
