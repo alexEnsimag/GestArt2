@@ -3,7 +3,7 @@
 #include <gtkmm/filefilter.h>
 #include <string>
 #include "Menu.hpp"
-//#include "../../Controler/Kinect/Parser.hpp"
+#include "../../Controler/Kinect/Parser.hpp"
 
 Menu::Menu(){
 		set_title("Gest-Art Application");
@@ -29,7 +29,7 @@ Menu::Menu(){
 		jouer = new Gtk::Button("JOUER");
 		jouer->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launch));
 		mouv = new Gtk::Button("Visualiser\n un \nMouvement");
-		jouer->signal_clicked().connect(sigc::mem_fun(*this, &Menu::loadMouv));
+		mouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::loadMouv));
 		jouer->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launch));
 		login = new Gtk::Button("S'identifier");
 		quitter = new Gtk::Button(Gtk::Stock::QUIT);
@@ -83,12 +83,12 @@ void Menu::loadMouv(){
 	openf.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
 	Glib::RefPtr<Gtk::FileFilter> filtre = Gtk::FileFilter::create();
 	filtre->set_name("Fichier txt");
-	filtre->add_mime_type("text/x-txt");
+	filtre->add_mime_type("text/plain");
 	openf.add_filter(filtre);
 	int resultat = openf.run();
 	if(resultat == Gtk::RESPONSE_OK) {
 		std::string nomFichier = openf.get_filename();
-//		Parser p = new Parser();
-//		p.parse(nomFichier);
+		Parser *p = new Parser();
+		p->parse(nomFichier);
 	}
 }
