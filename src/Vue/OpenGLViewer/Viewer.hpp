@@ -5,6 +5,7 @@
 
 class Viewer {
 	public:
+		Viewer();
 		void launch();
 };
 
