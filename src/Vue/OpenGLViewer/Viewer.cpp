@@ -1,12 +1,13 @@
 #include <stdio.h>
 #include <GL/glew.h>
 #include <GL/freeglut.h>
+#include <math.h>
 #include "Viewer.hpp"
 
 
 // A modifier !
 Squelette *squelette;
-float temps;
+float temps = -1;
 
 Viewer::Viewer(){
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); 
@@ -26,8 +27,8 @@ static void RenderSceneCB()
     glColor3f(1.0, 1.0, 1.0);
     squelette->draw();
     glFlush();
-    temps += 0.1;
-    float p[3] = {0.0f, temps, 0.0f};
+    temps += 0.005;
+    float p[3] = {0.0f, cos(temps), 0.0f};
     squelette->setTorse(p);
     glutPostRedisplay();
 }
@@ -38,7 +39,7 @@ static void InitializeGlutCallbacks()
 }
 
 void Viewer::launch(){
-	glutCreateWindow("Tutorial 01");
+	glutCreateWindow("Game Mode");
 	InitializeGlutCallbacks();
 	glutMainLoop();
 }
