@@ -4,6 +4,7 @@ project(Gest-Art_App)
 
 find_package(OpenGL REQUIRED)
 find_package(GLUT REQUIRED)
+find_package(GLEW REQUIRED)
 find_package(PkgConfig)
 pkg_check_modules(GTKMM gtkmm-3.0)
 
@@ -15,12 +16,14 @@ link_directories(
     ${GTKMM_LIBRARY_DIRS}
     ${OPENGL_LIBRARY_DIRS}
     ${GLUT_LIBRARY_DIRS}
+    ${GLEW_LIBRARY_DIRS}
 )
 
 include_directories(
     ${GTKMM_INCLUDE_DIRS}
     ${OPENGL_INCLUDE_DIRS}
     ${GLUT_INCLUDE_DIRS}
+    ${GLEW_INCLUDE_DIRS}
 )
 
 file(
@@ -39,4 +42,5 @@ target_link_libraries(
     ${GTKMM_LIBRARIES}
     ${OPENGL_LIBRARIES}
     ${GLUT_LIBRARY}
+    ${GLEW_LIBRARY}
 )
