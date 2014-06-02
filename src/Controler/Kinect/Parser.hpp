@@ -4,6 +4,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
+#include <fstream>
 
 
 #include <string>
@@ -12,8 +13,12 @@ using namespace std;
 
 class Parser{
 	public:
-		int parse(string nomFichier);
+		void open(string nomFichier);
+		void parse();
+		void close();
 
+	private:
+		ifstream fichier;
 };
 
 
