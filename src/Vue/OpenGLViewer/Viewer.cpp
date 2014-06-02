@@ -30,3 +30,7 @@ void Viewer::launch(){
 	glutMainLoop();
 }
 
+
+Viewer::~Viewer(){
+	delete squelette;
+}
