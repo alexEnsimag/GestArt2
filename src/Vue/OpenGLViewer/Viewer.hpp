@@ -6,6 +6,7 @@
 class Viewer {
 	public:
 		Viewer();
+		~Viewer();
 		void launch();
 	private:
 		Squelette *squelette;
