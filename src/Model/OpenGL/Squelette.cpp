@@ -11,11 +11,14 @@ Squelette::Squelette(){
 }
 
 void Squelette::draw(){
-	glBegin(GL_LINES);
+/*	glBegin(GL_LINES);
 		//glVertex3f(head->x, head->y, head->z);	
 		//glVertex3f(neck->x, neck->y, neck->z);	
 
 	glEnd;
+*/
+
+	
 
 }
 
