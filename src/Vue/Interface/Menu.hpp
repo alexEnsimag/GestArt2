@@ -20,12 +20,15 @@ class Menu : public Gtk::Window {
 		Gtk::VBox *boxVD;
 		Gtk::Button *jouer;
 		Gtk::Button *login;
+		Gtk::Button *mouv;
 		Gtk::Button *quitter;
 		Gtk::CheckButton *screen;
 		Gtk::Image *img;
 		Viewer *glView;
+		ViewerParser *glViewParser;
 	
 		void fullsc();
 		void launch();
+		void loadMouv();
 };
 #endif
