@@ -8,6 +8,8 @@
 #include <gtkmm/image.h>
 #include <gtkmm/box.h>
 
+#include "../OpenGLViewer/Viewer.hpp"
+
 class Menu : public Gtk::Window {
 	public : 
 		Menu();
@@ -21,7 +23,9 @@ class Menu : public Gtk::Window {
 		Gtk::Button *quitter;
 		Gtk::CheckButton *screen;
 		Gtk::Image *img;
+		Viewer *glView;
 	
 		void fullsc();
+		void launch();
 };
 #endif

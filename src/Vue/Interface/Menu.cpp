@@ -10,6 +10,10 @@ Menu::Menu(){
 		resize(800,500);
 		//Positionnement
 	 	set_position(Gtk::WIN_POS_CENTER);
+		
+		//Creation de la vue openGL
+		glView = new Viewer();
+
 		//Création des widget
 		boxH = new Gtk::HBox(false, 10);
 
@@ -19,6 +23,7 @@ Menu::Menu(){
 		screen = new Gtk::CheckButton("Plein Ecran");
 		screen->signal_toggled().connect(sigc::mem_fun(*this, &Menu::fullsc));
 		jouer = new Gtk::Button("JOUER");
+		jouer->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launch));
 		login = new Gtk::Button("S'identifier");
 		quitter = new Gtk::Button(Gtk::Stock::QUIT);
 		quitter->signal_clicked().connect(sigc::ptr_fun(&Gtk::Main::quit));
@@ -56,4 +61,8 @@ void Menu::fullsc(){
 	}else{
 		this->unfullscreen();
 	}
+}
+
+void Menu::launch(){
+	glView->launch();
 }

@@ -2,6 +2,8 @@ cmake_minimum_required(VERSION 2.6)
 
 project(Gest-Art_App)
 
+find_package(OpenGL REQUIRED)
+find_package(GLUT REQUIRED)
 find_package(PkgConfig)
 pkg_check_modules(GTKMM gtkmm-3.0)
 
@@ -11,10 +13,14 @@ endif()
 
 link_directories(
     ${GTKMM_LIBRARY_DIRS}
+    ${OPENGL_LIBRARY_DIRS}
+    ${GLUT_LIBRARY_DIRS}
 )
 
 include_directories(
     ${GTKMM_INCLUDE_DIRS}
+    ${OPENGL_INCLUDE_DIRS}
+    ${GLUT_INCLUDE_DIRS}
 )
 
 file(
@@ -31,4 +37,6 @@ add_executable(
 target_link_libraries(
     Gest-Art_App
     ${GTKMM_LIBRARIES}
+    ${OPENGL_LIBRARIES}
+    ${GLUT_LIBRARY}
 )
