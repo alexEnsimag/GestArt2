@@ -25,6 +25,7 @@ class Menu : public Gtk::Window {
 		Gtk::CheckButton *screen;
 		Gtk::Image *img;
 		Viewer *glView;
+		ViewerParser *glViewParser;
 	
 		void fullsc();
 		void launch();

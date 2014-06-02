@@ -17,6 +17,7 @@ Menu::Menu(){
 		
 		//Creation de la vue openGL
 		glView = new Viewer();
+		glViewParser = new ViewerParser();
 
 		//Création des widget
 		boxH = new Gtk::HBox(false, 10);
@@ -88,7 +89,6 @@ void Menu::loadMouv(){
 	int resultat = openf.run();
 	if(resultat == Gtk::RESPONSE_OK) {
 		std::string nomFichier = openf.get_filename();
-		Parser *p = new Parser();
-		p->parse(nomFichier);
+		glViewParser->launch(nomFichier);
 	}
 }
