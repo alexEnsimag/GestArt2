@@ -26,7 +26,7 @@ void Viewer::launch(){
 	glutCreateWindow("Tutorial 01");
 	InitializeGlutCallbacks();
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	squelette->draw;
+	squelette->draw();
 	glutMainLoop();
 }
 
