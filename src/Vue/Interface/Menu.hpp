@@ -9,6 +9,7 @@
 #include <gtkmm/box.h>
 
 #include "../OpenGLViewer/Viewer.hpp"
+#include "../OpenGLViewer/ViewerParser.hpp"
 
 class Menu : public Gtk::Window {
 	public : 
