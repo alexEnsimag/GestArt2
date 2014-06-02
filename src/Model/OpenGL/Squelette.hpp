@@ -14,6 +14,7 @@ class Squelette {
 
 		void setHead(float* p);		
 		void setNeck(float* p);		
+		void setAss(float* p);		
 		void setSchoulderG(float* p);		
 		void setSchoulderD(float* p);		
 		void setCoudeG(float* p);		
@@ -32,6 +33,7 @@ class Squelette {
 
 		float head[3];
 		float neck[3];
+		float ass[3];
 		float schoulderG[3];
 		float schoulderD[3];
 		float coudeG[3];

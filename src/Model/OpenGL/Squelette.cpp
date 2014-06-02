@@ -10,16 +10,14 @@ Squelette::Squelette(){
 	head[2] = 0.0f;
 	head[1] = 0.8f;
 	
-	neck[0] = 0.0f;
-	neck[2] = 0.0f;
-	neck[1] = 0.6f;
-
 	schoulderG[0] = 0.2f; 
 	schoulderG[2] = 0.0f;
 	schoulderG[1] = 0.6f;
 	schoulderD[0] = -0.2f;
 	schoulderD[2] = 0.0f;
 	schoulderD[1] = 0.6f;
+
+
 	coudeG[0] = 0.4f;
 	coudeG[2] = 0.0f;     
 	coudeG[1] = 0.2f;
@@ -40,7 +38,7 @@ Squelette::Squelette(){
 	bassinG[1] = -0.2f;
 	bassinD[0] = -0.2f;
 	bassinD[2] = 0.0f; 
-	bassinD[1] = -0.2f;
+
 	genouxG[0] = 0.25f;
 	genouxG[2] = 0.0f; 
 	genouxG[1] = -0.6f;
@@ -53,31 +51,21 @@ Squelette::Squelette(){
 	piedD[0] = -0.2f;
 	piedD[2] = 0.0f; 
 	piedD[1] = -1.0f;
-	
-
-	// Initialisation des os
-	os.push_back(new Segment(head, neck));
-	os.push_back(new Segment(neck, schoulderD));
-
-	os.push_back(new Segment(neck, schoulderG));
-	os.push_back(new Segment(neck, torse));
-	os.push_back(new Segment(schoulderG, coudeG));
-	os.push_back(new Segment(mainG, coudeG));
-	os.push_back(new Segment(schoulderD, coudeD));
-	os.push_back(new Segment(mainD, coudeD));
-	os.push_back(new Segment(torse, bassinD));
-	os.push_back(new Segment(torse, bassinG));
-	os.push_back(new Segment(bassinD, genouxD));
-	os.push_back(new Segment(bassinG, genouxG));
-	os.push_back(new Segment(piedD, genouxD));
-	os.push_back(new Segment(piedG, genouxG));
-	
-	
+		
 }
 
 void Squelette::draw(){
 
-	
+	// maj neck et ass
+	float pNeck[3] = {(schoulderG[0]+schoulderD[0])/2, (schoulderG[1]+schoulderD[1])/2, (schoulderG[2]+schoulderD[2])/2};
+	setNeck(pNeck);
+
+	setHead(pNeck);
+
+
+	float pAss[3] = {(bassinG[0]+bassinD[0])/2, (bassinG[1]+bassinD[1])/2, (bassinG[2]+bassinD[2])/2};
+	setAss(pAss);
+
 	glBegin(GL_LINES);
 		glVertex3fv(head);	
 		glVertex3fv(neck);	
@@ -116,10 +104,14 @@ void Squelette::draw(){
 	glEnd();	
 	glBegin(GL_LINES);
 		glVertex3fv(torse);	
+		glVertex3fv(ass);	
+	glEnd();	
+	glBegin(GL_LINES);
+		glVertex3fv(ass);	
 		glVertex3fv(bassinD);	
 	glEnd();	
 	glBegin(GL_LINES);
-		glVertex3fv(torse);	
+		glVertex3fv(ass);	
 		glVertex3fv(bassinG);	
 	glEnd();	
 	glBegin(GL_LINES);
@@ -155,6 +147,10 @@ void Squelette::setHead(float *p){
 
 void Squelette::setNeck(float *p){
 	setCoord(neck, p);
+}
+
+void Squelette::setAss(float *p){
+	setCoord(ass, p);
 }
 
 void Squelette::setSchoulderG(float *p){

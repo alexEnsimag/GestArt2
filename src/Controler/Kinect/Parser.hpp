@@ -8,17 +8,18 @@
 
 
 #include <string>
+#include "../../Model/OpenGL/Squelette.hpp"
 
 using namespace std;
 
 class Parser{
 	public:
-		void open(string nomFichier);
-		void parse();
+		void openFichier(string nomFichier);
+		void parse(Squelette *squelette);
 		void close();
 
 	private:
-		ifstream fichier;
+		ifstream *fichier;
 };
 
 
