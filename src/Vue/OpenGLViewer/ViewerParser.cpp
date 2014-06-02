@@ -4,12 +4,13 @@
 #include <string>
 #include "ViewerParser.hpp"
 #include "../../Controler/Kinect/Parser.hpp"
+#include <unistd.h>
+#include <time.h>
 
 
 // A modifier !
-Squelette *squelette;
+Squelette *squel;
 Parser *parser;
-float temps;
 
 ViewerParser::ViewerParser(){
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); 
@@ -19,25 +20,30 @@ ViewerParser::ViewerParser(){
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
 	glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
-	squelette = new Squelette();
+	squel = new Squelette();
 	parser = new Parser();
 }
 
+static void sleep2(unsigned int ms){
+	clock_t goal = ms + clock();
+	while(goal>clock());
+}
 
 static void RenderSceneCB()
 {
+    //sleep2(5);
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(1.0, 1.0, 1.0);
 
-    squelette->draw();
+    squel->draw();
     
     glFlush();
     
-     parser->parse();
+     parser->parse(squel);
 /*
     temps += 0.1;
     float p[3] = {0.0f, temps, 0.0f};
-    squelette->setTorse(p);
+    squel->setTorse(p);
 */
     glutPostRedisplay();
 }
@@ -49,12 +55,13 @@ static void InitializeGlutCallbacks()
 
 void ViewerParser::launch(string nomFichier){
 	glutCreateWindow("Tutorial 01");
-	parser->open(nomFichier);
-	InitializeGlutCallbacks(nomFichier);
+	parser->openFichier(nomFichier);
+	InitializeGlutCallbacks();
 	glutMainLoop();
+	parser->close();
 }
 
 
 ViewerParser::~ViewerParser(){
-//	delete squelette;
+//	delete squel;
 }
