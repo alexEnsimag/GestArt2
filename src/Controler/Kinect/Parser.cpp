@@ -27,7 +27,7 @@ void Parser::parse(Squelette *squelette){
 	string mot1;
 	float pos1, pos2, pos3;
 	*fichier >> mot1 >> pos1 >> pos2 >> pos3;
-	float p[3] = {pos1/1000, pos2/1000,(pos-3000)/1500};
+	float p[3] = {pos1/1000, pos2/1000,(pos3-3000)/1500};
 	if(! mot1.compare(MAING)){
 		squelette->setMainD(p);
 	}else if(! mot1.compare(MAIND)){
