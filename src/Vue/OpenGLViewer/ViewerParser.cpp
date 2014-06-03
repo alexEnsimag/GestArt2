@@ -31,7 +31,7 @@ static void sleep2(unsigned int ms){
 
 static void RenderSceneCB()
 {
-    //sleep2(5);
+    sleep2(10000);
     glClear(GL_COLOR_BUFFER_BIT);
     glColor3f(1.0, 1.0, 1.0);
 
