@@ -3,48 +3,60 @@
 #include <GL/freeglut.h>
 #include <math.h>
 #include "Viewer.hpp"
+#include "../../Model/OpenGL/math_3d.h"
 
 
-// A modifier !
-Squelette *squelette;
-float temps = -1;
+GLuint VBO;
 
 Viewer::Viewer(){
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); 
 	glutInitWindowSize(800, 800);
 	glutInitWindowPosition(100, 100);
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
-	squelette = new Squelette();
 }
 
 
 static void RenderSceneCB()
 {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(1.0, 1.0, 1.0);
-    squelette->draw();
-    glFlush();
-    temps += 0.005;
-    float p[3] = {0.0f, cos(temps), 0.0f};
-    squelette->setTorse(p);
-    glutPostRedisplay();
+	glClear(GL_COLOR_BUFFER_BIT);
+	glEnableVertexAttribArray(0);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+	glDrawArrays(GL_TRIANGLES, 0, 3);
+	glDisableVertexAttribArray(0);
+	glutSwapBuffers();
 }
 
 static void InitializeGlutCallbacks()
 {
-    glutDisplayFunc(RenderSceneCB);
+	glutDisplayFunc(RenderSceneCB);
+}
+
+
+static void CreateVertexBuffer()
+{
+	Vector3f Vertices[3];
+	Vertices[0] = Vector3f(0.0f, 0.0f, 0.0f);
+	Vertices[0] = Vector3f(1.0f, 0.0f, 0.0f);
+	Vertices[0] = Vector3f(0.0f, 1.0f, 0.0f);
+
+	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
+	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
 }
 
 void Viewer::launch(){
 	glutCreateWindow("Game Mode");
 	InitializeGlutCallbacks();
+	// Must be done after glut is initialized!
+	GLenum res = glewInit();
+	if (res != GLEW_OK) {
+		fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
+	}
+	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+	CreateVertexBuffer();
 	glutMainLoop();
 }
 
-
 Viewer::~Viewer(){
-//	delete squelette;
+	//	delete squelette;
 }
