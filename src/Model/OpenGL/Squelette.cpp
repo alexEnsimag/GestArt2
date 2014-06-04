@@ -70,8 +70,11 @@ Squelette::Squelette(){
 }
 
 
-Squelette::Squelette(vector<Vertex> *vert){
-	vertices = vert;
+Squelette::Squelette(vector<Vertex> vert){
+	//vertices = vert;
+	for(int i=0; i<vert.size(); i++){
+		vertices.push_back( &(vert[i]));
+	}
 	head.x = 0.0f;
 	head.z = 2.0f;
 	head.y = 0.8f;
@@ -84,18 +87,18 @@ Squelette::Squelette(vector<Vertex> *vert){
 	schoulderD.y = 0.6f;
 
 
-	coudeG.x = 0.2f;
+	coudeG.x = 0.4f;
 	coudeG.z = 2.0f;     
-	coudeG.y = 0.18f;
-	coudeD.x = -0.2f;
+	coudeG.y = 0.6f;
+	coudeD.x = -0.4f;
 	coudeD.z = 2.0f; 
-	coudeD.y = 0.18f;
-	mainG.x = 0.22f;
+	coudeD.y = 0.6f;
+	mainG.x = 0.6f;
 	mainG.z = 2.0f; 
-	mainG.y = -0.1f;
-	mainD.x = -0.22f;
+	mainG.y = -0.6f;
+	mainD.x = -0.6f;
 	mainD.z = 2.0f; 
-	mainD.y = -0.1f;
+	mainD.y = -0.6f;
 	torse.x = 0.0f;
 	torse.z = 2.0f; 
 	torse.y = 0.0f;
@@ -234,39 +237,39 @@ void Squelette::draw(){
 	 */
 }
 
-static float computeDistance(Segment *seg, Vertex v){
-	if(distancePoints(*(seg->p1), v.m_pos) < distancePoints(*(seg->p2), v.m_pos)){
+static float computeDistance(Segment *seg, Vertex *v){
+	if(distancePoints(*(seg->p1), v->m_pos) < distancePoints(*(seg->p2), v->m_pos)){
 		Vector3f v1 = Vector3f(seg->p2->x-seg->p1->x, seg->p2->x-seg->p1->x, seg->p2->x-seg->p1->x);
-		Vector3f v2 = Vector3f(v.m_pos.x-seg->p1->x,v.m_pos.y-seg->p1->y,v.m_pos.z-seg->p1->z);
+		Vector3f v2 = Vector3f(v->m_pos.x-seg->p1->x,v->m_pos.y-seg->p1->y,v->m_pos.z-seg->p1->z);
 		Vector3f vecProj = projection(v2, v1);
 		if(scal(v2,v1)>0){
 			Vector3f vResult = Vector3f(v2.x - vecProj.x, v2.y - vecProj.y, v2.z - vecProj.z);
 			return longueur(vResult);
 		}else{
-			return distancePoints(v.m_pos, *(seg->p1));
+			return distancePoints(v->m_pos, *(seg->p1));
 		}
 	}else{
 		Vector3f v1 = Vector3f(seg->p2->x-seg->p1->x, seg->p2->x-seg->p1->x, seg->p2->x-seg->p1->x);
-		Vector3f v2 = Vector3f(v.m_pos.x-seg->p2->x,v.m_pos.y-seg->p2->y,v.m_pos.z-seg->p2->z);
+		Vector3f v2 = Vector3f(v->m_pos.x-seg->p2->x,v->m_pos.y-seg->p2->y,v->m_pos.z-seg->p2->z);
 		Vector3f vecProj = projection(v2, v1);
 		if(scal(v2,v1)>0){
 			Vector3f vResult = Vector3f(v2.x - vecProj.x, v2.y - vecProj.y, v2.z - vecProj.z);
 			return longueur(vResult);
 		}else{
-			return distancePoints(v.m_pos, *(seg->p2));
+			return distancePoints(v->m_pos, *(seg->p2));
 		}
 
 	}
 }
 
 void Squelette::setVertices(){
-	for(int i=0; i<vertices->size(); i++){
-		Segment *s = foundSegment((*vertices)[i]);
-		s->verticesAssocies.push_back(&(*vertices)[i]);
+	for(int i=0; i<vertices.size(); i++){
+		Segment *s = foundSegment(vertices[i]);
+		s->verticesAssocies.push_back(vertices[i]);
 	}
 }
 
-Segment* Squelette::foundSegment(Vertex v){
+Segment* Squelette::foundSegment(Vertex *v){
 	float distMin = 500;
 	float dist;
 	Segment *s;
@@ -283,9 +286,9 @@ Segment* Squelette::foundSegment(Vertex v){
 
 static void setSegment(Segment *s, float dx, float dy, float dz){
 	for(int i=0; i<s->verticesAssocies.size(); i++){
-		s->verticesAssocies[i]->m_pos.x += dx;
-		s->verticesAssocies[i]->m_pos.y += dy;
-		s->verticesAssocies[i]->m_pos.z += dz;
+		s->verticesAssocies[i]->m_pos.x = dx;
+		s->verticesAssocies[i]->m_pos.y = dy;
+		s->verticesAssocies[i]->m_pos.z = dz;
 	}
 }
 
@@ -318,8 +321,8 @@ void Squelette::setSchoulderD(Vector3f p){
 	dy = -schoulderD.y+p.y;
 	dz = -schoulderD.z+p.z;
 
-	setSegment(os[2], dx, dy, dz);
-	setSegment(os[4], dx/2, dy/2, dz/2);
+	setSegment(os[2], 0, 0, 0);
+	setSegment(os[4], 0, 0, 0);
 
 	setCoord(&schoulderD, p);
 }
@@ -332,8 +335,8 @@ void Squelette::setCoudeD(Vector3f p){
 	dy = -coudeD.y+p.y;
 	dz = -coudeD.z+p.z;
 
-	setSegment(os[6], dx/2, dy/2, dz/2);
-	setSegment(os[4], dx/2, dy/2, dz/2);
+	setSegment(os[6], 0, 0, 0);
+	setSegment(os[4], 0, 0, 0);
 	setCoord(&coudeD, p);
 }
 void Squelette::setMainG(Vector3f p){
@@ -344,12 +347,17 @@ void Squelette::setMainG(Vector3f p){
 void Squelette::setMainD(Vector3f p){
 	float dx, dy, dz;
 	dx = p.x-mainD.x;
-	dy = -mainD.y+p.y;
+	dy = p.y-mainD.y;
 	dz = -mainD.z+p.z;
 	
 	setCoord(&mainD, p);
+	printf("%f", p.x);
 	
-	setSegment(os[6], dx/2, dy/2, dz/2);
+	for(int i=0; i<vertices.size()/2; i++){
+		vertices[i]->m_pos.x =p.x;
+		vertices[i]->m_pos.y =p.y;
+		vertices[i]->m_pos.z = 0;
+	}
 }
 void Squelette::setTorse(Vector3f p){
 	setCoord(&torse, p);

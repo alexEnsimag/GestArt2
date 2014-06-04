@@ -40,7 +40,7 @@ static bool InitMesh(){
 
 	m_pMesh2 = new Mesh();
 
-	return m_pMesh2->LoadMesh("Modele/Scotty3ds.3ds");
+	return m_pMesh2->LoadMesh("Modele/Scotty.3ds");
 
 }
 

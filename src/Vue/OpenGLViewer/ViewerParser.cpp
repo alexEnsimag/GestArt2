@@ -9,7 +9,7 @@ static bool InitMesh(){
 
 	m_pMesh = new Mesh();
 
-	return m_pMesh->LoadMesh("Modele/Scotty3ds.3ds");
+	return m_pMesh->LoadMesh("Modele/Scotty.3ds");
 
 }
 
@@ -70,7 +70,7 @@ void ViewerParser::launch(string nomFichier){
 	if(! InitMesh()){
 		fprintf(stderr, "Error: '%s'\n", "error while loading the mesh");
 	}
-	squel = new Squelette(&(m_pMesh->Vertices));
+	squel = new Squelette((m_pMesh->Vertices));
 	//squel = new Squelette();
 
 	parser->openFichier(nomFichier);

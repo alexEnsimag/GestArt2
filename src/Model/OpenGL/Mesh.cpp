@@ -189,6 +189,7 @@ bool Mesh::InitMaterials(const aiScene* pScene, const std::string& Filename)
 
 void Mesh::Render()
 {
+/*
 	glEnableVertexAttribArray(0);
 	glEnableVertexAttribArray(1);
 	glEnableVertexAttribArray(2);
@@ -202,6 +203,7 @@ void Mesh::Render()
 		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Entries[i].IB);
 
 		const unsigned int MaterialIndex = m_Entries[i].MaterialIndex;
+*/
 
 		/*
 		   if (MaterialIndex < m_Textures.size() && m_Textures[MaterialIndex]) {
@@ -232,15 +234,17 @@ void Mesh::Render()
 		//Triangle
 
 
-		glEnableClientState(GL_VERTEX_ARRAY);
+//		glEnableClientState(GL_VERTEX_ARRAY);
 		//glVertexPointer(3, GL_FLOAT, 0, vertices);
 
 		//	glDrawElements(GL_QUADS, 4, GL_UNSIGNED_INT, indice); 
 		// glDrawElements(GL_TRIANGLES, m_Entries[i].NumIndices, GL_UNSIGNED_INT, 0);
+/*
 	}
 
 	glDisableVertexAttribArray(0);
 	glDisableVertexAttribArray(1);
 	glDisableVertexAttribArray(2);
+*/
 }
 
