@@ -6,6 +6,7 @@
 #include "../../Controler/Kinect/Parser.hpp"
 #include <unistd.h>
 #include <time.h>
+#include "../../Model/OpenGL/math_3d.h"
 
 
 // A modifier !
@@ -33,9 +34,12 @@ static void RenderSceneCB()
     glColor3f(0.4, 0.0, 0.6);
     squel2->draw();
     glFlush();
-
+/*
 	//Animation
-	GLfloat p[3] = {0.0, 0.0, 0.0};
+	Vector3f p;
+	p.x = 0.0;
+	p.y = 0.0;
+	p.z = 0.0;
 	squel2->setMainD(p);
 	squel2->setMainG(p);
 	squel2->setSchoulderD(p);
@@ -50,7 +54,7 @@ static void RenderSceneCB()
 	squel2->setPiedD(p);
 	squel2->setPiedG(p);
 	squel2->setHead(p);
-
+*/
 	glutPostRedisplay();
 }
 
