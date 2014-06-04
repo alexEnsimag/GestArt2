@@ -1,12 +1,12 @@
-#ifndef DEF_VIEWER
-#define DEF_VIEWER
+#ifndef DEF_VIEWERMESH
+#define DEF_VIEWERMESH
 
 
 
-class Viewer {
+class ViewerMesh {
 	public:
-		Viewer();
-		~Viewer();
+		ViewerMesh();
+		~ViewerMesh();
 		void launch();
 	private:
 };

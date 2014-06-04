@@ -2,14 +2,14 @@
 #include <GL/glew.h>
 #include <GL/freeglut.h>
 #include <math.h>
-#include "Viewer.hpp"
+#include "ViewerMesh.hpp"
 #include "../../Model/OpenGL/Mesh.hpp"
 
 
 // A modifier !
 Mesh *m_pMesh;
 
-Viewer::Viewer(){
+ViewerMesh::ViewerMesh(){
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); 
 //	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 	glutInitWindowSize(800, 800);
@@ -43,7 +43,7 @@ static bool InitMesh(){
 
 }
 
-void Viewer::launch(){
+void ViewerMesh::launch(){
 	glutCreateWindow("Game Mode");
 	// Must be done after glut is initialized!
 	GLenum res = glewInit();
@@ -60,6 +60,6 @@ void Viewer::launch(){
 }
 
 
-Viewer::~Viewer(){
+ViewerMesh::~ViewerMesh(){
 	delete m_pMesh;
 }
