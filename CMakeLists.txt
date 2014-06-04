@@ -43,4 +43,5 @@ target_link_libraries(
     ${OPENGL_LIBRARIES}
     ${GLUT_LIBRARY}
     ${GLEW_LIBRARY}
+    -lassimp
 )
