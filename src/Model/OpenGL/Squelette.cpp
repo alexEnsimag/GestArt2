@@ -8,34 +8,35 @@ Squelette::Squelette(){
 	head.z = 0.0f;
 	head.y = 0.8f;
 
-	schoulderG.x = 0.2f; 
+	schoulderG.x = 0.18f; 
 	schoulderG.z = 0.0f;
 	schoulderG.y = 0.6f;
-	schoulderD.x = -0.2f;
+	schoulderD.x = -0.18f;
 	schoulderD.z = 0.0f;
 	schoulderD.y = 0.6f;
 
 
-	coudeG.x = 0.4f;
+	coudeG.x = 0.2f;
 	coudeG.z = 0.0f;     
-	coudeG.y = 0.2f;
-	coudeD.x = -0.4f;
+	coudeG.y = 0.18f;
+	coudeD.x = -0.2f;
 	coudeD.z = 0.0f; 
-	coudeD.y = 0.2f;
-	mainG.x = 0.8f;
+	coudeD.y = 0.18f;
+	mainG.x = 0.22f;
 	mainG.z = 0.0f; 
 	mainG.y = -0.1f;
-	mainD.x = -0.8f;
+	mainD.x = -0.22f;
 	mainD.z = 0.0f; 
 	mainD.y = -0.1f;
 	torse.x = 0.0f;
 	torse.z = 0.0f; 
 	torse.y = 0.0f;
-	bassinG.x = 0.2f;
+	bassinG.x = 0.1f;
 	bassinG.z = 0.0f; 
-	bassinG.y = -0.2f;
-	bassinD.x = -0.2f;
+	bassinG.y = -0.0f;
+	bassinD.x = -0.1f;
 	bassinD.z = 0.0f; 
+	bassinD.y = 0.0f; 
 
 	genouxG.x = 0.25f;
 	genouxG.z = 0.0f; 

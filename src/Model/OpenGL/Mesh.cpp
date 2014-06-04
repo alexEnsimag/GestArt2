@@ -221,13 +221,13 @@ void Mesh::Render()
 			glBegin(GL_TRIANGLES); //Begin triangle coordinates
 			glNormal3f((Vertices[i]).m_normal.x/2,(Vertices[i]).m_normal.z/2,(Vertices[i]).m_normal.y/2);
 
-			glVertex3f((Vertices[i]).m_pos.x/2,(Vertices[i]).m_pos.z/2,(Vertices[i]).m_pos.y/2);
+			glVertex3f((Vertices[i]).m_pos.x/2.5,(Vertices[i]).m_pos.z/2.5,(Vertices[i]).m_pos.y/2.5);
 
 			glNormal3f((Vertices[i+1]).m_normal.x/2,(Vertices[i+1]).m_normal.z/2,(Vertices[i+1]).m_normal.y/2);
-			glVertex3f((Vertices[i+1]).m_pos.x/2,(Vertices[i+1]).m_pos.z/2,(Vertices[i+1]).m_pos.y/2);
+			glVertex3f((Vertices[i+1]).m_pos.x/2.5,(Vertices[i+1]).m_pos.z/2.5,(Vertices[i+1]).m_pos.y/2.5);
 
 			glNormal3f((Vertices[i+2]).m_normal.x/2,(Vertices[i+2]).m_normal.z/2,(Vertices[i+2]).m_normal.y/2);
-			glVertex3f((Vertices[i+2]).m_pos.x/2,(Vertices[i+2]).m_pos.z/2,(Vertices[i+2]).m_pos.y/2);
+			glVertex3f((Vertices[i+2]).m_pos.x/2.5,(Vertices[i+2]).m_pos.z/2.5,(Vertices[i+2]).m_pos.y/2.5);
 /*
 
 			printf("%f ", (Vertices[i]).m_pos.z);
