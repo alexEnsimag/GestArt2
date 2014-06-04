@@ -6,20 +6,20 @@
 
 Mesh::MeshEntry::MeshEntry()
 {
-    VB = INVALID_OGL_VALUE;
-    IB = INVALID_OGL_VALUE;
+    VB = 0xffffffff;
+    IB = 0xffffffff;
     NumIndices  = 0;
     MaterialIndex = INVALID_MATERIAL;
 };
 
 Mesh::MeshEntry::~MeshEntry()
 {
-    if (VB != INVALID_OGL_VALUE)
+    if (VB != 0xffffffff)
     {
         glDeleteBuffers(1, &VB);
     }
 
-    if (IB != INVALID_OGL_VALUE)
+    if (IB != 0xffffffff)
     {
         glDeleteBuffers(1, &IB);
     }
@@ -52,9 +52,11 @@ Mesh::~Mesh()
 
 void Mesh::Clear()
 {
+/*
     for (unsigned int i = 0 ; i < m_Textures.size() ; i++) {
         SAFE_DELETE(m_Textures[i]);
     }
+*/
 }
 
 
@@ -200,7 +202,24 @@ void Mesh::Render()
             m_Textures[MaterialIndex]->Bind(GL_TEXTURE0);
         }
 */
-        glDrawElements(GL_TRIANGLES, m_Entries[i].NumIndices, GL_UNSIGNED_INT, 0);
+
+	GLfloat vertices[] = {1,-1,-1, 1, 1,-1
+			-1,1,-1, -1,-1,-1,
+			1, -1,1,1,1,1,
+			-1,1,1, -1,-1,1 };          // 8 of vertex coords
+	GLubyte indices[] = {0,1,2, 2,3,0,   // 36 of indices
+                     0,3,4, 4,5,0,
+                     0,5,6, 6,1,0,
+                     1,6,7, 7,2,1,
+                     7,4,3, 3,2,7,
+                     4,7,6, 6,5,4};
+	glEnableClientState(GL_VERTEX_ARRAY);
+	glVertexPointer(3, GL_FLOAT, 0, vertices);
+
+	glDrawArrays(GL_TRIANGLES, 0,36);
+//	glDrawElements(GL_TRIANGLES, 36, GL_UNSIGNED_BYTE, indices);
+//	glDrawElements(GL_QUADS, 4, GL_UNSIGNED_INT, indice); 
+       // glDrawElements(GL_TRIANGLES, m_Entries[i].NumIndices, GL_UNSIGNED_INT, 0);
     }
 
     glDisableVertexAttribArray(0);

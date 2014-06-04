@@ -7,11 +7,11 @@
 
 
 // A modifier !
-Mesh m_pMesh;
+Mesh *m_pMesh;
 
 Viewer::Viewer(){
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); 
-	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
+//	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 	glutInitWindowSize(800, 800);
 	glutInitWindowPosition(100, 100);
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
@@ -19,10 +19,6 @@ Viewer::Viewer(){
 	glCullFace(GL_BACK);
 	glEnable(GL_CULL_FACE);
 	glEnable(GL_DEPTH_TEST);
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
-	squelette = new Squelette();
 }
 
 
@@ -43,7 +39,7 @@ static bool InitMesh(){
 
 	m_pMesh = new Mesh();
 
-	return m_pMesh->LoadMesh("../Content/phoenix_ugv.md2");
+	return m_pMesh->LoadMesh("Modele/phoenix_ugv.md2");
 
 }
 
