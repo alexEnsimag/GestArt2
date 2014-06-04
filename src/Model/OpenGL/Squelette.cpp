@@ -55,6 +55,7 @@ Squelette::Squelette(){
 }
 
 void Squelette::draw(){
+	glLineWidth(6);
 
 	// maj neck et ass
 	float pNeck[3] = {(schoulderG[0]+schoulderD[0])/2, (schoulderG[1]+schoulderD[1])/2, (schoulderG[2]+schoulderD[2])/2};

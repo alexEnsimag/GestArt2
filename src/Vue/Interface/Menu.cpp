@@ -82,6 +82,7 @@ void Menu::loadMouv(){
 	//openf.set_current_folder(Glib::get_home_dir());	
 	openf.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
 	openf.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
+	openf.set_current_folder("mouvements/");
 	Glib::RefPtr<Gtk::FileFilter> filtre = Gtk::FileFilter::create();
 	filtre->set_name("Fichier txt");
 	filtre->add_mime_type("text/plain");

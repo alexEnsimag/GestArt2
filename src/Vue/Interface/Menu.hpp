@@ -22,6 +22,7 @@ class Menu : public Gtk::Window {
 		Gtk::Button *jouer;
 		Gtk::Button *login;
 		Gtk::Button *mouv;
+		Gtk::Button *NewMouv;
 		Gtk::Button *quitter;
 		Gtk::CheckButton *screen;
 		Gtk::Image *img;
