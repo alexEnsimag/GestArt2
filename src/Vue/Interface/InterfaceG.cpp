@@ -1,4 +1,4 @@
-#include <GL/glut.h>
+
 #include "InterfaceG.hpp"
 
 InterfaceG::InterfaceG(int argc, char** argv) : main(argc, argv) {

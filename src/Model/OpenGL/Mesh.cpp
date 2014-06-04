@@ -208,6 +208,7 @@ void Mesh::Render()
 		   m_Textures[MaterialIndex]->Bind(GL_TEXTURE0);
 		   }
 		 */
+		// lights and color
 		glEnable(GL_LIGHTING);
 		glDisable(GL_LIGHT0);
 		glEnable(GL_LIGHT1);

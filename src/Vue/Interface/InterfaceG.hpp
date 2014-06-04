@@ -3,6 +3,7 @@
 
 #include <gtkmm/main.h>
 #include "Menu.hpp"
+//#include <GL/glut.h>
 
 class InterfaceG {
 	public:

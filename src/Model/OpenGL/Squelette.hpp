@@ -1,8 +1,10 @@
 
 #ifndef DEF_SQUELETTE
 #define DEF_SQUELETTE
+#include <stdio.h>
 
-#include "math_3d.h"
+#include "Segment.hpp"
+#include <GL/freeglut.h>
 using namespace std;
 #include <vector>
 
@@ -12,41 +14,41 @@ class Squelette {
 		void draw();
 		vector<Segment*> os;
 
-		void setHead(float* p);		
-		void setNeck(float* p);		
-		void setAss(float* p);		
-		void setSchoulderG(float* p);		
-		void setSchoulderD(float* p);		
-		void setCoudeG(float* p);		
-		void setCoudeD(float* p);		
-		void setMainG(float* p);		
-		void setMainD(float* p);		
-		void setTorse(float* p);		
-		void setBassinG(float* p);		
-		void setBassinD(float* p);		
-		void setGenouxG(float* p);		
-		void setGenouxD(float* p);		
-		void setPiedG(float* p);		
-		void setPiedD(float* p);		
+		void setHead(Vector3f p);		
+		void setNeck(Vector3f p);		
+		void setAss(Vector3f p);		
+		void setSchoulderG(Vector3f p);		
+		void setSchoulderD(Vector3f p);		
+		void setCoudeG(Vector3f p);		
+		void setCoudeD(Vector3f p);		
+		void setMainG(Vector3f p);		
+		void setMainD(Vector3f p);		
+		void setTorse(Vector3f p);		
+		void setBassinG(Vector3f p);		
+		void setBassinD(Vector3f p);		
+		void setGenouxG(Vector3f p);		
+		void setGenouxD(Vector3f p);		
+		void setPiedG(Vector3f p);		
+		void setPiedD(Vector3f p);		
 
 	private:
 
-		float head[3];
-		float neck[3];
-		float ass[3];
-		float schoulderG[3];
-		float schoulderD[3];
-		float coudeG[3];
-		float coudeD[3];
-		float mainG[3];
-		float mainD[3];
-		float torse[3];
-		float bassinG[3];
-		float bassinD[3];
-		float genouxG[3];
-		float genouxD[3];
-		float piedG[3];
-		float piedD[3];
+		Vector3f head;
+		Vector3f neck;
+		Vector3f ass;
+		Vector3f schoulderG;
+		Vector3f schoulderD;
+		Vector3f coudeG;
+		Vector3f coudeD;
+		Vector3f mainG;
+		Vector3f mainD;
+		Vector3f torse;
+		Vector3f bassinG;
+		Vector3f bassinD;
+		Vector3f genouxG;
+		Vector3f genouxD;
+		Vector3f piedG;
+		Vector3f piedD;
 		
 		
 

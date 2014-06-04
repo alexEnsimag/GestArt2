@@ -1,7 +1,15 @@
 #ifndef DEF_VIEWERPARSER
 #define DEF_VIEWERPARSER
+#include <stdio.h>
+//#include <GL/glew.h>
+#include <string>
+#include "../../Controler/Kinect/Parser.hpp"
+#include <unistd.h>
+#include <time.h>
+
 
 #include "../../Model/OpenGL/Squelette.hpp"
+//#include <GL/freeglut.h>
 
 
 class ViewerParser {
