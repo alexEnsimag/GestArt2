@@ -95,7 +95,7 @@ void Menu::launchTps(){
 }
 
 void Menu::launchMesh(){
-	viewerTps->launch();
+	viewerMesh->launch();
 }
 
 void Menu::loadMouv(){
