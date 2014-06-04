@@ -16,7 +16,6 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
     Tutorial 04 - shaders
-*/
 
 #include <stdio.h>
 #include <string.h>
@@ -164,3 +163,4 @@ int main(int argc, char** argv)
 
     return 0;
 }
+*/

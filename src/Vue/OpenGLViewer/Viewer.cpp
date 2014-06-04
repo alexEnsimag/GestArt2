@@ -8,8 +8,8 @@
 #include "ogldev_util.h"
 
 GLuint VBO2;
-const char* pVSFileName = "shader.vs";
-const char* pFSFileName = "shader.fs";
+const char* pVSfileName = "shader.vs";
+const char* pFSfileName = "shader.fs";
 
 Viewer::Viewer(int argc, char** argv){
 	glutInit(&argc, argv);
@@ -87,11 +87,11 @@ static void CompileShaders()
     
     string vs, fs;
 
-    if (!ReadFile(pVSFileName, vs)) {
+    if (!ReadFile(pVSfileName, vs)) {
         exit(1);
     };
 
-    if (!ReadFile(pFSFileName, fs)) {
+    if (!ReadFile(pFSfileName, fs)) {
         exit(1);
     };
 
