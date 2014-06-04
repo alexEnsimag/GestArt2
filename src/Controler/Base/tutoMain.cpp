@@ -1,51 +1,65 @@
+/*
+
+	Copyright 2010 Etay Meiri
+
+    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+    Tutorial 04 - shaders
+
 #include <stdio.h>
 #include <string.h>
 #include <GL/glew.h>
 #include <GL/freeglut.h>
-#include <math.h>
-#include "Viewer.hpp"
-#include "../../Model/OpenGL/math_3d.h"
+
 #include "ogldev_util.h"
+#include "../../Model/OpenGL/math_3d.h"
 
-GLuint VBO2;
-const char* pVSfileName = "shader.vs";
-const char* pFSfileName = "shader.fs";
+GLuint VBO;
 
-Viewer::Viewer(int argc, char** argv){
-	glutInit(&argc, argv);
-	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); 
-	glEnable(GL_LIGHTING);
-	glutInitWindowSize(800, 800);
-	glutInitWindowPosition(100, 100);
-}
-
+const char* pVSFileName = "shader.vs";
+const char* pFSFileName = "shader.fs";
 
 static void RenderSceneCB()
 {
-	glClear(GL_COLOR_BUFFER_BIT);
-	glEnableVertexAttribArray(0);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO2);
-	glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
-	glDrawArrays(GL_TRIANGLES, 0, 3);
-	glDisableVertexAttribArray(0);
-	glutSwapBuffers();
+    glClear(GL_COLOR_BUFFER_BIT);
+
+    glEnableVertexAttribArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, VBO);
+    glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 0, 0);
+
+    glDrawArrays(GL_TRIANGLES, 0, 3);
+
+    glDisableVertexAttribArray(0);
+
+    glutSwapBuffers();
 }
+
 
 static void InitializeGlutCallbacks()
 {
-	glutDisplayFunc(RenderSceneCB);
+    glutDisplayFunc(RenderSceneCB);
 }
-
 
 static void CreateVertexBuffer()
 {
-	Vector3f Vertices[3];
-	Vertices[0] = Vector3f(0.0f, 0.0f, 0.0f);
-	Vertices[0] = Vector3f(1.0f, 0.0f, 0.0f);
-	Vertices[0] = Vector3f(0.0f, 1.0f, 0.0f);
+    Vector3f Vertices[3];
+    Vertices[0] = Vector3f(-1.0f, -1.0f, 0.0f);
+    Vertices[1] = Vector3f(1.0f, -1.0f, 0.0f);
+    Vertices[2] = Vector3f(0.0f, 1.0f, 0.0f);
 
-	glGenBuffers(1, &VBO2);
-	glBindBuffer(GL_ARRAY_BUFFER, VBO2);
+ 	glGenBuffers(1, &VBO);
+	glBindBuffer(GL_ARRAY_BUFFER, VBO);
 	glBufferData(GL_ARRAY_BUFFER, sizeof(Vertices), Vertices, GL_STATIC_DRAW);
 }
 
@@ -87,11 +101,11 @@ static void CompileShaders()
     
     string vs, fs;
 
-    if (!ReadFile(pVSfileName, vs)) {
+    if (!ReadFile(pVSFileName, vs)) {
         exit(1);
     };
 
-    if (!ReadFile(pFSfileName, fs)) {
+    if (!ReadFile(pFSFileName, fs)) {
         exit(1);
     };
 
@@ -120,22 +134,33 @@ static void CompileShaders()
     glUseProgram(ShaderProgram);
 }
 
+int main(int argc, char** argv)
+{
+    glutInit(&argc, argv);
+    glutInitDisplayMode(GLUT_DOUBLE|GLUT_RGB);
+    glutInitWindowSize(1024, 768);
+    glutInitWindowPosition(100, 100);
+    glutCreateWindow("Tutorial 04");
 
-void Viewer::launch(){
-	glutCreateWindow("Game Mode");
-	InitializeGlutCallbacks();
-	// Must be done after glut is initialized!
-	GLenum res = glewInit();
-	if (res != GLEW_OK) {
-		fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
-	}
-	printf("GL version: %s\n", glGetString(GL_VERSION));
-	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
-	CreateVertexBuffer();
-	CompileShaders();
-	glutMainLoop();
-}
+    InitializeGlutCallbacks();
 
-Viewer::~Viewer(){
-	//	delete squelette;
+    // Must be done after glut is initialized!
+    GLenum res = glewInit();
+    if (res != GLEW_OK) {
+      fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
+      return 1;
+    }
+    
+    printf("GL version: %s\n", glGetString(GL_VERSION));
+
+    glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
+
+    CreateVertexBuffer();
+
+    CompileShaders();
+
+    glutMainLoop();
+
+    return 0;
 }
+*/

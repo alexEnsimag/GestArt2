@@ -5,7 +5,7 @@
 
 class Viewer {
 	public:
-		Viewer();
+		Viewer(int argc, char** argv);
 		~Viewer();
 		void launch();
 	private:
