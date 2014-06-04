@@ -26,18 +26,11 @@ static void RenderSceneCB()
 {
     sleep2(100000);
     glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(1.0, 1.0, 1.0);
-
+    glColor3f(0.4, 0.6, 0.0);
     squel->draw();
-    
     glFlush();
-    
+	//animation
      parser->parse(squel);
-/*
-    temps += 0.1;
-    float p[3] = {0.0f, temps, 0.0f};
-    squel->setTorse(p);
-*/
     glutPostRedisplay();
 }
 
@@ -56,5 +49,5 @@ void ViewerParser::launch(string nomFichier){
 
 
 ViewerParser::~ViewerParser(){
-//	delete squel;
+	delete squel;
 }
