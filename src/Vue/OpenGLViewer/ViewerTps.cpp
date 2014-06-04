@@ -29,20 +29,29 @@ static void sleep2(unsigned int ms){
 
 static void RenderSceneCB()
 {
-    sleep2(100000);
     glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(1.0, 1.0, 1.0);
-
+    glColor3f(0.4, 0.0, 0.6);
     squel2->draw();
-    
     glFlush();
-    
-/*
-    temps += 0.1;
-    float p[3] = {0.0f, temps, 0.0f};
-    squel2->setTorse(p);
-*/
-    glutPostRedisplay();
+
+	//Animation
+	GLfloat p[3] = {0.0, 0.0, 0.0};
+	squel2->setMainD(p);
+	squel2->setMainG(p);
+	squel2->setSchoulderD(p);
+	squel2->setSchoulderG(p);
+	squel2->setCoudeD(p);
+	squel2->setCoudeG(p);
+	squel2->setTorse(p);
+	squel2->setBassinD(p);
+	squel2->setBassinG(p);
+	squel2->setGenouxD(p);
+	squel2->setGenouxG(p);
+	squel2->setPiedD(p);
+	squel2->setPiedG(p);
+	squel2->setHead(p);
+
+	glutPostRedisplay();
 }
 
 static void InitializeGlutCallbacks()
@@ -58,5 +67,5 @@ void ViewerTps::launch(){
 
 
 ViewerTps::~ViewerTps(){
-//	delete squel2;
+	delete squel2;
 }

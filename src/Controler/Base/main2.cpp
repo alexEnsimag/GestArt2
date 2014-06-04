@@ -1,5 +1,5 @@
 //#include <windows.h>
-
+/*
 #include <iostream>
 #include "math_3d.h"
 
@@ -104,7 +104,6 @@ void drawScene() {
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	glDisableVertexAttribArray(0);
-/*
 	glBegin(GL_TRIANGLES); //Begin triangle coordinates
 
 	//Triangle
@@ -116,7 +115,6 @@ void drawScene() {
 	glVertex3f(-1.5f, 0.5f, -5.0f);
 
 	glEnd(); //End triangle coordinates
-*/
 	glutSwapBuffers(); //Send the 3D scene to the screen
 
 }
@@ -154,3 +152,4 @@ int main(int argc, char** argv) {
 	return 0;
 
 }
+*/
