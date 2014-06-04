@@ -55,7 +55,7 @@ void setup()
   context.enableDepth();
 
   // enable skeleton generation for all joints
-  context.enableUser();
+  context.enableUser(SimpleOpenNI.SKEL_PROFILE_ALL);
 
   stroke(255,255,255);
   smooth();  
