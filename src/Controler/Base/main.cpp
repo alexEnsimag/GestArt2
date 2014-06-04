@@ -1,4 +1,5 @@
 #include "../../Vue/Interface/InterfaceG.hpp"
+/*
 int main(int argc, char** argv)
 {
 	//Création de l'interface Graphique
@@ -9,3 +10,4 @@ int main(int argc, char** argv)
 	delete it;
 	return 0;
 }
+*/
