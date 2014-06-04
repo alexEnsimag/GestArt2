@@ -12,9 +12,7 @@
 
 using namespace std;
 
-#include "shader.hpp"
 
-GLuint VBO;
 //Initializes 3D rendering
 
 void initRendering() {
@@ -53,7 +51,6 @@ void handleResize(int w, int h) {
 
 void drawScene() {
 
-	GLuint programID = LoadShaders( "SimpleVertexShader.vertexshader", "SimpleFragmentShader.fragmentshader" );
 	//Clear information from last draw
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -76,6 +73,7 @@ void drawScene() {
 
 	glEnd(); //End quadrilateral coordinates
 
+<<<<<<< HEAD
 	Vector3f Vertices[3];
 	Vertices[0] = Vector3f(-1.0f, -1.0f, 0.0f);
 	Vertices[1] = Vector3f(1.0f, -1.0f, 0.0f);
@@ -104,6 +102,8 @@ void drawScene() {
 	glDrawArrays(GL_TRIANGLES, 0, 3);
 
 	glDisableVertexAttribArray(0);
+=======
+>>>>>>> e74072946213326324404257517322299fa508c7
 	glBegin(GL_TRIANGLES); //Begin triangle coordinates
 
 	//Triangle
@@ -115,6 +115,10 @@ void drawScene() {
 	glVertex3f(-1.5f, 0.5f, -5.0f);
 
 	glEnd(); //End triangle coordinates
+<<<<<<< HEAD
+=======
+
+>>>>>>> e74072946213326324404257517322299fa508c7
 	glutSwapBuffers(); //Send the 3D scene to the screen
 
 }
@@ -137,9 +141,6 @@ int main(int argc, char** argv) {
 
 	//Set handler functions for drawing, keypresses, and window resizes
 	glewInit();
-
-
-
 
 	glutDisplayFunc(drawScene);
 

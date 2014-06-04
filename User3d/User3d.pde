@@ -1,11 +1,13 @@
 /* --------------------------------------------------------------------------
  * SimpleOpenNI User3d Test
  * --------------------------------------------------------------------------
- * Processing Wrapper for the OpenNI/Kinect 2 library
+ * Processing Wrapper for the OpenNI/Kinect library
  * http://code.google.com/p/simple-openni
  * --------------------------------------------------------------------------
- * prog:  Max Rheiner / Interaction Design / Zhdk / http://iad.zhdk.ch/
- * date:  12/12/2012 (m/d/y)
+ * prog:  Max Rheiner / Interaction Design / zhdk / http://iad.zhdk.ch/
+ * date:  02/16/2011 (m/d/y)
+ * ----------------------------------------------------------------------------
+ * this demos is at the moment only for 1 user, will be implemented later
  * ----------------------------------------------------------------------------
  */
  
@@ -26,33 +28,24 @@ boolean      autoCalib=true;
 
 PVector      bodyCenter = new PVector();
 PVector      bodyDir = new PVector();
-PVector      com = new PVector();                                   
-PVector      com2d = new PVector();                                   
-color[]       userClr = new color[]{ color(255,0,0),
-                                     color(0,255,0),
-                                     color(0,0,255),
-                                     color(255,255,0),
-                                     color(255,0,255),
-                                     color(0,255,255)
-                                   };
+
+PrintWriter output;
 
 void setup()
 {
   size(1024,768,P3D);  // strange, get drawing error in the cameraFrustum if i use P3D, in opengl there is no problem
-  //frameRate(25);
   context = new SimpleOpenNI(this);
-  if(context.isInit() == false)
-  {
-     println("Can't init SimpleOpenNI, maybe the camera is not connected!"); 
-     exit();
-     return;  
-  }
-
+   
   // disable mirror
   context.setMirror(false);
 
   // enable depthMap generation 
-  context.enableDepth();
+  if(context.enableDepth() == false)
+  {
+     println("Can't open the depthMap, maybe the camera is not connected!"); 
+     exit();
+     return;
+  }
 
   // enable skeleton generation for all joints
   context.enableUser(SimpleOpenNI.SKEL_PROFILE_ALL);
@@ -63,9 +56,11 @@ void setup()
               float(width)/float(height),
               10,150000);
               
-  /* start oscP5, listening for incoming messages at port 12000 */
+               /* start oscP5, listening for incoming messages at port 12000 */
   oscP5 = new OscP5(this,12345);
   myRemoteLocation = new NetAddress("127.0.0.1",12345);
+  
+  output = createWriter("positions.txt");
  }
 
 void draw()
@@ -82,15 +77,13 @@ void draw()
   scale(zoomF);
   
   int[]   depthMap = context.depthMap();
-  int[]   userMap = context.userMap();
   int     steps   = 3;  // to speed up the drawing, draw every third point
   int     index;
   PVector realWorldPoint;
  
   translate(0,0,-1000);  // set the rotation center of the scene 1000 infront of the camera
 
-  // draw the pointcloud
-  beginShape(POINTS);
+  stroke(100); 
   for(int y=0;y < context.depthHeight();y+=steps)
   {
     for(int x=0;x < context.depthWidth();x+=steps)
@@ -100,16 +93,10 @@ void draw()
       { 
         // draw the projected point
         realWorldPoint = context.depthMapRealWorld()[index];
-        if(userMap[index] == 0)
-          stroke(100); 
-        else
-          stroke(userClr[ (userMap[index] - 1) % userClr.length ]);        
-        
         point(realWorldPoint.x,realWorldPoint.y,realWorldPoint.z);
       }
     } 
   } 
-  endShape();
   
   // draw the skeleton if it's available
   int[] userList = context.getUsers();
@@ -117,26 +104,6 @@ void draw()
   {
     if(context.isTrackingSkeleton(userList[i]))
       drawSkeleton(userList[i]);
-    
-    // draw the center of mass
-    if(context.getCoM(userList[i],com))
-    {
-      stroke(100,255,0);
-      strokeWeight(1);
-      beginShape(LINES);
-        vertex(com.x - 15,com.y,com.z);
-        vertex(com.x + 15,com.y,com.z);
-        
-        vertex(com.x,com.y - 15,com.z);
-        vertex(com.x,com.y + 15,com.z);
-
-        vertex(com.x,com.y,com.z - 15);
-        vertex(com.x,com.y,com.z + 15);
-      endShape();
-      
-      fill(0,255,100);
-      text(Integer.toString(userList[i]),com.x,com.y,com.z);
-    }      
   }    
  
   // draw the kinect cam
@@ -193,9 +160,10 @@ void drawLimb(int userId,int jointType1,int jointType2)
   // draw the joint position
   confidence = context.getJointPositionSkeleton(userId,jointType1,jointPos1);
   confidence = context.getJointPositionSkeleton(userId,jointType2,jointPos2);
-  if(jointType2 == SimpleOpenNI.SKEL_LEFT_HAND || jointType2 == SimpleOpenNI.SKEL_RIGHT_HAND) {
+  //if(jointType2 == SimpleOpenNI.SKEL_LEFT_HAND || jointType2 == SimpleOpenNI.SKEL_RIGHT_HAND) {
+    //sendJointMsg(jointType1, jointPos1);
     sendJointMsg(jointType2, jointPos2);
-  }
+ // }
 
   stroke(255,0,0,confidence * 200 + 55);
   line(jointPos1.x,jointPos1.y,jointPos1.z,
@@ -233,90 +201,74 @@ void drawJointOrientation(int userId,int jointType,PVector pos,float length)
     line(0,0,0,
          0,0,length);
   popMatrix();
-  
-    /* in the following different ways of creating osc messages are shown by example */
-  //OscMessage msg;
-  /*if(jointType == SimpleOpenNI.SKEL_HEAD) {
-    msg = new OscMessage("/head_pos_body");
-  } else if(jointType == SimpleOpenNI.SKEL_LEFT_SHOULDER) {
-    msg = new OscMessage("/leftshoulder_pos_body");
-  } else if(jointType == SimpleOpenNI.SKEL_LEFT_ELBOW) {
-    msg = new OscMessage("/leftelbow_pos_body");
-  } else if(jointType == SimpleOpenNI.SKEL_RIGHT_SHOULDER) {
-    msg = new OscMessage("/rightshoulder_pos_body");
-  } else if(jointType == SimpleOpenNI.SKEL_RIGHT_ELBOW) {
-    msg = new OscMessage("/rightelbow_pos_body");
-  } else if(jointType == SimpleOpenNI.SKEL_TORSO) {
-    msg = new OscMessage("/torso_pos_body");
-  } else if(jointType == SimpleOpenNI.SKEL_LEFT_HIP) {
-    msg = new OscMessage("/lefthip_pos_body");
-  } else if(jointType == SimpleOpenNI.SKEL_LEFT_KNEE) {
-    msg = new OscMessage("/leftknee_pos_body");
-  } else if(jointType == SimpleOpenNI.SKEL_RIGHT_HIP) {
-    msg = new OscMessage("/righthip_pos_body");
-  } else if(jointType == SimpleOpenNI.SKEL_RIGHT_KNEE) {
-        msg = new OscMessage("/rightknee_pos_body");
-  } else if(jointType == SimpleOpenNI.SKEL_LEFT_HAND) {
-        msg = new OscMessage("/lefthand_pos_body");
-  } else if(jointType == SimpleOpenNI.SKEL_RIGHT_HAND) {
-        msg = new OscMessage("/righthand_pos_body");
-  } else {
-    return;
-  } */
-  /*if(jointType == SimpleOpenNI.SKEL_LEFT_HAND) {
-        msg = new OscMessage("/lefthand_pos_body");
-  } else if(jointType == SimpleOpenNI.SKEL_RIGHT_HAND) {
-        msg = new OscMessage("/righthand_pos_body");
-  } else {
-    return;
-  } 
-  msg.add(pos.x);
-  msg.add(pos.y);
-  msg.add(pos.z);
-  oscP5.send(msg, myRemoteLocation); */
-  
-  /*print("OSC Message Received: ");
-  print(msg.addrPattern() + " ");
-  println(msg.get(0).floatValue() + " " + msg.get(1).floatValue() + " " + msg.get(2).floatValue());*/
-}
-
-void sendJointMsg(int jointType,PVector pos) 
-{
-  OscMessage msg;
-  if(jointType == SimpleOpenNI.SKEL_LEFT_HAND) {
-        msg = new OscMessage("/lefthand_pos_body");
-  } else if(jointType == SimpleOpenNI.SKEL_RIGHT_HAND) {
-        msg = new OscMessage("/righthand_pos_body");
-  } else {
-    return;
-  } 
-  msg.add(pos.x);
-  msg.add(pos.y);
-  msg.add(pos.z);
-  oscP5.send(msg, myRemoteLocation); 
 }
 
 // -----------------------------------------------------------------
 // SimpleOpenNI user events
 
-void onNewUser(SimpleOpenNI curContext,int userId)
+void onNewUser(int userId)
 {
   println("onNewUser - userId: " + userId);
-  println("\tstart tracking skeleton");
+  println("  start pose detection");
   
-  context.startTrackingSkeleton(userId);
+  if(autoCalib)
+    context.requestCalibrationSkeleton(userId,true);
+  else    
+    context.startPoseDetection("Psi",userId);
 }
 
-void onLostUser(SimpleOpenNI curContext,int userId)
+void onLostUser(int userId)
 {
   println("onLostUser - userId: " + userId);
 }
 
-void onVisibleUser(SimpleOpenNI curContext,int userId)
+void onExitUser(int userId)
 {
-  //println("onVisibleUser - userId: " + userId);
+  println("onExitUser - userId: " + userId);
 }
 
+void onReEnterUser(int userId)
+{
+  println("onReEnterUser - userId: " + userId);
+}
+
+
+void onStartCalibration(int userId)
+{
+  println("onStartCalibration - userId: " + userId);
+}
+
+void onEndCalibration(int userId, boolean successfull)
+{
+  println("onEndCalibration - userId: " + userId + ", successfull: " + successfull);
+  
+  if (successfull) 
+  { 
+    println("  User calibrated !!!");
+    context.startTrackingSkeleton(userId); 
+  } 
+  else 
+  { 
+    println("  Failed to calibrate user !!!");
+    println("  Start pose detection");
+    context.startPoseDetection("Psi",userId);
+  }
+}
+
+void onStartPose(String pose,int userId)
+{
+  println("onStartdPose - userId: " + userId + ", pose: " + pose);
+  println(" stop pose detection");
+  
+  context.stopPoseDetection(userId); 
+  context.requestCalibrationSkeleton(userId, true);
+ 
+}
+
+void onEndPose(String pose,int userId)
+{
+  println("onEndPose - userId: " + userId + ", pose: " + pose);
+}
 
 // -----------------------------------------------------------------
 // Keyboard events
@@ -379,11 +331,51 @@ void getBodyDirection(int userId,PVector centerPoint,PVector dir)
   centerPoint.add(jointR);
   */
   
-  PVector up = PVector.sub(jointH,centerPoint);
-  PVector left = PVector.sub(jointR,centerPoint);
-    
+  PVector up = new PVector();
+  PVector left = new PVector();
+  
+  up.set(PVector.sub(jointH,centerPoint));
+  left.set(PVector.sub(jointR,centerPoint));
+  
   dir.set(up.cross(left));
   dir.normalize();
+}
+
+void sendJointMsg(int jointType,PVector pos) 
+{
+  OscMessage msg;
+  if(jointType == SimpleOpenNI.SKEL_HEAD) {
+    msg = new OscMessage("/head_pos_body");
+  } else if(jointType == SimpleOpenNI.SKEL_LEFT_SHOULDER) {
+    msg = new OscMessage("/leftshoulder_pos_body");
+  } else if(jointType == SimpleOpenNI.SKEL_LEFT_ELBOW) {
+    msg = new OscMessage("/leftelbow_pos_body");
+  } else if(jointType == SimpleOpenNI.SKEL_RIGHT_SHOULDER) {
+    msg = new OscMessage("/rightshoulder_pos_body");
+  } else if(jointType == SimpleOpenNI.SKEL_RIGHT_ELBOW) {
+    msg = new OscMessage("/rightelbow_pos_body");
+  } else if(jointType == SimpleOpenNI.SKEL_TORSO) {
+    msg = new OscMessage("/torso_pos_body");
+  } else if(jointType == SimpleOpenNI.SKEL_LEFT_HIP) {
+    msg = new OscMessage("/lefthip_pos_body");
+  } else if(jointType == SimpleOpenNI.SKEL_LEFT_KNEE) {
+    msg = new OscMessage("/leftknee_pos_body");
+  } else if(jointType == SimpleOpenNI.SKEL_RIGHT_HIP) {
+    msg = new OscMessage("/righthip_pos_body");
+  } else if(jointType == SimpleOpenNI.SKEL_RIGHT_KNEE) {
+        msg = new OscMessage("/rightknee_pos_body");
+  }
+  else if(jointType == SimpleOpenNI.SKEL_LEFT_HAND) {
+        msg = new OscMessage("/lefthand_pos_body");
+  } else if(jointType == SimpleOpenNI.SKEL_RIGHT_HAND) {
+        msg = new OscMessage("/righthand_pos_body");
+  } else {
+    return;
+  } 
+  msg.add(pos.x);
+  msg.add(pos.y);
+  msg.add(pos.z);
+  oscP5.send(msg, myRemoteLocation); 
 }
 
 void oscEvent(OscMessage theOscMessage) 
@@ -401,4 +393,9 @@ void oscEvent(OscMessage theOscMessage)
   print("OSC Message Recieved: ");
   print(theOscMessage.addrPattern() + " ");
   println(firstValue + " " + secondValue + " " + thirdValue);
+  
+  // write into the file
+  output.print(theOscMessage.addrPattern() + " ");
+  output.println(firstValue + " " + secondValue + " " + thirdValue);
+  
 }

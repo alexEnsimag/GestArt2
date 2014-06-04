@@ -1,18 +1,11 @@
-#include <stdio.h>
-#include <GL/glew.h>
-#include <GL/freeglut.h>
-#include <string>
 #include "ViewerParser.hpp"
-#include "../../Controler/Kinect/Parser.hpp"
-#include <unistd.h>
-#include <time.h>
-
 
 // A modifier !
 Squelette *squel;
 Parser *parser;
 
 ViewerParser::ViewerParser(){
+
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); 
 	glutInitWindowSize(800, 800);
 	glutInitWindowPosition(100, 100);

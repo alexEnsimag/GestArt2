@@ -10,6 +10,7 @@
 Mesh *m_pMesh;
 
 ViewerMesh::ViewerMesh(int argc, char** argv){
+
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); 
 //	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 	glutInitWindowSize(800, 800);
@@ -18,6 +19,7 @@ ViewerMesh::ViewerMesh(int argc, char** argv){
 	glFrontFace(GL_CW);
 	glCullFace(GL_BACK);
 	glEnable(GL_CULL_FACE);
+	glEnable(GL_LIGHTING);
 	glEnable(GL_DEPTH_TEST);
 }
 
@@ -39,7 +41,7 @@ static bool InitMesh(){
 
 	m_pMesh = new Mesh();
 
-	return m_pMesh->LoadMesh("Modele/phoenix_ugv.md2");
+	return m_pMesh->LoadMesh("Modele/Scotty3ds.3ds");
 
 }
 

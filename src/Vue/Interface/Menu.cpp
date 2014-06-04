@@ -6,6 +6,7 @@
 #include "../../Controler/Kinect/Parser.hpp"
 
 Menu::Menu(int argc, char** argv){
+
 		set_title("Gest-Art Application");
 		set_icon_from_file("Images/icon.png");
 		set_border_width(20);
@@ -28,6 +29,7 @@ Menu::Menu(int argc, char** argv){
 		boxVD = new Gtk::VBox(false ,10);
 
 		newMouv = new Gtk::Button("Enregistrer\nun\nMouvement");
+
 		tempsReel = new Gtk::Button("Temps Reel");
 		tempsReel->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchTps));
 		loadMesh = new Gtk::Button("Charger un Mesh");
@@ -95,7 +97,7 @@ void Menu::launchTps(){
 }
 
 void Menu::launchMesh(){
-	viewerTps->launch();
+	viewerMesh->launch();
 }
 
 void Menu::loadMouv(){

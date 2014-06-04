@@ -26,6 +26,7 @@
 #else
 #include <math.h>
 #endif
+//#include "Mesh.hpp"
 
 #define ToRadian(x) (float)(((x) * M_PI / 180.0f))
 #define ToDegree(x) (float)(((x) * 180.0f / M_PI))
@@ -197,20 +198,18 @@ Quaternion operator*(const Quaternion& q, const Vector3f& v);
 
 
 
+/*
 class Segment{
 	public:
-	float p1[3];
-	float p2[3];
-	Segment(float* a, float* b){
-		p1[0] = a[0];
-		p1[1] = a[1];
-		p1[2] = a[2];
-		p2[0]=b[0];
-		p2[1]=b[1];
-		p2[2]=b[2];
+	Vertex3f *p1;
+	Vertex3f *p2;
+	vector<Vertex> vertexAssocies;
+	Segment(Vertex3f* a, Vertex3f* b){
+		p1 = a;
+		p2=b;
 	}
 };
-
+*/
 
 #endif	/* MATH_3D_H */
 

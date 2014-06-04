@@ -30,7 +30,10 @@ void Parser::parse(Squelette *squelette){
 
 	for(int i=0; i<NBPOINTS; i++){
 		*fichier >> mot1 >> pos1 >> pos2 >> pos3;
-		float p[3] = {pos1/1000, pos2/1000, (pos3-3000)/1500};
+		Vector3f p;
+		p.x = pos1/1000;
+		p.y = pos2/1000;
+		p.z = (pos3-3000)/1500;
 		if(! mot1.compare(MAING)){
 			squelette->setMainD(p);
 		}else if(! mot1.compare(MAIND)){
