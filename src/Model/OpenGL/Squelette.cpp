@@ -24,10 +24,10 @@ Squelette::Squelette(){
 	coudeD.y = 0.18f;
 	mainG.x = 0.22f;
 	mainG.z = 0.0f; 
-	mainG.y = -0.1f;
+	mainG.y = -0.2f;
 	mainD.x = -0.22f;
 	mainD.z = 0.0f; 
-	mainD.y = -0.1f;
+	mainD.y = -0.2f;
 	torse.x = 0.0f;
 	torse.z = 0.0f; 
 	torse.y = 0.0f;
@@ -38,18 +38,18 @@ Squelette::Squelette(){
 	bassinD.z = 0.0f; 
 	bassinD.y = 0.0f; 
 
-	genouxG.x = 0.25f;
+	genouxG.x = 0.1f;
 	genouxG.z = 0.0f; 
-	genouxG.y = -0.6f;
-	genouxD.x = -0.25f;
+	genouxG.y = -0.3f;
+	genouxD.x = -0.1f;
 	genouxD.z = 0.0f; 
-	genouxD.y = -0.6f;
-	piedG.x = 0.2f;
+	genouxD.y = -0.3f;
+	piedG.x = 0.1f;
 	piedG.z = 0.0f; 
-	piedG.y = -1.0f;
-	piedD.x = -0.2f;
+	piedG.y = -0.6f;
+	piedD.x = -0.1f;
 	piedD.z = 0.0f; 
-	piedD.y = -1.0f;
+	piedD.y = -0.6f;
 
 	os.push_back(new Segment(&head, &neck));	
 	os.push_back(new Segment(&schoulderG, &neck));	
