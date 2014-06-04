@@ -1,5 +1,4 @@
 #include "../../Vue/Interface/InterfaceG.hpp"
-
 int main(int argc, char** argv)
 {
 	//Création de l'interface Graphique
