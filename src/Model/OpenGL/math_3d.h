@@ -197,6 +197,27 @@ Quaternion operator*(const Quaternion& l, const Quaternion& r);
 Quaternion operator*(const Quaternion& q, const Vector3f& v);
 
 
+static float distancePoints(Vector3f p1, Vector3f p2){
+	return (sqrt((p1.x+p2.x)*(p1.x+p2.x)+(p1.y+p2.y)*(p1.y+p2.y)+(p1.z+p2.z)*(p1.z+p2.z)));
+}
+
+static float scal(Vector3f p1, Vector3f p2){
+	return p1.x*p2.x+p1.y*p2.y+p1.z*p2.z;
+}
+
+static float longueur(Vector3f p){
+	return sqrt(p.x*p.x+p.y*p.y+p.z*p.z);
+}
+
+static Vector3f projection(Vector3f p1, Vector3f p2){
+	float dist = scal(p1,p2)/longueur(p2);
+	Vector3f p;
+	p.x = (p2.x*dist)/longueur(p2);
+	p.y = (p2.y*dist)/longueur(p2);
+	p.z = (p2.z*dist)/longueur(p2);
+
+	return p;
+}
 
 /*
 class Segment{

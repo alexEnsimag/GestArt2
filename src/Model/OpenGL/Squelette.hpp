@@ -2,6 +2,8 @@
 #ifndef DEF_SQUELETTE
 #define DEF_SQUELETTE
 #include <stdio.h>
+#include <math.h>
+
 
 #include "Segment.hpp"
 #include <GL/freeglut.h>
@@ -11,6 +13,7 @@ using namespace std;
 class Squelette {
 	public:
 		Squelette();
+		Squelette(vector<Vertex> *vert);
 		void draw();
 		vector<Segment*> os;
 
@@ -32,6 +35,11 @@ class Squelette {
 		void setPiedD(Vector3f p);		
 
 	private:
+
+		vector<Vertex> *vertices;
+		
+		void setVertices();
+		Segment* foundSegment(Vertex v);
 
 		Vector3f head;
 		Vector3f neck;

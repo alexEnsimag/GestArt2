@@ -7,7 +7,7 @@
 
 
 // A modifier !
-Mesh *m_pMesh;
+Mesh *m_pMesh2;
 
 ViewerMesh::ViewerMesh(int argc, char** argv){
 
@@ -19,7 +19,6 @@ ViewerMesh::ViewerMesh(int argc, char** argv){
 	glFrontFace(GL_CW);
 	glCullFace(GL_BACK);
 	glEnable(GL_CULL_FACE);
-	glEnable(GL_LIGHTING);
 	glEnable(GL_DEPTH_TEST);
 }
 
@@ -27,7 +26,7 @@ ViewerMesh::ViewerMesh(int argc, char** argv){
 static void RenderSceneCB()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	m_pMesh->Render();
+	m_pMesh2->Render();
         glutSwapBuffers();
 
 }
@@ -39,9 +38,9 @@ static void InitializeGlutCallbacks()
 
 static bool InitMesh(){
 
-	m_pMesh = new Mesh();
+	m_pMesh2 = new Mesh();
 
-	return m_pMesh->LoadMesh("Modele/Scotty3ds.3ds");
+	return m_pMesh2->LoadMesh("Modele/Scotty3ds.3ds");
 
 }
 
@@ -63,5 +62,5 @@ void ViewerMesh::launch(){
 
 
 ViewerMesh::~ViewerMesh(){
-	delete m_pMesh;
+	delete m_pMesh2;
 }

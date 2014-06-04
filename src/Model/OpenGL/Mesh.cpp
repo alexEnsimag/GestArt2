@@ -4,7 +4,7 @@
 
 #include "Mesh.hpp"
 
-std::vector<Vertex> Vertices;
+//std::vector<Vertex> Vertices;
 std::vector<unsigned int> Indices;
 
 
@@ -208,15 +208,7 @@ void Mesh::Render()
 		   m_Textures[MaterialIndex]->Bind(GL_TEXTURE0);
 		   }
 		 */
-		// lights and color
-		glEnable(GL_LIGHTING);
-		glDisable(GL_LIGHT0);
-		glEnable(GL_LIGHT1);
-		GLfloat const white[] = {1.0f,1.0f,1.0f, 1.f};
-		glLightfv(GL_LIGHT1, GL_DIFFUSE, white);
-		GLfloat position[] = {1.0f, 1.0f, 0.5f}; 
-		glLightfv(GL_LIGHT1, GL_POSITION, position);
-		glColor3f(0.4f, 0.6f, 0.0f); 
+		
 		for(int i=0; i<Vertices.size(); i+=3){
 			glBegin(GL_TRIANGLES); //Begin triangle coordinates
 			glNormal3f((Vertices[i]).m_normal.x/2,(Vertices[i]).m_normal.z/2,(Vertices[i]).m_normal.y/2);

@@ -1,55 +1,56 @@
 
 #include "Squelette.hpp"
 
+
 Squelette::Squelette(){
 
 
 	head.x = 0.0f;
-	head.z = 0.0f;
+	head.z = 2.0f;
 	head.y = 0.8f;
 
 	schoulderG.x = 0.18f; 
-	schoulderG.z = 0.0f;
+	schoulderG.z = 2.0f;
 	schoulderG.y = 0.6f;
 	schoulderD.x = -0.18f;
-	schoulderD.z = 0.0f;
+	schoulderD.z = 2.0f;
 	schoulderD.y = 0.6f;
 
 
 	coudeG.x = 0.2f;
-	coudeG.z = 0.0f;     
+	coudeG.z = 2.0f;     
 	coudeG.y = 0.18f;
 	coudeD.x = -0.2f;
-	coudeD.z = 0.0f; 
+	coudeD.z = 2.0f; 
 	coudeD.y = 0.18f;
 	mainG.x = 0.22f;
-	mainG.z = 0.0f; 
-	mainG.y = -0.2f;
+	mainG.z = 2.0f; 
+	mainG.y = -0.1f;
 	mainD.x = -0.22f;
-	mainD.z = 0.0f; 
-	mainD.y = -0.2f;
+	mainD.z = 2.0f; 
+	mainD.y = -0.1f;
 	torse.x = 0.0f;
-	torse.z = 0.0f; 
+	torse.z = 2.0f; 
 	torse.y = 0.0f;
 	bassinG.x = 0.1f;
-	bassinG.z = 0.0f; 
-	bassinG.y = -0.0f;
+	bassinG.z = 2.0f; 
+	bassinG.y = 0.1f;
 	bassinD.x = -0.1f;
-	bassinD.z = 0.0f; 
-	bassinD.y = 0.0f; 
+	bassinD.z = 2.0f; 
+	bassinD.y = 0.1f; 
 
 	genouxG.x = 0.1f;
-	genouxG.z = 0.0f; 
-	genouxG.y = -0.3f;
+	genouxG.z = 2.0f; 
+	genouxG.y = -0.35f;
 	genouxD.x = -0.1f;
-	genouxD.z = 0.0f; 
-	genouxD.y = -0.3f;
+	genouxD.z = 2.0f; 
+	genouxD.y = -0.35f;
 	piedG.x = 0.1f;
-	piedG.z = 0.0f; 
-	piedG.y = -0.6f;
+	piedG.z = 2.0f; 
+	piedG.y = -0.7f;
 	piedD.x = -0.1f;
-	piedD.z = 0.0f; 
-	piedD.y = -0.6f;
+	piedD.z = 2.0f; 
+	piedD.y = -0.7f;
 
 	os.push_back(new Segment(&head, &neck));	
 	os.push_back(new Segment(&schoulderG, &neck));	
@@ -66,6 +67,75 @@ Squelette::Squelette(){
 	os.push_back(new Segment(&genouxG, &piedG));	
 	os.push_back(new Segment(&bassinD, &genouxD));	
 	os.push_back(new Segment(&genouxD, &piedD));	
+}
+
+
+Squelette::Squelette(vector<Vertex> *vert){
+	vertices = vert;
+	head.x = 0.0f;
+	head.z = 2.0f;
+	head.y = 0.8f;
+
+	schoulderG.x = 0.18f; 
+	schoulderG.z = 2.0f;
+	schoulderG.y = 0.6f;
+	schoulderD.x = -0.18f;
+	schoulderD.z = 2.0f;
+	schoulderD.y = 0.6f;
+
+
+	coudeG.x = 0.2f;
+	coudeG.z = 2.0f;     
+	coudeG.y = 0.18f;
+	coudeD.x = -0.2f;
+	coudeD.z = 2.0f; 
+	coudeD.y = 0.18f;
+	mainG.x = 0.22f;
+	mainG.z = 2.0f; 
+	mainG.y = -0.1f;
+	mainD.x = -0.22f;
+	mainD.z = 2.0f; 
+	mainD.y = -0.1f;
+	torse.x = 0.0f;
+	torse.z = 2.0f; 
+	torse.y = 0.0f;
+	bassinG.x = 0.1f;
+	bassinG.z = 2.0f; 
+	bassinG.y = 0.1f;
+	bassinD.x = -0.1f;
+	bassinD.z = 2.0f; 
+	bassinD.y = 0.1f; 
+
+	genouxG.x = 0.1f;
+	genouxG.z = 2.0f; 
+	genouxG.y = -0.35f;
+	genouxD.x = -0.1f;
+	genouxD.z = 2.0f; 
+	genouxD.y = -0.35f;
+	piedG.x = 0.1f;
+	piedG.z = 2.0f; 
+	piedG.y = -0.7f;
+	piedD.x = -0.1f;
+	piedD.z = 2.0f; 
+	piedD.y = -0.7f;
+
+	os.push_back(new Segment(&head, &neck));	
+	os.push_back(new Segment(&schoulderG, &neck));	
+	os.push_back(new Segment(&schoulderD, &neck));	
+	os.push_back(new Segment(&schoulderG, &coudeG));	
+	os.push_back(new Segment(&schoulderD, &coudeD));	
+	os.push_back(new Segment(&coudeG, &mainG));	
+	os.push_back(new Segment(&coudeD, &mainD));	
+	os.push_back(new Segment(&neck, &torse));	
+	os.push_back(new Segment(&ass, &bassinG));	
+	os.push_back(new Segment(&ass, &bassinD));	
+	os.push_back(new Segment(&torse, &ass));	
+	os.push_back(new Segment(&bassinG, &genouxG));	
+	os.push_back(new Segment(&genouxG, &piedG));	
+	os.push_back(new Segment(&bassinD, &genouxD));	
+	os.push_back(new Segment(&genouxD, &piedD));
+
+	setVertices();
 }
 
 void Squelette::draw(){
@@ -164,6 +234,62 @@ void Squelette::draw(){
 	 */
 }
 
+static float computeDistance(Segment *seg, Vertex v){
+	if(distancePoints(*(seg->p1), v.m_pos) < distancePoints(*(seg->p2), v.m_pos)){
+		Vector3f v1 = Vector3f(seg->p2->x-seg->p1->x, seg->p2->x-seg->p1->x, seg->p2->x-seg->p1->x);
+		Vector3f v2 = Vector3f(v.m_pos.x-seg->p1->x,v.m_pos.y-seg->p1->y,v.m_pos.z-seg->p1->z);
+		Vector3f vecProj = projection(v2, v1);
+		if(scal(v2,v1)>0){
+			Vector3f vResult = Vector3f(v2.x - vecProj.x, v2.y - vecProj.y, v2.z - vecProj.z);
+			return longueur(vResult);
+		}else{
+			return distancePoints(v.m_pos, *(seg->p1));
+		}
+	}else{
+		Vector3f v1 = Vector3f(seg->p2->x-seg->p1->x, seg->p2->x-seg->p1->x, seg->p2->x-seg->p1->x);
+		Vector3f v2 = Vector3f(v.m_pos.x-seg->p2->x,v.m_pos.y-seg->p2->y,v.m_pos.z-seg->p2->z);
+		Vector3f vecProj = projection(v2, v1);
+		if(scal(v2,v1)>0){
+			Vector3f vResult = Vector3f(v2.x - vecProj.x, v2.y - vecProj.y, v2.z - vecProj.z);
+			return longueur(vResult);
+		}else{
+			return distancePoints(v.m_pos, *(seg->p2));
+		}
+
+	}
+}
+
+void Squelette::setVertices(){
+	for(int i=0; i<vertices->size(); i++){
+		Segment *s = foundSegment((*vertices)[i]);
+		s->verticesAssocies.push_back(&(*vertices)[i]);
+	}
+}
+
+Segment* Squelette::foundSegment(Vertex v){
+	float distMin = 500;
+	float dist;
+	Segment *s;
+	for(int i=0; i<os.size(); i++){
+		dist = computeDistance(os[i], v);	
+		if(dist<distMin){
+			distMin = dist;
+			s = os[i];
+		}
+	}
+	return s;
+}
+
+
+static void setSegment(Segment *s, float dx, float dy, float dz){
+	for(int i=0; i<s->verticesAssocies.size(); i++){
+		s->verticesAssocies[i]->m_pos.x += dx;
+		s->verticesAssocies[i]->m_pos.y += dy;
+		s->verticesAssocies[i]->m_pos.z += dz;
+	}
+}
+
+
 static void setCoord(Vector3f *dest, Vector3f src){
 	dest->z = src.z;
 	dest->y = src.y;
@@ -187,19 +313,43 @@ void Squelette::setSchoulderG(Vector3f p){
 }
 
 void Squelette::setSchoulderD(Vector3f p){
+	float dx, dy, dz;
+	dx = p.x-schoulderD.x;
+	dy = -schoulderD.y+p.y;
+	dz = -schoulderD.z+p.z;
+
+	setSegment(os[2], dx, dy, dz);
+	setSegment(os[4], dx/2, dy/2, dz/2);
+
 	setCoord(&schoulderD, p);
 }
 void Squelette::setCoudeG(Vector3f p){
 	setCoord(&coudeG, p);
 }
 void Squelette::setCoudeD(Vector3f p){
+	float dx, dy, dz;
+	dx = p.x-coudeD.x;
+	dy = -coudeD.y+p.y;
+	dz = -coudeD.z+p.z;
+
+	setSegment(os[6], dx/2, dy/2, dz/2);
+	setSegment(os[4], dx/2, dy/2, dz/2);
 	setCoord(&coudeD, p);
 }
 void Squelette::setMainG(Vector3f p){
 	setCoord(&mainG, p);
 }
+
+ 
 void Squelette::setMainD(Vector3f p){
+	float dx, dy, dz;
+	dx = p.x-mainD.x;
+	dy = -mainD.y+p.y;
+	dz = -mainD.z+p.z;
+	
 	setCoord(&mainD, p);
+	
+	setSegment(os[6], dx/2, dy/2, dz/2);
 }
 void Squelette::setTorse(Vector3f p){
 	setCoord(&torse, p);

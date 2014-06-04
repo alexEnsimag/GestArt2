@@ -11,7 +11,7 @@ class Segment{
 	public:
 	Vector3f *p1;
 	Vector3f *p2;
-	std::vector<Vertex> vertexAssocies;
+	std::vector<Vertex*> verticesAssocies;
 	Segment(Vector3f* a, Vector3f* b){
 		p1 = a;
 		p2=b;

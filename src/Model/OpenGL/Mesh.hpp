@@ -38,6 +38,8 @@ public:
 
     ~Mesh();
 
+    std::vector<Vertex> Vertices;
+
     bool LoadMesh(const std::string& Filename);
 
     void Render();
