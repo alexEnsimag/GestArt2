@@ -2,8 +2,7 @@
 #include "InterfaceG.hpp"
 
 InterfaceG::InterfaceG(int argc, char** argv) : main(argc, argv) {
-	glutInit(&argc, argv);
-	menu = new Menu();
+	menu = new Menu(argc, argv);
 }
 
 void InterfaceG::run(){

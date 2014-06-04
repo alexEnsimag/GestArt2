@@ -5,7 +5,7 @@
 #include "Menu.hpp"
 #include "../../Controler/Kinect/Parser.hpp"
 
-Menu::Menu(){
+Menu::Menu(int argc, char** argv){
 		set_title("Gest-Art Application");
 		set_icon_from_file("Images/icon.png");
 		set_border_width(20);
@@ -16,7 +16,7 @@ Menu::Menu(){
 	 	set_position(Gtk::WIN_POS_CENTER);
 		
 		//Creation de la vue openGL
-		glView = new Viewer();
+		glView = new Viewer(argc, argv);
 		glViewParser = new ViewerParser();
 
 		//Création des widget

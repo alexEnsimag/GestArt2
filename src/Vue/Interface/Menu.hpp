@@ -13,7 +13,7 @@
 
 class Menu : public Gtk::Window {
 	public : 
-		Menu();
+		Menu(int argc, char** argv);
 		~Menu();
 	private :
 		Gtk::HBox *boxH;
