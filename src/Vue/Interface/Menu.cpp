@@ -16,8 +16,10 @@ Menu::Menu(int argc, char** argv){
 	 	set_position(Gtk::WIN_POS_CENTER);
 		
 		//Creation de la vue openGL
-		glView = new Viewer(argc, argv);
-		glViewParser = new ViewerParser();
+		viewerJeux = new ViewerJeux(argc, argv);
+		viewerMesh = new ViewerMesh(argc, argv);
+		viewerTps = new ViewerTps();
+		viewerParser = new ViewerParser();
 
 		//Création des widget
 		boxH = new Gtk::HBox(false, 10);
@@ -25,13 +27,18 @@ Menu::Menu(int argc, char** argv){
 		boxVG = new Gtk::VBox(false ,10);
 		boxVD = new Gtk::VBox(false ,10);
 
+		newMouv = new Gtk::Button("Enregistrer\nun\nMouvement");
+		tempsReel = new Gtk::Button("Temps Reel");
+		tempsReel->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchTps));
+		loadMesh = new Gtk::Button("Charger un Mesh");
+		loadMesh->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchMesh));
+		
 		screen = new Gtk::CheckButton("Plein Ecran");
 		screen->signal_toggled().connect(sigc::mem_fun(*this, &Menu::fullsc));
 		jouer = new Gtk::Button("JOUER");
 		jouer->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launch));
 		mouv = new Gtk::Button("Visualiser\n un \nMouvement");
 		mouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::loadMouv));
-		jouer->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launch));
 		login = new Gtk::Button("S'identifier");
 		quitter = new Gtk::Button(Gtk::Stock::QUIT);
 		quitter->signal_clicked().connect(sigc::ptr_fun(&Gtk::Main::quit));
@@ -46,6 +53,9 @@ Menu::Menu(int argc, char** argv){
 
 		boxVD->pack_start(*mouv);
 		boxVD->pack_start(*login);
+		boxVD->pack_start(*newMouv);
+		boxVD->pack_start(*loadMesh);
+		boxVD->pack_start(*tempsReel);
 		boxVD->pack_start(*screen, Gtk::PACK_SHRINK);
 		boxVD->pack_start(*quitter,Gtk::PACK_SHRINK);
 
@@ -55,6 +65,9 @@ Menu::Menu(int argc, char** argv){
 
 Menu::~Menu(){
 	delete jouer;
+	delete newMouv;
+	delete tempsReel;
+	delete loadMesh;
 	delete login;
 	delete quitter;
 	delete mouv;
@@ -74,7 +87,15 @@ void Menu::fullsc(){
 }
 
 void Menu::launch(){
-	glView->launch();
+	viewerJeux->launch();
+}
+
+void Menu::launchTps(){
+	viewerTps->launch();
+}
+
+void Menu::launchMesh(){
+	viewerTps->launch();
 }
 
 void Menu::loadMouv(){
@@ -90,6 +111,6 @@ void Menu::loadMouv(){
 	int resultat = openf.run();
 	if(resultat == Gtk::RESPONSE_OK) {
 		std::string nomFichier = openf.get_filename();
-		glViewParser->launch(nomFichier);
+		viewerParser->launch(nomFichier);
 	}
 }

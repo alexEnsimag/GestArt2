@@ -5,7 +5,7 @@
 
 class ViewerMesh {
 	public:
-		ViewerMesh();
+		ViewerMesh(int argc, char**argv);
 		~ViewerMesh();
 		void launch();
 	private:
