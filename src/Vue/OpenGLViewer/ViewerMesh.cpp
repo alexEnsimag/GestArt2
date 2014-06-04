@@ -9,7 +9,7 @@
 // A modifier !
 Mesh *m_pMesh;
 
-ViewerMesh::ViewerMesh(){
+ViewerMesh::ViewerMesh(int argc, char** argv){
 	glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGBA | GLUT_DEPTH); 
 //	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
 	glutInitWindowSize(800, 800);

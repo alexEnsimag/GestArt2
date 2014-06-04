@@ -61,7 +61,7 @@ void Squelette::draw(){
 	float pNeck[3] = {(schoulderG[0]+schoulderD[0])/2, (schoulderG[1]+schoulderD[1])/2, (schoulderG[2]+schoulderD[2])/2};
 	setNeck(pNeck);
 
-	setHead(pNeck);
+//	setHead(pNeck);
 
 
 	float pAss[3] = {(bassinG[0]+bassinD[0])/2, (bassinG[1]+bassinD[1])/2, (bassinG[2]+bassinD[2])/2};
@@ -121,8 +121,8 @@ void Squelette::draw(){
 	glEnd();	
 
 	glBegin(GL_LINES);
-		glVertex3fv(genouxD);	
-		glVertex3fv(piedD);	
+//		glVertex3fv(genouxD);	
+//		glVertex3fv(piedD);	
 	glEnd();	
 	glBegin(GL_LINES);
 		glVertex3fv(bassinG);	
@@ -130,8 +130,8 @@ void Squelette::draw(){
 	glEnd();	
 
 	glBegin(GL_LINES);
-		glVertex3fv(genouxG);	
-		glVertex3fv(piedG);	
+//		glVertex3fv(genouxG);	
+//		glVertex3fv(piedG);	
 	glEnd();	
 
 }
