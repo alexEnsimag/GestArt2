@@ -70,7 +70,7 @@ void ViewerParser::launch(string nomFichier){
 	if(! InitMesh()){
 		fprintf(stderr, "Error: '%s'\n", "error while loading the mesh");
 	}
-	squel = new Squelette((m_pMesh->Vertices));
+	squel = new Squelette(&(m_pMesh->Vertices));
 	//squel = new Squelette();
 
 	parser->openFichier(nomFichier);
