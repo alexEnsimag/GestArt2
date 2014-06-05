@@ -13,7 +13,7 @@ using namespace std;
 class Squelette {
 	public:
 		Squelette();
-		Squelette(vector<Vertex> vert);
+		Squelette(vector<Vertex> *vert);
 		void draw();
 		vector<Segment*> os;
 

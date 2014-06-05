@@ -70,10 +70,10 @@ Squelette::Squelette(){
 }
 
 
-Squelette::Squelette(vector<Vertex> vert){
+Squelette::Squelette(vector<Vertex> *vert){
 	//vertices = vert;
-	for(int i=0; i<vert.size(); i++){
-		vertices.push_back( &(vert[i]));
+	for(int i=0; i<vert->size(); i++){
+		vertices.push_back( &((*vert)[i]));
 	}
 	head.x = 0.0f;
 	head.z = 2.0f;
@@ -286,9 +286,9 @@ Segment* Squelette::foundSegment(Vertex *v){
 
 static void setSegment(Segment *s, float dx, float dy, float dz){
 	for(int i=0; i<s->verticesAssocies.size(); i++){
-		s->verticesAssocies[i]->m_pos.x = dx;
-		s->verticesAssocies[i]->m_pos.y = dy;
-		s->verticesAssocies[i]->m_pos.z = dz;
+		s->verticesAssocies[i]->m_pos.x += dx;
+		s->verticesAssocies[i]->m_pos.z += dy;
+		s->verticesAssocies[i]->m_pos.y += dz;
 	}
 }
 
@@ -321,8 +321,7 @@ void Squelette::setSchoulderD(Vector3f p){
 	dy = -schoulderD.y+p.y;
 	dz = -schoulderD.z+p.z;
 
-	setSegment(os[2], 0, 0, 0);
-	setSegment(os[4], 0, 0, 0);
+	setSegment(os[2], dx, dy, 0);
 
 	setCoord(&schoulderD, p);
 }
@@ -335,8 +334,7 @@ void Squelette::setCoudeD(Vector3f p){
 	dy = -coudeD.y+p.y;
 	dz = -coudeD.z+p.z;
 
-	setSegment(os[6], 0, 0, 0);
-	setSegment(os[4], 0, 0, 0);
+	setSegment(os[4], dx, dy, 0);
 	setCoord(&coudeD, p);
 }
 void Squelette::setMainG(Vector3f p){
@@ -350,14 +348,17 @@ void Squelette::setMainD(Vector3f p){
 	dy = p.y-mainD.y;
 	dz = -mainD.z+p.z;
 	
-	setCoord(&mainD, p);
 	//printf("%f", p.x);
 	
+/*
 	for(int i=0; i<vertices.size()/2; i++){
 		vertices[i]->m_pos.x =5;
 		vertices[i]->m_pos.y =p.y;
 		vertices[i]->m_pos.z = 0;
 	}
+*/
+	setSegment(os[6], dx, dy, 0);
+	setCoord(&mainD, p);
 }
 void Squelette::setTorse(Vector3f p){
 	setCoord(&torse, p);
