@@ -351,10 +351,10 @@ void Squelette::setMainD(Vector3f p){
 	dz = -mainD.z+p.z;
 	
 	setCoord(&mainD, p);
-	printf("%f", p.x);
+	//printf("%f", p.x);
 	
 	for(int i=0; i<vertices.size()/2; i++){
-		vertices[i]->m_pos.x =p.x;
+		vertices[i]->m_pos.x =5;
 		vertices[i]->m_pos.y =p.y;
 		vertices[i]->m_pos.z = 0;
 	}
