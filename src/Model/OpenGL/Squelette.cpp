@@ -90,9 +90,9 @@ Squelette::Squelette(Mesh* vMainD){
 	os.push_back(new Bone(&schoulderG, &coudeG));	
 	os.push_back(new Bone(&schoulderD, &coudeD));	
 	os.push_back(new Bone(&coudeG, &mainG));	
-	os.push_back(new Bone(&coudeD, &mainD));	
+	os.push_back(new Bone(&coudeD, &mainD, vMainD));	
 	os.push_back(new Bone(&neck, &torse));	
-	os.push_back(new Bone(&bassinD, &bassinG, vMainD));
+	os.push_back(new Bone(&bassinD, &bassinG));
 	os.push_back(new Bone(&torse, &ass));	
 	os.push_back(new Bone(&bassinG, &genouxG));	
 	os.push_back(new Bone(&genouxG, &piedG));	

@@ -17,27 +17,24 @@ Bone::Bone(Vector3f* a, Vector3f* b, Mesh* m){
 void Bone::displayMesh(){
 	if (mesh == NULL)
 		return;
+	Vector3f center = getMiddle();
+	Vector3f rot = getRotation();
+	glPushMatrix();
+	glTranslatef(center.x, center.y, center.z);
+	glRotatef(rot.z,0, 0, 1);
+	//printf("rot.y:%f\n", rot.y);
+	glRotatef(rot.y,0, 1, 0);
+	//glRotatef(rot.x,1, 0, 0);
 	mesh->Render();
+	glPopMatrix();
 }
 
 void Bone::display(){
-	   	glBegin(GL_LINES);
-		glVertex3f(p1->x,p1->y,p1->z);
-		glVertex3f(p2->x,p2->y,p2->z);
-		glEnd();
-		Vector3f center = getMiddle();
-		Vector3f rot = getRotation();
-		//printf("%f\n", rot.z);
-		//glRotatef(rot.z,0, 0, 1);
-		//glRotatef(rot.y,0, 1, 0);
-		//glRotatef(rot.x,1, 0, 0);
-		//glRotatef(100,0,0,1);
-		glTranslatef(center.x, center.y, center.z);
-		displayMesh();
-		glTranslatef(-center.x, -center.y, -center.z);
-		//glRotatef(-rot.x,1, 0, 0);
-		//glRotatef(-rot.y,0, 1, 0);
-		//glRotatef(-rot.z,0, 0, 1);
+	glBegin(GL_LINES);
+	glVertex3f(p1->x,p1->y,p1->z);
+	glVertex3f(p2->x,p2->y,p2->z);
+	glEnd();
+	displayMesh();
 }
 
 Vector3f Bone::getMiddle(){
