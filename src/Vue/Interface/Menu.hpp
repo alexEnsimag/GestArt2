@@ -13,6 +13,11 @@
 #include "../OpenGLViewer/ViewerTps.hpp"
 #include "../OpenGLViewer/ViewerMesh.hpp"
 
+#include <sys/wait.h>
+#include <unistd.h>
+#include <stdlib.h>
+
+
 class Menu : public Gtk::Window {
 	public : 
 		Menu(int argc, char** argv);
@@ -40,5 +45,7 @@ class Menu : public Gtk::Window {
 		void launchTps();
 		void launch();
 		void loadMouv();
+		void enregistrement();
+		void launchEnregistrement();
 };
 #endif

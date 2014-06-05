@@ -4,6 +4,16 @@
 #include <string>
 #include "Menu.hpp"
 #include "../../Controler/Kinect/Parser.hpp"
+#include <gtkmm/entry.h>
+
+#include "Dialogue.hpp"
+
+#define PROCESSING_PATH "lib/Processing/processing-2.2.1/"
+#define FILE_PROCESSING_PATH "lib/Processing/processing-2.2.1/pointsMain" 
+#define OF_PATH "lib/OpenFrameworks/of_v0.8.1_linux64_release/apps/myApps/oscReceiveExample/bin/"
+#define MVT_PATH "mouvements/"
+
+string texteField;
 
 Menu::Menu(int argc, char** argv){
 
@@ -29,6 +39,8 @@ Menu::Menu(int argc, char** argv){
 		boxVD = new Gtk::VBox(false ,10);
 
 		newMouv = new Gtk::Button("Enregistrer\nun\nMouvement");
+		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::enregistrement));
+		
 
 		tempsReel = new Gtk::Button("Temps Reel");
 		tempsReel->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchTps));
@@ -114,5 +126,58 @@ void Menu::loadMouv(){
 	if(resultat == Gtk::RESPONSE_OK) {
 		std::string nomFichier = openf.get_filename();
 		viewerParser->launch(nomFichier);
+	}
+}
+
+void Menu::enregistrement(){
+	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom defichier");
+	diag.set_texte("choix");
+	int reponse = diag.run();
+	if(reponse == Gtk::RESPONSE_OK) { 
+        	texteField = diag.get_texte();
+		launchEnregistrement();
+    	}
+	//zoneTexte.signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchEnregistrement));
+
+}
+
+void Menu::launchEnregistrement(){
+	char *argProcessing[5];
+	string nameCommand = PROCESSING_PATH;
+	nameCommand = nameCommand + "./processing-java";
+	string nameFile = FILE_PROCESSING_PATH;
+	string arg1 = "--sketch="+nameFile+"";
+	string arg2 = MVT_PATH;
+	arg2 = "--output="+arg2+texteField+"";
+	string arg3 = "--run";
+	argProcessing[0] = (char *) nameCommand.c_str();
+	argProcessing[1] = (char *) arg1.c_str();
+	argProcessing[2] = (char *) arg2.c_str();
+	argProcessing[3] = (char *) arg3.c_str();
+	argProcessing[4] = NULL;
+
+	char *argOf[2];
+	string nameCommandOf = OF_PATH;
+	nameCommandOf = nameCommandOf + "./oscReceiveExample_debug";
+	argOf[0] = (char *) nameCommandOf.c_str();
+	argOf[1] = NULL;
+
+	pid_t pidOf = fork();
+	if(pidOf<0){
+		cerr << "Failed to fork" <<endl;
+	}else if(pidOf==0){
+		pid_t pidProcess = fork();
+		if(pidProcess<0){
+			cerr << "Failed to fork" <<endl;
+		}else if(pidProcess==0){
+			if(execvp(argProcessing[0],argProcessing)){
+				cerr<< "failed execute" <<endl;
+			}
+		}else{			
+			if(execvp(argOf[0],argOf)){
+				cerr<< "failed execute" <<endl;
+			}
+		}
+	}else{
 	}
 }
