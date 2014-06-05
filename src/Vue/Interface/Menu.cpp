@@ -17,64 +17,64 @@ string texteField;
 
 Menu::Menu(int argc, char** argv){
 
-		set_title("Gest-Art Application");
-		set_icon_from_file("Images/icon.png");
-		set_border_width(20);
+	set_title("Gest-Art Application");
+	set_icon_from_file("Images/icon.png");
+	set_border_width(20);
 
-		//Redimensionnement
-		resize(800,500);
-		//Positionnement
-	 	set_position(Gtk::WIN_POS_CENTER);
-		
-		//Creation de la vue openGL
-		viewerJeux = new ViewerJeux(argc, argv);
-		viewerMesh = new ViewerMesh(argc, argv);
-		viewerTps = new ViewerTps();
-		viewerParser = new ViewerParser();
+	//Redimensionnement
+	resize(800,500);
+	//Positionnement
+	set_position(Gtk::WIN_POS_CENTER);
 
-		//Création des widget
-		boxH = new Gtk::HBox(false, 10);
+	//Creation de la vue openGL
+	viewerJeux = new ViewerJeux(argc, argv);
+	viewerMesh = new ViewerMesh(argc, argv);
+	viewerTps = new ViewerTps();
+	viewerParser = new ViewerParser();
 
-		boxVG = new Gtk::VBox(false ,10);
-		boxVD = new Gtk::VBox(false ,10);
+	//Création des widget
+	boxH = new Gtk::HBox(false, 10);
 
-		newMouv = new Gtk::Button("Enregistrer\nun\nMouvement");
-		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::enregistrement));
-		
+	boxVG = new Gtk::VBox(false ,10);
+	boxVD = new Gtk::VBox(false ,10);
 
-		tempsReel = new Gtk::Button("Temps Reel");
-		tempsReel->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchTps));
-		loadMesh = new Gtk::Button("Charger un Mesh");
-		loadMesh->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchMesh));
-		
-		screen = new Gtk::CheckButton("Plein Ecran");
-		screen->signal_toggled().connect(sigc::mem_fun(*this, &Menu::fullsc));
-		jouer = new Gtk::Button("JOUER");
-		jouer->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launch));
-		mouv = new Gtk::Button("Visualiser\n un \nMouvement");
-		mouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::loadMouv));
-		login = new Gtk::Button("S'identifier");
-		quitter = new Gtk::Button(Gtk::Stock::QUIT);
-		quitter->signal_clicked().connect(sigc::ptr_fun(&Gtk::Main::quit));
-		img = new Gtk::Image("Images/menu.png");
+	newMouv = new Gtk::Button("Enregistrer\nun\nMouvement");
+	newMouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchEnregistrement));
 
-		//Ajout des Widgets
-		boxH->pack_start(*boxVD,Gtk::PACK_SHRINK);
-		boxH->pack_start(*boxVG);
 
-		boxVG->pack_start(*img);
-		boxVG->pack_start(*jouer);
+	tempsReel = new Gtk::Button("Temps Reel");
+	tempsReel->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchTps));
+	loadMesh = new Gtk::Button("Charger un Mesh");
+	loadMesh->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchMesh));
 
-		boxVD->pack_start(*mouv);
-		boxVD->pack_start(*login);
-		boxVD->pack_start(*newMouv);
-		boxVD->pack_start(*loadMesh);
-		boxVD->pack_start(*tempsReel);
-		boxVD->pack_start(*screen, Gtk::PACK_SHRINK);
-		boxVD->pack_start(*quitter,Gtk::PACK_SHRINK);
+	screen = new Gtk::CheckButton("Plein Ecran");
+	screen->signal_toggled().connect(sigc::mem_fun(*this, &Menu::fullsc));
+	jouer = new Gtk::Button("JOUER");
+	jouer->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launch));
+	mouv = new Gtk::Button("Visualiser\n un \nMouvement");
+	mouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::loadMouv));
+	login = new Gtk::Button("S'identifier");
+	quitter = new Gtk::Button(Gtk::Stock::QUIT);
+	quitter->signal_clicked().connect(sigc::ptr_fun(&Gtk::Main::quit));
+	img = new Gtk::Image("Images/menu.png");
 
-		boxH->show();
-		add(*boxH);
+	//Ajout des Widgets
+	boxH->pack_start(*boxVD,Gtk::PACK_SHRINK);
+	boxH->pack_start(*boxVG);
+
+	boxVG->pack_start(*img);
+	boxVG->pack_start(*jouer);
+
+	boxVD->pack_start(*mouv);
+	boxVD->pack_start(*login);
+	boxVD->pack_start(*newMouv);
+	boxVD->pack_start(*loadMesh);
+	boxVD->pack_start(*tempsReel);
+	boxVD->pack_start(*screen, Gtk::PACK_SHRINK);
+	boxVD->pack_start(*quitter,Gtk::PACK_SHRINK);
+
+	boxH->show();
+	add(*boxH);
 }
 
 Menu::~Menu(){
@@ -134,50 +134,67 @@ void Menu::enregistrement(){
 	diag.set_texte("choix");
 	int reponse = diag.run();
 	if(reponse == Gtk::RESPONSE_OK) { 
-        	texteField = diag.get_texte();
+		texteField = diag.get_texte();
 		launchEnregistrement();
-    	}
+	}
 	//zoneTexte.signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchEnregistrement));
 
 }
 
 void Menu::launchEnregistrement(){
-	char *argProcessing[5];
+	char *argProcessing[6];
 	string nameCommand = PROCESSING_PATH;
 	nameCommand = nameCommand + "./processing-java";
 	string nameFile = FILE_PROCESSING_PATH;
-	string arg1 = "--sketch="+nameFile+"";
-	string arg2 = MVT_PATH;
-	arg2 = "--output="+arg2+texteField+"";
-	string arg3 = "--run";
+	//nameFile = nameFile+"/pointsMain.pde";
+	   string arg1 = "--sketch="+nameFile+"";
+	   string arg2 = "--output=toto";
+	   string arg3 = "--force";
+	   string arg4 = "--run";
+
 	argProcessing[0] = (char *) nameCommand.c_str();
 	argProcessing[1] = (char *) arg1.c_str();
 	argProcessing[2] = (char *) arg2.c_str();
 	argProcessing[3] = (char *) arg3.c_str();
-	argProcessing[4] = NULL;
+	argProcessing[4] = (char *) arg4.c_str();
 
+	argProcessing[5] = NULL;
+
+	pid_t pidProcess = fork();
+	if(pidProcess<0){
+		cerr << "Failed to fork" <<endl;
+	}else if(pidProcess==0){
+		if(execvp(argProcessing[0],argProcessing)){
+			cerr<< "failed execute" <<endl;
+		}
+	}else{			
+	}
+
+
+
+	/*
 	char *argOf[2];
 	string nameCommandOf = OF_PATH;
 	nameCommandOf = nameCommandOf + "./oscReceiveExample_debug";
 	argOf[0] = (char *) nameCommandOf.c_str();
 	argOf[1] = NULL;
-
-	pid_t pidOf = fork();
-	if(pidOf<0){
-		cerr << "Failed to fork" <<endl;
-	}else if(pidOf==0){
-		pid_t pidProcess = fork();
-		if(pidProcess<0){
-			cerr << "Failed to fork" <<endl;
-		}else if(pidProcess==0){
-			if(execvp(argProcessing[0],argProcessing)){
-				cerr<< "failed execute" <<endl;
-			}
-		}else{			
-			if(execvp(argOf[0],argOf)){
-				cerr<< "failed execute" <<endl;
-			}
-		}
-	}else{
-	}
+	   pid_t pidOf = fork();
+	   if(pidOf<0){
+	   cerr << "Failed to fork" <<endl;
+	   }else if(pidOf==0){
+	   pid_t pidProcess = fork();
+	   if(pidProcess<0){
+	   cerr << "Failed to fork" <<endl;
+	   }else if(pidProcess==0){
+	   if(execvp(argProcessing[0],argProcessing)){
+	   cerr<< "failed execute" <<endl;
+	   }
+	   }else{			
+	   if(execvp(argOf[0],argOf)){
+	   cerr<< "failed execute" <<endl;
+	   }
+	   }
+	   }else{
+	   }
+	 */
 }
