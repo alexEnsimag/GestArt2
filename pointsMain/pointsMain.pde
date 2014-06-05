@@ -161,7 +161,9 @@ void drawLimb(int userId,int jointType1,int jointType2)
   confidence = context.getJointPositionSkeleton(userId,jointType1,jointPos1);
   confidence = context.getJointPositionSkeleton(userId,jointType2,jointPos2);
   //if(jointType2 == SimpleOpenNI.SKEL_LEFT_HAND || jointType2 == SimpleOpenNI.SKEL_RIGHT_HAND) {
-    //sendJointMsg(jointType1, jointPos1);
+    if(jointType1 == SimpleOpenNI.SKEL_HEAD) {
+    	sendJointMsg(jointType1, jointPos1);
+    }
     sendJointMsg(jointType2, jointPos2);
  // }
 
