@@ -7,15 +7,21 @@
 
 #include "Mesh.hpp"
 
-class Segment{
+class Bone{
 	public:
-	Vector3f *p1;
-	Vector3f *p2;
-	std::vector<Vertex*> verticesAssocies;
-	Segment(Vector3f* a, Vector3f* b){
-		p1 = a;
-		p2=b;
-	}
+
+		Bone(Vector3f* a, Vector3f* b);
+		Bone(Vector3f* a, Vector3f* b, Mesh *m);
+		Vector3f *p1;
+		Vector3f *p2;
+		double length();
+		void display();
+	private:
+		Mesh *mesh;
+		void displayMesh();
+		Vector3f getMiddle();
+		Vector3f getRotation();
+		Vector3f getVector();
 };
 
 

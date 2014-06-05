@@ -13,9 +13,9 @@ using namespace std;
 class Squelette {
 	public:
 		Squelette();
-		Squelette(vector<Vertex> *vert);
+		Squelette(Mesh *main);
 		void draw();
-		vector<Segment*> os;
+		vector<Bone*> os;
 
 		void setHead(Vector3f p);		
 		void setNeck(Vector3f p);		
@@ -36,11 +36,6 @@ class Squelette {
 
 	private:
 
-		vector<Vertex*> vertices;
-		
-		void setVertices();
-		Segment* foundSegment(Vertex *v);
-
 		Vector3f head;
 		Vector3f neck;
 		Vector3f ass;
@@ -57,8 +52,6 @@ class Squelette {
 		Vector3f genouxD;
 		Vector3f piedG;
 		Vector3f piedD;
-		
-		
 
 };
 #endif

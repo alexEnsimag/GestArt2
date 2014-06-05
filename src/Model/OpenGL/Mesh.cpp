@@ -114,9 +114,9 @@ void Mesh::InitMesh(unsigned int Index, const aiMesh* paiMesh)
 		const aiVector3D* pNormal   = &(paiMesh->mNormals[i]);
 		const aiVector3D* pTexCoord = paiMesh->HasTextureCoords(0) ? &(paiMesh->mTextureCoords[0][i]) : &Zero3D;
 
-		Vertex v(Vector3f(pPos->x, pPos->y, pPos->z),
+		Vertex v(Vector3f(pPos->x, pPos->z, pPos->y),
 				Vector2f(pTexCoord->x, pTexCoord->y),
-				Vector3f(pNormal->x, pNormal->y, pNormal->z));
+				Vector3f(pNormal->x, pNormal->z, pNormal->y));
 
 		Vertices.push_back(v);
 	}
@@ -189,62 +189,18 @@ bool Mesh::InitMaterials(const aiScene* pScene, const std::string& Filename)
 
 void Mesh::Render()
 {
-/*
-	glEnableVertexAttribArray(0);
-	glEnableVertexAttribArray(1);
-	glEnableVertexAttribArray(2);
-
-	for (unsigned int i = 0 ; i < m_Entries.size() ; i++) {
-		glBindBuffer(GL_ARRAY_BUFFER, m_Entries[i].VB);
-		glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), 0);
-		glVertexAttribPointer(1, 2, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)12);
-		glVertexAttribPointer(2, 3, GL_FLOAT, GL_FALSE, sizeof(Vertex), (const GLvoid*)20);
-
-		glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_Entries[i].IB);
-
-		const unsigned int MaterialIndex = m_Entries[i].MaterialIndex;
-*/
-
-		/*
-		   if (MaterialIndex < m_Textures.size() && m_Textures[MaterialIndex]) {
-		   m_Textures[MaterialIndex]->Bind(GL_TEXTURE0);
-		   }
-		 */
-		
-		for(int i=0; i<Vertices.size(); i+=3){
+	for(int i=0; i<Vertices.size(); i+=3){
 			glBegin(GL_TRIANGLES); //Begin triangle coordinates
-			glNormal3f((Vertices[i]).m_normal.x/2,(Vertices[i]).m_normal.z/2,(Vertices[i]).m_normal.y/2);
+			glNormal3f((Vertices[i]).m_normal.x,(Vertices[i]).m_normal.y,(Vertices[i]).m_normal.z);
 
-			glVertex3f((Vertices[i]).m_pos.x/2.5,(Vertices[i]).m_pos.z/2.5,(Vertices[i]).m_pos.y/2.5);
+			glVertex3f((Vertices[i]).m_pos.x/2.5,(Vertices[i]).m_pos.y/2.5,(Vertices[i]).m_pos.z/2.5);
 
-			glNormal3f((Vertices[i+1]).m_normal.x/2,(Vertices[i+1]).m_normal.z/2,(Vertices[i+1]).m_normal.y/2);
-			glVertex3f((Vertices[i+1]).m_pos.x/2.5,(Vertices[i+1]).m_pos.z/2.5,(Vertices[i+1]).m_pos.y/2.5);
+			glNormal3f((Vertices[i+1]).m_normal.x,(Vertices[i+1]).m_normal.y,(Vertices[i+1]).m_normal.z);
+			glVertex3f((Vertices[i+1]).m_pos.x/2.5,(Vertices[i+1]).m_pos.y/2.5,(Vertices[i+1]).m_pos.z/2.5);
 
-			glNormal3f((Vertices[i+2]).m_normal.x/2,(Vertices[i+2]).m_normal.z/2,(Vertices[i+2]).m_normal.y/2);
-			glVertex3f((Vertices[i+2]).m_pos.x/2.5,(Vertices[i+2]).m_pos.z/2.5,(Vertices[i+2]).m_pos.y/2.5);
-/*
-
-			printf("%f ", (Vertices[i]).m_pos.z);
-			printf("%f ", (Vertices[i+1]).m_pos.z);
-			printf("%f \n", (Vertices[i+2]).m_pos.z);
-*/
+			glNormal3f((Vertices[i+2]).m_normal.x,(Vertices[i+2]).m_normal.y,(Vertices[i+2]).m_normal.z);
+			glVertex3f((Vertices[i+2]).m_pos.x/2.5,(Vertices[i+2]).m_pos.y/2.5,(Vertices[i+2]).m_pos.z/2.5);
 			glEnd(); //End triangle coordinates
 		}
-
-		//Triangle
-
-
-//		glEnableClientState(GL_VERTEX_ARRAY);
-		//glVertexPointer(3, GL_FLOAT, 0, vertices);
-
-		//	glDrawElements(GL_QUADS, 4, GL_UNSIGNED_INT, indice); 
-		// glDrawElements(GL_TRIANGLES, m_Entries[i].NumIndices, GL_UNSIGNED_INT, 0);
-/*
-	}
-
-	glDisableVertexAttribArray(0);
-	glDisableVertexAttribArray(1);
-	glDisableVertexAttribArray(2);
-*/
 }
 

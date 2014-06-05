@@ -46,10 +46,10 @@ static void RenderSceneCB()
     glColor3f(0.4, 0.6, 0.0);
     squel->draw();
 		glColor3f(0.4f, 0.0f, 0.6f); 
-    m_pMesh->Render();
+    // m_pMesh->Render();
     glFlush();
 	//animation
-     parser->parse(squel);
+    parser->parse(squel);
     glutPostRedisplay();
 }
 
@@ -70,7 +70,7 @@ void ViewerParser::launch(string nomFichier){
 	if(! InitMesh()){
 		fprintf(stderr, "Error: '%s'\n", "error while loading the mesh");
 	}
-	squel = new Squelette(&(m_pMesh->Vertices));
+	squel = new Squelette(m_pMesh);
 	//squel = new Squelette();
 
 	parser->openFichier(nomFichier);
