@@ -3,14 +3,45 @@
 // A modifier !
 Squelette *squel;
 Parser *parser;
-Mesh *m_pMesh;
 
-static bool InitMesh(){
+bool ViewerParser::InitMesh(){
 
-	m_pMesh = new Mesh();
+	aBrasD = new Mesh();
+	aBrasG = new Mesh();
+	brasD = new Mesh();
+	brasG = new Mesh();
+	torse = new Mesh();
+	tete = new Mesh();
+	bassin = new Mesh();
+	jambeD = new Mesh();
+	jambeG = new Mesh();
+	molletD = new Mesh();
+	molletG = new Mesh();
 
-	return m_pMesh->LoadMesh("Modele/Scotty.3ds");
+	if(!aBrasD->LoadMesh("Modele/avant_brasD.3ds"))
+		return false;
+	if(!aBrasG->LoadMesh("Modele/avant_brasG.3ds"))
+		return false;
+	if(!brasD->LoadMesh("Modele/brasD.3ds"))
+		return false;
+	if(!brasG->LoadMesh("Modele/brasG.3ds"))
+		return false;
+	if(!jambeD->LoadMesh("Modele/jambe.3ds"))
+		return false;
+	if(!jambeG->LoadMesh("Modele/jambe.3ds"))
+		return false;
+	if(!molletG->LoadMesh("Modele/mollet.3ds"))
+		return false;
+	if(!molletD->LoadMesh("Modele/mollet.3ds"))
+		return false;
+	if(!tete->LoadMesh("Modele/tete.3ds"))
+		return false;
+	if(!torse->LoadMesh("Modele/torse.3ds"))
+		return false;
+	if(!bassin->LoadMesh("Modele/bassin.3ds"))
+		return false;
 
+	return true;
 }
 
 ViewerParser::ViewerParser(){
@@ -33,29 +64,29 @@ static void sleep2(unsigned int ms){
 
 static void RenderSceneCB()
 {
-    sleep2(100000);
-    glClear(GL_COLOR_BUFFER_BIT);
-// lights and color
-		glEnable(GL_LIGHTING);
-		glDisable(GL_LIGHT0);
-		glEnable(GL_LIGHT1);
-		GLfloat const white[] = {1.0f,1.0f,1.0f, 1.f};
-		glLightfv(GL_LIGHT1, GL_DIFFUSE, white);
-		GLfloat position[] = {1.0f, 1.0f, 0.5f}; 
-		glLightfv(GL_LIGHT1, GL_POSITION, position);
-    glColor3f(0.4, 0.6, 0.0);
-    squel->draw();
-		glColor3f(0.4f, 0.0f, 0.6f); 
-    // m_pMesh->Render();
-    glFlush();
+	sleep2(100000);
+	glClear(GL_COLOR_BUFFER_BIT);
+	// lights and color
+	glEnable(GL_LIGHTING);
+	glDisable(GL_LIGHT0);
+	glEnable(GL_LIGHT1);
+	GLfloat const white[] = {1.0f,1.0f,1.0f, 1.f};
+	glLightfv(GL_LIGHT1, GL_DIFFUSE, white);
+	GLfloat position[] = {1.0f, 1.0f, 0.5f}; 
+	glLightfv(GL_LIGHT1, GL_POSITION, position);
+	glColor3f(0.4, 0.6, 0.0);
+	squel->draw();
+	glColor3f(0.4f, 0.0f, 0.6f); 
+	// m_pMesh->Render();
+	glFlush();
 	//animation
-    parser->parse(squel);
-    glutPostRedisplay();
+	parser->parse(squel);
+	glutPostRedisplay();
 }
 
 static void InitializeGlutCallbacks()
 {
-    glutDisplayFunc(RenderSceneCB);
+	glutDisplayFunc(RenderSceneCB);
 }
 
 void ViewerParser::launch(string nomFichier){
@@ -64,13 +95,15 @@ void ViewerParser::launch(string nomFichier){
 	GLenum res = glewInit();
 	if (res != GLEW_OK) {
 		fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
+		return;
 	}
 
 
 	if(! InitMesh()){
 		fprintf(stderr, "Error: '%s'\n", "error while loading the mesh");
+		return;
 	}
-	squel = new Squelette(m_pMesh);
+	squel = new Squelette(aBrasD, aBrasG, brasD, brasG, torse, tete, bassin, jambeD, jambeG, molletD, molletG);
 	//squel = new Squelette();
 
 	parser->openFichier(nomFichier);
@@ -82,6 +115,16 @@ void ViewerParser::launch(string nomFichier){
 
 
 ViewerParser::~ViewerParser(){
-	delete m_pMesh;
+	delete aBrasD;
+	delete aBrasG;
+	delete brasD;
+	delete brasG;
+	delete torse;
+	delete tete;
+	delete bassin;
+	delete jambeD;
+	delete jambeG;
+	delete molletD;
+	delete molletG;
 	delete squel;
 }

@@ -23,7 +23,7 @@ void Bone::displayMesh(){
 	glTranslatef(center.x, center.y, center.z);
 	glRotatef(rot.z,0, 0, 1);
 	//printf("rot.y:%f\n", rot.y);
-	glRotatef(rot.y,0, 1, 0);
+	//glRotatef(rot.y,0, 1, 0);
 	//glRotatef(rot.x,1, 0, 0);
 	mesh->Render();
 	glPopMatrix();

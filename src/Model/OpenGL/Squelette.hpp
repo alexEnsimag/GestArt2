@@ -13,7 +13,7 @@ using namespace std;
 class Squelette {
 	public:
 		Squelette();
-		Squelette(Mesh *main);
+		Squelette(Mesh *abd, Mesh* abg, Mesh* bd, Mesh* bg, Mesh* torse, Mesh* tete, Mesh* bassin, Mesh* jd, Mesh* jg, Mesh* md, Mesh* mg);
 		void draw();
 		vector<Bone*> os;
 
