@@ -187,19 +187,19 @@ bool Mesh::InitMaterials(const aiScene* pScene, const std::string& Filename)
 	return Ret;
 }
 
-void Mesh::Render()
+void Mesh::Render(float ratio)
 {
 	for(int i=0; i<Vertices.size(); i+=3){
 			glBegin(GL_TRIANGLES); //Begin triangle coordinates
 			glNormal3f((Vertices[i]).m_normal.x,(Vertices[i]).m_normal.y,(Vertices[i]).m_normal.z);
 
-			glVertex3f((Vertices[i]).m_pos.x/2.5,(Vertices[i]).m_pos.y/2.5,(Vertices[i]).m_pos.z/2.5);
+			glVertex3f((Vertices[i]).m_pos.x*ratio,(Vertices[i]).m_pos.y*ratio,(Vertices[i]).m_pos.z*ratio);
 
 			glNormal3f((Vertices[i+1]).m_normal.x,(Vertices[i+1]).m_normal.y,(Vertices[i+1]).m_normal.z);
-			glVertex3f((Vertices[i+1]).m_pos.x/2.5,(Vertices[i+1]).m_pos.y/2.5,(Vertices[i+1]).m_pos.z/2.5);
+			glVertex3f((Vertices[i+1]).m_pos.x*ratio,(Vertices[i+1]).m_pos.y*ratio,(Vertices[i+1]).m_pos.z*ratio);
 
 			glNormal3f((Vertices[i+2]).m_normal.x,(Vertices[i+2]).m_normal.y,(Vertices[i+2]).m_normal.z);
-			glVertex3f((Vertices[i+2]).m_pos.x/2.5,(Vertices[i+2]).m_pos.y/2.5,(Vertices[i+2]).m_pos.z/2.5);
+			glVertex3f((Vertices[i+2]).m_pos.x*ratio,(Vertices[i+2]).m_pos.y*ratio,(Vertices[i+2]).m_pos.z*ratio);
 			glEnd(); //End triangle coordinates
 		}
 }

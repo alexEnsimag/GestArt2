@@ -42,7 +42,7 @@ public:
 
     bool LoadMesh(const std::string& Filename);
 
-    void Render();
+    void Render(float ratio);
 
 private:
     bool InitFromScene(const aiScene* pScene, const std::string& Filename);
