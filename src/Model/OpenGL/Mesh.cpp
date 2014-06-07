@@ -47,8 +47,16 @@ void Mesh::MeshEntry::Init(const std::vector<Vertex>& Vertices,
 
 Mesh::Mesh()
 {
+	color[0] = 0.0;
+	color[1] = 0.0;
+	color[2] = 0.0;
 }
 
+void Mesh::setColor(float r, float g, float b){
+	color[0] = r;
+	color[1] = g;
+	color[2] = b;
+}
 
 Mesh::~Mesh()
 {
@@ -189,6 +197,7 @@ bool Mesh::InitMaterials(const aiScene* pScene, const std::string& Filename)
 
 void Mesh::Render(float ratio)
 {
+	glColor3f(color[0], color[1], color[2]);
 	for(int i=0; i<Vertices.size(); i+=3){
 			glBegin(GL_TRIANGLES); //Begin triangle coordinates
 			glNormal3f((Vertices[i]).m_normal.x,(Vertices[i]).m_normal.y,(Vertices[i]).m_normal.z);

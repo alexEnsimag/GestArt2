@@ -1,5 +1,5 @@
-#ifndef DEF_SEGMENT_
-#define	DEF_SEGMENT_
+#ifndef DEF_SEGMENT
+#define	DEF_SEGMENT
 
 #include <vector>
 #include <stdio.h>

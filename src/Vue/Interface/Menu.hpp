@@ -13,6 +13,7 @@
 #include <string>
 #include <gtkmm/entry.h>
 #include <gtkmm/messagedialog.h>
+#include <gtkmm/label.h>
 
 #include "Dialogue.hpp"
 #include "../OpenGLViewer/ViewerJeux.hpp"
@@ -39,6 +40,7 @@ class Menu : public Gtk::Window {
 		~Menu();
 	private :
 		Gtk::HBox *boxH;
+		Gtk::HBox *boxScenar;
 		Gtk::VBox *boxVG;
 		Gtk::VBox *boxVD;
 		Gtk::Button *jouer;
@@ -49,6 +51,13 @@ class Menu : public Gtk::Window {
 		Gtk::Button *loadMesh;
 		Gtk::Button *quitter;
 		Gtk::CheckButton *screen;
+
+		Gtk::Label *scenarLabel;
+		Gtk::Button *scenarG;
+		Gtk::Button *scenarD;
+		int selectedScenar;
+		vector<std::string> scenar;
+
 		Gtk::Image *img;
 		ViewerJeux *viewerJeux;
 		ViewerMesh *viewerMesh;
@@ -64,5 +73,7 @@ class Menu : public Gtk::Window {
 		void enregistrement();
 		void identification();
 		void launchEnregistrement();
+		void nextScen();
+		void prevScen();
 };
 #endif

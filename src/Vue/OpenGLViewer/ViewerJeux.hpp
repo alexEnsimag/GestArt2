@@ -3,6 +3,7 @@
 
 #include "../../Model/OpenGL/Mesh.hpp"
 #include "../../Model/OpenGL/Scene.hpp"
+#include "../../Model/OpenGL/Light.hpp"
 
 
 
@@ -13,6 +14,7 @@ class ViewerJeux {
 		void launch();
 	private:
 		bool InitMesh();
+		Light *light;
 		Mesh* scene;
 		Mesh* alambic;
 		Mesh* table;

@@ -9,6 +9,7 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG){
 		set_title("Gest-Art Application");
 		set_icon_from_file("Images/icon.png");
 		set_border_width(20);
+		selectedScenar = 0;
 
 		//Redimensionnement
 		resize(500,500);
@@ -17,6 +18,11 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG){
 		
 		//Link avec l'interface mère
 		it = itG;
+
+		//Ajout des différents scénar:
+		scenar.push_back("scénar 01");
+		scenar.push_back("scénar 02");
+		scenar.push_back("scénar 03");
 		
 		//Creation de la vue openGL
 		viewerJeux = new ViewerJeux(argc, argv);
@@ -26,9 +32,16 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG){
 
 		//Création des widget
 		boxH = new Gtk::HBox(false, 10);
+		boxScenar = new Gtk::HBox (false,10);
 
 		boxVG = new Gtk::VBox(false ,10);
 		boxVD = new Gtk::VBox(false ,10);
+
+		scenarLabel = new Gtk::Label(scenar[selectedScenar]);
+		scenarG = new Gtk::Button ("<");
+		scenarG->signal_clicked().connect(sigc::mem_fun(*this, &Menu::prevScen));
+		scenarD = new Gtk::Button (">");
+		scenarD->signal_clicked().connect(sigc::mem_fun(*this, &Menu::nextScen));
 
 		newMouv = new Gtk::Button("Enregistrer\nun\nMouvement");
 		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::enregistrement));
@@ -52,26 +65,33 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG){
 		img = new Gtk::Image("Images/menu.png");
 
 		//Ajout des Widgets
-		boxH->pack_start(*boxVD,Gtk::PACK_SHRINK);
-		boxH->pack_start(*boxVG);
+		boxH->pack_start(*boxVG,Gtk::PACK_SHRINK);
+		boxH->pack_start(*boxVD);
 
-		boxVG->pack_start(*img);
-		boxVG->pack_start(*jouer);
+		boxVG->pack_start(*mouv);
+		boxVG->pack_start(*login);
+		boxVG->pack_start(*newMouv);
+		boxVG->pack_start(*loadMesh);
+		boxVG->pack_start(*tempsReel);
+		boxVG->pack_start(*screen, Gtk::PACK_SHRINK);
+		boxVG->pack_start(*quitter,Gtk::PACK_SHRINK);
 
-		boxVD->pack_start(*mouv);
-		boxVD->pack_start(*login);
-		boxVD->pack_start(*newMouv);
-		boxVD->pack_start(*loadMesh);
-		boxVD->pack_start(*tempsReel);
-		boxVD->pack_start(*screen, Gtk::PACK_SHRINK);
-		boxVD->pack_start(*quitter,Gtk::PACK_SHRINK);
+		boxVD->pack_start(*img);
+		boxVD->pack_start(*boxScenar,Gtk::PACK_SHRINK);
+		boxVD->pack_start(*jouer);
 
+		boxScenar->pack_start(*scenarG,Gtk::PACK_SHRINK);
+		boxScenar->pack_start(*scenarLabel);
+		boxScenar->pack_start(*scenarD,Gtk::PACK_SHRINK);
 		boxH->show();
 		add(*boxH);
 }
 
 Menu::~Menu(){
 	delete jouer;
+	delete scenarG;
+	delete scenarD;
+	delete scenarLabel;
 	delete newMouv;
 	delete tempsReel;
 	delete loadMesh;
@@ -82,6 +102,7 @@ Menu::~Menu(){
 	delete screen;
 	delete boxVD;
 	delete boxVG;
+	delete boxScenar;
 	delete boxH;
 }
 
@@ -189,4 +210,15 @@ void Menu::identification(){
 		identification();
 	}
     	}
+}
+
+void Menu::nextScen(){
+	selectedScenar +=1;
+	selectedScenar %= scenar.size(); 
+	scenarLabel->set_text(scenar[selectedScenar]);
+}
+void Menu::prevScen(){
+	selectedScenar += scenar.size() - 1 ;
+	selectedScenar %= scenar.size(); 
+	scenarLabel->set_text(scenar[selectedScenar]);
 }

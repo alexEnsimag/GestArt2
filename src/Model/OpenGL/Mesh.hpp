@@ -35,6 +35,7 @@ class Mesh
 {
 public:
     Mesh();
+    void setColor(float r, float g, float b);
 
     ~Mesh();
 
@@ -45,6 +46,7 @@ public:
     void Render(float ratio);
 
 private:
+	GLfloat color[3];
     bool InitFromScene(const aiScene* pScene, const std::string& Filename);
     void InitMesh(unsigned int Index, const aiMesh* paiMesh);
     bool InitMaterials(const aiScene* pScene, const std::string& Filename);
