@@ -1,21 +1,10 @@
-#include <gtkmm/main.h>
-#include <gtkmm/filechooserdialog.h>
-#include <gtkmm/filefilter.h>
-#include <string>
 #include "Menu.hpp"
-#include "../../Controler/Kinect/Parser.hpp"
-#include <gtkmm/entry.h>
 
-#include "Dialogue.hpp"
 
-#define PROCESSING_PATH "lib/Processing/processing-2.2.1/"
-#define FILE_PROCESSING_PATH "lib/Processing/processing-2.2.1/pointsMain" 
-#define OF_PATH "lib/OpenFrameworks/of_v0.8.1_linux64_release/apps/myApps/oscReceiveExample/bin/"
-#define MVT_PATH "mouvements/"
 
 string texteField;
 
-Menu::Menu(int argc, char** argv){
+Menu::Menu(int argc, char** argv, InterfaceG* const itG){
 
 		set_title("Gest-Art Application");
 		set_icon_from_file("Images/icon.png");
@@ -25,6 +14,9 @@ Menu::Menu(int argc, char** argv){
 		resize(800,500);
 		//Positionnement
 	 	set_position(Gtk::WIN_POS_CENTER);
+		
+		//Link avec l'interface mère
+		it = itG;
 		
 		//Creation de la vue openGL
 		viewerJeux = new ViewerJeux(argc, argv);
@@ -40,7 +32,6 @@ Menu::Menu(int argc, char** argv){
 
 		newMouv = new Gtk::Button("Enregistrer\nun\nMouvement");
 		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::enregistrement));
-		
 
 		tempsReel = new Gtk::Button("Temps Reel");
 		tempsReel->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchTps));
@@ -54,6 +45,8 @@ Menu::Menu(int argc, char** argv){
 		mouv = new Gtk::Button("Visualiser\n un \nMouvement");
 		mouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::loadMouv));
 		login = new Gtk::Button("S'identifier");
+		login->signal_clicked().connect(sigc::mem_fun(*this, &Menu::identification));
+		
 		quitter = new Gtk::Button(Gtk::Stock::QUIT);
 		quitter->signal_clicked().connect(sigc::ptr_fun(&Gtk::Main::quit));
 		img = new Gtk::Image("Images/menu.png");
@@ -137,8 +130,6 @@ void Menu::enregistrement(){
         	texteField = diag.get_texte();
 		launchEnregistrement();
     	}
-	//zoneTexte.signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchEnregistrement));
-
 }
 
 void Menu::launchEnregistrement(){
@@ -180,4 +171,22 @@ void Menu::launchEnregistrement(){
 		}
 	}else{
 	}
+}
+
+void Menu::identification(){
+	Dialogue diag("Acces interface Administrateur", this, "Veuillez entrer le code admministrateur");
+	diag.set_texte("admin");
+	diag.zoneTexte.set_visibility(false);
+	int reponse = diag.run();
+	if(reponse == Gtk::RESPONSE_OK) { 
+        	texteField = diag.get_texte();
+	if(texteField == "admin"){
+		diag.hide();
+		it->pageAdmin();
+	}else{
+		Gtk::MessageDialog diagE(*this, "Erreur de code", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_CLOSE);
+		int reponse = diagE.run();
+		identification();
+	}
+    	}
 }
