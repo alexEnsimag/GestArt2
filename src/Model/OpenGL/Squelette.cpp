@@ -86,14 +86,14 @@ Squelette::Squelette(Mesh *aBrasD, Mesh* aBrasG, Mesh* brasD, Mesh* brasG, Mesh*
 	piedD.x = -0.1f;piedD.y = -0.7f;piedD.z = 0.0f; 
 
 	os.push_back(new Bone(&head, &neck, tete));	
-	os.push_back(new Bone(&schoulderD, &schoulderG, torso));	
+	os.push_back(new Bone(&schoulderD, &schoulderG));	
 	os.push_back(new Bone(&schoulderG, &coudeG, brasG));	
 	os.push_back(new Bone(&schoulderD, &coudeD, brasD));	
 	os.push_back(new Bone(&coudeG, &mainG, aBrasG));	
 	os.push_back(new Bone(&coudeD, &mainD, aBrasD));	
-	os.push_back(new Bone(&neck, &torse));	
-	os.push_back(new Bone(&bassinD, &bassinG, bassin));
-	os.push_back(new Bone(&torse, &ass));	
+	os.push_back(new Bone(&neck, &torse, torso));	
+	os.push_back(new Bone(&bassinD, &bassinG));
+	os.push_back(new Bone(&torse, &ass, bassin));	
 	os.push_back(new Bone(&bassinG, &genouxG, jambeG));	
 	os.push_back(new Bone(&genouxG, &piedG, molletG));	
 	os.push_back(new Bone(&bassinD, &genouxD, jambeD));	
