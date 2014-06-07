@@ -2,8 +2,6 @@
 
 // A modifier !
 Squelette *squel;
-Scene *decorBehind;
-Scene *decorBefore;
 Parser *parser;
 
 bool ViewerParser::InitMesh(){
@@ -19,17 +17,6 @@ bool ViewerParser::InitMesh(){
 	jambeG = new Mesh();
 	molletD = new Mesh();
 	molletG = new Mesh();
-
-	scene = new Mesh();
-	alambic = new Mesh();
-	table = new Mesh();
-	chaise1 = new Mesh();
-	chaise2 = new Mesh();
-	etageres = new Mesh();
-	fiole1 = new Mesh();
-	fiole2 = new Mesh();
-	fiole3 = new Mesh();
-	fiole4 = new Mesh();
 
 	if(!aBrasD->LoadMesh("Modele/avant_brasD.3ds"))
 		return false;
@@ -52,28 +39,6 @@ bool ViewerParser::InitMesh(){
 	if(!torse->LoadMesh("Modele/torse.3ds"))
 		return false;
 	if(!bassin->LoadMesh("Modele/bassin.3ds"))
-		return false;
-
-
-	if(!scene->LoadMesh("Modele/scene.3ds"))
-		return false;
-	if(!alambic->LoadMesh("Modele/alambic.3ds"))
-		return false;
-	if(!table->LoadMesh("Modele/table.3ds"))
-		return false;
-	if(!chaise1->LoadMesh("Modele/chaise1.3ds"))
-		return false;
-	if(!chaise2->LoadMesh("Modele/chaise2.3ds"))
-		return false;
-	if(!etageres->LoadMesh("Modele/etageres.3ds"))
-		return false;
-	if(!fiole1->LoadMesh("Modele/fiole1.3ds"))
-		return false;
-	if(!fiole2->LoadMesh("Modele/fiole2.3ds"))
-		return false;
-	if(!fiole3->LoadMesh("Modele/fiole3.3ds"))
-		return false;
-	if(!fiole4->LoadMesh("Modele/fiole4.3ds"))
 		return false;
 
 	return true;
@@ -111,9 +76,7 @@ static void RenderSceneCB()
 	GLfloat position[] = {1.0f, 1.0f, 0.5f}; 
 	glLightfv(GL_LIGHT1, GL_POSITION, position);
 	//Meshes
-	decorBehind->draw();
 	squel->draw();
-	decorBefore->draw();
 	//animation
 	glFlush();
 	parser->parse(squel);
@@ -126,29 +89,18 @@ static void InitializeGlutCallbacks()
 }
 
 void ViewerParser::launch(string nomFichier){
-	glutCreateWindow("Tutorial 01");
+	glutCreateWindow("Visualisation de mouvement");
 	// Must be done after glut is initialized!
 	GLenum res = glewInit();
 	if (res != GLEW_OK) {
 		fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
 		return;
 	}
-
-
 	if(! InitMesh()){
 		fprintf(stderr, "Error: '%s'\n", "error while loading the mesh");
 		return;
 	}
 	squel = new Squelette(aBrasD, aBrasG, brasD, brasG, torse, tete, bassin, jambeD, jambeG, molletD, molletG);
-	decorBehind = new Scene(scene);
-	decorBehind->add(fiole4);
-	decorBehind->add(fiole3);
-	decorBehind->add(fiole2);
-	decorBehind->add(fiole1);
-	decorBefore = new Scene(chaise1);
-	decorBefore->add(alambic);
-	decorBefore->add(table);
-	decorBefore->add(chaise2);
 
 	parser->openFichier(nomFichier);
 

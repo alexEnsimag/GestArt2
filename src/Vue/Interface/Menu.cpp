@@ -11,7 +11,7 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG){
 		set_border_width(20);
 
 		//Redimensionnement
-		resize(800,500);
+		resize(500,500);
 		//Positionnement
 	 	set_position(Gtk::WIN_POS_CENTER);
 		

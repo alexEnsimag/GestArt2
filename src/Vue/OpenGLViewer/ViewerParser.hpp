@@ -32,16 +32,6 @@ class ViewerParser {
 		Mesh* molletD;
 		Mesh* molletG;
 		
-		Mesh* scene;
-		Mesh* alambic;
-		Mesh* table;
-		Mesh* chaise1;
-		Mesh* chaise2;
-		Mesh* etageres;
-		Mesh* fiole1;
-		Mesh* fiole2;
-		Mesh* fiole3;
-		Mesh* fiole4;
 };
 
 #endif
