@@ -1,84 +1,98 @@
-#include <gtkmm/main.h>
-#include <gtkmm/filechooserdialog.h>
-#include <gtkmm/filefilter.h>
-#include <string>
 #include "Menu.hpp"
-#include "../../Controler/Kinect/Parser.hpp"
-#include <gtkmm/entry.h>
 
-#include "Dialogue.hpp"
 
-#define PROCESSING_PATH "lib/Processing/processing-2.2.1/"
-#define FILE_PROCESSING_PATH "lib/Processing/processing-2.2.1/pointsMain" 
-#define OF_PATH "lib/OpenFrameworks/of_v0.8.1_linux64_release/apps/myApps/oscReceiveExample/bin/"
-#define MVT_PATH "mouvements/"
 
 string texteField;
 
-Menu::Menu(int argc, char** argv){
-
-	set_title("Gest-Art Application");
-	set_icon_from_file("Images/icon.png");
-	set_border_width(20);
-
-	//Redimensionnement
-	resize(800,500);
-	//Positionnement
-	set_position(Gtk::WIN_POS_CENTER);
-
-	//Creation de la vue openGL
-	viewerJeux = new ViewerJeux(argc, argv);
-	viewerMesh = new ViewerMesh(argc, argv);
-	viewerTps = new ViewerTps();
-	viewerParser = new ViewerParser();
-
-	//Création des widget
-	boxH = new Gtk::HBox(false, 10);
-
-	boxVG = new Gtk::VBox(false ,10);
-	boxVD = new Gtk::VBox(false ,10);
-
-	newMouv = new Gtk::Button("Enregistrer\nun\nMouvement");
-	newMouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchEnregistrement));
+Menu::Menu(int argc, char** argv, InterfaceG* const itG){
 
 
-	tempsReel = new Gtk::Button("Temps Reel");
-	tempsReel->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchTps));
-	loadMesh = new Gtk::Button("Charger un Mesh");
-	loadMesh->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchMesh));
+		set_title("Gest-Art Application");
+		set_icon_from_file("Images/icon.png");
+		set_border_width(20);
+		selectedScenar = 0;
 
-	screen = new Gtk::CheckButton("Plein Ecran");
-	screen->signal_toggled().connect(sigc::mem_fun(*this, &Menu::fullsc));
-	jouer = new Gtk::Button("JOUER");
-	jouer->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launch));
-	mouv = new Gtk::Button("Visualiser\n un \nMouvement");
-	mouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::loadMouv));
-	login = new Gtk::Button("S'identifier");
-	quitter = new Gtk::Button(Gtk::Stock::QUIT);
-	quitter->signal_clicked().connect(sigc::ptr_fun(&Gtk::Main::quit));
-	img = new Gtk::Image("Images/menu.png");
+		//Redimensionnement
+		resize(500,500);
+		//Positionnement
+	 	set_position(Gtk::WIN_POS_CENTER);
+		
+		//Link avec l'interface mère
+		it = itG;
 
-	//Ajout des Widgets
-	boxH->pack_start(*boxVD,Gtk::PACK_SHRINK);
-	boxH->pack_start(*boxVG);
+		//Ajout des différents scénar:
+		scenar.push_back("scénar 01");
+		scenar.push_back("scénar 02");
+		scenar.push_back("scénar 03");
+		
+		//Creation de la vue openGL
+		viewerJeux = new ViewerJeux(argc, argv);
+		viewerMesh = new ViewerMesh(argc, argv);
+		viewerTps = new ViewerTps();
+		viewerParser = new ViewerParser();
 
-	boxVG->pack_start(*img);
-	boxVG->pack_start(*jouer);
+		//Création des widget
+		boxH = new Gtk::HBox(false, 10);
+		boxScenar = new Gtk::HBox (false,10);
 
-	boxVD->pack_start(*mouv);
-	boxVD->pack_start(*login);
-	boxVD->pack_start(*newMouv);
-	boxVD->pack_start(*loadMesh);
-	boxVD->pack_start(*tempsReel);
-	boxVD->pack_start(*screen, Gtk::PACK_SHRINK);
-	boxVD->pack_start(*quitter,Gtk::PACK_SHRINK);
+		boxVG = new Gtk::VBox(false ,10);
+		boxVD = new Gtk::VBox(false ,10);
 
-	boxH->show();
-	add(*boxH);
+		scenarLabel = new Gtk::Label(scenar[selectedScenar]);
+		scenarG = new Gtk::Button ("<");
+		scenarG->signal_clicked().connect(sigc::mem_fun(*this, &Menu::prevScen));
+		scenarD = new Gtk::Button (">");
+		scenarD->signal_clicked().connect(sigc::mem_fun(*this, &Menu::nextScen));
+
+		newMouv = new Gtk::Button("Enregistrer\nun\nMouvement");
+		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::enregistrement));
+
+		tempsReel = new Gtk::Button("Temps Reel");
+		tempsReel->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchTps));
+		loadMesh = new Gtk::Button("Charger un Mesh");
+		loadMesh->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchMesh));
+		
+		screen = new Gtk::CheckButton("Plein Ecran");
+		screen->signal_toggled().connect(sigc::mem_fun(*this, &Menu::fullsc));
+		jouer = new Gtk::Button("JOUER");
+		jouer->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launch));
+		mouv = new Gtk::Button("Visualiser\n un \nMouvement");
+		mouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::loadMouv));
+		login = new Gtk::Button("S'identifier");
+		login->signal_clicked().connect(sigc::mem_fun(*this, &Menu::identification));
+		
+		quitter = new Gtk::Button(Gtk::Stock::QUIT);
+		quitter->signal_clicked().connect(sigc::ptr_fun(&Gtk::Main::quit));
+		img = new Gtk::Image("Images/menu.png");
+
+		//Ajout des Widgets
+		boxH->pack_start(*boxVG,Gtk::PACK_SHRINK);
+		boxH->pack_start(*boxVD);
+
+		boxVG->pack_start(*mouv);
+		boxVG->pack_start(*login);
+		boxVG->pack_start(*newMouv);
+		boxVG->pack_start(*loadMesh);
+		boxVG->pack_start(*tempsReel);
+		boxVG->pack_start(*screen, Gtk::PACK_SHRINK);
+		boxVG->pack_start(*quitter,Gtk::PACK_SHRINK);
+
+		boxVD->pack_start(*img);
+		boxVD->pack_start(*boxScenar,Gtk::PACK_SHRINK);
+		boxVD->pack_start(*jouer);
+
+		boxScenar->pack_start(*scenarG,Gtk::PACK_SHRINK);
+		boxScenar->pack_start(*scenarLabel);
+		boxScenar->pack_start(*scenarD,Gtk::PACK_SHRINK);
+		boxH->show();
+		add(*boxH);
 }
 
 Menu::~Menu(){
 	delete jouer;
+	delete scenarG;
+	delete scenarD;
+	delete scenarLabel;
 	delete newMouv;
 	delete tempsReel;
 	delete loadMesh;
@@ -89,6 +103,7 @@ Menu::~Menu(){
 	delete screen;
 	delete boxVD;
 	delete boxVG;
+	delete boxScenar;
 	delete boxH;
 }
 
@@ -137,8 +152,6 @@ void Menu::enregistrement(){
 		texteField = diag.get_texte();
 		launchEnregistrement();
 	}
-	//zoneTexte.signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchEnregistrement));
-
 }
 
 void Menu::launchEnregistrement(){
@@ -198,4 +211,33 @@ void Menu::launchEnregistrement(){
 	   }else{
 	   }
 */	 
+}
+
+void Menu::identification(){
+	Dialogue diag("Acces interface Administrateur", this, "Veuillez entrer le code admministrateur");
+	diag.set_texte("admin");
+	diag.zoneTexte.set_visibility(false);
+	int reponse = diag.run();
+	if(reponse == Gtk::RESPONSE_OK) { 
+        	texteField = diag.get_texte();
+	if(texteField == "admin"){
+		diag.hide();
+		it->pageAdmin();
+	}else{
+		Gtk::MessageDialog diagE(*this, "Erreur de code", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_CLOSE);
+		int reponse = diagE.run();
+		identification();
+	}
+    	}
+}
+
+void Menu::nextScen(){
+	selectedScenar +=1;
+	selectedScenar %= scenar.size(); 
+	scenarLabel->set_text(scenar[selectedScenar]);
+}
+void Menu::prevScen(){
+	selectedScenar += scenar.size() - 1 ;
+	selectedScenar %= scenar.size(); 
+	scenarLabel->set_text(scenar[selectedScenar]);
 }

@@ -34,6 +34,7 @@ void Parser::parse(Squelette *squelette){
 		p.x = pos1/1000;
 		p.y = pos2/1000;
 		p.z = (pos3-3000)/1500;
+//		p.z = 0;
 		if(! mot1.compare(MAING)){
 			squelette->setMainD(p);
 		}else if(! mot1.compare(MAIND)){

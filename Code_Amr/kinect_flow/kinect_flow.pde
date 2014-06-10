@@ -86,7 +86,7 @@ void setup() {
 
   context = new SimpleOpenNI(this);
 
-  if (!context.enableScene()) { 
+  if (!context.enableUser()) { 
 
     // if context.enableScene() returns false
 
@@ -95,6 +95,7 @@ void setup() {
     // make sure the green light is blinking
 
     println("Kinect not connected!"); 
+    println("blablablabla");
 
     exit();
 
@@ -146,7 +147,7 @@ void draw() {
 
   // put the image into a PImage
 
-  cam = context.sceneImage().get();
+  cam = context.userImage().get();
 
   // copy the image into the smaller blob image
 

@@ -9,6 +9,7 @@
 
 
 #include "../../Model/OpenGL/Squelette.hpp"
+#include "../../Model/OpenGL/Scene.hpp"
 //#include <GL/freeglut.h>
 
 
@@ -18,7 +19,19 @@ class ViewerParser {
 		~ViewerParser();
 		void launch(string nomFichier);
 	private:
-	//	Squelette *squelette;
+		bool InitMesh();
+		Mesh* aBrasD;
+		Mesh* aBrasG;
+		Mesh* brasD;
+		Mesh* brasG;
+		Mesh* torse;
+		Mesh* tete;
+		Mesh* bassin;
+		Mesh* jambeD;
+		Mesh* jambeG;
+		Mesh* molletD;
+		Mesh* molletG;
+		
 };
 
 #endif
