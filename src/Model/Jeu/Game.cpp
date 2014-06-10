@@ -3,6 +3,8 @@
 
 Game::Game(){
 	//Parcours du dossier Scenar/
+	DIR* repartoire = opendir("Scenario/");
+	
 	//Ajout des différents Scenar
 }
 
