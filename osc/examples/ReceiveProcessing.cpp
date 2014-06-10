@@ -17,7 +17,7 @@ using ::__strcmp__;  // avoid error: E2316 '__strcmp__' is not a member of 'std'
 #include "ip/UdpSocket.h"
 
 
-#define PORT 12345
+#define PORT 12346
 
 class ExamplePacketListener : public osc::OscPacketListener {
 protected:
@@ -30,7 +30,9 @@ protected:
         try{
             // osc::OsckPacketListener handles the bundle traversal.
 			osc::ReceivedMessage::const_iterator arg = m.ArgumentsBegin();
-			float x = (arg++)->AsFloat();
+			int classLabel = (arg++)->AsInt32();
+			std::cout << "ClassLabel : " << classLabel;
+			/*float x = (arg++)->AsFloat();
 			float y = (arg++)->AsFloat();
 			float z = (arg++)->AsFloat();
 			
@@ -62,7 +64,7 @@ protected:
 				std::cout << "Error message " << m.AddressPattern() << "\n";
 		    	return;
 		    }
-			std::cout << m.AddressPattern() << " " << x << " " << y << " " << z << "\n";
+			std::cout << m.AddressPattern() << " " << x << " " << y << " " << z << "\n";*/
 
         }catch( osc::Exception& e ){
             // any parsing errors such as unexpected argument types, or 
