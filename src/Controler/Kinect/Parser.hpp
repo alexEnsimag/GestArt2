@@ -17,7 +17,6 @@ class Parser{
 		void openFichier(string nomFichier);
 		void parse(Squelette *squelette);
 		void close();
-
 	private:
 		ifstream *fichier;
 };

@@ -20,10 +20,8 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG){
 		//Link avec l'interface mère
 		it = itG;
 
-		//Ajout des différents scénar:
-		scenar.push_back("scénar 01");
-		scenar.push_back("scénar 02");
-		scenar.push_back("scénar 03");
+		//Ajout du lien avec le jeu:
+		jeu = new Game();
 		
 		//Creation de la vue openGL
 		viewerJeux = new ViewerJeux(argc, argv);
@@ -38,7 +36,7 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG){
 		boxVG = new Gtk::VBox(false ,10);
 		boxVD = new Gtk::VBox(false ,10);
 
-		scenarLabel = new Gtk::Label(scenar[selectedScenar]);
+		scenarLabel = new Gtk::Label(jeu->getScenar(0).getName());
 		scenarG = new Gtk::Button ("<");
 		scenarG->signal_clicked().connect(sigc::mem_fun(*this, &Menu::prevScen));
 		scenarD = new Gtk::Button (">");
@@ -231,11 +229,11 @@ void Menu::identification(){
 
 void Menu::nextScen(){
 	selectedScenar +=1;
-	selectedScenar %= scenar.size(); 
-	scenarLabel->set_text(scenar[selectedScenar]);
+	selectedScenar %= jeu->getNbScenar(); 
+	scenarLabel->set_text(jeu->getScenar(selectedScenar).getName());
 }
 void Menu::prevScen(){
-	selectedScenar += scenar.size() - 1 ;
-	selectedScenar %= scenar.size(); 
-	scenarLabel->set_text(scenar[selectedScenar]);
+	selectedScenar += jeu->getNbScenar() - 1 ;
+	selectedScenar %= jeu->getNbScenar(); 
+	scenarLabel->set_text(jeu->getScenar(selectedScenar).getName());
 }

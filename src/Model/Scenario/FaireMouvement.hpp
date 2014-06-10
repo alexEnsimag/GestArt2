@@ -4,5 +4,5 @@
 #include "Activite.hpp"
 	class FaireMouvement : public Activite
 	{
-	}
+	};
 #endif 

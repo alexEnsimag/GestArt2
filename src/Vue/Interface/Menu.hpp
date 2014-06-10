@@ -21,6 +21,7 @@
 #include "../OpenGLViewer/ViewerTps.hpp"
 #include "../OpenGLViewer/ViewerMesh.hpp"
 #include "../../Controler/Kinect/Parser.hpp"
+#include "../../Model/Jeu/Game.hpp"
 
 #include <sys/wait.h>
 #include <unistd.h>
@@ -56,7 +57,7 @@ class Menu : public Gtk::Window {
 		Gtk::Button *scenarG;
 		Gtk::Button *scenarD;
 		int selectedScenar;
-		vector<std::string> scenar;
+		Game *jeu;
 
 		Gtk::Image *img;
 		ViewerJeux *viewerJeux;
