@@ -37,3 +37,9 @@ Scenario Game::getScenar(int i){
 	}
 	return scenar[i];
 }
+
+void Game::launch(int i){
+	scenar[i].launch();
+}
+
+

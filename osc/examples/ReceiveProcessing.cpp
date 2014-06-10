@@ -30,9 +30,9 @@ protected:
         try{
             // osc::OsckPacketListener handles the bundle traversal.
 			osc::ReceivedMessage::const_iterator arg = m.ArgumentsBegin();
-			int classLabel = (arg++)->AsInt32();
-			std::cout << "ClassLabel : " << classLabel;
-			/*float x = (arg++)->AsFloat();
+			std::string classLabel = (arg++)->AsString();
+			std::cout << "ClassLabel : " << classLabel << "\n";
+		/*float x = (arg++)->AsFloat();
 			float y = (arg++)->AsFloat();
 			float z = (arg++)->AsFloat();
 			
