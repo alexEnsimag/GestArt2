@@ -45,3 +45,11 @@ void Scenario::setName(string s){
 string Scenario::getName(){
 	return name;
 }
+
+void Scenario::launch(){
+	for(int i=0; i<activites.size(); i++){
+		activites[i]->launch();
+	}
+}
+
+

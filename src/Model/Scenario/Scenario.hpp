@@ -31,6 +31,7 @@ class Scenario{
 		string getName();
 		//Permet de changer le nom du sénario
 		void setName(string s);
+		void launch();
 	private:
 		string name;
 		vector<Activite*> activites;

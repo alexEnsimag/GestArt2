@@ -12,3 +12,7 @@ string Activite::getName(){
 string Activite::getParam(){
 	return param;
 }
+
+void Activite::launch(){
+	
+}

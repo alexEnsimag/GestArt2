@@ -9,6 +9,7 @@ class Activite {
 		Activite(string n, string p);
 		string getName();
 		string getParam();
+		void launch();
 		
 	private:
 		string name;
