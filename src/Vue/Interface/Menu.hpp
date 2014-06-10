@@ -28,9 +28,9 @@
 #include <stdlib.h>
 
 #define PROCESSING_PATH "lib/Processing/processing-2.2.1/"
-#define FILE_PROCESSING_PATH "lib/Processing/processing-2.2.1/pointsMain" 
+//#define FILE_PROCESSING_PATH "lib/Processing/processing-2.2.1/pointsMain" 
 #define OF_PATH "lib/OpenFrameworks/of_v0.8.1_linux64_release/apps/myApps/oscReceiveExample/bin/"
-#define MVT_PATH "mouvements/"
+//#define MVT_PATH "mouvements/"
 
 class Menu;
 #include "InterfaceG.hpp"
