@@ -11,10 +11,10 @@ void Scenario::enregistrer(){
 		cout << "Erreur a la création du Fichier" << endl;
 		return;
 	}
-	//fichier << name << endl;
+	fichier << name << endl;
 	for(int i=0; i<activites.size(); i++){
-		//fichier << activites[i].getName(); << endl;
-		//fichier << activites[i].getParam() << endl;
+		fichier << activites[i]->getName() << endl;
+		fichier << activites[i]->getParam() << endl;
 	}
 	fichier.close();
 }

@@ -1,3 +1,4 @@
+#include <iostream>
 #include "Activite.hpp"
 
 Activite::Activite(string n, string p){
@@ -14,5 +15,5 @@ string Activite::getParam(){
 }
 
 void Activite::launch(){
-	
+	cout<< "Not yet implemented:" << name << ", " << param << endl;
 }
