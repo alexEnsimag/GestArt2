@@ -26,6 +26,7 @@ void InterfaceG::retMenuFromAdmin(){
 }
 
 void InterfaceG::pageAfficheScenar(){
+	maj();
 	admin->hide();
 	afficheScenar->show_all();
 	Gtk::Main::run(*afficheScenar);
@@ -55,6 +56,10 @@ void InterfaceG::retFromModifScenar(){
 	modifScenar->hide();
 	afficheScenar->show_all();
 	Gtk::Main::run(*afficheScenar);
+}
+
+void InterfaceG::maj(){
+	jeu->updateScenar();
 }
 
 InterfaceG::~InterfaceG(){

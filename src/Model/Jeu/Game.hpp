@@ -17,6 +17,7 @@ class Game{
 		Scenario* getScenar(int i);
 		void launch(int i);
 		void updateScenar();
+		void delScenar(int i);
 
 	private:	
 		vector<Scenario> scenar;

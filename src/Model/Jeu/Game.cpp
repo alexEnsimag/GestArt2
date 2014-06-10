@@ -70,4 +70,6 @@ void Game::updateScenar(){
 	closedir(rep);
 }
 
-
+void delScenar(int i){
+//	remove scenar(i);
+}

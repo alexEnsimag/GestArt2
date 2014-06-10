@@ -7,7 +7,7 @@ void Scenario::addActivite(Activite *a){
 
 void Scenario::enregistrer(){
 	string nomFichier = "Scenario/" + name + ".txt";
-	ofstream fichier(name.c_str(), ios::out | ios::trunc);
+	ofstream fichier(nomFichier.c_str(), ios::out | ios::trunc);
 	if(!fichier){
 		cout << "Erreur a la création du Fichier" << endl;
 		return;
@@ -40,7 +40,7 @@ void Scenario::charger(string nomFichier){
 		if (mot == "ActiviteObjet"){
 			addActivite(new ActiviteObjet(param,nbEssai));
 		}else if (mot == "ActiviteForme"){
-			addActivite(new ActiviteFormes(param,nbEssai));
+			addActivite(new ActiviteForme(param,nbEssai));
 		}else{
 			cout << "Activitée non reconnue" << endl;
 		}

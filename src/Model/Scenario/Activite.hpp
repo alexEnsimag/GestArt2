@@ -2,7 +2,9 @@
 #define DEF_ACTIVITE
 
 #include <iostream>
+#include <sstream>
 #include <string>
+#include <vector>
 using namespace std;
 
 class Activite {
@@ -14,8 +16,6 @@ class Activite {
 		int getEssais();
 		bool getWellDone();
 		virtual void launch();
-		
-		vector<string> possibleParams;
 	private:
 		string name;
 		string param;

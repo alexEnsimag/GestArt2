@@ -28,6 +28,7 @@ class AfficheScenar : public Gtk::Window {
 		Gtk::VBox *boxVG;
 		Gtk::VBox *boxVM;
 		Gtk::VBox *boxVD;
+		Gtk::VBox *boxVED;
 		Gtk::Button *retour;
 		Gtk::Button *newScenar;
 
@@ -37,5 +38,6 @@ class AfficheScenar : public Gtk::Window {
 		void retAdmin();
 		void modifScenar(int i);
 		void addScenar();
+		void delScenar(int i);
 };
 #endif

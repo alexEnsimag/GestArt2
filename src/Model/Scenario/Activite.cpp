@@ -1,4 +1,4 @@
-#include <iostream>
+
 #include "Activite.hpp"
 
 Activite::Activite(string n, string p, int nb){
@@ -21,7 +21,9 @@ int Activite::getEssais(){
 }
 
 string Activite::toString(){
-	string result = name + ", " + param;
+	std::stringstream nbEss;
+	nbEss << nbEssai;
+	string result = name + ", " + param + " x" + nbEss.str();
 	return result;
 }
 

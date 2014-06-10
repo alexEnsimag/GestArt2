@@ -22,6 +22,7 @@ class InterfaceG {
 		void pageModifScenar();
 		void pageModifScenar(Scenario *s);
 		void retFromModifScenar();
+		void maj();
 	private:
 		Gtk::Main main;
 		Menu *menu;

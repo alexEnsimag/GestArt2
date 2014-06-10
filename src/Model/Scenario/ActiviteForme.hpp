@@ -1,20 +1,17 @@
-
-#ifndef DEF_ACTIVITEOBJET
-#define DEF_ACTIVITEOBJET
+#ifndef DEF_ACTIVITEFORMES
+#define DEF_ACTIVITEFORMES
 
 #include "Activite.hpp"
 
 
-class ActiviteObjet : public Activite {
+class ActiviteForme : public Activite {
 	public: 
-		ActiviteObjet(string p, int nb) : Activite("ActiviteObjet",p, nb){};
+		ActiviteForme(string p,int nb) : Activite("ActiviteForme",p, nb){};
 		virtual void launch();
-		void intLaunch();
 		static const vector<string> possibleParams;
 		static int getParamSize(){
 			return possibleParams.size();
 		}
-
 	private:
 };
 
