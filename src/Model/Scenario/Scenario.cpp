@@ -30,11 +30,20 @@ void Scenario::charger(string nomFichier){
 	string param;
 	fichier >> mot;
 	setName(mot);
+
 	
 	while(!fichier.eof()){
 		fichier >> mot >> param;
-		addActivite(new Activite(mot, param));
+		if (mot == "ActiviteObjet"){
+			addActivite(new ActiviteObjet(param));
+		}else if (mot == "ActiviteForme"){
+			addActivite(new ActiviteFormes(param));
+		}else{
+			cout << "Activitée non reconnue" << endl;
+		}
 	}
+	//On enleve le doublon de fin
+	activites.pop_back();
 	fichier.close();
 }
 

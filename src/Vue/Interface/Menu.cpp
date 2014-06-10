@@ -5,8 +5,7 @@
 
 string texteField;
 
-Menu::Menu(int argc, char** argv, InterfaceG* const itG){
-
+Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 
 		set_title("Gest-Art Application");
 		set_icon_from_file("Images/icon.png");
@@ -22,7 +21,7 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG){
 		it = itG;
 
 		//Ajout du lien avec le jeu:
-		jeu = new Game();
+		jeu = g;
 		
 		//Creation de la vue openGL
 		viewerJeux = new ViewerJeux(argc, argv);
@@ -114,8 +113,7 @@ void Menu::fullsc(){
 }
 
 void Menu::launch(){
-	
-	jeu->launch(selectedScenar );
+	jeu->launch(selectedScenar);
 	//viewerJeux->launch();
 }
 

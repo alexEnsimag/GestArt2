@@ -1,6 +1,7 @@
 #ifndef DEF_ACTIVITE
 #define DEF_ACTIVITE
 
+#include <iostream>
 #include <string>
 using namespace std;
 
@@ -11,7 +12,7 @@ class Activite {
 		string getParam();
 		bool getWellDone();
 		void setWellDone(bool b);
-		void launch();
+		virtual void launch();
 		
 	private:
 		string name;

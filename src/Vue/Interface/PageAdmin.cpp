@@ -28,8 +28,8 @@ PageAdmin::PageAdmin(int argc, char** argv, InterfaceG* const itG){
 		modifObjet->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::modifObjetFunc));
 		modifAvatar = new Gtk::Button("Modifier un Avatar");
 		modifAvatar->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::modifAvatarFunc));
-		modifSenario = new Gtk::Button("Modifier un Senario");
-		modifSenario->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::modifAvatarFunc));
+		modifScenario = new Gtk::Button("Modifier un Scenario");
+		modifScenario->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::modifScenarioFunc));
 		modifTheme = new Gtk::Button("Modifier un Thème");
 		modifTheme->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::modifThemeFunc));
 		getData = new Gtk::Button("Récupérer des données");
@@ -50,7 +50,7 @@ PageAdmin::PageAdmin(int argc, char** argv, InterfaceG* const itG){
 		boxVD->pack_start(*modifGeste);
 		boxVD->pack_start(*modifObjet);
 		boxVD->pack_start(*modifAvatar);
-		boxVD->pack_start(*modifSenario);
+		boxVD->pack_start(*modifScenario);
 		boxVD->pack_start(*modifTheme);
 		boxVD->pack_start(*getData, Gtk::PACK_SHRINK);
 
@@ -67,7 +67,7 @@ PageAdmin::~PageAdmin(){
 	delete modifGeste;
 	delete modifObjet;
 	delete modifAvatar;
-	delete modifSenario;
+	delete modifScenario;
 	delete modifTheme;
 	delete getData;
 }
@@ -91,7 +91,7 @@ void PageAdmin::modifObjetFunc(){
 }
 void PageAdmin::modifAvatarFunc(){
 }
-void PageAdmin::modifSenarioFunc(){
+void PageAdmin::modifScenarioFunc(){
 }
 void PageAdmin::modifThemeFunc(){
 }

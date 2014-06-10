@@ -5,12 +5,12 @@
 #include "Activite.hpp"
 
 
-	class ActiviteObjet : Activite {
-		public: 
-			ActiviteObjet(string p) : Activite("ActiviteObjet",p){};
-			void launch();
+class ActiviteObjet : public Activite {
+	public: 
+		ActiviteObjet(string p) : Activite("ActiviteObjet",p){};
+		virtual void launch();
 
-		private:
-	};
-			 
+	private:
+};
+
 #endif

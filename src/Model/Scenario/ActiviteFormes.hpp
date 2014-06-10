@@ -5,10 +5,10 @@
 #include "Activite.hpp"
 
 
-	class ActiviteFormes : Activite {
+	class ActiviteFormes : public Activite {
 		public: 
 			ActiviteFormes(string p) : Activite("ActiviteFormes",p){};
-			void launch();
+		        virtual	void launch();
 			
 
 		private:
