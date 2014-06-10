@@ -1,10 +1,15 @@
 #include "Menu.hpp"
 
 
+#define PROCESSING_PATH "lib/Processing/processing-2.2.1/"
+#define OF_PATH "lib/OpenFrameworks/of_v0.8.1_linux64_release/apps/myApps/oscReceiveExample/bin/"
+#define MVT_PATH "mouvements/"
+#define FILE_PROCESSING_PATH "lib/Processing/processing-2.2.1/pointsMain_pde"
 
 string texteField;
 
 Menu::Menu(int argc, char** argv, InterfaceG* const itG){
+
 
 		set_title("Gest-Art Application");
 		set_icon_from_file("Images/icon.png");
@@ -44,8 +49,7 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG){
 		scenarD->signal_clicked().connect(sigc::mem_fun(*this, &Menu::nextScen));
 
 		newMouv = new Gtk::Button("Enregistrer\nun\nMouvement");
-		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::enregistrement));
-
+		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchEnregistrement));
 		tempsReel = new Gtk::Button("Temps Reel");
 		tempsReel->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchTps));
 		loadMesh = new Gtk::Button("Charger un Mesh");
@@ -148,50 +152,67 @@ void Menu::enregistrement(){
 	diag.set_texte("choix");
 	int reponse = diag.run();
 	if(reponse == Gtk::RESPONSE_OK) { 
-        	texteField = diag.get_texte();
+		texteField = diag.get_texte();
 		launchEnregistrement();
-    	}
+	}
 }
 
 void Menu::launchEnregistrement(){
-	char *argProcessing[5];
+	char *argProcessing[6];
 	string nameCommand = PROCESSING_PATH;
 	nameCommand = nameCommand + "./processing-java";
 	string nameFile = FILE_PROCESSING_PATH;
+	//nameFile = nameFile+"/pointsMain.pde";
 	string arg1 = "--sketch="+nameFile+"";
 	string arg2 = MVT_PATH;
-	arg2 = "--output="+arg2+texteField+"";
-	string arg3 = "--run";
+	arg2 = "--output="+arg2+"toto";
+	string arg3 = "--force";
+	string arg4 = "--run";
 	argProcessing[0] = (char *) nameCommand.c_str();
 	argProcessing[1] = (char *) arg1.c_str();
 	argProcessing[2] = (char *) arg2.c_str();
 	argProcessing[3] = (char *) arg3.c_str();
-	argProcessing[4] = NULL;
+	argProcessing[4] = (char *) arg4.c_str();
+	argProcessing[5] = NULL;
 
-	char *argOf[2];
-	string nameCommandOf = OF_PATH;
-	nameCommandOf = nameCommandOf + "./oscReceiveExample_debug";
-	argOf[0] = (char *) nameCommandOf.c_str();
-	argOf[1] = NULL;
 
-	pid_t pidOf = fork();
-	if(pidOf<0){
+	pid_t pidProcess = fork();
+	if(pidProcess<0){
 		cerr << "Failed to fork" <<endl;
-	}else if(pidOf==0){
-		pid_t pidProcess = fork();
-		if(pidProcess<0){
-			cerr << "Failed to fork" <<endl;
-		}else if(pidProcess==0){
-			if(execvp(argProcessing[0],argProcessing)){
-				cerr<< "failed execute" <<endl;
-			}
-		}else{			
-			if(execvp(argOf[0],argOf)){
-				cerr<< "failed execute" <<endl;
-			}
+	}else if(pidProcess==0){
+		if(execvp(argProcessing[0],argProcessing)){
+			cerr<< "failed execute" <<endl;
 		}
-	}else{
+	}else{			
 	}
+
+	
+/*
+
+	   char *argOf[2];
+	   string nameCommandOf = OF_PATH;
+	   nameCommandOf = nameCommandOf + "./oscReceiveExample_debug";
+	   argOf[0] = (char *) nameCommandOf.c_str();
+	   argOf[1] = NULL;
+	   pid_t pidProcess = fork();
+	   if(pidProcess<0){
+	   cerr << "Failed to fork" <<endl;
+	   }else if(pidProcess==0){
+	   pid_t pidOf = fork();
+	   if(pidOf<0){
+	   cerr << "Failed to fork" <<endl;
+	   }else if(pidOf==0){
+	   if(execvp(argOf[0],argOf)){
+	   cerr<< "failed execute" <<endl;
+	   }
+	   }else{			
+	   if(execvp(argProcessing[0],argProcessing)){
+	   cerr<< "failed execute" <<endl;
+	   }
+	   }
+	   }else{
+	   }
+*/	 
 }
 
 void Menu::identification(){
