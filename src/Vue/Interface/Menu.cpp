@@ -1,4 +1,5 @@
 #include "Menu.hpp"
+#include "../../Controler/Kinect/Processing.hpp"
 
 
 
@@ -154,6 +155,9 @@ void Menu::enregistrement(){
 }
 
 void Menu::launchEnregistrement(){
+	Processing *proc = new Processing();
+	proc->lancementProcessing();
+/*
 	char *argProcessing[6];
 	string nameCommand = PROCESSING_PATH;
 	nameCommand = nameCommand + "./processing-java";
@@ -181,7 +185,7 @@ void Menu::launchEnregistrement(){
 		}
 	}else{			
 	}
-
+*/
 	
 /*
 

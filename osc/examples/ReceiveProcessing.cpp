@@ -19,8 +19,19 @@ using ::__strcmp__;  // avoid error: E2316 '__strcmp__' is not a member of 'std'
 
 #define PORT 12346
 
+
+std::string classLabel;
+
 class ExamplePacketListener : public osc::OscPacketListener {
+public:
+	void setS(UdpListeningReceiveSocket *s) {
+		_s = s;
+	}
 protected:
+	UdpListeningReceiveSocket * _s;
+
+   
+
 
     virtual void ProcessMessage( const osc::ReceivedMessage& m, 
 				const IpEndpointName& remoteEndpoint )
@@ -30,8 +41,15 @@ protected:
         try{
             // osc::OsckPacketListener handles the bundle traversal.
 			osc::ReceivedMessage::const_iterator arg = m.ArgumentsBegin();
-			std::string classLabel = (arg++)->AsString();
+			classLabel = (arg++)->AsString();
+
+			
 			std::cout << "ClassLabel : " << classLabel << "\n";
+
+			if(classLabel != "0") {
+				_s->Break();
+				//socketUdp.Break();
+			}
 		/*float x = (arg++)->AsFloat();
 			float y = (arg++)->AsFloat();
 			float z = (arg++)->AsFloat();
@@ -75,20 +93,32 @@ protected:
     }
 };
 
+
+
+
 int main(int argc, char* argv[])
 {
     (void) argc; // suppress unused parameter warnings
     (void) argv; // suppress unused parameter warnings
 
+	//ExamplePacketListener listener();
+
     ExamplePacketListener listener;
     UdpListeningReceiveSocket s(
             IpEndpointName( IpEndpointName::ANY_ADDRESS, PORT ),
-            &listener );
+            &listener );    
+   listener.setS(&s);
+
+
+    //s = new UdpListeningReceiveSocket (
+        //    IpEndpointName( IpEndpointName::ANY_ADDRESS, PORT ),
+          //  &listener );
 
     std::cout << "press ctrl-c to end\n";
 
-    s.RunUntilSigInt();
+    s.Run();
 
     return 0;
 }
+
 

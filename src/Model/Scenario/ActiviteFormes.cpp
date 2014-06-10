@@ -7,6 +7,4 @@ void ActiviteFormes::launch(){
 	// osc
 	
 	// processing
-
-
 }
