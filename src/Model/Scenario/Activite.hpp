@@ -1,6 +1,7 @@
 #ifndef DEF_ACTIVITE
 #define DEF_ACTIVITE
 
+#include <iostream>
 #include <string>
 using namespace std;
 

@@ -1,7 +1,8 @@
 #ifndef DEF_SENARIO
 #define DEF_SENARIO
 
-#include "Activite.hpp"
+#include "ActiviteForme.hpp"
+#include "ActiviteObjet.hpp"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>

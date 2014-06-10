@@ -37,7 +37,7 @@ class Menu;
 
 class Menu : public Gtk::Window {
 	public : 
-		Menu(int argc, char** argv, InterfaceG* const it);
+		Menu(int argc, char** argv, InterfaceG* const it, Game *g);
 		~Menu();
 	private :
 		Gtk::HBox *boxH;
@@ -57,7 +57,6 @@ class Menu : public Gtk::Window {
 		Gtk::Button *scenarG;
 		Gtk::Button *scenarD;
 		int selectedScenar;
-		Game *jeu;
 
 		Gtk::Image *img;
 		ViewerJeux *viewerJeux;
@@ -65,6 +64,7 @@ class Menu : public Gtk::Window {
 		ViewerTps *viewerTps;
 		ViewerParser *viewerParser;
 		InterfaceG *it;
+		Game *jeu;
 	
 		void fullsc();
 		void launchMesh();
