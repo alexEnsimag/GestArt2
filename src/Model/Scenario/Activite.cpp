@@ -1,9 +1,10 @@
 #include <iostream>
 #include "Activite.hpp"
 
-Activite::Activite(string n, string p){
+Activite::Activite(string n, string p, int nb){
 	name = n;
 	param = p;
+        nbEssai = nb;
         wellDone = false;
 }
 
@@ -19,9 +20,6 @@ bool Activite::getWellDone(){
 	return wellDone;
 }
 
-void Activite::setWellDone(bool b){
-	wellDone = b;
-}
 void Activite::launch(){
 	cout<< "Not yet implemented:" << name << ", " << param << endl;
 }

@@ -7,7 +7,7 @@
 
 class ActiviteFormes : public Activite {
 	public: 
-		ActiviteFormes(string p) : Activite("ActiviteFormes",p){};
+		ActiviteFormes(string p,int nb) : Activite("ActiviteFormes",p, nb){};
 		virtual void launch();
 
 	private:
