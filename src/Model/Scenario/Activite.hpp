@@ -12,7 +12,7 @@ class Activite {
 		string getParam();
 		bool getWellDone();
 		void setWellDone(bool b);
-		void launch();
+		virtual void launch();
 		
 	private:
 		string name;
