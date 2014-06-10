@@ -9,8 +9,10 @@
 		public: 
 			ActiviteFormes(string p) : Activite("ActiviteFormes",p){};
 			void launch();
+			
 
 		private:
+			void lancerOsc();
 	};
 			 
 #endif
