@@ -27,7 +27,7 @@ class PageAdmin : public Gtk::Window {
 		Gtk::Button *modifGeste;
 		Gtk::Button *modifObjet;
 		Gtk::Button *modifAvatar;
-		Gtk::Button *modifSenario;
+		Gtk::Button *modifScenario;
 		Gtk::Button *modifTheme;
 		Gtk::Button *getData;
 		Gtk::CheckButton *screen;
@@ -38,7 +38,7 @@ class PageAdmin : public Gtk::Window {
 		void modifGesteFunc();
 		void modifObjetFunc();
 		void modifAvatarFunc();
-		void modifSenarioFunc();
+		void modifScenarioFunc();
 		void modifThemeFunc();
 		void getDataFunc();
 };

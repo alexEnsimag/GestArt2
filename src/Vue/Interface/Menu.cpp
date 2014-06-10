@@ -113,8 +113,7 @@ void Menu::fullsc(){
 }
 
 void Menu::launch(){
-	
-	jeu->launch(selectedScenar );
+	jeu->launch(selectedScenar);
 	//viewerJeux->launch();
 }
 

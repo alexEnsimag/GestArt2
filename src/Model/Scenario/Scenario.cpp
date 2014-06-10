@@ -30,6 +30,7 @@ void Scenario::charger(string nomFichier){
 	string param;
 	fichier >> mot;
 	setName(mot);
+
 	
 	while(!fichier.eof()){
 		fichier >> mot >> param;
@@ -41,6 +42,8 @@ void Scenario::charger(string nomFichier){
 			cout << "Activitée non reconnue" << endl;
 		}
 	}
+	//On enleve le doublon de fin
+	activites.pop_back();
 	fichier.close();
 }
 
