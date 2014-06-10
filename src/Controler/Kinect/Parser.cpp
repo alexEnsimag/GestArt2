@@ -24,7 +24,6 @@ void Parser::openFichier(string nomFichier) {
 
 void Parser::parse(Squelette *squelette){
 
-
 	string mot1;
 	float pos1, pos2, pos3;
 
