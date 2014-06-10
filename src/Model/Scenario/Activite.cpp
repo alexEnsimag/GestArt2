@@ -14,5 +14,5 @@ string Activite::getParam(){
 }
 
 void Activite::launch(){
-	
+	cout<< "Not yet implemented:" << name << ", " << param << endl;
 }
