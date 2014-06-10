@@ -1,10 +1,6 @@
 #include "Menu.hpp"
 
 
-#define PROCESSING_PATH "lib/Processing/processing-2.2.1/"
-#define OF_PATH "lib/OpenFrameworks/of_v0.8.1_linux64_release/apps/myApps/oscReceiveExample/bin/"
-#define MVT_PATH "mouvements/"
-#define FILE_PROCESSING_PATH "lib/Processing/processing-2.2.1/pointsMain_pde"
 
 string texteField;
 
