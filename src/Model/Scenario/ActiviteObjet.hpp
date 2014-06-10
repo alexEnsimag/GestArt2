@@ -7,8 +7,9 @@
 
 class ActiviteObjet : public Activite {
 	public: 
-		ActiviteObjet(string p) : Activite("ActiviteObjet",p){};
+		ActiviteObjet(string p, int nb) : Activite("ActiviteObjet",p, nb){};
 		virtual void launch();
+		void intLaunch();
 
 	private:
 };

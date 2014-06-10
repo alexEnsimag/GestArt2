@@ -30,12 +30,12 @@ int Game::getNbScenar(){
 	return scenar.size();
 }
 
-Scenario Game::getScenar(int i){
+Scenario *Game::getScenar(int i){
 	if (i >= scenar.size()){
 		cout << "Erreur, tentative d'acces a un scénario inexistant" << endl;
-		return scenar[0];
+		return &(scenar[0]);
 	}
-	return scenar[i];
+	return &(scenar[i]);
 }
 
 void Game::launch(int i){

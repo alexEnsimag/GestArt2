@@ -3,7 +3,7 @@
 
 string texteField2;
 
-PageAdmin::PageAdmin(int argc, char** argv, InterfaceG* const itG){
+PageAdmin::PageAdmin(InterfaceG* const itG){
 
 		set_title("Gest-Art Application : Admin");
 		set_icon_from_file("Images/icon.png");
@@ -92,6 +92,7 @@ void PageAdmin::modifObjetFunc(){
 void PageAdmin::modifAvatarFunc(){
 }
 void PageAdmin::modifScenarioFunc(){
+	it->pageAfficheScenar();
 }
 void PageAdmin::modifThemeFunc(){
 }

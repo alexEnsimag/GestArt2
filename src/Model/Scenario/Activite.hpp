@@ -7,11 +7,11 @@ using namespace std;
 
 class Activite {
 	public:
-		Activite(string n, string p);
+		Activite(string n, string p,int nb);
 		string getName();
 		string getParam();
+		string toString();
 		bool getWellDone();
-		void setWellDone(bool b);
 		virtual void launch();
 		
 	private:
@@ -19,5 +19,7 @@ class Activite {
 		string param;
 	protected:
 		bool wellDone;
+		int nbEssai;
+		
 };
 #endif

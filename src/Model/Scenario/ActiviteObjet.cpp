@@ -12,7 +12,7 @@ void kill_child(int sig)
         kill(pid,SIGKILL);
 }
 
-void ActiviteObjet::launch(){   
+void ActiviteObjet::intLaunch(){
     string name ="";
     string commande = "zbarcam";
     int tube[2];
@@ -56,12 +56,22 @@ void ActiviteObjet::launch(){
 
         }
         if (name != ""){
-            if (name == getParam())
-                setWellDone(true);
-            else
-                setWellDone(false);
-            alarm(1);
+            if (name == getParam()){
+                alarm(1);
+                wellDone = true;
+            } else {
+                alarm(1);
+            }
         }
         wait(NULL);
     }
+}
+void ActiviteObjet::launch(){  
+    // nombre d'essai courant
+    int nb = 0 ;  
+    while ((nb < nbEssai) && !(wellDone)){
+
+        intLaunch();
+        nb++;
+        }
 }

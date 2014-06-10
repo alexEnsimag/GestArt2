@@ -14,7 +14,7 @@ class Game{
 	public:
 		Game();
 		int getNbScenar();
-		Scenario getScenar(int i);
+		Scenario* getScenar(int i);
 		void launch(int i);
 		void updateScenar();
 
