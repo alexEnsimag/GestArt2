@@ -34,62 +34,46 @@
 	requested that these non-binding requests be included whenever the
 	above license is reproduced.
 */
-#include "ip/NetworkingUtils.h"
+#ifndef INCLUDED_OSCPACK_OSCPACKETLISTENER_H
+#define INCLUDED_OSCPACK_OSCPACKETLISTENER_H
 
-#include <winsock2.h>   // this must come first to prevent errors with MSVC7
-#include <windows.h>
-
-#include <cstring>
+#include "OscReceivedElements.h"
+#include "PacketListener.h"
 
 
-static LONG initCount_ = 0;
-static bool winsockInitialized_ = false;
+namespace osc{
 
-NetworkInitializer::NetworkInitializer()
-{
-    if( InterlockedIncrement( &initCount_ ) == 1 ){
-        // there is a race condition here if one thread tries to access
-        // the library while another is still initializing it. 
-        // i can't think of an easy way to fix it so i'm telling you here
-        // incase you need to init the library from two threads at once.
-        // this is why the header file advises to instantiate one of these 
-        // in main() so that the initialization happens globally
+class OscPacketListener : public PacketListener{ 
+protected:
+    virtual void ProcessBundle( const osc::ReceivedBundle& b, 
+				const IpEndpointName& remoteEndpoint )
+    {
+        // ignore bundle time tag for now
 
-        // initialize winsock
-	    WSAData wsaData;
-	    int nCode = WSAStartup(MAKEWORD(1, 1), &wsaData);
-	    if( nCode != 0 ){
-	        //std::cout << "WSAStartup() failed with error code " << nCode << "\n";
-        }else{
-            winsockInitialized_ = true;
+        for( ReceivedBundle::const_iterator i = b.ElementsBegin(); 
+				i != b.ElementsEnd(); ++i ){
+            if( i->IsBundle() )
+                ProcessBundle( ReceivedBundle(*i), remoteEndpoint );
+            else
+                ProcessMessage( ReceivedMessage(*i), remoteEndpoint );
         }
     }
-}
 
-
-NetworkInitializer::~NetworkInitializer()
-{
-    if( InterlockedDecrement( &initCount_ ) == 0 ){
-        if( winsockInitialized_ ){
-            WSACleanup();
-            winsockInitialized_ = false;
-        }
+    virtual void ProcessMessage( const osc::ReceivedMessage& m, 
+				const IpEndpointName& remoteEndpoint ) = 0;
+    
+public:
+	virtual void ProcessPacket( const char *data, int size, 
+			const IpEndpointName& remoteEndpoint )
+    {
+        osc::ReceivedPacket p( data, size );
+        if( p.IsBundle() )
+            ProcessBundle( ReceivedBundle(p), remoteEndpoint );
+        else
+            ProcessMessage( ReceivedMessage(p), remoteEndpoint );
     }
-}
+};
 
+} // namespace osc
 
-unsigned long GetHostByName( const char *name )
-{
-    NetworkInitializer networkInitializer;
-
-    unsigned long result = 0;
-
-    struct hostent *h = gethostbyname( name );
-    if( h ){
-        struct in_addr a;
-        std::memcpy( &a, h->h_addr_list[0], h->h_length );
-        result = ntohl(a.s_addr);
-    }
-
-    return result;
-}
+#endif /* INCLUDED_OSCPACK_OSCPACKETLISTENER_H */

@@ -1,6 +1,7 @@
 
 #include "Activite.hpp"
 
+
 Activite::Activite(string n, string p, int nb){
 	name = n;
 	param = p;

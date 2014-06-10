@@ -1,6 +1,6 @@
 #include "Processing.hpp"
 
-void Processing::lancementProcessing(){
+pid_t Processing::lancementProcessing(){
 	char *argProcessing[6];
 	string nameCommand = PROCESSING_PATH;
 	nameCommand = nameCommand + "./processing-java";
@@ -18,7 +18,7 @@ void Processing::lancementProcessing(){
 	argProcessing[4] = (char *) arg4.c_str();
 	argProcessing[5] = NULL;
 
-
+	signal(SIGCHLD, SIG_IGN);
 	pid_t pidProcess = fork();
 	if(pidProcess<0){
 		cerr << "Failed to fork" <<endl;
@@ -28,6 +28,7 @@ void Processing::lancementProcessing(){
 		}
 	}else{			
 	}
+	return pidProcess;
 
 
 
