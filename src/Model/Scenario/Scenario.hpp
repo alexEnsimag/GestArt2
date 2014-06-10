@@ -28,11 +28,24 @@ class Scenario{
 
 		//Permet d'ajouter une activite au sénario
 		void addActivite(Activite *a);
+
 		//Permet de récuperer le nom de sénario
 		string getName();
+
 		//Permet de changer le nom du sénario
 		void setName(string s);
+
+		//Permet de récuperer le nombre d'activité
+		int getNbActivite();
+
+		//Permet de récuperer l'activité n°i
+		Activite* getActivite(int i);
+
+		//Permet de lancer le scénario
 		void launch();
+		
+		//Permet de supprimer une activité au sénario
+		void removeActivite(int i);
 	private:
 		string name;
 		vector<Activite*> activites;

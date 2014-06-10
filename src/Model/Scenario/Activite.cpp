@@ -15,6 +15,11 @@ string Activite::getParam(){
 	return param;
 }
 
+string Activite::toString(){
+	string result = name + ", " + param;
+	return result;
+}
+
 bool Activite::getWellDone(){
 	return wellDone;
 }

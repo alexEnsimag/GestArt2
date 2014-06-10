@@ -10,6 +10,7 @@ class Activite {
 		Activite(string n, string p);
 		string getName();
 		string getParam();
+		string toString();
 		bool getWellDone();
 		void setWellDone(bool b);
 		virtual void launch();

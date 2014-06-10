@@ -36,7 +36,7 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 		boxVG = new Gtk::VBox(false ,10);
 		boxVD = new Gtk::VBox(false ,10);
 
-		scenarLabel = new Gtk::Label(jeu->getScenar(0).getName());
+		scenarLabel = new Gtk::Label(jeu->getScenar(0)->getName());
 		scenarG = new Gtk::Button ("<");
 		scenarG->signal_clicked().connect(sigc::mem_fun(*this, &Menu::prevScen));
 		scenarD = new Gtk::Button (">");
@@ -234,10 +234,10 @@ void Menu::identification(){
 void Menu::nextScen(){
 	selectedScenar +=1;
 	selectedScenar %= jeu->getNbScenar(); 
-	scenarLabel->set_text(jeu->getScenar(selectedScenar).getName());
+	scenarLabel->set_text(jeu->getScenar(selectedScenar)->getName());
 }
 void Menu::prevScen(){
 	selectedScenar += jeu->getNbScenar() - 1 ;
 	selectedScenar %= jeu->getNbScenar(); 
-	scenarLabel->set_text(jeu->getScenar(selectedScenar).getName());
+	scenarLabel->set_text(jeu->getScenar(selectedScenar)->getName());
 }

@@ -4,8 +4,8 @@
 InterfaceG::InterfaceG(int argc, char** argv) : main(argc, argv) {
 	jeu = new Game;
 	menu = new Menu(argc, argv, this, jeu);
-	admin = new PageAdmin(argc, argv, this);
-	modifScenar = new ModifScenar(argc, argv, this, jeu);
+	admin = new PageAdmin(this);
+	afficheScenar = new AfficheScenar(this, jeu);
 }
 
 void InterfaceG::run(){
@@ -25,16 +25,36 @@ void InterfaceG::retMenuFromAdmin(){
 	Gtk::Main::run(*menu);
 }
 
+void InterfaceG::pageAfficheScenar(){
+	admin->hide();
+	afficheScenar->show_all();
+	Gtk::Main::run(*afficheScenar);
+}
+
 void InterfaceG::retAdminFromScenar(){
-	modifScenar->hide();
+	afficheScenar->hide();
 	admin->show_all();
 	Gtk::Main::run(*admin);
 }
 
 void InterfaceG::pageModifScenar(){
-	admin->hide();
+	modifScenar = new ModifScenar(this, NULL);
+	afficheScenar->hide();
 	modifScenar->show_all();
 	Gtk::Main::run(*modifScenar);
+}
+
+void InterfaceG::pageModifScenar(Scenario *s){
+	modifScenar = new ModifScenar(this, s);
+	afficheScenar->hide();
+	modifScenar->show_all();
+	Gtk::Main::run(*modifScenar);
+}
+
+void InterfaceG::retFromModifScenar(){
+	modifScenar->hide();
+	afficheScenar->show_all();
+	Gtk::Main::run(*afficheScenar);
 }
 
 InterfaceG::~InterfaceG(){

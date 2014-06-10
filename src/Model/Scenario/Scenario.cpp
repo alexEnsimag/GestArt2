@@ -61,4 +61,14 @@ void Scenario::launch(){
 	}
 }
 
+int Scenario::getNbActivite(){
+	return activites.size();
+}
 
+Activite* Scenario::getActivite(int i){
+	return(activites[i]);
+}
+
+void Scenario::removeActivite(int i){
+	activites.erase(activites.begin()+i);
+}
