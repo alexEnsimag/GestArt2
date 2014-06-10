@@ -15,10 +15,10 @@ class Dialogue : public Gtk::Dialog {
         Dialogue(std::string titre, Gtk::Window* parent, std::string message);
         std::string get_texte();
         void set_texte(std::string texte);
+        Gtk::Entry zoneTexte;
         
     private :
         Gtk::Box* boiteV;
         Gtk::Label etiquette;
-        Gtk::Entry zoneTexte;
 };
 #endif

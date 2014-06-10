@@ -52,7 +52,8 @@ ViewerParser::ViewerParser(){
 	glClearColor(0.0f, 0.0f, 0.0f, 0.0f);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	glOrtho(0.0, 1.0, 0.0, 1.0, -1.0, 1.0);
+	glOrtho(-25.0, 25.0, -25.0, 25.0, -25.0, 25.0);
+	glEnable(GL_DEPTH_TEST);
 
 	parser = new Parser();
 }
@@ -66,7 +67,7 @@ static void RenderSceneCB()
 {
 	sleep2(100000);
 	glClear(GL_COLOR_BUFFER_BIT);
-	// lights and color
+	// lights
 	glEnable(GL_LIGHTING);
 	glDisable(GL_LIGHT0);
 	glEnable(GL_LIGHT1);
@@ -74,12 +75,10 @@ static void RenderSceneCB()
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, white);
 	GLfloat position[] = {1.0f, 1.0f, 0.5f}; 
 	glLightfv(GL_LIGHT1, GL_POSITION, position);
-	glColor3f(0.4, 0.6, 0.0);
+	//Meshes
 	squel->draw();
-	glColor3f(0.4f, 0.0f, 0.6f); 
-	// m_pMesh->Render();
-	glFlush();
 	//animation
+	glFlush();
 	parser->parse(squel);
 	glutPostRedisplay();
 }
@@ -90,21 +89,18 @@ static void InitializeGlutCallbacks()
 }
 
 void ViewerParser::launch(string nomFichier){
-	glutCreateWindow("Tutorial 01");
+	glutCreateWindow("Visualisation de mouvement");
 	// Must be done after glut is initialized!
 	GLenum res = glewInit();
 	if (res != GLEW_OK) {
 		fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
 		return;
 	}
-
-
 	if(! InitMesh()){
 		fprintf(stderr, "Error: '%s'\n", "error while loading the mesh");
 		return;
 	}
 	squel = new Squelette(aBrasD, aBrasG, brasD, brasG, torse, tete, bassin, jambeD, jambeG, molletD, molletG);
-	//squel = new Squelette();
 
 	parser->openFichier(nomFichier);
 

@@ -9,6 +9,7 @@
 
 
 #include "../../Model/OpenGL/Squelette.hpp"
+#include "../../Model/OpenGL/Scene.hpp"
 //#include <GL/freeglut.h>
 
 
@@ -30,6 +31,7 @@ class ViewerParser {
 		Mesh* jambeG;
 		Mesh* molletD;
 		Mesh* molletG;
+		
 };
 
 #endif

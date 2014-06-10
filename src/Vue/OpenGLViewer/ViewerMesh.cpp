@@ -26,7 +26,7 @@ ViewerMesh::ViewerMesh(int argc, char** argv){
 static void RenderSceneCB()
 {
 	glClear(GL_COLOR_BUFFER_BIT);
-	m_pMesh2->Render();
+	m_pMesh2->Render(1/2.5);
         glutSwapBuffers();
 
 }
