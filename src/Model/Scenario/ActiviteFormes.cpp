@@ -1,13 +1,24 @@
 #include "ActiviteFormes.hpp"
 #include "ReceiveClassLabel.hpp"
 
+
+ActiviteFormes::ActiviteFormes(string p){
+	Activite("ActiviteFormes",p);
+
+}
+
 void ActiviteFormes::launch(){
 	// faire une forme
+//	m->afficherMessage("faire un carre");
 	// lancer of
-	// osc
+	of = new Of();
+	of->lancementOf();
 	lancerOsc();
+	// osc
 
 	// processing
+//	Processing *proc = new Processing();
+//	proc->lancementProcessing();
 }
 
 void ActiviteFormes::lancerOsc(){
@@ -20,9 +31,26 @@ void ActiviteFormes::lancerOsc(){
 			&listener );    
 
 	listener.setS(&s);
+	listener.setActivite(this);
 	s.Run();
-
 }
+
+
+void ActiviteFormes::update(string classLabel){
+	if(classLabel == "1"){
+		cout<<"success!!";
+		wellDone=true;
+	}else{
+		cout<<"echec!!";
+
+	}
+}
+
+void ActiviteFormes::killOf(){
+	of->killOf();
+}
+
+
 
 
 

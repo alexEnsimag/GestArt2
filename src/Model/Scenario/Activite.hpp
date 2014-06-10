@@ -17,6 +17,7 @@ class Activite {
 	private:
 		string name;
 		string param;
+	protected:
 		bool wellDone;
 };
 #endif

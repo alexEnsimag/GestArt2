@@ -8,6 +8,8 @@
 #include "../../osc/OscPacketListener.h"
 #include "../../osc/UdpSocket.h"
 
+#include "ActiviteFormes.hpp"
+
 
 #define PORT 12346
 
@@ -16,8 +18,14 @@ public:
 	void setS(UdpListeningReceiveSocket *s) {
 		_s = s;
 	}
+
+	void setActivite(ActiviteFormes *a) {
+		_activite = a;
+	}
+
 protected:
 	UdpListeningReceiveSocket * _s;
+	ActiviteFormes * _activite;
 
    
 
@@ -33,19 +41,22 @@ protected:
 			std::string classLabel = (arg++)->AsString();
 
 			
-			std::cout << "ClassLabel : " << classLabel << "\n";
+			
 
 			if(classLabel != "0") {
+				std::cout << "ClassLabel : " << classLabel << "\n";
+				
 				_s->Break();
-				//socketUdp.Break();
+				//_activite->update(classLabel);
+				_activite->killOf();				//socketUdp.Break();
 			}
 		
 
         }catch( osc::Exception& e ){
             // any parsing errors such as unexpected argument types, or 
             // missing arguments get thrown as exceptions.
-            std::cout << "error while parsing message: "
-                << m.AddressPattern() << ": " << e.what() << "\n";
+           // std::cout << "error while parsing message: "
+             //   << m.AddressPattern() << ": " << e.what() << "\n";
         }
     }
 };

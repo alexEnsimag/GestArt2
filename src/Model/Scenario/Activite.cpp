@@ -1,6 +1,7 @@
 #include <iostream>
 #include "Activite.hpp"
 
+
 Activite::Activite(string n, string p){
 	name = n;
 	param = p;

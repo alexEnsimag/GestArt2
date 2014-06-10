@@ -20,7 +20,7 @@ using namespace std;
 
 class Processing{
 	public:
-		void lancementProcessing();
+		pid_t lancementProcessing();
 	private:
 };
 

@@ -241,3 +241,12 @@ void Menu::prevScen(){
 	selectedScenar %= jeu->getNbScenar(); 
 	scenarLabel->set_text(jeu->getScenar(selectedScenar).getName());
 }
+
+void Menu::afficherMessage(string s){
+	Gtk::MessageDialog diagE(*this, s, false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_CLOSE);
+	int reponse = diagE.run();
+
+}
+
+
+
