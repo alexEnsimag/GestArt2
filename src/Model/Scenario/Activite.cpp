@@ -16,6 +16,10 @@ string Activite::getParam(){
 	return param;
 }
 
+int Activite::getEssais(){
+	return nbEssai;
+}
+
 string Activite::toString(){
 	string result = name + ", " + param;
 	return result;

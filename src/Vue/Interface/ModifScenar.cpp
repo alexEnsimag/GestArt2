@@ -26,6 +26,19 @@ ModifScenar::ModifScenar(InterfaceG* const itG, Scenario *s){
 
 		valider = new Gtk::Button("Valider");
 		valider->signal_clicked().connect(sigc::mem_fun(*this, &ModifScenar::validation));
+		
+		listeActivite = new Gtk::ComboBoxText;
+		listeActivite.append("ActiviteForme");
+		listeActivite.append("ActiviteObjet");
+		listeActivite->signal_changed().connect(sigc::mem_fun(*this, &ModifScenar::updateParam));
+		
+		listeParam = new Gtk::ComboBoxText;
+
+		validerActivite = new Gtk::Button("Ajouter l'activité");
+		validerActivite.signal_clicked().connect(sigc::bind<string>(sigc::mem_fun(*this, &ModifScenar::addActivite), listeActivite.get_active_text()));
+
+		nbEssais = new Gtk::Entry();
+		nbEssais->set_text(1);
 
 		nomScenar = new Gtk::Entry();
 		nomScenar->set_text(scenar->getName());
@@ -59,6 +72,11 @@ ModifScenar::~ModifScenar(){
 	delete boxH;
 	delete annuler;
 	delete valider;
+	delete validerActivite;
+	delete nomScenar;
+	delete nbEssais;
+	delete listeActivite;
+	delete listeParam;
 }
 
 
@@ -80,5 +98,37 @@ void ModifScenar::delActivite(int i){
 	delete boxH;
 	delete annuler;
 	delete valider;
+	delete validerActivite;
+	delete nomScenar;
+	delete nbEssais;
+	delete listeActivite;
+	delete listeParam;
 	it->pageModifScenar(scenar);
+}
+
+void ModifScenar::addActivite(){
+	string s = listeActivite.get_active_text();
+
+	if(s == "ActiviteForme"){
+		ActiviteFormes a = new ActiviteFormes(listeParam->get_active_text(), atoi(nbEssais.get_text()));
+		scenar->addActivite(a);
+	}else if(s== "ActiviteObjet"){
+		ActiviteObjet a = new ActiviteFormes(listeParam->get_active_text(), atoi(nbEssais.get_text()));
+		scenar->addActivite(a);
+	}else{
+		cout << "Ajout d'une activité inconnue" << endl;
+	}
+}
+
+void modifScenar::updateParam(){
+	string s = listeActivite.get_active_text();
+	if(s == "ActiviteForme"){
+	}else if(s== "ActiviteObjet"){
+	}else{
+		cout << "Ajout d'une activité inconnue" << endl;
+	}
+
+	for(int i=0; i<ActiviteForme.getParams(); i++){
+		listeParam.append("ActiviteForme");
+	}
 }

@@ -6,6 +6,7 @@ void Scenario::addActivite(Activite *a){
 }
 
 void Scenario::enregistrer(){
+	string nomFichier = "Scenario/" + name + ".txt";
 	ofstream fichier(name.c_str(), ios::out | ios::trunc);
 	if(!fichier){
 		cout << "Erreur a la création du Fichier" << endl;
@@ -15,6 +16,7 @@ void Scenario::enregistrer(){
 	for(int i=0; i<activites.size(); i++){
 		fichier << activites[i]->getName() << endl;
 		fichier << activites[i]->getParam() << endl;
+		fichier << activites[i]->getEssais() << endl;
 	}
 	fichier.close();
 }
@@ -23,7 +25,7 @@ void Scenario::charger(string nomFichier){
 	//Ouverture du fichier
 	ifstream fichier(nomFichier.c_str(), ios::in);
 	if(!fichier){
-		cout << "Erreur a l'ouverture du Fichier" << endl;
+		cout << "Erreur à l'ouverture du Fichier" << endl;
 		return;
 	}
 	string mot;

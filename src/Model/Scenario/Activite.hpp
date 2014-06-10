@@ -11,9 +11,11 @@ class Activite {
 		string getName();
 		string getParam();
 		string toString();
+		int getEssais();
 		bool getWellDone();
 		virtual void launch();
 		
+		vector<string> possibleParams;
 	private:
 		string name;
 		string param;
