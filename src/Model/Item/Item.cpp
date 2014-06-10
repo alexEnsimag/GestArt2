@@ -6,24 +6,24 @@
 #include <sys/wait.h>
 
 
-Item::Item( string n, string image, string qr,string audio){
+Item::Item( string n, string image,string audio){
     name = n;
     imageFileName = image;
-    qrFileName = qr;  // ne sert à rien???
     audioFileName = audio;
 }
 
 
 
-void Item::qrEncode () {
+void Item::qrEncode (string qrFileName) {
         char * arg[4];
         string arg0 = "qrencode";
         string arg1 ="-o";
+        string arg2 = qrFileName+".png";
         string arg3 = "'"+name+"'";
           
         arg[0] = (char *) arg0.c_str();
         arg[1] = (char *) arg1.c_str();
-        arg[2] = (char *) imageFileName.c_str();
+        arg[2] = (char *) arg2.c_str();
         arg[3] =(char *) arg3.c_str();
         pid_t pid = fork() ;
         if(pid < 0) { // Failed
