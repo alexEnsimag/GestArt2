@@ -38,9 +38,9 @@ void Scenario::charger(string nomFichier){
 	while(!fichier.eof()){
 		fichier >> mot >> param >> nbEssai;
 		if (mot == "ActiviteObjet"){
-			addActivite(new ActiviteObjet(param,nbEssai));
+			addActivite(new ActiviteObjet(param, nbEssai));
 		}else if (mot == "ActiviteForme"){
-			addActivite(new ActiviteForme(param,nbEssai));
+			addActivite(new ActiviteForme(param, nbEssai));
 		}else{
 			cout << "Activitée non reconnue" << endl;
 		}

@@ -78,5 +78,5 @@ void AfficheScenar::modifScenar(int i){
 }
 
 void AfficheScenar::delScenar(int i){
-	jeu->delScenar(int i);
+	jeu->delScenar(i);
 }

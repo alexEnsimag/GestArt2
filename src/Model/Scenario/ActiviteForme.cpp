@@ -10,12 +10,7 @@ static vector<string> MakeVector(){
 
 const vector<string> ActiviteForme::possibleParams = MakeVector();
 
-ActiviteFormes::ActiviteFormes(string p){
-	Activite("ActiviteFormes",p);
-
-}
-
-void ActiviteFormes::lancerOsc(){
+void ActiviteForme::lancerOsc(){
 	ExamplePacketListener listener;
 
 	UdpListeningReceiveSocket s(
@@ -30,7 +25,7 @@ void ActiviteFormes::lancerOsc(){
 }
 
 
-void ActiviteFormes::update(string classLabel){
+void ActiviteForme::update(string classLabel){
 	if(classLabel == "1"){
 		cout<<"success!!";
 		wellDone=true;
@@ -40,7 +35,7 @@ void ActiviteFormes::update(string classLabel){
 	}
 }
 
-void ActiviteFormes::killOf(){
+void ActiviteForme::killOf(){
 	of->killOf();
 }
 

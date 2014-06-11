@@ -8,7 +8,7 @@
 #include "../../osc/OscPacketListener.h"
 #include "../../osc/UdpSocket.h"
 
-#include "ActiviteFormes.hpp"
+#include "ActiviteForme.hpp"
 
 
 #define PORT 12346
@@ -19,13 +19,13 @@ public:
 		_s = s;
 	}
 
-	void setActivite(ActiviteFormes *a) {
+	void setActivite(ActiviteForme *a) {
 		_activite = a;
 	}
 
 protected:
 	UdpListeningReceiveSocket * _s;
-	ActiviteFormes * _activite;
+	ActiviteForme * _activite;
 
    
 

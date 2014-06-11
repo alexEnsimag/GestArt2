@@ -9,14 +9,16 @@
 
 class ActiviteForme : public Activite {
 		public: 
-			ActiviteFormes(string p);
-			//ActiviteFormes(string p) : Activite("ActiviteFormes",p){};
+			//ActiviteForme(string p, int nbE);
+			ActiviteForme(string p, int nbE) : Activite("ActiviteFormes",p, nbE){};
 		        virtual	void launch();
 			void update(string classLabel);
 			void killOf();
 			
 		static const vector<string> possibleParams;
 		static int getParamSize(){
+			return possibleParams.size();
+		}
 
 		private:
 			Of *of;
