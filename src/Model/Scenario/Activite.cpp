@@ -41,8 +41,25 @@ void Activite::setWellDone(bool b){
 	wellDone = b;
 }
 
-void Activite::launch(){
+void Activite::init(){
+	setWellDone(false);
+}
+
+void Activite::exec(){
 	cout<< "Not yet implemented:" << name << ", " << param << endl;
+}
+
+void Activite::close(){
+}
+
+void Activite::launch(){
+	init();
+	int count =0;
+	while (count < nbEssai && !WellDone){
+		count ++;
+		exec();
+	}
+	close();
 }
 
 void Activite::afficherMessage(string s){

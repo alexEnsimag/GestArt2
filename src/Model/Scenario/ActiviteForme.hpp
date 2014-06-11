@@ -10,7 +10,9 @@
 class ActiviteForme : public Activite {
 		public: 
 			ActiviteForme(string p, int nbE) : Activite("ActiviteForme", p, nbE){};
-		        virtual	void launch();
+			virtual void init();
+			virtual void exec();
+			virtual void close();
 			void update(string classLabel);
 			void killOf();
 /*			

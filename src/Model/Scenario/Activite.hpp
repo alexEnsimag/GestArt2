@@ -19,7 +19,9 @@ class Activite {
 		void decrementEssai();
 		bool getWellDone();
 		void setWellDone(bool b);
-		virtual void launch();
+		virtual void init();
+		void launch();
+		virtual void exec();
 		void afficherMessage(std::string s);
 	private:
 		std::string name;

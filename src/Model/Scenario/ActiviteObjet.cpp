@@ -9,7 +9,7 @@ void kill_child(int sig)
         kill(pid,SIGKILL);
 }
 
-void ActiviteObjet::intLaunch(){
+void ActiviteObjet::exec(){
     string name ="";
     string commande = "zbarcam";
     int tube[2];
@@ -63,21 +63,18 @@ void ActiviteObjet::intLaunch(){
         wait(NULL);
     }
 }
-void ActiviteObjet::launch(){  
+
+void ActiviteObjet::init(){  
     // nombre d'essai courant
-    int nb = 0 ;  
     string msg = getParam();
     msg = "ramener le "+msg;
     afficherMessage(msg);
-    while ((nb < nbEssai) && !(wellDone)){
+}
 
-        intLaunch();
-        nb++;
-    }
+void AcriviteObjet::close(){
     if(getWellDone() == true){
         afficherMessage("Bravo");
     }else{
         afficherMessage("Perdu!");
     }
-
 }
