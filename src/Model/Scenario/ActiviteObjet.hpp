@@ -15,10 +15,6 @@ class ActiviteObjet : public Activite {
 		ActiviteObjet(std::string p, int nb) : Activite("ActiviteObjet",p, nb){}
 		virtual void launch();
 		void intLaunch();
-		static const std::vector<std::string> possibleParams;
-		static int getParamSize(){
-			return possibleParams.size();
-		}
 
 	private:
 };

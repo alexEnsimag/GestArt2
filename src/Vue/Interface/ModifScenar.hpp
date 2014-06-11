@@ -11,6 +11,7 @@
 #include <gtkmm/entry.h>
 #include <gtkmm/comboboxtext.h>
 
+#include <iostream>
 #include <unistd.h>
 #include <stdlib.h>
 
@@ -49,6 +50,7 @@ class ModifScenar : public Gtk::Window {
 		void validation();
 		void delActivite(int i);
 		void addActivite();
+		void chargerActivites();
 		void reloadPage();
 };
 #endif
