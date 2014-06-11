@@ -26,11 +26,7 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
-
-#define PROCESSING_PATH "lib/Processing/processing-2.2.1/"
-//#define FILE_PROCESSING_PATH "lib/Processing/processing-2.2.1/pointsMain" 
-#define OF_PATH "lib/OpenFrameworks/of_v0.8.1_linux64_release/apps/myApps/oscReceiveExample/bin/"
-//#define MVT_PATH "mouvements/"
+#include <string>
 
 class Menu;
 #include "InterfaceG.hpp"
@@ -39,6 +35,7 @@ class Menu : public Gtk::Window {
 	public : 
 		Menu(int argc, char** argv, InterfaceG* const it, Game *g);
 		~Menu();
+		void afficherMessage(string s);
 	private :
 		Gtk::HBox *boxH;
 		Gtk::HBox *boxScenar;

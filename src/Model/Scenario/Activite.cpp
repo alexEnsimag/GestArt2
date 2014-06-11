@@ -1,5 +1,7 @@
-#include <iostream>
+
 #include "Activite.hpp"
+using namespace std;
+
 
 Activite::Activite(string n, string p, int nb){
 	name = n;
@@ -14,6 +16,17 @@ string Activite::getName(){
 
 string Activite::getParam(){
 	return param;
+}
+
+int Activite::getEssais(){
+	return nbEssai;
+}
+
+string Activite::toString(){
+	std::stringstream nbEss;
+	nbEss << nbEssai;
+	string result = name + ", " + param + " x" + nbEss.str();
+	return result;
 }
 
 bool Activite::getWellDone(){

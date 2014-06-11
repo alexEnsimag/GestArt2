@@ -17,7 +17,7 @@ class PageAdmin;
 
 class PageAdmin : public Gtk::Window {
 	public : 
-		PageAdmin(int argc, char** argv, InterfaceG* const it);
+		PageAdmin(InterfaceG* const it);
 		~PageAdmin();
 	private :
 		Gtk::HBox *boxH;

@@ -14,12 +14,13 @@ class Game{
 	public:
 		Game();
 		int getNbScenar();
-		Scenario getScenar(int i);
+		Scenario* getScenar(int i);
 		void launch(int i);
 		void updateScenar();
+		void delScenar(int i);
 
 	private:	
-		vector<Scenario> scenar;
+		std::vector<Scenario> scenar;
 };
 
 #endif

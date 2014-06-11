@@ -1,4 +1,2 @@
 ScenarioFormes
 ActiviteForme carre	1
-ActiviteForme triangle	2
-ActiviteForme cercle	1

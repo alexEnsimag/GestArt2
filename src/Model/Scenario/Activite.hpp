@@ -2,20 +2,23 @@
 #define DEF_ACTIVITE
 
 #include <iostream>
+#include <sstream>
 #include <string>
-using namespace std;
+#include <vector>
 
 class Activite {
 	public:
-		Activite(string n, string p,int nb);
-		string getName();
-		string getParam();
+		Activite(std::string n, std::string p,int nb);
+		virtual ~Activite(){}
+		std::string getName();
+		std::string getParam();
+		std::string toString();
+		int getEssais();
 		bool getWellDone();
 		virtual void launch();
-		
 	private:
-		string name;
-		string param;
+		std::string name;
+		std::string param;
 	protected:
 		bool wellDone;
 		int nbEssai;

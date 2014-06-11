@@ -162,6 +162,8 @@ public:
         mux_.AttachSocketListener( this, listener_ );
     }
 
+	UdpListeningReceiveSocket(){};
+
     ~UdpListeningReceiveSocket()
         { mux_.DetachSocketListener( this, listener_ ); }
 

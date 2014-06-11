@@ -8,6 +8,8 @@
 #include <gtkmm/image.h>
 #include <gtkmm/box.h>
 #include <gtkmm/label.h>
+#include <gtkmm/entry.h>
+#include <gtkmm/comboboxtext.h>
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -21,23 +23,32 @@ using namespace std;
 
 class ModifScenar : public Gtk::Window {
 	public : 
-		ModifScenar(int argc, char** argv, InterfaceG* const it, Game *g);
+		ModifScenar(InterfaceG* const it, Scenario *s);
 		~ModifScenar();
+
 	private :
 		Gtk::HBox *boxH;
 		Gtk::VBox *boxVG;
 		Gtk::VBox *boxVM;
 		Gtk::VBox *boxVD;
-		Gtk::Button *retour;
-		Gtk::Button *newScenar;
-		vector<Gtk::Button*> modif;
-		vector<Gtk::Label*> nomsScenar;
-		Game *jeu;
+		Gtk::Button *annuler;
+		Gtk::Button *valider;
+		Gtk::Button *validerActivite;
+		Gtk::Entry *nomScenar;
+		
+		Gtk::Label *newActivite;
+		Gtk::Entry *nbEssais;
+		Gtk::ComboBoxText *listeActivite;
+		Gtk::ComboBoxText *listeParam;
 
 		InterfaceG *it;
+		Scenario *scenar;
 	
-		void retAdmin();
-		void modifScenar(int i);
-		void addScenar();
+		void updateParam();
+		void retAfficheScenar();
+		void validation();
+		void delActivite(int i);
+		void addActivite();
+		void reloadPage();
 };
 #endif

@@ -1,12 +1,17 @@
-#include <iostream>
 #include "ActiviteObjet.hpp"
-#include <stdio.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <string>
+
+using namespace std;
+
+static vector<string> MakeVector(){
+	vector<string> v;
+	v.push_back("Alex");
+	return v;
+}
+
+const vector<string> ActiviteObjet::possibleParams = MakeVector();
 
 pid_t pid;
+
 void kill_child(int sig)
 {
         kill(pid,SIGKILL);
