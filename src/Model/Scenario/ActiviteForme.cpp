@@ -8,21 +8,25 @@ void ActiviteForme::init(){
 	string nameForme = getParam();
 	string msg = "Faire un " + nameForme;
 	afficherMessage(msg);
-	of = new Of();
-	of->lancementOfRecognize();
 }
 
 void ActiviteForme::exec(){
 
 	lancerOsc();
+/*
+	if(getWellDone() == true){
+		afficherMessage("Bravo");
+	}else{
+		afficherMessage("Perdu!");
+	}*/
+}
+
+void ActiviteForme::closeAct(){
 	if(getWellDone() == true){
 		afficherMessage("Bravo");
 	}else{
 		afficherMessage("Perdu!");
 	}
-}
-
-void ActiviteForme::exec(){
 }
 
 void ActiviteForme::lancerOsc(){
@@ -38,5 +42,5 @@ void ActiviteForme::lancerOsc(){
 }
 
 void ActiviteForme::killOf(){
-	of->killOf();
+//	of->killOf();
 }

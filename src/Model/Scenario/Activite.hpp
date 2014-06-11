@@ -22,13 +22,14 @@ class Activite {
 		virtual void init();
 		void launch();
 		virtual void exec();
+		virtual void closeAct();
 		void afficherMessage(std::string s);
 	private:
+		bool wellDone;
+		int nbEssai;
 		std::string name;
 		std::string param;
 	protected:
-		bool wellDone;
-		int nbEssai;
 		
 };
 #endif

@@ -60,6 +60,10 @@ string Scenario::getName(){
 }
 
 void Scenario::launch(){
+	// lancment processing et of
+	of = new Of();
+	of->lancementOfRecognize();
+	
 	for(int i=0; i<activites.size(); i++){
 		cout<<activites[i]->getName()<<", "<<activites[i]->getParam()<<endl;
 		activites[i]->launch();

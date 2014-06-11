@@ -15,7 +15,7 @@ class ActiviteObjet : public Activite {
 		ActiviteObjet(std::string p, int nb) : Activite("ActiviteObjet",p, nb){}
 		virtual void init();
 		virtual void exec();
-		virtual void close();
+		virtual void closeAct();
 
 	private:
 };

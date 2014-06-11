@@ -49,17 +49,20 @@ void Activite::exec(){
 	cout<< "Not yet implemented:" << name << ", " << param << endl;
 }
 
-void Activite::close(){
+void Activite::closeAct(){
 }
 
 void Activite::launch(){
 	init();
 	int count =0;
-	while (count < nbEssai && !WellDone){
+	while (count < nbEssai && !wellDone){
+		if(count>0){
+			afficherMessage("essaie encore");
+		}
 		count ++;
 		exec();
 	}
-	close();
+	closeAct();
 }
 
 void Activite::afficherMessage(string s){

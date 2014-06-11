@@ -55,7 +55,7 @@ void ActiviteObjet::exec(){
         if (name != ""){
             if (name == getParam()){
                 alarm(1);
-                wellDone = true;
+                setWellDone( true);
             } else {
                 alarm(1);
             }
@@ -71,7 +71,7 @@ void ActiviteObjet::init(){
     afficherMessage(msg);
 }
 
-void AcriviteObjet::close(){
+void ActiviteObjet::closeAct(){
     if(getWellDone() == true){
         afficherMessage("Bravo");
     }else{

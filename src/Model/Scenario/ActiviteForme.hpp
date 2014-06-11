@@ -3,7 +3,6 @@
 
 #include "Activite.hpp"
 #include <string>
-#include "../../Controler/Kinect/Of.hpp"
 #include "../../Controler/Kinect/Processing.hpp"
 #include <gtkmm/messagedialog.h>
 
@@ -12,7 +11,7 @@ class ActiviteForme : public Activite {
 			ActiviteForme(string p, int nbE) : Activite("ActiviteForme", p, nbE){};
 			virtual void init();
 			virtual void exec();
-			virtual void close();
+			virtual void closeAct();
 			void update(string classLabel);
 			void killOf();
 /*			
@@ -23,7 +22,7 @@ class ActiviteForme : public Activite {
 */
 
 		private:
-			Of *of;
+			//Of *of;
 			void lancerOsc();
 };
 

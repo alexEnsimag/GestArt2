@@ -3,6 +3,7 @@
 
 #include "ActiviteForme.hpp"
 #include "ActiviteObjet.hpp"
+#include "../../Controler/Kinect/Of.hpp"
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
@@ -46,6 +47,7 @@ class Scenario{
 		//Permet de supprimer une activité au sénario
 		void removeActivite(int i);
 	private:
+		Of *of;
 		std::string name;
 		std::vector<Activite*> activites;
 

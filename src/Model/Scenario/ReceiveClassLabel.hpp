@@ -48,17 +48,17 @@ protected:
 				_activite->setWellDone(true);
 				
 				_s->Break();
-				_activite->killOf();				//socketUdp.Break();
+				//_activite->killOf();				//socketUdp.Break();
 			}else{
 				temps++;
 				if(temps%1000==0){
-					_activite->decrementEssai();
-					if(_activite->getEssais()==0){
+					//_activite->decrementEssai();
+					//if(_activite->getEssais()==0){
 						_s->Break();
-						_activite->killOf();
-					}else{
-						_activite->afficherMessage("Essaie encore!");
-					}
+						//_activite->killOf();
+					//}else{
+						//_activite->afficherMessage("Essaie encore!");
+				//	}
 				}
 
 			}
