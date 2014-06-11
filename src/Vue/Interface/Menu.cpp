@@ -83,6 +83,11 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 		boxScenar->pack_start(*scenarD,Gtk::PACK_SHRINK);
 		boxH->show();
 		add(*boxH);
+
+
+
+		// Creation Admin
+		admin = new Admin("toto", "toto");
 }
 
 Menu::~Menu(){
@@ -143,7 +148,7 @@ void Menu::loadMouv(){
 }
 
 void Menu::enregistrement(){
-	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom defichier");
+	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
 	diag.set_texte("choix");
 	int reponse = diag.run();
 	if(reponse == Gtk::RESPONSE_OK) { 
@@ -155,6 +160,7 @@ void Menu::enregistrement(){
 void Menu::launchEnregistrement(){
 	Of *of = new Of();
 	of->lancementOfRegister();
+	
 	//Processing *proc = new Processing();
 	//proc->lancementProcessing();
 	 

@@ -66,9 +66,18 @@ void ActiviteObjet::intLaunch(){
 void ActiviteObjet::launch(){  
     // nombre d'essai courant
     int nb = 0 ;  
+    string msg = getParam();
+    msg = "ramener le "+msg;
+    afficherMessage(msg);
     while ((nb < nbEssai) && !(wellDone)){
 
         intLaunch();
         nb++;
-        }
+    }
+    if(getWellDone() == true){
+        afficherMessage("Bravo");
+    }else{
+        afficherMessage("Perdu!");
+    }
+
 }
