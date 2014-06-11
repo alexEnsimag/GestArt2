@@ -73,5 +73,6 @@ void Game::updateScenar(){
 }
 
 void Game::delScenar(int i){
-//	remove scenar(i);
+	//Remove File
+	scenar.erase(scenar.begin()+i);
 }

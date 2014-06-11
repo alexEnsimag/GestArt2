@@ -15,7 +15,8 @@ ModifScenar::ModifScenar(InterfaceG* const itG, Scenario *s){
 		it = itG;
 		if (s == NULL){
 			scenar = new Scenario();
-			scenar->setName("Nouveau Scénario");
+			scenar->setName("New_Scenario");
+			scenar->enregistrer();
 		}else{
 			scenar = s;
 		}
