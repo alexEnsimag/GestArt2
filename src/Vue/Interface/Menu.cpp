@@ -3,7 +3,6 @@
 
 
 
-string texteField;
 
 Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 
@@ -25,9 +24,7 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 		
 		//Creation de la vue openGL
 		viewerJeux = new ViewerJeux(argc, argv);
-		viewerMesh = new ViewerMesh(argc, argv);
 		viewerTps = new ViewerTps();
-		viewerParser = new ViewerParser();
 
 		//Création des widget
 		boxH = new Gtk::HBox(false, 10);
@@ -42,19 +39,9 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 		scenarD = new Gtk::Button (">");
 		scenarD->signal_clicked().connect(sigc::mem_fun(*this, &Menu::nextScen));
 
-		newMouv = new Gtk::Button("Enregistrer\nun\nMouvement");
-		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchEnregistrement));
-		tempsReel = new Gtk::Button("Temps Reel");
-		tempsReel->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchTps));
-		loadMesh = new Gtk::Button("Charger un Mesh");
-		loadMesh->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launchMesh));
 		
-		screen = new Gtk::CheckButton("Plein Ecran");
-		screen->signal_toggled().connect(sigc::mem_fun(*this, &Menu::fullsc));
 		jouer = new Gtk::Button("JOUER");
 		jouer->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launch));
-		mouv = new Gtk::Button("Visualiser\n un \nMouvement");
-		mouv->signal_clicked().connect(sigc::mem_fun(*this, &Menu::loadMouv));
 		login = new Gtk::Button("S'identifier");
 		login->signal_clicked().connect(sigc::mem_fun(*this, &Menu::identification));
 		
@@ -66,12 +53,7 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 		boxH->pack_start(*boxVG,Gtk::PACK_SHRINK);
 		boxH->pack_start(*boxVD);
 
-		boxVG->pack_start(*mouv);
-		boxVG->pack_start(*login);
-		boxVG->pack_start(*newMouv);
-		boxVG->pack_start(*loadMesh);
-		boxVG->pack_start(*tempsReel);
-		boxVG->pack_start(*screen, Gtk::PACK_SHRINK);
+		boxVG->pack_start(*login,Gtk::PACK_SHRINK);
 		boxVG->pack_start(*quitter,Gtk::PACK_SHRINK);
 
 		boxVD->pack_start(*img);
@@ -93,26 +75,13 @@ Menu::~Menu(){
 	delete scenarG;
 	delete scenarD;
 	delete scenarLabel;
-	delete newMouv;
-	delete tempsReel;
-	delete loadMesh;
 	delete login;
 	delete quitter;
-	delete mouv;
 	delete img;
-	delete screen;
 	delete boxVD;
 	delete boxVG;
 	delete boxScenar;
 	delete boxH;
-}
-
-void Menu::fullsc(){
-	if(screen->get_active()){
-		this->fullscreen();
-	}else{
-		this->unfullscreen();
-	}
 }
 
 void Menu::launch(){
@@ -124,54 +93,16 @@ void Menu::launchTps(){
 	viewerTps->launch();
 }
 
-void Menu::launchMesh(){
-	viewerMesh->launch();
-}
-
-void Menu::loadMouv(){
-	Gtk::FileChooserDialog openf(*this, "Ouverture de fichier", Gtk::FILE_CHOOSER_ACTION_OPEN);
-	//openf.set_current_folder(Glib::get_home_dir());	
-	openf.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
-	openf.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
-	openf.set_current_folder("mouvements/");
-	Glib::RefPtr<Gtk::FileFilter> filtre = Gtk::FileFilter::create();
-	filtre->set_name("Fichier txt");
-	filtre->add_mime_type("text/plain");
-	openf.add_filter(filtre);
-	int resultat = openf.run();
-	if(resultat == Gtk::RESPONSE_OK) {
-		std::string nomFichier = openf.get_filename();
-		viewerParser->launch(nomFichier);
-	}
-}
-
-void Menu::enregistrement(){
-	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
-	diag.set_texte("choix");
-	int reponse = diag.run();
-	if(reponse == Gtk::RESPONSE_OK) { 
-		texteField = diag.get_texte();
-		launchEnregistrement();
-	}
-}
-
-void Menu::launchEnregistrement(){
-	Of *of = new Of();
-	of->lancementOfRegister();
-	
-	//Processing *proc = new Processing();
-	//proc->lancementProcessing();
-	 
-}
 
 void Menu::identification(){
+	string texteF;
 	Dialogue diag("Acces interface Administrateur", this, "Veuillez entrer le code admministrateur");
 	diag.set_texte("admin");
 	diag.zoneTexte.set_visibility(false);
 	int reponse = diag.run();
 	if(reponse == Gtk::RESPONSE_OK) { 
-        	texteField = diag.get_texte();
-	if(texteField == "admin"){
+        	texteF = diag.get_texte();
+	if(texteF == "admin"){
 		diag.hide();
 		it->pageAdmin();
 	}else{

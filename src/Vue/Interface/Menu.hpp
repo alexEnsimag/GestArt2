@@ -46,10 +46,7 @@ class Menu : public Gtk::Window {
 		Gtk::Button *login;
 		Gtk::Button *mouv;
 		Gtk::Button *newMouv;
-		Gtk::Button *tempsReel;
-		Gtk::Button *loadMesh;
 		Gtk::Button *quitter;
-		Gtk::CheckButton *screen;
 
 		Gtk::Label *scenarLabel;
 		Gtk::Button *scenarG;
@@ -58,7 +55,6 @@ class Menu : public Gtk::Window {
 
 		Gtk::Image *img;
 		ViewerJeux *viewerJeux;
-		ViewerMesh *viewerMesh;
 		ViewerTps *viewerTps;
 		ViewerParser *viewerParser;
 		InterfaceG *it;

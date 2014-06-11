@@ -11,6 +11,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
+#include "../OpenGLViewer/ViewerParser.hpp"
 
 class PageAdmin;
 #include "InterfaceG.hpp"
@@ -30,10 +31,13 @@ class PageAdmin : public Gtk::Window {
 		Gtk::Button *modifScenario;
 		Gtk::Button *modifTheme;
 		Gtk::Button *getData;
-		Gtk::CheckButton *screen;
+
+		Gtk::Button *mouv;
+		Gtk::Button *newMouvRec;
+		Gtk::Button *newMouv;
 		InterfaceG *it;
+		ViewerParser *viewerParser;
 	
-		void fullsc();
 		void retMenu();
 		void modifGesteFunc();
 		void modifObjetFunc();
@@ -41,5 +45,9 @@ class PageAdmin : public Gtk::Window {
 		void modifScenarioFunc();
 		void modifThemeFunc();
 		void getDataFunc();
+		void loadMouv();
+		void enregistrement();
+		void launchEnregistrementRec();
+		void launchEnregistrement();
 };
 #endif

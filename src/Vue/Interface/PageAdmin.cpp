@@ -1,7 +1,7 @@
 #include "PageAdmin.hpp"
 
 
-string texteField2;
+string texteField;
 
 PageAdmin::PageAdmin(InterfaceG* const itG){
 
@@ -14,6 +14,7 @@ PageAdmin::PageAdmin(InterfaceG* const itG){
 		//Positionnement
 	 	set_position(Gtk::WIN_POS_CENTER);
 		//Link vers le parent
+		viewerParser = new ViewerParser();
 		it = itG;
 
 		//Création des widget
@@ -35,8 +36,15 @@ PageAdmin::PageAdmin(InterfaceG* const itG){
 		getData = new Gtk::Button("Récupérer des données");
 		getData->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::getDataFunc));
 
-		screen = new Gtk::CheckButton("Plein Ecran");
-		screen->signal_toggled().connect(sigc::mem_fun(*this, &PageAdmin::fullsc));
+		newMouvRec = new Gtk::Button("Enregistrer\nun\nMouvement\npour\nla\nreconnaissance");
+		newMouvRec->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::launchEnregistrementRec));
+
+		newMouv = new Gtk::Button("Enregistrer\nun\nMouvement");
+		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::launchEnregistrement));
+	
+		mouv = new Gtk::Button("Visualiser\n un \nMouvement");
+		mouv->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::loadMouv));
+
 		quitter = new Gtk::Button("Retour Menu");
 		quitter->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::retMenu));
 
@@ -44,15 +52,17 @@ PageAdmin::PageAdmin(InterfaceG* const itG){
 		boxH->pack_start(*boxVG,Gtk::PACK_SHRINK);
 		boxH->pack_start(*boxVD);
 
-		boxVG->pack_start(*screen, Gtk::PACK_SHRINK);
+		boxVG->pack_start(*mouv);
+		boxVG->pack_start(*newMouvRec);
+		boxVG->pack_start(*newMouv);
 		boxVG->pack_start(*quitter,Gtk::PACK_SHRINK);
 
-		boxVD->pack_start(*modifGeste);
-		boxVD->pack_start(*modifObjet);
-		boxVD->pack_start(*modifAvatar);
+		//boxVD->pack_start(*modifGeste);
+		//boxVD->pack_start(*modifObjet);
+		//boxVD->pack_start(*modifAvatar);
 		boxVD->pack_start(*modifScenario);
-		boxVD->pack_start(*modifTheme);
-		boxVD->pack_start(*getData, Gtk::PACK_SHRINK);
+		//boxVD->pack_start(*modifTheme);
+		//boxVD->pack_start(*getData, Gtk::PACK_SHRINK);
 
 		boxH->show();
 		add(*boxH);
@@ -60,10 +70,11 @@ PageAdmin::PageAdmin(InterfaceG* const itG){
 
 PageAdmin::~PageAdmin(){
 	delete quitter;
-	delete screen;
 	delete boxVD;
 	delete boxVG;
 	delete boxH;
+	delete mouv;
+	delete newMouv;
 	delete modifGeste;
 	delete modifObjet;
 	delete modifAvatar;
@@ -72,13 +83,6 @@ PageAdmin::~PageAdmin(){
 	delete getData;
 }
 
-void PageAdmin::fullsc(){
-	if(screen->get_active()){
-		this->fullscreen();
-	}else{
-		this->unfullscreen();
-	}
-}
 
 void PageAdmin::retMenu(){
 	it->retMenuFromAdmin();
@@ -98,3 +102,46 @@ void PageAdmin::modifThemeFunc(){
 }
 void PageAdmin::getDataFunc(){
 }
+
+void PageAdmin::loadMouv(){
+	Gtk::FileChooserDialog openf(*this, "Ouverture de fichier", Gtk::FILE_CHOOSER_ACTION_OPEN);
+	//openf.set_current_folder(Glib::get_home_dir());	
+	openf.add_button(Gtk::Stock::CANCEL, Gtk::RESPONSE_CANCEL);
+	openf.add_button(Gtk::Stock::OPEN, Gtk::RESPONSE_OK);
+	openf.set_current_folder("mouvements/");
+	Glib::RefPtr<Gtk::FileFilter> filtre = Gtk::FileFilter::create();
+	filtre->set_name("Fichier txt");
+	filtre->add_mime_type("text/plain");
+	openf.add_filter(filtre);
+	int resultat = openf.run();
+	if(resultat == Gtk::RESPONSE_OK) {
+		std::string nomFichier = openf.get_filename();
+		viewerParser->launch(nomFichier);
+	}
+}
+
+void PageAdmin::enregistrement(){
+	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
+	diag.set_texte("choix");
+	int reponse = diag.run();
+	if(reponse == Gtk::RESPONSE_OK) { 
+		texteField = diag.get_texte();
+		launchEnregistrement();
+	}
+}
+
+void PageAdmin::launchEnregistrementRec(){
+	Of *of = new Of();
+	of->lancementOfRegister();
+	
+	//Processing *proc = new Processing();
+	//proc->lancementProcessing();
+	 
+}
+void PageAdmin::launchEnregistrement(){
+	
+	Processing *proc = new Processing();
+	proc->lancementProcessing();
+	 
+}
+
