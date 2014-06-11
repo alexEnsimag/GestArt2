@@ -11,4 +11,3 @@ void Fenetre::afficherMessage(string s){
 	fen.show_all();
 	Gtk::Main::run(fen);
 }
-

@@ -1,0 +1,16 @@
+Ontario2
+ActiviteForme
+carre
+42
+ActiviteForme
+triangle
+42
+ActiviteForme
+cercle
+42
+ActiviteForme
+triangle
+4
+ActiviteObjet
+Objet2
+7
