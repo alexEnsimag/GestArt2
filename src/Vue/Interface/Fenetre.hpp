@@ -10,7 +10,6 @@ class Fenetre  {
     public :
 	Gtk::Window fen;
 	void afficherMessage(std::string s);
-        void detruireFenetre();
 	
     private :
 };

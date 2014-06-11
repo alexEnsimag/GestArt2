@@ -12,7 +12,3 @@ void Fenetre::afficherMessage(string s){
 	Gtk::Main::run(fen);
 }
 
-void Fenetre::detruireFenetre(){
-	fen.close();
-	
-}
