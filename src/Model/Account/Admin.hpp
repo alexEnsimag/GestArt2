@@ -8,6 +8,7 @@ class Admin{
 	public:
 		Admin(string id, string mdp); 
 		void addGest(string name, int number, bool addFile);
+		void enregistrementGeste(string name);
 		
 	private:	
 		string identifiant;

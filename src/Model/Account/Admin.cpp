@@ -33,3 +33,10 @@ void Admin::addGest(string name, int number, bool addFile=false){
         gestFile.close();
     }
 }
+
+void Admin::enregistrementGeste(string name){
+	int classLabel = gests.size();
+}
+
+
+
