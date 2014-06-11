@@ -20,7 +20,7 @@ class Game{
 		void delScenar(int i);
 
 	private:	
-		vector<Scenario> scenar;
+		std::vector<Scenario> scenar;
 };
 
 #endif

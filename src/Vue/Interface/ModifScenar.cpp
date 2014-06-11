@@ -114,8 +114,10 @@ void ModifScenar::addActivite(){
 	string s = listeActivite->get_active_text();
 
 	if(s == "ActiviteForme"){
-		ActiviteForme *a = new ActiviteForme(listeParam->get_active_text(), atoi(nbEssais->get_text().c_str()));
-		scenar->addActivite(a);
+		//ActiviteForme *a = new ActiviteForme("carre", 1);
+
+		//ActiviteForme *a = new ActiviteForme(listeParam->get_active_text(), atoi(nbEssais->get_text().c_str()));
+		//scenar->addActivite(a);
 	}else if(s== "ActiviteObjet"){
 		ActiviteObjet *a = new ActiviteObjet(listeParam->get_active_text(), atoi(nbEssais->get_text().c_str()));
 		scenar->addActivite(a);

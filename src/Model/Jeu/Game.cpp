@@ -1,6 +1,8 @@
 
 #include "Game.hpp"
 
+using namespace std;
+
 Game::Game(){
 	//Parcours du dossier Scenar/ et ajout au jeu
 	DIR* rep = opendir("Scenario/");

@@ -1,5 +1,6 @@
 
 #include "Activite.hpp"
+using namespace std;
 
 
 Activite::Activite(string n, string p, int nb){

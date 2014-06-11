@@ -1,29 +1,27 @@
-#ifndef DEF_ACTIVITEFORMES
-#define DEF_ACTIVITEFORMES
+
+#ifndef DEF_ACTIVITEFORME
+#define DEF_ACTIVITEFORME
 
 #include "Activite.hpp"
-#include <string>
-#include "../../Controler/Kinect/Of.hpp"
-#include "../../Controler/Kinect/Processing.hpp"
-#include <gtkmm/messagedialog.h>
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <sys/wait.h>
+
 
 class ActiviteForme : public Activite {
-		public: 
-			//ActiviteForme(string p, int nbE);
-			ActiviteForme(string p, int nbE) : Activite("ActiviteFormes",p, nbE){};
-		        virtual	void launch();
-			void update(string classLabel);
-			void killOf();
-			
-		static const vector<string> possibleParams;
+	public: 
+		ActiviteForme(std::string p, int nb) : Activite("ActiviteForme",p, nb){}
+		virtual void launch();
+		
+
+		static const std::vector<std::string> possibleParams;
 		static int getParamSize(){
 			return possibleParams.size();
 		}
 
-		private:
-			Of *of;
-			void lancerOsc();
-
+	private:
 };
 
 #endif

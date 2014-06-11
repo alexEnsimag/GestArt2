@@ -1,5 +1,6 @@
 
 #include "Scenario.hpp"
+using namespace std;
 
 void Scenario::addActivite(Activite *a){
 	activites.push_back(a);
