@@ -27,6 +27,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string>
+#include "../../Controler/Kinect/Of.hpp"
 
 class Menu;
 #include "InterfaceG.hpp"

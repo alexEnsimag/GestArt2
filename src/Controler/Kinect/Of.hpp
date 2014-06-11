@@ -16,7 +16,8 @@ using namespace std;
 
 class Of{
 	public:
-		void lancementOf();
+		void lancementOfRecognize();
+		void lancementOfRegister();
 		void killOf();
 	private:
 		pid_t pidProc;

@@ -48,11 +48,10 @@ protected:
 				_activite->setWellDone(true);
 				
 				_s->Break();
-				//_activite->update(classLabel);
 				_activite->killOf();				//socketUdp.Break();
 			}else{
 				temps++;
-				if(temps%500==0){
+				if(temps%1000==0){
 					_activite->decrementEssai();
 					if(_activite->getEssais()==0){
 						_s->Break();

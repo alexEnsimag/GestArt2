@@ -21,12 +21,14 @@ void ActiviteForme::launch(){
 //	fen = new Fenetre();
 //	fen->afficherMessage("Formes carre et rond");
 	setWellDone(false);
-	afficherMessage("Formes carre et rond");
+	string nameForme = getParam();
+	string msg = "Faire un " + nameForme;
+	afficherMessage(msg);
 		
  	// lancer of
 	// osc
 	of = new Of();
-	of->lancementOf();
+	of->lancementOfRecognize();
 	
  	lancerOsc();
 	// osc
