@@ -43,7 +43,7 @@ AfficheScenar::AfficheScenar(InterfaceG* const itG, Game *g){
 			Gtk::Button* mod = new Gtk::Button("modifier");
 			mod->signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(*this, &AfficheScenar::modifScenar), i));
 			Gtk::Button* del = new Gtk::Button("-");
-			mod->signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(*this, &AfficheScenar::delScenar), i));
+			del->signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(*this, &AfficheScenar::delScenar), i));
 			
 			boxVM->pack_start(*lab,Gtk::PACK_SHRINK);
 			boxVD->pack_start(*mod,Gtk::PACK_SHRINK);
@@ -70,7 +70,6 @@ void AfficheScenar::retAdmin(){
 
 void AfficheScenar::addScenar(){
 	it->pageModifScenar();
-	//jeu->updateScenar();
 }
 
 void AfficheScenar::modifScenar(int i){
@@ -79,4 +78,5 @@ void AfficheScenar::modifScenar(int i){
 
 void AfficheScenar::delScenar(int i){
 	jeu->delScenar(i);
+	it->pageAfficheScenar();
 }

@@ -1,4 +1,4 @@
-ScenarioObjet
+scenarioObjet
 ActiviteObjet
 Alex
 2

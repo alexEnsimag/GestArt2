@@ -1,4 +1,4 @@
-ScenarioFormes
+scenarioFormes
 ActiviteForme
 carre
 1
