@@ -1,3 +1,4 @@
-ScenarioObjet
-ActiviteObjet Alex 2
-ActiviteForme cercle	1
+scenarioObjet
+ActiviteObjet
+Alex
+2

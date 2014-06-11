@@ -10,10 +10,15 @@
 #include <sys/wait.h>
 
 
+#include "../../Controler/Kinect/Of.hpp"
+#include "../../Controler/Kinect/Processing.hpp"
+
+
 class ActiviteForme : public Activite {
 	public: 
 		ActiviteForme(std::string p, int nb) : Activite("ActiviteForme",p, nb){}
 		virtual void launch();
+		void killOf();
 		
 
 		static const std::vector<std::string> possibleParams;
@@ -22,6 +27,9 @@ class ActiviteForme : public Activite {
 		}
 
 	private:
+		Of *of;
+		Fenetre *fen;
+		void lancerOsc();
 };
 
 #endif
