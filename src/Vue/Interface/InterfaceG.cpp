@@ -5,7 +5,8 @@ InterfaceG::InterfaceG(int argc, char** argv) : main(argc, argv) {
 	jeu = new Game;
 	menu = new Menu(argc, argv, this, jeu);
 	admin = new PageAdmin(this);
-	afficheScenar = new AfficheScenar(this, jeu);
+	afficheScenar = NULL;
+	modifScenar = NULL;
 }
 
 void InterfaceG::run(){
@@ -26,8 +27,11 @@ void InterfaceG::retMenuFromAdmin(){
 }
 
 void InterfaceG::pageAfficheScenar(){
-	maj();
+	if (afficheScenar != NULL)
+		afficheScenar->hide();
 	admin->hide();
+	maj();
+	afficheScenar = new AfficheScenar(this, jeu);
 	afficheScenar->show_all();
 	Gtk::Main::run(*afficheScenar);
 }
@@ -39,20 +43,26 @@ void InterfaceG::retAdminFromScenar(){
 }
 
 void InterfaceG::pageModifScenar(){
-	modifScenar = new ModifScenar(this, NULL);
+	if (modifScenar != NULL)
+		modifScenar->hide();
 	afficheScenar->hide();
+	modifScenar = new ModifScenar(this, NULL);
 	modifScenar->show_all();
 	Gtk::Main::run(*modifScenar);
 }
 
 void InterfaceG::pageModifScenar(Scenario *s){
-	modifScenar = new ModifScenar(this, s);
+	if (modifScenar != NULL)
+		modifScenar->hide();
 	afficheScenar->hide();
+	modifScenar = new ModifScenar(this, s);
 	modifScenar->show_all();
 	Gtk::Main::run(*modifScenar);
 }
 
 void InterfaceG::retFromModifScenar(){
+	maj();
+	afficheScenar = new AfficheScenar(this, jeu);
 	modifScenar->hide();
 	afficheScenar->show_all();
 	Gtk::Main::run(*afficheScenar);

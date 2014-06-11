@@ -4,28 +4,7 @@
 using namespace std;
 
 Game::Game(){
-	//Parcours du dossier Scenar/ et ajout au jeu
-	DIR* rep = opendir("Scenario/");
-	if(rep == NULL){
-		cout << "ERREUR DOSSIER SCENARIO NOT FOUND" << endl;
-		return;
-	}
-	struct dirent* fichier = NULL;
-	string comp = "txt";
-	string nomF;
-	string dir = "Scenario/";
-	size_t found;
-
-	while ((fichier = readdir(rep)) != NULL){
-		nomF = dir + fichier->d_name;
-		found = nomF.find(comp);
-		if (found!=std::string::npos){
-			Scenario *s = new Scenario();
-			s->charger(nomF);
-			scenar.push_back(*s);
-		}
-	}
-	closedir(rep);
+	updateScenar();
 }
 
 int Game::getNbScenar(){
@@ -45,9 +24,7 @@ void Game::launch(int i){
 }
 
 void Game::updateScenar(){
-	for(int i=0; i<scenar.size(); i++){
-		scenar.pop_back();
-	}
+	scenar.clear();
 	//Parcours du dossier Scenar/ et ajout au jeu
 	DIR* rep = opendir("Scenario/");
 	if(rep == NULL){
@@ -56,22 +33,29 @@ void Game::updateScenar(){
 	}
 	struct dirent* fichier = NULL;
 	string comp = "txt";
+	string badswp = "~";
 	string nomF;
 	string dir = "Scenario/";
 	size_t found;
 
 	while ((fichier = readdir(rep)) != NULL){
 		nomF = dir + fichier->d_name;
-		found = nomF.find(comp);
+		found = nomF.find(badswp);
 		if (found!=std::string::npos){
-			Scenario *s = new Scenario();
-			s->charger(nomF);
-			scenar.push_back(*s);
+		}else{
+			found = nomF.find(comp);
+			if (found!=std::string::npos){
+				Scenario *s = new Scenario();
+				s->charger(nomF);
+				scenar.push_back(*s);
+			}
 		}
 	}
 	closedir(rep);
 }
 
 void Game::delScenar(int i){
-//	remove scenar(i);
+	string nomFile = "Scenario/" + scenar[i].getName() + ".txt";
+	int res = remove(nomFile.c_str());
+	scenar.erase(scenar.begin()+i);
 }

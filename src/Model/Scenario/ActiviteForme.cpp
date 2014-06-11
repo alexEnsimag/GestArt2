@@ -5,7 +5,9 @@ using namespace std;
 
 static vector<string> MakeVector(){
 	vector<string> v;
-	v.push_back("Alex");
+	v.push_back("carre");
+	v.push_back("triangle");
+	v.push_back("cercle");
 	return v;
 }
 

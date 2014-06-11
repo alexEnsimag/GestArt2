@@ -15,7 +15,7 @@ ModifScenar::ModifScenar(InterfaceG* const itG, Scenario *s){
 		it = itG;
 		if (s == NULL){
 			scenar = new Scenario();
-			scenar->setName("Nouveau Scénario");
+			scenar->setName("New_Scenario");
 		}else{
 			scenar = s;
 		}
@@ -26,7 +26,7 @@ ModifScenar::ModifScenar(InterfaceG* const itG, Scenario *s){
 		boxVM = new Gtk::VBox(false , 25);
 		boxVD = new Gtk::VBox(false ,10);
 
-		annuler = new Gtk::Button("Annuler");
+		annuler = new Gtk::Button("Retour");
 		annuler->signal_clicked().connect(sigc::mem_fun(*this, &ModifScenar::retAfficheScenar));
 
 		valider = new Gtk::Button("Valider");
@@ -114,16 +114,16 @@ void ModifScenar::addActivite(){
 	string s = listeActivite->get_active_text();
 
 	if(s == "ActiviteForme"){
-		//ActiviteForme *a = new ActiviteForme("carre", 1);
-
-		//ActiviteForme *a = new ActiviteForme(listeParam->get_active_text(), atoi(nbEssais->get_text().c_str()));
-		//scenar->addActivite(a);
+		ActiviteForme *a = new ActiviteForme(listeParam->get_active_text(), atoi(nbEssais->get_text().c_str()));
+		scenar->addActivite(a);
 	}else if(s== "ActiviteObjet"){
 		ActiviteObjet *a = new ActiviteObjet(listeParam->get_active_text(), atoi(nbEssais->get_text().c_str()));
 		scenar->addActivite(a);
 	}else{
 		cout << "Ajout d'une activité inconnue" << endl;
 	}
+	scenar->setName(nomScenar->get_text());
+	scenar->enregistrer();
 	reloadPage();
 }
 
