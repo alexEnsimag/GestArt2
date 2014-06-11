@@ -17,10 +17,7 @@
 
 #include "Dialogue.hpp"
 #include "../OpenGLViewer/ViewerJeux.hpp"
-#include "../OpenGLViewer/ViewerParser.hpp"
 #include "../OpenGLViewer/ViewerTps.hpp"
-#include "../OpenGLViewer/ViewerMesh.hpp"
-#include "../../Controler/Kinect/Parser.hpp"
 #include "../../Model/Jeu/Game.hpp"
 
 #include <sys/wait.h>
@@ -44,8 +41,6 @@ class Menu : public Gtk::Window {
 		Gtk::VBox *boxVD;
 		Gtk::Button *jouer;
 		Gtk::Button *login;
-		Gtk::Button *mouv;
-		Gtk::Button *newMouv;
 		Gtk::Button *quitter;
 
 		Gtk::Label *scenarLabel;
@@ -56,18 +51,12 @@ class Menu : public Gtk::Window {
 		Gtk::Image *img;
 		ViewerJeux *viewerJeux;
 		ViewerTps *viewerTps;
-		ViewerParser *viewerParser;
 		InterfaceG *it;
 		Game *jeu;
 	
-		void fullsc();
-		void launchMesh();
 		void launchTps();
 		void launch();
-		void loadMouv();
-		void enregistrement();
 		void identification();
-		void launchEnregistrement();
 		void nextScen();
 		void prevScen();
 };

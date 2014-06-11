@@ -116,6 +116,17 @@ void Squelette::draw(){
 	pAss.z =  (bassinG.z+bassinD.z)/2;
 	setAss(pAss);
 
+	//maj pied et genoux
+	genouxD.x = bassinD.x;
+	genouxD.z = bassinD.z;
+	genouxG.x = bassinG.x;
+	genouxG.z = bassinG.z;
+	piedD.x = genouxD.x;
+	piedD.z = genouxD.z;
+	piedG.x = genouxG.x;
+	piedG.z = genouxG.z;
+	 
+
 	for(int i=0; i<os.size(); i++){
 		os[i]->display();
 	}
