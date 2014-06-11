@@ -41,6 +41,4 @@ void ActiviteForme::lancerOsc(){
 
 }
 
-void ActiviteForme::killOf(){
-//	of->killOf();
-}
+

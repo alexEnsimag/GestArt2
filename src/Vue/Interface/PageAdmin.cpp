@@ -40,7 +40,7 @@ PageAdmin::PageAdmin(InterfaceG* const itG){
 		newMouvRec->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::launchEnregistrementRec));
 
 		newMouv = new Gtk::Button("Enregistrer\nun\nMouvement");
-		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::launchEnregistrement));
+		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::enregistrement));
 	
 		mouv = new Gtk::Button("Visualiser\n un \nMouvement");
 		mouv->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::loadMouv));
@@ -66,6 +66,8 @@ PageAdmin::PageAdmin(InterfaceG* const itG){
 
 		boxH->show();
 		add(*boxH);
+
+		admin = new Admin();
 }
 
 PageAdmin::~PageAdmin(){
@@ -126,18 +128,18 @@ void PageAdmin::enregistrement(){
 	int reponse = diag.run();
 	if(reponse == Gtk::RESPONSE_OK) { 
 		texteField = diag.get_texte();
-		launchEnregistrement();
+		launchEnregistrementRec();
 	}
 }
 
 void PageAdmin::launchEnregistrementRec(){
 	Of *of = new Of();
 	of->lancementOfRegister();
-	
+	admin->enregistrementGeste(texteField);
 	//Processing *proc = new Processing();
 	//proc->lancementProcessing();
-	 
 }
+
 void PageAdmin::launchEnregistrement(){
 	
 	Processing *proc = new Processing();

@@ -6,8 +6,8 @@ using namespace std;
 //#include <pair>
 class Admin{
 	public:
-		Admin(string id, string mdp); 
-		void addGest(string name, int number, bool addFile);
+		Admin(); 
+		void addGest(string name, int number);
 		void enregistrementGeste(string name);
 		
 	private:	

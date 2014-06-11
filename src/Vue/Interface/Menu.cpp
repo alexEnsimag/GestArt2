@@ -65,9 +65,6 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 		boxScenar->pack_start(*scenarD,Gtk::PACK_SHRINK);
 		boxH->show();
 		add(*boxH);
-
-
-
 }
 
 Menu::~Menu(){
@@ -129,6 +126,4 @@ void Menu::afficherMessage(string s){
 	int reponse = diagE.run();
 
 }
-
-
 

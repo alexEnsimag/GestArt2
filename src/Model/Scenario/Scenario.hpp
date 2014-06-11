@@ -9,6 +9,10 @@
 #include <stdlib.h>
 #include <fstream>
 
+#include <gst/gst.h>
+#include <stdbool.h>
+#include <glib.h>
+
 #include <vector>
 #include <string>
 
@@ -50,6 +54,8 @@ class Scenario{
 		Of *of;
 		std::string name;
 		std::vector<Activite*> activites;
+		void killOf();
+		//void lancementVideoDebut();
 
 };
 #endif
