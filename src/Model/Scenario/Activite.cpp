@@ -22,6 +22,10 @@ int Activite::getEssais(){
 	return nbEssai;
 }
 
+void Activite::decrementEssai(){
+	nbEssai--;
+}
+
 string Activite::toString(){
 	std::stringstream nbEss;
 	nbEss << nbEssai;
@@ -33,6 +37,16 @@ bool Activite::getWellDone(){
 	return wellDone;
 }
 
+void Activite::setWellDone(bool b){
+	wellDone = b;
+}
+
 void Activite::launch(){
 	cout<< "Not yet implemented:" << name << ", " << param << endl;
+}
+
+void Activite::afficherMessage(string s){
+	Fenetre *fen = new Fenetre();
+	fen->afficherMessage(s);
+
 }

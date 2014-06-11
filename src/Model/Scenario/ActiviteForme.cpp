@@ -16,8 +16,10 @@ const vector<string> ActiviteForme::possibleParams = MakeVector();
 void ActiviteForme::launch(){  
 // faire une forme
 //	m->afficherMessage("faire un carre");
-	fen = new Fenetre();
-	fen->afficherMessage("Formes carre et rond");
+//	fen = new Fenetre();
+//	fen->afficherMessage("Formes carre et rond");
+	setWellDone(false);
+	afficherMessage("Formes carre et rond");
 		
  	// lancer of
 	// osc
@@ -27,6 +29,11 @@ void ActiviteForme::launch(){
  	lancerOsc();
 	// osc
  	// processing
+	if(getWellDone() == true){
+		afficherMessage("Bravo");
+	}else{
+		afficherMessage("Perdu!");
+	}
 	
 }
 

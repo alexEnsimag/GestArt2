@@ -16,8 +16,11 @@ class Activite {
 		std::string getParam();
 		std::string toString();
 		int getEssais();
+		void decrementEssai();
 		bool getWellDone();
+		void setWellDone(bool b);
 		virtual void launch();
+		void afficherMessage(std::string s);
 	private:
 		std::string name;
 		std::string param;

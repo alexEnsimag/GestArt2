@@ -15,6 +15,7 @@
 
 class ExamplePacketListener : public osc::OscPacketListener {
 public:
+	int temps = 0;
 	void setS(UdpListeningReceiveSocket *s) {
 		_s = s;
 	}
@@ -41,14 +42,26 @@ protected:
 			std::string classLabel = (arg++)->AsString();
 
 			
-			
 
 			if(classLabel != "0") {
 				std::cout << "ClassLabel : " << classLabel << "\n";
+				_activite->setWellDone(true);
 				
 				_s->Break();
 				//_activite->update(classLabel);
 				_activite->killOf();				//socketUdp.Break();
+			}else{
+				temps++;
+				if(temps%500==0){
+					_activite->decrementEssai();
+					if(_activite->getEssais()==0){
+						_s->Break();
+						_activite->killOf();
+					}else{
+						_activite->afficherMessage("Essaie encore!");
+					}
+				}
+
 			}
 		
 
