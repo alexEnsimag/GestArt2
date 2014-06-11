@@ -22,7 +22,6 @@
 #include "../OpenGLViewer/ViewerMesh.hpp"
 #include "../../Controler/Kinect/Parser.hpp"
 #include "../../Model/Jeu/Game.hpp"
-#include "../../Model/Account/Admin.hpp"
 
 #include <sys/wait.h>
 #include <unistd.h>
@@ -64,7 +63,6 @@ class Menu : public Gtk::Window {
 		ViewerParser *viewerParser;
 		InterfaceG *it;
 		Game *jeu;
-		Admin *admin; // pour les gestes
 	
 		void fullsc();
 		void launchMesh();

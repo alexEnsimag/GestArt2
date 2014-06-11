@@ -86,8 +86,6 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 
 
 
-		// Creation Admin
-		admin = new Admin("toto", "toto");
 }
 
 Menu::~Menu(){
