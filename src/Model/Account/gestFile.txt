@@ -1,2 +1,0 @@
-carree 1
-triangle 2

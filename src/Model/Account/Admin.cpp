@@ -14,7 +14,7 @@ Admin::Admin(string id, string mdp){
          string name;
          int number;
          while(!fichier.eof()){
-             fichier >> name >> number;
+             fichier >> number >> name;
          }
          gests.insert ( std::pair<int,string>(number,name) );
      }
