@@ -28,6 +28,7 @@ class ActiviteForme : public Activite {
 
 	private:
 		Of *of;
+		Fenetre *fen;
 		void lancerOsc();
 };
 

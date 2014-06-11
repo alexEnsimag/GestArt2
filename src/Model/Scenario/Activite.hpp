@@ -6,6 +6,8 @@
 #include <string>
 #include <vector>
 
+#include "../../Vue/Interface/Fenetre.hpp"
+
 class Activite {
 	public:
 		Activite(std::string n, std::string p,int nb);
