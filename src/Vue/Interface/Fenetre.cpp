@@ -13,6 +13,5 @@ void Fenetre::afficherMessage(string s){
 }
 
 void Fenetre::detruireFenetre(){
-	fen.close();
-	
+	fen.hide();
 }
