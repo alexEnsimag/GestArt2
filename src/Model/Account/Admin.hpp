@@ -7,7 +7,7 @@ using namespace std;
 class Admin{
 	public:
 		Admin(string id, string mdp); 
-		void addGest(string name, int number);
+		void addGest(string name, int number, bool addFile);
 		
 	private:	
 		string identifiant;
