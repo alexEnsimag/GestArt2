@@ -41,7 +41,7 @@ void ActiviteObjet::intLaunch(){
         dup2(tube[1], 1);
         if( execvp(arg[0],arg))
             cerr << "failed execute"<< endl;
-        close(tube[0]);
+        close(tube[1]);
 
     } else {  //Parent
         //alarm(1);
