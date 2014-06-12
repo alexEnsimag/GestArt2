@@ -9,6 +9,14 @@ void kill_child(int sig)
         kill(pid,SIGKILL);
 }
 
+void ActiviteObjet::init(){  
+    //string msg = getParam();
+    //msg = "ramener le "+msg;
+    //afficherMessage(msg);
+	string uri = "Videos/" + param + ".avi";
+	Video::lancerVideo(uri);
+}
+
 void ActiviteObjet::exec(){
     string name ="";
     string commande = "zbarcam";
@@ -36,7 +44,6 @@ void ActiviteObjet::exec(){
         close(tube[1]);
 
     } else {  //Parent
-        //alarm(1);
         char    buf[80];
         close(tube[1]);
         read(tube[0], buf, sizeof(buf));
@@ -64,17 +71,10 @@ void ActiviteObjet::exec(){
     }
 }
 
-void ActiviteObjet::init(){  
-    // nombre d'essai courant
-    string msg = getParam();
-    msg = "ramener le "+msg;
-    afficherMessage(msg);
-}
-
 void ActiviteObjet::closeAct(){
     if(getWellDone() == true){
-        afficherMessage("Bravo");
+	Video::lancerVideo("Videos/gagné.avi");
     }else{
-        afficherMessage("Perdu!");
+	Video::lancerVideo("Videos/perdu.avi");
     }
 }

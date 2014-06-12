@@ -21,9 +21,11 @@ string Activite::getParam(){
 int Activite::getEssais(){
 	return nbEssai;
 }
+
 int Activite::getDuree(){
 	return duree;
 }
+
 
 void Activite::decrementEssai(){
 	nbEssai--;
