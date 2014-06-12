@@ -44,7 +44,6 @@ void ActiviteObjet::exec(){
         close(tube[1]);
 
     } else {  //Parent
-        //alarm(1);
         char    buf[80];
         close(tube[1]);
         read(tube[0], buf, sizeof(buf));
