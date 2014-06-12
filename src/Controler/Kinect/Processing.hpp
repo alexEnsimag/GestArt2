@@ -13,7 +13,7 @@
 
 using namespace std;
 
-#define FILE_PROCESSING_PATH "lib/Processing/processing-2.2.1/pointsMain" 
+#define FILE_PROCESSING_PATH "lib/Processing/processing-2.2.1/pointsMainNew" 
 #define MVT_PATH "mouvements/"
 #define PROCESSING_PATH "lib/Processing/processing-2.2.1/"
 
