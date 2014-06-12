@@ -8,8 +8,8 @@ void ActiviteForme::init(){
 	//string nameForme = getParam();
 	//string msg = "Faire un " + nameForme;
 	//afficherMessage(msg);
-	string uri = "Videos/" + param + ".avi";
-	Video::lancerVideo(uri);
+	string uri = "Videos/" + getParam() + ".avi";
+	Video::lancerVideo(uri, getDuree());
 }
 
 void ActiviteForme::exec(){
@@ -25,9 +25,9 @@ void ActiviteForme::exec(){
 
 void ActiviteForme::closeAct(){
 	if(getWellDone() == true){
-		Video::lancerVideo("Videos/gagné.avi");
+		Video::lancerVideo("Videos/gagné.avi", 1000);
 	}else{
-		Video::lancerVideo("Videos/perdu.avi");
+		Video::lancerVideo("Videos/perdu.avi", 1000);
 	}
 }
 

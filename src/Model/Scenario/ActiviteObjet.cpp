@@ -13,8 +13,8 @@ void ActiviteObjet::init(){
     //string msg = getParam();
     //msg = "ramener le "+msg;
     //afficherMessage(msg);
-	string uri = "Videos/" + param + ".avi";
-	Video::lancerVideo(uri);
+	string uri = "Videos/" + getParam() + ".avi";
+	Video::lancerVideo(uri, getDuree());
 }
 
 void ActiviteObjet::exec(){
@@ -73,8 +73,8 @@ void ActiviteObjet::exec(){
 
 void ActiviteObjet::closeAct(){
     if(getWellDone() == true){
-	Video::lancerVideo("Videos/gagné.avi");
+	Video::lancerVideo("Videos/gagné.avi", 2000);
     }else{
-	Video::lancerVideo("Videos/perdu.avi");
+	Video::lancerVideo("Videos/perdu.avi",2000);
     }
 }
