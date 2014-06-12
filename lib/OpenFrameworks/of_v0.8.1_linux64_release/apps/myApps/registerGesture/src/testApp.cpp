@@ -103,8 +103,8 @@ void testApp::setup()
 
     //The input to the training data will be the [x y] from the mouse, so we set the number of dimensions to 2
     trainingData.setNumDimensions( 6 );
-    performTrainingLabel();
-    //trainingClassLabel = 1;
+    //performTrainingLabel();
+    trainingClassLabel = 1;
 
     //Initialize the DTW classifier
     DTW dtw;
@@ -161,11 +161,11 @@ void testApp::update()
         }
 
         // If data trained, predict the movement
-        /*if( pipeline.getTrained() ){
+        if( pipeline.getTrained() ){
             if( !pipeline.predict(inputVector) ){
                 infoText = "Failed to make prediction";
             }
-        }*/
+        }
     }
 }
 
