@@ -1,6 +1,10 @@
 #include "ActiviteForme.hpp"
 #include "ReceiveClassLabel.hpp"
 
+#include <iomanip>
+#include <locale>
+#include <sstream>
+
 using namespace std;
 
 void ActiviteForme::init(){
@@ -26,6 +30,8 @@ void ActiviteForme::closeAct(){
 void ActiviteForme::lancerOsc(){
 	ExamplePacketListener listener;
 	// maj classLabel
+	int numLabel = MapGestes::getGestByName(getParam());
+	listener.setClassLabel(numLabel);
 	UdpListeningReceiveSocket s(
 			IpEndpointName( IpEndpointName::ANY_ADDRESS, PORT ),
 			&listener );    

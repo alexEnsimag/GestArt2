@@ -12,6 +12,8 @@
 #include "../../Vue/Interface/Fenetre.hpp"
 #include "../../Controler/Video/Video.hpp"
 
+#include "../../Model/Movement/MapGestes.hpp"
+
 class Activite {
 	public:
 		Activite(std::string n, std::string p,int nb);
