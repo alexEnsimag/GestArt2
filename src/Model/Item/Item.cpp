@@ -4,7 +4,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <sys/wait.h>
-
+#define QR_PATH Ressources/QrCodes
 
 Item::Item( string n, string image,string audio){
     name = n;
@@ -13,12 +13,12 @@ Item::Item( string n, string image,string audio){
 }
 
 
-
+// Genère un Qr code correspendant à l'objet dans le Dossier ressources.
 void Item::qrEncode (string qrFileName) {
         char * arg[4];
         string arg0 = "qrencode";
         string arg1 ="-o";
-        string arg2 = qrFileName+".png";
+        string arg2 = QR_PATH+name+".png";
         string arg3 = "'"+name+"'";
           
         arg[0] = (char *) arg0.c_str();
