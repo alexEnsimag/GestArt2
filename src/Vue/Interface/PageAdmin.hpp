@@ -34,8 +34,9 @@ class PageAdmin : public Gtk::Window {
 		Gtk::Button *getData;
 
 		Gtk::Button *mouv;
-		Gtk::Button *newMouvRec;
+		Gtk::Button *newMouvSamples;
 		Gtk::Button *newMouv;
+		Gtk::Button *testMouv;
 		InterfaceG *it;
 		ViewerParser *viewerParser;
 	
@@ -49,8 +50,8 @@ class PageAdmin : public Gtk::Window {
 		void modifThemeFunc();
 		void getDataFunc();
 		void loadMouv();
-		void enregistrement();
-		void launchEnregistrementRec();
+		void launchEnregistrementSamples();
 		void launchEnregistrement();
+		void testerMouvement();
 };
 #endif

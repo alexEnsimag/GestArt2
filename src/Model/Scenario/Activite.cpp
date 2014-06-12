@@ -8,6 +8,8 @@ Activite::Activite(string n, string p, int nb){
 	param = p;
         nbEssai = nb;
         wellDone = false;
+
+	chargerDuree();
 }
 
 string Activite::getName(){
@@ -21,9 +23,11 @@ string Activite::getParam(){
 int Activite::getEssais(){
 	return nbEssai;
 }
+
 int Activite::getDuree(){
 	return duree;
 }
+
 
 void Activite::decrementEssai(){
 	nbEssai--;
@@ -71,5 +75,25 @@ void Activite::launch(){
 void Activite::afficherMessage(string s){
 	Fenetre *fen = new Fenetre();
 	fen->afficherMessage(s);
+
+}
+
+void Activite::chargerDuree(){
+	string nomFichier = "Scenario/Activite/" + getName() + ".txt";
+
+	ifstream fichier(nomFichier.c_str(), ios::in);
+	if(!fichier){
+		cout << "Erreur à l'ouverture du Fichier" << endl;
+		return;
+	}
+	string param2;
+	int duree2;
+		while(!fichier.eof()){
+			fichier >> param2>> duree2;
+			if(param2 == getParam()){
+				duree=duree2;
+			}
+		}	
+	fichier.close();
 
 }

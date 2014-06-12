@@ -11,7 +11,16 @@ void kill_child(int sig)
         kill(pid,SIGKILL);
 }
 
+void ActiviteObjet::init(){  
+    //string msg = getParam();
+    //msg = "ramener le "+msg;
+    //afficherMessage(msg);
+	string uri = "Videos/" + getParam() + ".avi";
+	Video::lancerVideo(uri, getDuree());
+}
+
 //Override de la méthode exec() dans activité 
+
 void ActiviteObjet::exec(){
     string name ="";
     string commande = "zbarcam";
@@ -74,18 +83,11 @@ void ActiviteObjet::exec(){
     }
 }
 
-// Affiche les intructions correspondantes à l'activité
-void ActiviteObjet::init(){  
-    string msg = getParam();
-    setWellDone(false);
-    msg = "ramener le "+msg;
-    afficherMessage(msg);
-}
 // Affiche un message indiquant l'echec ou la réussite de l'activité
 void ActiviteObjet::closeAct(){
-    if(getWellDone()){
-        afficherMessage("Bravo");
+    if(getWellDone() == true){
+	Video::lancerVideo("Video/gagne.avi", 2000);
     }else{
-        afficherMessage("Perdu!");
+	Video::lancerVideo("Video/perdu.avi",2000);
     }
 }

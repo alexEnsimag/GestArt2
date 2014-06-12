@@ -9,7 +9,7 @@ static void sleep2(unsigned int ms){
 	while(goal>clock());
 }
 
-void Video::lancementVideo(string nomVideo, float time){
+void Video::lancerVideo(string nomVideo, int time){
 	libvlc_instance_t * inst;
 	libvlc_media_player_t *mp;
 	libvlc_media_t *m;
@@ -19,8 +19,12 @@ void Video::lancementVideo(string nomVideo, float time){
 
 	/* Create a new item */
 	//m = libvlc_media_new_location (inst, "Move_Kinect.avi");
-	m = libvlc_media_new_path (inst, nomVideo.c_str());
-
+	try{
+		m = libvlc_media_new_path (inst, nomVideo.c_str());
+	}catch (int e){
+		cout << "Fichier non trouvé:" << nomVideo << endl;
+		return;
+	}
 
 	/* Create a media player playing environement */
 	mp = libvlc_media_player_new_from_media (m);

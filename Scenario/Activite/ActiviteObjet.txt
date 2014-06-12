@@ -1,4 +1,4 @@
-olfa
-ponga
-Alex
-Mathilde
+olfa	1000
+ponga	1000
+Alex	1000
+Mathilde	1000

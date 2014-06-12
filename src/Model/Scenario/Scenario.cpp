@@ -61,14 +61,19 @@ string Scenario::getName(){
 
 
 	
+/*
+* Lancement du scenario : - video d'initialisation
+			  - lancement of et processing
+			  - lance chaque activite
+			  - fermeture of et processing 
+			   
+*/
 
 void Scenario::launch(){
 	// lancement video debut
-	/*gst_init(NULL, NULL);	
-	  const char *nameVideo = "file://Move_Kinect.avi";*/
-	Video::lancementVideo("Videos/intro.avi", 20000);
+	Video::lancerVideo("Video/Move_Kinect.avi", 4000);
 
-	// lancment processing et of
+	// lancement processing et of
 	of = new Of();
 	of->lancementOfRecognize();
 
