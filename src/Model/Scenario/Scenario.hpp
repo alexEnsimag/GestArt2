@@ -9,9 +9,7 @@
 #include <stdlib.h>
 #include <fstream>
 
-#include <gst/gst.h>
-#include <stdbool.h>
-#include <glib.h>
+#include "../../Controler/Video/Video.hpp"
 
 #include <vector>
 #include <string>
@@ -55,7 +53,6 @@ class Scenario{
 		std::string name;
 		std::vector<Activite*> activites;
 		void killOf();
-		//void lancementVideoDebut();
 
 };
 #endif

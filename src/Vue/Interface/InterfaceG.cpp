@@ -1,6 +1,5 @@
 
 #include "InterfaceG.hpp"
-#include <gst/gst.h>
 
 InterfaceG::InterfaceG(int argc, char** argv) : main(argc, argv) {
 	jeu = new Game;

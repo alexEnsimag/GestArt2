@@ -13,7 +13,6 @@ class ActiviteForme : public Activite {
 			virtual void exec();
 			virtual void closeAct();
 			void update(string classLabel);
-			//void killOf();
 /*			
 		static const vector<string> possibleParams;
 		static int getParamSize(){
@@ -22,7 +21,6 @@ class ActiviteForme : public Activite {
 */
 
 		private:
-			//Of *of;
 			void lancerOsc();
 };
 

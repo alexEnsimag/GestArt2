@@ -16,6 +16,7 @@ class Activite {
 		std::string getParam();
 		std::string toString();
 		int getEssais();
+		int getDuree();
 		void decrementEssai();
 		bool getWellDone();
 		void setWellDone(bool b);
@@ -29,6 +30,7 @@ class Activite {
 		int nbEssai;
 		std::string name;
 		std::string param;
+		int duree;
 	protected:
 		
 };
