@@ -5,9 +5,11 @@ using namespace std;
 
 void ActiviteForme::init(){
 	setWellDone(false);
-	string nameForme = getParam();
-	string msg = "Faire un " + nameForme;
-	afficherMessage(msg);
+	//string nameForme = getParam();
+	//string msg = "Faire un " + nameForme;
+	//afficherMessage(msg);
+	string uri = "Videos/" + param + ".avi";
+	Video::lancerVideo(uri);
 }
 
 void ActiviteForme::exec(){
@@ -23,9 +25,9 @@ void ActiviteForme::exec(){
 
 void ActiviteForme::closeAct(){
 	if(getWellDone() == true){
-		afficherMessage("Bravo");
+		Video::lancerVideo("Videos/gagné.avi");
 	}else{
-		afficherMessage("Perdu!");
+		Video::lancerVideo("Videos/perdu.avi");
 	}
 }
 
@@ -40,5 +42,3 @@ void ActiviteForme::lancerOsc(){
 	s.Run();
 
 }
-
-
