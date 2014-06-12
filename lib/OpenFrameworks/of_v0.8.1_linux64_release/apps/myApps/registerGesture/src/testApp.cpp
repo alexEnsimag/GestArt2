@@ -429,5 +429,6 @@ void testApp::performTrainingLabel()
         cout << trainingClassLabel << " gestes charges" << endl;
         trainingClassLabel++; // on incrémente pour l'enregistrement du nouveau geste
     }
+    fichier.close();
 
 }
