@@ -15,7 +15,7 @@ void ActiviteObjet::init(){
     //string msg = getParam();
     //msg = "ramener le "+msg;
     //afficherMessage(msg);
-	string uri = "Videos/" + getParam() + ".avi";
+	string uri = "Video/" + getParam() + ".avi";
 	Video::lancerVideo(uri, getDuree());
 }
 

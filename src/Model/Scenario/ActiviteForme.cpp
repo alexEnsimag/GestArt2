@@ -13,7 +13,8 @@ void ActiviteForme::init(){
 
 void ActiviteForme::exec(){
 
-	lancerOsc();
+	int numLabel = MapGestes::getGestByName(getParam());
+	lancerOsc(numLabel);
 	
 }
 
@@ -25,10 +26,9 @@ void ActiviteForme::closeAct(){
 	}
 }
 
-void ActiviteForme::lancerOsc(){
+void ActiviteForme::lancerOsc(int numLabel){
 	ExamplePacketListener listener;
 	// maj classLabel
-	int numLabel = MapGestes::getGestByName(getParam());
 	listener.setClassLabel(numLabel);
 	UdpListeningReceiveSocket s(
 			IpEndpointName( IpEndpointName::ANY_ADDRESS, PORT ),

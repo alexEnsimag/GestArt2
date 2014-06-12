@@ -169,11 +169,11 @@ void PageAdmin::testerMouvement() {
 			cout << "Geste inexistant" << endl;
 			return;		
 		} else {
+
 			cout << "ClassLabel du geste : " << key << endl;		
+			Of *of = new Of();
+			of->lancementOfRecognize(); 
 		}
-		// TODO
-		//Processing *proc = new Processing();
-		//proc->lancementProcessing();
 	} else {
 		cout << "Erreur dans le nom du fichier" << endl;	
 	}
