@@ -25,9 +25,9 @@ void ActiviteForme::exec(){
 
 void ActiviteForme::closeAct(){
 	if(getWellDone() == true){
-		Video::lancerVideo("Videos/gagné.avi", 1000);
+		Video::lancerVideo("Video/gagne.avi", 1000);
 	}else{
-		Video::lancerVideo("Videos/perdu.avi", 1000);
+		Video::lancerVideo("Video/perdu.avi", 1000);
 	}
 }
 

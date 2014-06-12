@@ -73,8 +73,8 @@ void ActiviteObjet::exec(){
 
 void ActiviteObjet::closeAct(){
     if(getWellDone() == true){
-	Video::lancerVideo("Videos/gagné.avi", 2000);
+	Video::lancerVideo("Video/gagne.avi", 2000);
     }else{
-	Video::lancerVideo("Videos/perdu.avi",2000);
+	Video::lancerVideo("Video/perdu.avi",2000);
     }
 }
