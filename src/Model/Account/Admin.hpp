@@ -9,7 +9,9 @@ class Admin{
 		Admin(); 
 		void addGest(string name, int number);
 		void enregistrementGeste(string name);
-		
+		string getGestByKey(int key);	
+		int getGestByName(string name);
+
 	private:	
 		string identifiant;
 		string motDePasse;

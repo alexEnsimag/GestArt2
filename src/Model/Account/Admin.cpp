@@ -14,12 +14,13 @@ Admin::Admin(){
          string name;
          int number;
          while(!fichier.eof()){
-             fichier >> number >> name;
+             fichier >> number;
+		fichier >> name;
+		gests.insert ( std::pair<int,string>(number,name) );
          }
-         gests.insert ( std::pair<int,string>(number,name) );
      }
-
 }
+
 void Admin::addGest(string name, int number){
     gests.insert ( std::pair<int,string>(number,name) );
     const char * space = " ";
@@ -36,5 +37,20 @@ void Admin::enregistrementGeste(string name){
 	addGest(name, gests.size() + 1);
 }
 
+string Admin::getGestByKey(int key) { 
+	return gests[key]; 
+}
+	
+int Admin::getGestByName(string name) { 
+	std::map<int, std::string>::const_iterator it;
+	int key = -1;
 
+	for (it = gests.begin(); it != gests.end(); ++it) {
+		if (it->second == name) {
+			key = it->first;
+			break;
+		}
+	}
+	return key;
+}
 

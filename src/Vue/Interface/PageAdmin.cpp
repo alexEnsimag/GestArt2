@@ -155,6 +155,23 @@ void PageAdmin::launchEnregistrement(){
 }
 
 void PageAdmin::testerMouvement() {
-	// TODO
+	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
+	diag.set_texte("choix");
+	int reponse = diag.run();
+	if(reponse == Gtk::RESPONSE_OK) { 
+		texteField = diag.get_texte();
+		int key = admin->getGestByName(texteField);
+		if(key == -1) {
+			cout << "Geste inexistant" << endl;
+			return;		
+		} else {
+			cout << "ClassLabel du geste : " << key << endl;		
+		}
+		// TODO
+		//Processing *proc = new Processing();
+		//proc->lancementProcessing();
+	} else {
+		cout << "Erreur dans le nom du fichier" << endl;	
+	}
 }
 
