@@ -1,3 +1,1 @@
-1 carre
-2 triangle
-3 rectangle
+4 wave
