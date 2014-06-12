@@ -36,11 +36,14 @@ PageAdmin::PageAdmin(InterfaceG* const itG){
 		getData = new Gtk::Button("Récupérer des données");
 		getData->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::getDataFunc));
 
-		newMouvRec = new Gtk::Button("Enregistrer\nun\nMouvement\npour\nla\nreconnaissance");
-		newMouvRec->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::launchEnregistrementRec));
+		newMouv = new Gtk::Button("Enregistrer\nles points\nd'un\nMouvement");
+		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::launchEnregistrement));
 
-		newMouv = new Gtk::Button("Enregistrer\nun\nMouvement");
-		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::enregistrement));
+		newMouvSamples = new Gtk::Button("Enregistrer\nun\nMouvement");
+		newMouvSamples->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::launchEnregistrementSamples));
+
+		testMouv = new Gtk::Button("Tester\nun\nMouvement");
+		testMouv->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::testerMouvement));
 	
 		mouv = new Gtk::Button("Visualiser\n un \nMouvement");
 		mouv->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::loadMouv));
@@ -53,8 +56,9 @@ PageAdmin::PageAdmin(InterfaceG* const itG){
 		boxH->pack_start(*boxVD);
 
 		boxVG->pack_start(*mouv);
-		boxVG->pack_start(*newMouvRec);
 		boxVG->pack_start(*newMouv);
+		boxVG->pack_start(*newMouvSamples);
+		boxVG->pack_start(*testMouv);
 		boxVG->pack_start(*quitter,Gtk::PACK_SHRINK);
 
 		//boxVD->pack_start(*modifGeste);
@@ -122,28 +126,52 @@ void PageAdmin::loadMouv(){
 	}
 }
 
-void PageAdmin::enregistrement(){
+void PageAdmin::launchEnregistrementSamples(){
 	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
 	diag.set_texte("choix");
 	int reponse = diag.run();
 	if(reponse == Gtk::RESPONSE_OK) { 
 		texteField = diag.get_texte();
-		launchEnregistrementRec();
+		Of *of = new Of();
+		of->lancementOfRegister();
+		admin->enregistrementGeste(texteField);
+	} else {
+		cout << "Erreur dans le nom du fichier" << endl;	
 	}
 }
 
-void PageAdmin::launchEnregistrementRec(){
-	Of *of = new Of();
-	of->lancementOfRegister();
-	admin->enregistrementGeste(texteField);
-	//Processing *proc = new Processing();
-	//proc->lancementProcessing();
+void PageAdmin::launchEnregistrement(){
+	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
+	diag.set_texte("choix");
+	int reponse = diag.run();
+	if(reponse == Gtk::RESPONSE_OK) { 
+		texteField = diag.get_texte();
+		// TODO
+		//Processing *proc = new Processing();
+		//proc->lancementProcessing();
+	} else {
+		cout << "Erreur dans le nom du fichier" << endl;	
+	}
 }
 
-void PageAdmin::launchEnregistrement(){
-	
-	Processing *proc = new Processing();
-	proc->lancementProcessing();
-	 
+void PageAdmin::testerMouvement() {
+	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
+	diag.set_texte("choix");
+	int reponse = diag.run();
+	if(reponse == Gtk::RESPONSE_OK) { 
+		texteField = diag.get_texte();
+		int key = admin->getGestByName(texteField);
+		if(key == -1) {
+			cout << "Geste inexistant" << endl;
+			return;		
+		} else {
+			cout << "ClassLabel du geste : " << key << endl;		
+		}
+		// TODO
+		//Processing *proc = new Processing();
+		//proc->lancementProcessing();
+	} else {
+		cout << "Erreur dans le nom du fichier" << endl;	
+	}
 }
 
