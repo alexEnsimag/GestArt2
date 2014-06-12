@@ -5,7 +5,7 @@
 Admin::Admin(){ 
      //identifiant = id;
      //motDePasse = mdp;
-     gestFileName = "gestFile.txt";
+     gestFileName = "Ressources/gestFile.txt";
      //Ouverture du fichier
      ifstream fichier(gestFileName.c_str(), ios::in);
      if(!fichier){
