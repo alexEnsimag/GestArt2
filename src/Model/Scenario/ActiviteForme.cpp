@@ -1,9 +1,7 @@
 #include "ActiviteForme.hpp"
 #include "ReceiveClassLabel.hpp"
 
-#include <iomanip>
-#include <locale>
-#include <sstream>
+
 
 using namespace std;
 
