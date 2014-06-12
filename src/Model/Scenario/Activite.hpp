@@ -30,8 +30,6 @@ class Activite {
 		int nbEssai;
 		std::string name;
 		std::string param;
-		int duree;
-	protected:
 		
 };
 #endif
