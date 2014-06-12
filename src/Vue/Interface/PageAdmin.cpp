@@ -1,5 +1,7 @@
+
 #include "PageAdmin.hpp"
 
+using namespace std;
 
 string texteField;
 
@@ -72,7 +74,8 @@ PageAdmin::PageAdmin(InterfaceG* const itG, Game *j){
 		boxH->show();
 		add(*boxH);
 
-		admin = new Admin();
+		//admin = new Admin();
+		MapGestes::addGestesFile();
 }
 
 PageAdmin::~PageAdmin(){
@@ -135,7 +138,7 @@ void PageAdmin::launchEnregistrementSamples(){
 		texteField = diag.get_texte();
 		Of *of = new Of();
 		of->lancementOfRegister();
-		admin->enregistrementGeste(texteField);
+		MapGestes::enregistrementGeste(texteField);
 	} else {
 		cout << "Erreur dans le nom du fichier" << endl;	
 	}
@@ -161,7 +164,7 @@ void PageAdmin::testerMouvement() {
 	int reponse = diag.run();
 	if(reponse == Gtk::RESPONSE_OK) { 
 		texteField = diag.get_texte();
-		int key = admin->getGestByName(texteField);
+		int key = MapGestes::getGestByName(texteField);
 		if(key == -1) {
 			cout << "Geste inexistant" << endl;
 			return;		
