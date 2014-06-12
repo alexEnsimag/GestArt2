@@ -5,22 +5,14 @@ using namespace std;
 
 void ActiviteForme::init(){
 	setWellDone(false);
-	//string nameForme = getParam();
-	//string msg = "Faire un " + nameForme;
-	//afficherMessage(msg);
-	string uri = "Videos/" + getParam() + ".avi";
+	string uri = "Video/" + getParam() + ".avi";
 	Video::lancerVideo(uri, getDuree());
 }
 
 void ActiviteForme::exec(){
 
 	lancerOsc();
-/*
-	if(getWellDone() == true){
-		afficherMessage("Bravo");
-	}else{
-		afficherMessage("Perdu!");
-	}*/
+	
 }
 
 void ActiviteForme::closeAct(){
@@ -33,7 +25,7 @@ void ActiviteForme::closeAct(){
 
 void ActiviteForme::lancerOsc(){
 	ExamplePacketListener listener;
-
+	// maj classLabel
 	UdpListeningReceiveSocket s(
 			IpEndpointName( IpEndpointName::ANY_ADDRESS, PORT ),
 			&listener );    

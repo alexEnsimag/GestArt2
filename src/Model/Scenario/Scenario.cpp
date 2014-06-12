@@ -72,7 +72,6 @@ string Scenario::getName(){
 void Scenario::launch(){
 	// lancement video debut
 	Video::lancerVideo("Video/Move_Kinect.avi", 4000);
-
 	// lancement processing et of
 	of = new Of();
 	of->lancementOfRecognize();

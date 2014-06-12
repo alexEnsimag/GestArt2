@@ -19,9 +19,10 @@ class PageAdmin;
 
 class PageAdmin : public Gtk::Window {
 	public : 
-		PageAdmin(InterfaceG* const it);
+		PageAdmin(InterfaceG* const it, Game *jeu);
 		~PageAdmin();
 	private :
+		Game *jeu;
 		Gtk::HBox *boxH;
 		Gtk::VBox *boxVG;
 		Gtk::VBox *boxVD;

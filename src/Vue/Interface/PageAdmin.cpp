@@ -3,7 +3,7 @@
 
 string texteField;
 
-PageAdmin::PageAdmin(InterfaceG* const itG){
+PageAdmin::PageAdmin(InterfaceG* const itG, Game *j){
 
 		set_title("Gest-Art Application : Admin");
 		set_icon_from_file("Images/icon.png");
@@ -16,6 +16,7 @@ PageAdmin::PageAdmin(InterfaceG* const itG){
 		//Link vers le parent
 		viewerParser = new ViewerParser();
 		it = itG;
+		jeu = j;
 
 		//Création des widget
 		boxH = new Gtk::HBox(false, 10);
