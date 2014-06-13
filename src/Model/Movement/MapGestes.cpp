@@ -31,7 +31,6 @@ void MapGestes::addGestesFile(){
 //const std::map<int, string> MapGestes::gests = remplirMap();
 
 void MapGestes::addGest(string name, int number){
-    cout << "addGeste" << endl;
     gests.insert ( std::pair<int,string>(number,name) );
     const char * space = " ";
     const char * endLine = "\n";

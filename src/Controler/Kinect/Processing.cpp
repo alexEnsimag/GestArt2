@@ -1,11 +1,15 @@
 #include "Processing.hpp"
 #include "../../Vue/Interface/Fenetre.hpp"
 
-pid_t Processing::lancementProcessing(){
+pid_t Processing::lancementProcessing(bool recognition){
 	char *argProcessing[6];
 	string nameCommand = PROCESSING_PATH;
 	nameCommand = nameCommand + "./processing-java";
-	string nameFile = FILE_PROCESSING_PATH;
+	string nameFile ;
+        if (recognition)
+            nameFile= FILE_PROCESSING_REC_PATH;
+        else
+            nameFile = FILE_PROCESSING_PATH;
 	//nameFile = nameFile+"/pointsMain.pde";
 	string arg1 = "--sketch="+nameFile+"";
 	string arg2 = MVT_PATH;

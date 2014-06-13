@@ -22,7 +22,7 @@ void Of::lancementOfRecognize(){
 		}
 	}else{			
 		Processing *proc = new Processing();
-	        pidProc = proc->lancementProcessing();
+	        pidProc = proc->lancementProcessing(false);
 	}
 }
 
@@ -45,7 +45,7 @@ void Of::lancementOfRegister(){
 		}
 	}else{			
 		Processing *proc = new Processing();
-	        pidProc = proc->lancementProcessing();
+	        pidProc = proc->lancementProcessing(false);
 	}
 }
 

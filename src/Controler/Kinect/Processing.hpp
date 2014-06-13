@@ -14,13 +14,14 @@
 using namespace std;
 
 #define FILE_PROCESSING_PATH "lib/Processing/processing-2.2.1/pointsMain" 
+#define FILE_PROCESSING_REC_PATH "lib/Processing/processing-2.2.1/TestPosition" 
 #define MVT_PATH "mouvements/"
 #define PROCESSING_PATH "lib/Processing/processing-2.2.1/"
 
 
 class Processing{
 	public:
-		pid_t lancementProcessing();
+		pid_t lancementProcessing(bool recognition);
 		pid_t lancementProcessingWithMove(string texte);
 	private:
 };
