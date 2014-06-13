@@ -7,6 +7,7 @@
 #include <gtkmm/stock.h>
 #include <gtkmm/image.h>
 #include <gtkmm/box.h>
+#include <gtkmm/label.h>
 
 #include <unistd.h>
 #include <stdlib.h>
@@ -23,9 +24,9 @@ class PageAdmin : public Gtk::Window {
 		~PageAdmin();
 	private :
 		Game *jeu;
-		Gtk::HBox *boxH;
-		Gtk::VBox *boxVG;
-		Gtk::VBox *boxVD;
+		Gtk::HBox *boxH1;
+		Gtk::HBox *boxH2;
+		Gtk::VBox *boxV;
 		Gtk::Button *quitter;
 		Gtk::Button *modifGeste;
 		Gtk::Button *modifObjet;
@@ -38,6 +39,8 @@ class PageAdmin : public Gtk::Window {
 		Gtk::Button *newMouvSamples;
 		Gtk::Button *newMouv;
 		Gtk::Button *testMouv;
+		Gtk::Label *mouvLabel;
+		Gtk::Label *scenLabel;
 		InterfaceG *it;
 		ViewerParser *viewerParser;
 	
