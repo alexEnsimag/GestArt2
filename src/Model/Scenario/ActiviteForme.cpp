@@ -1,5 +1,5 @@
 #include "ActiviteForme.hpp"
-#include "ReceiveClassLabel.hpp"
+#include "../../Controler/Kinect/Osc.hpp"
 
 
 
@@ -14,9 +14,9 @@ void ActiviteForme::init(){
 }
 
 void ActiviteForme::exec(){
-
+	Osc *osc = new Osc();
 	int numLabel = MapGestes::getGestByName(getParam());
-	lancerOsc(numLabel);
+	osc->lancerOsc(numLabel, this);
 	
 }
 
@@ -28,6 +28,7 @@ void ActiviteForme::closeAct(){
 	}
 }
 
+/*
 void ActiviteForme::lancerOsc(int numLabel){
 	ExamplePacketListener listener;
 	// maj classLabel
@@ -40,3 +41,4 @@ void ActiviteForme::lancerOsc(int numLabel){
 	s.Run();
 
 }
+*/

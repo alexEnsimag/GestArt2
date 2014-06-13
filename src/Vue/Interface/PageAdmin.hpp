@@ -14,6 +14,7 @@
 
 #include "../OpenGLViewer/ViewerParser.hpp"
 #include "../../Model/Movement/MapGestes.hpp"
+#include "../../Model/Scenario/ActiviteTestMouv.hpp"
 
 class PageAdmin;
 #include "InterfaceG.hpp"
@@ -22,6 +23,7 @@ class PageAdmin : public Gtk::Window {
 	public : 
 		PageAdmin(InterfaceG* const it, Game *jeu);
 		~PageAdmin();
+		void setWellDone(bool b);
 	private :
 		Game *jeu;
 		Gtk::HBox *boxH1;
@@ -43,6 +45,9 @@ class PageAdmin : public Gtk::Window {
 		Gtk::Label *scenLabel;
 		InterfaceG *it;
 		ViewerParser *viewerParser;
+
+		// pour tester mouvement
+		bool wellDone;
 	
 
 		void retMenu();

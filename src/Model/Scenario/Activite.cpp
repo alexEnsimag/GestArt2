@@ -46,6 +46,9 @@ bool Activite::getWellDone(){
 
 void Activite::setWellDone(bool b){
 	wellDone = b;
+	if(name == "ActiviteTestMouv" && b){
+		afficherMessage("mouvement reconnue");		
+	}	
 }
 
 void Activite::init(){

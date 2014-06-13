@@ -10,6 +10,7 @@
 #include "../../osc/UdpSocket.h"
 
 #include "ActiviteForme.hpp"
+#include "../../Vue/Interface/PageAdmin.hpp"
 
 
 #define PORT 12346
@@ -21,7 +22,7 @@ public:
 		_s = s;
 	}
 
-	void setActivite(ActiviteForme *a) {
+	void setActivite(Activite *a) {
 		_activite = a;
 	}
 	
@@ -31,7 +32,7 @@ public:
 
 protected:
 	UdpListeningReceiveSocket * _s;
-	ActiviteForme * _activite;
+	Activite * _activite;
 	int _classLabel;
 
    
@@ -52,6 +53,7 @@ protected:
 			if(strcmp(classLabel.c_str(), s) == 0) {
 				std::cout << "ClassLabel : " << classLabel << "\n";
 				_activite->setWellDone(true);
+				sleep(2);
 				
 				_s->Break();
 				//_activite->killOf();				//socketUdp.Break();

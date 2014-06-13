@@ -39,10 +39,10 @@ PageAdmin::PageAdmin(InterfaceG* const itG, Game *j){
 		getData = new Gtk::Button("Récupérer des données");
 		getData->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::getDataFunc));
 
-		newMouv = new Gtk::Button("Enregistrement");
+		newMouv = new Gtk::Button("Enregistrement\npour\nreconnaissance");
 		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::launchEnregistrement));
 
-		newMouvSamples = new Gtk::Button("Enregistrement\nsans\nreconnaissance");
+		newMouvSamples = new Gtk::Button("Enregistrement\npour\nvisualisation");
 		newMouvSamples->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::launchEnregistrementSamples));
 
 		testMouv = new Gtk::Button("Test de \nReconnaissance");
@@ -173,18 +173,13 @@ void PageAdmin::testerMouvement() {
 	int reponse = diag.run();
 	if(reponse == Gtk::RESPONSE_OK) { 
 		texteField = diag.get_texte();
-		int key = MapGestes::getGestByName(texteField);
-		if(key == -1) {
-			cout << "Geste inexistant" << endl;
-			return;		
-		} else {
 
-			cout << "ClassLabel du geste : " << key << endl;		
-			Of *of = new Of();
-			of->lancementOfRecognize(); 
-		}
+		ActiviteTestMouv *actMouv = new ActiviteTestMouv();
+		actMouv->testerMouvement(texteField);
 	} else {
 		cout << "Erreur dans le nom du fichier3" << endl;	
 	}
 }
+
+
 

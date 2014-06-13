@@ -13,15 +13,9 @@ class ActiviteForme : public Activite {
 			virtual void exec();
 			virtual void closeAct();
 			void update(string classLabel);
-/*			
-		static const vector<string> possibleParams;
-		static int getParamSize(){
-			return possibleParams.size();
-		}
-*/
 
 		private:
-			void lancerOsc(int classLabel);
+			//void lancerOsc(int classLabel);
 };
 
 #endif
