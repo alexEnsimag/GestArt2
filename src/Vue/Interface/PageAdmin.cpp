@@ -55,8 +55,8 @@ PageAdmin::PageAdmin(InterfaceG* const itG, Game *j){
 		quitter->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::retMenu));
 
 		//Ajout des Widgets
-		boxH->pack_start(*boxVG,Gtk::PACK_SHRINK);
-		boxH->pack_start(*boxVD);
+		boxH->pack_start(*boxVG);
+		boxH->pack_start(*boxVD,Gtk::PACK_SHRINK);
 
 		boxVG->pack_start(*mouv);
 		boxVG->pack_start(*newMouv);
