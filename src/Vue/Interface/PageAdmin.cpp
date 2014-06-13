@@ -39,10 +39,10 @@ PageAdmin::PageAdmin(InterfaceG* const itG, Game *j){
 		getData = new Gtk::Button("Récupérer des données");
 		getData->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::getDataFunc));
 
-		newMouv = new Gtk::Button("Enregistrement");
+		newMouv = new Gtk::Button("Enregistrement\npour\nreconnaissance");
 		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::launchEnregistrement));
 
-		newMouvSamples = new Gtk::Button("Enregistrement\nsans\nreconnaissance");
+		newMouvSamples = new Gtk::Button("Enregistrement\npour\nvisualisation");
 		newMouvSamples->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::launchEnregistrementSamples));
 
 		testMouv = new Gtk::Button("Test de \nReconnaissance");
