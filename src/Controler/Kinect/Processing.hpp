@@ -21,6 +21,7 @@ using namespace std;
 class Processing{
 	public:
 		pid_t lancementProcessing();
+		pid_t lancementProcessingWithMove(string texte);
 	private:
 };
 
