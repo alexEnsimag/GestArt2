@@ -49,7 +49,6 @@ protected:
 
 			char * s;
 			sprintf(s, "%d",_classLabel);
-			std::cout << s << " " << classLabel << std::endl;
 			if(strcmp(classLabel.c_str(), s) == 0) {
 				std::cout << "ClassLabel : " << classLabel << "\n";
 				_activite->setWellDone(true);
