@@ -13,7 +13,8 @@ const string MapGestes::gestFileName = "gestFile.txt";
 
 void MapGestes::addGestesFile(){
      //Ouverture du fichier
-     ifstream fichier(MapGestes::gestFileName.c_str(), ios::in | ios::ate);
+     ifstream fichier(MapGestes::gestFileName.c_str(), ios::in);
+
      if(!fichier){
          cout << "Erreur à l'ouverture du Fichier des gestes" << endl;
      } else {
@@ -30,10 +31,11 @@ void MapGestes::addGestesFile(){
 //const std::map<int, string> MapGestes::gests = remplirMap();
 
 void MapGestes::addGest(string name, int number){
+    cout << "addGeste" << endl;
     gests.insert ( std::pair<int,string>(number,name) );
     const char * space = " ";
     const char * endLine = "\n";
-    ofstream gestFile(MapGestes::gestFileName.c_str(), ios::ate);
+    ofstream gestFile(MapGestes::gestFileName.c_str(), ios_base::app);
     gestFile << number;
     gestFile << space;
     gestFile << name.c_str();
