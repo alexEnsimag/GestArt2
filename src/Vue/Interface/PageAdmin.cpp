@@ -146,15 +146,16 @@ void PageAdmin::launchEnregistrementSamples(){
 
 void PageAdmin::launchEnregistrement(){
 	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
-	diag.set_texte("choix");
+	//diag->set_texte("choix");
 	int reponse = diag.run();
 	if(reponse == Gtk::RESPONSE_OK) { 
 		texteField = diag.get_texte();
-		// TODO
-		//Processing *proc = new Processing();
-		//proc->lancementProcessing();
+		diag.hide();
+		Processing *proc = new Processing();
+		proc->lancementProcessingWithMove(texteField);
 	} else {
 		cout << "Erreur dans le nom du fichier" << endl;	
+		diag.hide();
 	}
 }
 
