@@ -140,7 +140,7 @@ void PageAdmin::launchEnregistrementSamples(){
 		of->lancementOfRegister();
 		MapGestes::enregistrementGeste(texteField);
 	} else {
-		cout << "Erreur dans le nom du fichier" << endl;	
+		cout << "Erreur dans le nom du fichier1" << endl;	
 	}
 }
 
@@ -154,7 +154,7 @@ void PageAdmin::launchEnregistrement(){
 		Processing *proc = new Processing();
 		proc->lancementProcessingWithMove(texteField);
 	} else {
-		cout << "Erreur dans le nom du fichier" << endl;	
+		cout << "Erreur dans le nom du fichier2" << endl;	
 		diag.hide();
 	}
 }
@@ -176,7 +176,7 @@ void PageAdmin::testerMouvement() {
 			of->lancementOfRecognize(); 
 		}
 	} else {
-		cout << "Erreur dans le nom du fichier" << endl;	
+		cout << "Erreur dans le nom du fichier3" << endl;	
 	}
 }
 
