@@ -71,7 +71,7 @@ string Scenario::getName(){
 bool b = false;
 void Scenario::launch(){
 	// lancement video debut
-	Video::lancerVideo("Video/Move_Kinect.avi", 4000);
+	Video::lancerVideo("Video/Intro.avi", 7000);
 	// lancement processing et of
 
 	for(int i=0; i<activites.size(); i++){
@@ -83,7 +83,7 @@ void Scenario::launch(){
 		
 		cout<<activites[i]->getName()<<", "<<activites[i]->getParam()<<endl;
 		activites[i]->launch();
-		sleep(2);
+	//	sleep(2);
 	}
 	killOf();
 }

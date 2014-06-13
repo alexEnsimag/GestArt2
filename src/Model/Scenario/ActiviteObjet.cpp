@@ -12,11 +12,11 @@ void kill_child(int sig)
 }
 
 void ActiviteObjet::init(){  
-    //string msg = getParam();
-    //msg = "ramener le "+msg;
-    //afficherMessage(msg);
+	setWellDone(false);
 	string uri = "Video/" + getParam() + ".avi";
 	Video::lancerVideo(uri, getDuree());
+	string uri2 = "Video/Montre"+getParam()+".avi";
+	Video::lancerVideo(uri2, 8000);
 }
 
 //Override de la méthode exec() dans activité 
@@ -86,8 +86,8 @@ void ActiviteObjet::exec(){
 // Affiche un message indiquant l'echec ou la réussite de l'activité
 void ActiviteObjet::closeAct(){
     if(getWellDone() == true){
-	Video::lancerVideo("Video/gagne.avi", 2000);
+	Video::lancerVideo("Video/Bravo.avi", 2000);
     }else{
-	Video::lancerVideo("Video/perdu.avi",2000);
+	Video::lancerVideo("Video/Presque.avi",11000);
     }
 }
