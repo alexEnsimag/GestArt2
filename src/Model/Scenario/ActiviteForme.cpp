@@ -24,7 +24,7 @@ void ActiviteForme::closeAct(){
 	if(getWellDone() == true){
 		Video::lancerVideo("Video/Bravo.avi", 3000);
 	}else{
-		Video::lancerVideo("Video/perdu.avi", 1000);
+		Video::lancerVideo("Video/Presque.avi", 11000);
 	}
 }
 
