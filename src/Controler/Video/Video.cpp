@@ -33,11 +33,11 @@ void Video::lancerVideo(string nomVideo, int time){
 	/* No need to keep the media now */
 	libvlc_media_release (m);
 
+	libvlc_set_fullscreen(mp, 1); 		
+
 
 
 	/* play the media_player */
-	libvlc_media_player_play (mp);
-	libvlc_media_player_stop (mp);
 
 	libvlc_media_player_play (mp);
 	sleep2(time*1000); /* Let it play a bit */
