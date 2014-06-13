@@ -1,26 +1,21 @@
 #include "ActiviteForme.hpp"
 #include "ReceiveClassLabel.hpp"
 
+
+
 using namespace std;
 
 void ActiviteForme::init(){
 	setWellDone(false);
-	//string nameForme = getParam();
-	//string msg = "Faire un " + nameForme;
-	//afficherMessage(msg);
-	string uri = "Videos/" + getParam() + ".avi";
+	string uri = "Video/" + getParam() + ".avi";
 	Video::lancerVideo(uri, getDuree());
 }
 
 void ActiviteForme::exec(){
 
-	lancerOsc();
-/*
-	if(getWellDone() == true){
-		afficherMessage("Bravo");
-	}else{
-		afficherMessage("Perdu!");
-	}*/
+	int numLabel = MapGestes::getGestByName(getParam());
+	lancerOsc(numLabel);
+	
 }
 
 void ActiviteForme::closeAct(){
@@ -31,9 +26,10 @@ void ActiviteForme::closeAct(){
 	}
 }
 
-void ActiviteForme::lancerOsc(){
+void ActiviteForme::lancerOsc(int numLabel){
 	ExamplePacketListener listener;
-
+	// maj classLabel
+	listener.setClassLabel(numLabel);
 	UdpListeningReceiveSocket s(
 			IpEndpointName( IpEndpointName::ANY_ADDRESS, PORT ),
 			&listener );    

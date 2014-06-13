@@ -4,7 +4,7 @@
 InterfaceG::InterfaceG(int argc, char** argv) : main(argc, argv) {
 	jeu = new Game;
 	menu = new Menu(argc, argv, this, jeu);
-	admin = new PageAdmin(this);
+	admin = new PageAdmin(this, jeu);
 	afficheScenar = NULL;
 	modifScenar = NULL;
 }

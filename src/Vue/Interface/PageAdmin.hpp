@@ -12,16 +12,17 @@
 #include <stdlib.h>
 
 #include "../OpenGLViewer/ViewerParser.hpp"
-#include "../../Model/Account/Admin.hpp"
+#include "../../Model/Movement/MapGestes.hpp"
 
 class PageAdmin;
 #include "InterfaceG.hpp"
 
 class PageAdmin : public Gtk::Window {
 	public : 
-		PageAdmin(InterfaceG* const it);
+		PageAdmin(InterfaceG* const it, Game *jeu);
 		~PageAdmin();
 	private :
+		Game *jeu;
 		Gtk::HBox *boxH;
 		Gtk::VBox *boxVG;
 		Gtk::VBox *boxVD;
@@ -40,7 +41,6 @@ class PageAdmin : public Gtk::Window {
 		InterfaceG *it;
 		ViewerParser *viewerParser;
 	
-		Admin *admin;
 
 		void retMenu();
 		void modifGesteFunc();

@@ -21,7 +21,7 @@ class ActiviteForme : public Activite {
 */
 
 		private:
-			void lancerOsc();
+			void lancerOsc(int classLabel);
 };
 
 #endif
