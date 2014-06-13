@@ -65,7 +65,7 @@ pid_t Processing::lancementProcessingWithMove(string texte){
 	}else{			
 		waitpid(pidProcess, NULL, 0);
 		string cmde = FILE_PROCESSING_PATH;
-		cmde = "mv " + cmde + "/positions.txt mouvements/"+texte;
+		cmde = "mv " + cmde + "/positions.txt mouvements/"+texte+".txt";
 		system(cmde.c_str());
 	}
 	return pidProcess;
