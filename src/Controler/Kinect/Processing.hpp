@@ -13,7 +13,7 @@
 
 using namespace std;
 
-#define FILE_PROCESSING_PATH "lib/Processing/processing-2.2.1/pointsMainNew" 
+#define FILE_PROCESSING_PATH "lib/Processing/processing-2.2.1/pointsMain" 
 #define MVT_PATH "mouvements/"
 #define PROCESSING_PATH "lib/Processing/processing-2.2.1/"
 
@@ -21,6 +21,7 @@ using namespace std;
 class Processing{
 	public:
 		pid_t lancementProcessing();
+		pid_t lancementProcessingWithMove(string texte);
 	private:
 };
 

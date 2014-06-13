@@ -174,9 +174,10 @@ void ModifScenar::updateParam(){
 		return;
 	}
 	string param;
-		while(!fichier.eof()){
-			fichier >> param;
-			listeParam->append(param);
-		}
+	int duree;
+	while(!fichier.eof()){
+		fichier >> param >> duree;
+		listeParam->append(param);
+	}
 	fichier.close();
 }

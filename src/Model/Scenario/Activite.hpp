@@ -2,11 +2,17 @@
 #define DEF_ACTIVITE
 
 #include <iostream>
-#include <sstream>
+#include <unistd.h>
+#include <stdlib.h>
+#include <fstream>
+//#include <sstream>
 #include <string>
 #include <vector>
 
 #include "../../Vue/Interface/Fenetre.hpp"
+#include "../../Controler/Video/Video.hpp"
+
+#include "../../Model/Movement/MapGestes.hpp"
 
 class Activite {
 	public:
@@ -30,6 +36,8 @@ class Activite {
 		int nbEssai;
 		std::string name;
 		std::string param;
+		int duree;
+		void chargerDuree();
 		
 };
 #endif

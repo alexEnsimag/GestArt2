@@ -61,20 +61,29 @@ string Scenario::getName(){
 
 
 	
-
+/*
+* Lancement du scenario : - video d'initialisation
+			  - lancement of et processing
+			  - lance chaque activite
+			  - fermeture of et processing 
+			   
+*/
+bool b = false;
 void Scenario::launch(){
 	// lancement video debut
-	/*gst_init(NULL, NULL);	
-	  const char *nameVideo = "file://Move_Kinect.avi";*/
-	Video::lancementVideo("Videos/intro.avi", 20000);
-
-	// lancment processing et of
-	of = new Of();
-	of->lancementOfRecognize();
+	Video::lancerVideo("Video/Move_Kinect.avi", 4000);
+	// lancement processing et of
 
 	for(int i=0; i<activites.size(); i++){
+		if(!b && activites[i]->getName()=="ActiviteForme"){
+			b = true;
+			of = new Of();
+			of->lancementOfRecognize();
+		}
+		
 		cout<<activites[i]->getName()<<", "<<activites[i]->getParam()<<endl;
 		activites[i]->launch();
+		sleep(2);
 	}
 	killOf();
 }

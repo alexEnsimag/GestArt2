@@ -10,7 +10,7 @@
 class Video{
 
 	public : 
-		static void lancementVideo(std::string nomVideo, float dureeMs);
+		static void lancerVideo(std::string nomVideo, int dureeMs);
 
 };
 
