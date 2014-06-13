@@ -165,18 +165,13 @@ void PageAdmin::testerMouvement() {
 	int reponse = diag.run();
 	if(reponse == Gtk::RESPONSE_OK) { 
 		texteField = diag.get_texte();
-		int key = MapGestes::getGestByName(texteField);
-		if(key == -1) {
-			cout << "Geste inexistant" << endl;
-			return;		
-		} else {
 
-			cout << "ClassLabel du geste : " << key << endl;		
-			Of *of = new Of();
-			of->lancementOfRecognize(); 
-		}
+		ActiviteTestMouv *actMouv = new ActiviteTestMouv();
+		actMouv->testerMouvement(texteField);
 	} else {
 		cout << "Erreur dans le nom du fichier" << endl;	
 	}
 }
+
+
 
