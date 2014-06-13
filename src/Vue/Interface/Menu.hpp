@@ -48,7 +48,8 @@ class Menu : public Gtk::Window {
 		Gtk::Button *scenarD;
 		int selectedScenar;
 
-		Gtk::Image *img;
+		Gtk::Image *imgMenu;
+		Gtk::Image *imgSponsor;
 		ViewerJeux *viewerJeux;
 		ViewerTps *viewerTps;
 		InterfaceG *it;

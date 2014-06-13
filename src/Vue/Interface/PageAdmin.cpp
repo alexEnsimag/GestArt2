@@ -12,7 +12,7 @@ PageAdmin::PageAdmin(InterfaceG* const itG, Game *j){
 		set_border_width(20);
 
 		//Redimensionnement
-		resize(500,500);
+		resize(300,500);
 		//Positionnement
 	 	set_position(Gtk::WIN_POS_CENTER);
 		//Link vers le parent
@@ -21,10 +21,10 @@ PageAdmin::PageAdmin(InterfaceG* const itG, Game *j){
 		jeu = j;
 
 		//Création des widget
-		boxH = new Gtk::HBox(false, 10);
+		boxV = new Gtk::VBox(false ,10);
+		boxH1 = new Gtk::HBox(false, 10);
+		boxH2 = new Gtk::HBox(false ,10);
 
-		boxVG = new Gtk::VBox(false ,10);
-		boxVD = new Gtk::VBox(false ,10);
 
 		modifGeste = new Gtk::Button("Modifier un Geste");
 		modifGeste->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::modifGesteFunc));
@@ -39,40 +39,46 @@ PageAdmin::PageAdmin(InterfaceG* const itG, Game *j){
 		getData = new Gtk::Button("Récupérer des données");
 		getData->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::getDataFunc));
 
-		newMouv = new Gtk::Button("Enregistrer\nles points\nd'un\nMouvement");
+		newMouv = new Gtk::Button("Enregistrement\npour\nreconnaissance");
 		newMouv->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::launchEnregistrement));
 
-		newMouvSamples = new Gtk::Button("Enregistrer\nun\nMouvement");
+		newMouvSamples = new Gtk::Button("Enregistrement\npour\nvisualisation");
 		newMouvSamples->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::launchEnregistrementSamples));
 
-		testMouv = new Gtk::Button("Tester\nun\nMouvement");
+		testMouv = new Gtk::Button("Test de \nReconnaissance");
 		testMouv->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::testerMouvement));
 	
-		mouv = new Gtk::Button("Visualiser\n un \nMouvement");
+		mouv = new Gtk::Button("Visualisation");
 		mouv->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::loadMouv));
 
 		quitter = new Gtk::Button("Retour Menu");
 		quitter->signal_clicked().connect(sigc::mem_fun(*this, &PageAdmin::retMenu));
 
-		//Ajout des Widgets
-		boxH->pack_start(*boxVG,Gtk::PACK_SHRINK);
-		boxH->pack_start(*boxVD);
+		mouvLabel = new Gtk::Label("Gestion des mouvements:");
+		scenLabel = new Gtk::Label("Gestion des scenarios:");
 
-		boxVG->pack_start(*mouv);
-		boxVG->pack_start(*newMouv);
-		boxVG->pack_start(*newMouvSamples);
-		boxVG->pack_start(*testMouv);
-		boxVG->pack_start(*quitter,Gtk::PACK_SHRINK);
+		//Ajout des Widgets
+		boxV->pack_start(*mouvLabel, Gtk::PACK_SHRINK);
+		boxV->pack_start(*boxH1);
+		boxV->pack_start(*boxH2);
+		boxV->pack_start(*scenLabel, Gtk::PACK_SHRINK);
+		
+		boxH1->pack_start(*newMouvSamples);
+		boxH1->pack_start(*newMouv);
+
+		boxH2->pack_start(*mouv);
+		boxH2->pack_start(*testMouv);
 
 		//boxVD->pack_start(*modifGeste);
 		//boxVD->pack_start(*modifObjet);
 		//boxVD->pack_start(*modifAvatar);
-		boxVD->pack_start(*modifScenario);
 		//boxVD->pack_start(*modifTheme);
 		//boxVD->pack_start(*getData, Gtk::PACK_SHRINK);
+		boxV->pack_end(*quitter,Gtk::PACK_SHRINK);
+		boxV->pack_end(*modifScenario,Gtk::PACK_SHRINK);
 
-		boxH->show();
-		add(*boxH);
+		boxV->show();
+		add(*boxV);
 
 		//admin = new Admin();
 		MapGestes::addGestesFile();
@@ -80,10 +86,12 @@ PageAdmin::PageAdmin(InterfaceG* const itG, Game *j){
 
 PageAdmin::~PageAdmin(){
 	delete quitter;
-	delete boxVD;
-	delete boxVG;
-	delete boxH;
+	delete boxV;
+	delete boxH1;
+	delete boxH2;
 	delete mouv;
+	delete mouvLabel;
+	delete scenLabel;
 	delete newMouv;
 	delete modifGeste;
 	delete modifObjet;
