@@ -38,33 +38,33 @@ Squelette::Squelette(){
 	bassinD.x = -0.1f;
 	bassinD.z = 2.0f; 
 	bassinD.y = 0.1f; 
-
 	genouxG.x = 0.1f;
 	genouxG.z = 2.0f; 
 	genouxG.y = -0.35f;
 	genouxD.x = -0.1f;
 	genouxD.z = 2.0f; 
 	genouxD.y = -0.35f;
+/*
 	piedG.x = 0.1f;
 	piedG.z = 2.0f; 
 	piedG.y = -0.7f;
 	piedD.x = -0.1f;
 	piedD.z = 2.0f; 
 	piedD.y = -0.7f;
-
-	os.push_back(new Bone(&head, &neck));	
+*/
+	os.push_back(new Bone(&bassinD, &bassinG));	
+	os.push_back(new Bone(&neck, &torse));	
+	os.push_back(new Bone(&torse, &ass));	
+	//os.push_back(new Bone(&head, &neck));	
 	os.push_back(new Bone(&schoulderD, &schoulderG));	
 	os.push_back(new Bone(&schoulderG, &coudeG));	
 	os.push_back(new Bone(&schoulderD, &coudeD));	
+	os.push_back(new Bone(&bassinG, &genouxG));	
+	os.push_back(new Bone(&bassinD, &genouxD));	
 	os.push_back(new Bone(&coudeG, &mainG));	
 	os.push_back(new Bone(&coudeD, &mainD));	
-	os.push_back(new Bone(&neck, &torse));	
-	os.push_back(new Bone(&bassinD, &bassinG));	
-	os.push_back(new Bone(&torse, &ass));	
-	os.push_back(new Bone(&bassinG, &genouxG));	
-	os.push_back(new Bone(&genouxG, &piedG));	
-	os.push_back(new Bone(&bassinD, &genouxD));	
-	os.push_back(new Bone(&genouxD, &piedD));	
+	//os.push_back(new Bone(&genouxG, &piedG));	
+	//os.push_back(new Bone(&genouxD, &piedD));	
 }
 
 
@@ -82,22 +82,22 @@ Squelette::Squelette(Mesh *aBrasD, Mesh* aBrasG, Mesh* brasD, Mesh* brasG, Mesh*
 	bassinD.x = -0.1f;bassinD.y = 0.1f;bassinD.z = 0.0f; 
 	genouxG.x = 0.1f;genouxG.y = -0.35f;genouxG.z = 0.0f; 
 	genouxD.x = -0.1f;genouxD.y = -0.35f;genouxD.z = 0.0f; 
-	piedG.x = 0.1f;piedG.y = -0.7f;piedG.z = 0.0f; 
-	piedD.x = -0.1f;piedD.y = -0.7f;piedD.z = 0.0f; 
+	//piedG.x = 0.1f;piedG.y = -0.7f;piedG.z = 0.0f; 
+	//piedD.x = -0.1f;piedD.y = -0.7f;piedD.z = 0.0f; 
 
-	os.push_back(new Bone(&head, &neck, tete));	
+	os.push_back(new Bone(&bassinD, &bassinG));
+	os.push_back(new Bone(&torse, &ass, bassin));	
 	os.push_back(new Bone(&schoulderD, &schoulderG));	
 	os.push_back(new Bone(&schoulderG, &coudeG, brasG));	
 	os.push_back(new Bone(&schoulderD, &coudeD, brasD));	
+	os.push_back(new Bone(&neck, &torse, torso));	
+	os.push_back(new Bone(&head, &neck, tete));	
 	os.push_back(new Bone(&coudeG, &mainG, aBrasG));	
 	os.push_back(new Bone(&coudeD, &mainD, aBrasD));	
-	os.push_back(new Bone(&neck, &torse, torso));	
-	os.push_back(new Bone(&bassinD, &bassinG));
-	os.push_back(new Bone(&torse, &ass, bassin));	
 	os.push_back(new Bone(&bassinG, &genouxG, jambeG));	
-	os.push_back(new Bone(&genouxG, &piedG, molletG));	
 	os.push_back(new Bone(&bassinD, &genouxD, jambeD));	
-	os.push_back(new Bone(&genouxD, &piedD, molletD));	
+	//os.push_back(new Bone(&genouxG, &piedG, molletG));	
+	//os.push_back(new Bone(&genouxD, &piedD, molletD));	
 }
 
 void Squelette::draw(){
@@ -117,6 +117,7 @@ void Squelette::draw(){
 	setAss(pAss);
 
 	//maj pied et genoux
+	/*
 	genouxD.x = bassinD.x;
 	genouxD.z = bassinD.z;
 	genouxG.x = bassinG.x;
@@ -125,6 +126,7 @@ void Squelette::draw(){
 	piedD.z = genouxD.z;
 	piedG.x = genouxG.x;
 	piedG.z = genouxG.z;
+	*/
 	 
 
 	for(int i=0; i<os.size(); i++){

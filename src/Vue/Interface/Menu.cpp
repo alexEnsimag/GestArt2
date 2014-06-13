@@ -12,7 +12,7 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 		selectedScenar = 0;
 
 		//Redimensionnement
-		resize(500,500);
+		resize(700,700);
 		//Positionnement
 	 	set_position(Gtk::WIN_POS_CENTER);
 		
@@ -47,7 +47,8 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 		
 		quitter = new Gtk::Button(Gtk::Stock::QUIT);
 		quitter->signal_clicked().connect(sigc::ptr_fun(&Gtk::Main::quit));
-		img = new Gtk::Image("Images/menu.png");
+		imgMenu = new Gtk::Image("Images/menu.png");
+		imgSponsor = new Gtk::Image("Images/sponsor.png");
 
 		//Ajout des Widgets
 		boxH->pack_start(*boxVG,Gtk::PACK_SHRINK);
@@ -55,8 +56,9 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 
 		boxVG->pack_start(*login,Gtk::PACK_SHRINK);
 		boxVG->pack_start(*quitter,Gtk::PACK_SHRINK);
+		//boxVG->pack_start(*imgSponsor);
 
-		boxVD->pack_start(*img);
+		boxVD->pack_start(*imgMenu);
 		boxVD->pack_start(*boxScenar,Gtk::PACK_SHRINK);
 		boxVD->pack_start(*jouer);
 
@@ -74,7 +76,8 @@ Menu::~Menu(){
 	delete scenarLabel;
 	delete login;
 	delete quitter;
-	delete img;
+	delete imgMenu;
+	delete imgSponsor;
 	delete boxVD;
 	delete boxVG;
 	delete boxScenar;
