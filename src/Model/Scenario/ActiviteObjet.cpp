@@ -12,9 +12,6 @@ void kill_child(int sig)
 }
 
 void ActiviteObjet::init(){  
-    //string msg = getParam();
-    //msg = "ramener le "+msg;
-    //afficherMessage(msg);
 	string uri = "Video/" + getParam() + ".avi";
 	Video::lancerVideo(uri, getDuree());
 }
@@ -86,7 +83,7 @@ void ActiviteObjet::exec(){
 // Affiche un message indiquant l'echec ou la réussite de l'activité
 void ActiviteObjet::closeAct(){
     if(getWellDone() == true){
-	Video::lancerVideo("Video/gagne.avi", 2000);
+	Video::lancerVideo("Video/Bravo.avi", 2000);
     }else{
 	Video::lancerVideo("Video/perdu.avi",2000);
     }

@@ -13,7 +13,7 @@ const string MapGestes::gestFileName = "gestFile.txt";
 
 void MapGestes::addGestesFile(){
      //Ouverture du fichier
-     ifstream fichier(MapGestes::gestFileName.c_str(), ios::in);
+     ifstream fichier(MapGestes::gestFileName.c_str(), ios::in | ios::ate);
      if(!fichier){
          cout << "Erreur à l'ouverture du Fichier des gestes" << endl;
      } else {
