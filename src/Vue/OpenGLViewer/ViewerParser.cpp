@@ -5,7 +5,6 @@ Squelette *squel;
 Parser *parser;
 
 bool ViewerParser::InitMesh(){
-
 	aBrasD = new Mesh();
 	aBrasG = new Mesh();
 	brasD = new Mesh();
@@ -75,7 +74,7 @@ static void RenderSceneCB()
 	glLightfv(GL_LIGHT1, GL_DIFFUSE, white);
 	GLfloat position[] = {1.0f, 1.0f, 0.5f}; 
 	glLightfv(GL_LIGHT1, GL_POSITION, position);
-	//Meshes
+	//Meshes & skeleton
 	squel->draw();
 	//animation
 	glFlush();
@@ -96,11 +95,14 @@ void ViewerParser::launch(string nomFichier){
 		fprintf(stderr, "Error: '%s'\n", glewGetErrorString(res));
 		return;
 	}
+	/*
 	if(! InitMesh()){
 		fprintf(stderr, "Error: '%s'\n", "error while loading the mesh");
 		return;
 	}
-	squel = new Squelette(aBrasD, aBrasG, brasD, brasG, torse, tete, bassin, jambeD, jambeG, molletD, molletG);
+	*/
+	//squel = new Squelette(aBrasD, aBrasG, brasD, brasG, torse, tete, bassin, jambeD, jambeG, molletD, molletG);
+	squel = new Squelette();
 
 	parser->openFichier(nomFichier);
 
