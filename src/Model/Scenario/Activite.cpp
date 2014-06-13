@@ -64,7 +64,7 @@ void Activite::launch(){
 	int count =0;
 	while (count < nbEssai && !wellDone){
 		if(count>0){
-			afficherMessage("essaie encore");
+			Video::lancerVideo("Video/EssaieEncore.avi", 5000);
 		}
 		count ++;
 		exec();

@@ -83,7 +83,7 @@ void Scenario::launch(){
 		
 		cout<<activites[i]->getName()<<", "<<activites[i]->getParam()<<endl;
 		activites[i]->launch();
-		sleep(2);
+	//	sleep(2);
 	}
 	killOf();
 }
