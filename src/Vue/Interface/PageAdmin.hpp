@@ -61,5 +61,6 @@ class PageAdmin : public Gtk::Window {
 		void launchEnregistrementSamples();
 		void launchEnregistrement();
 		void testerMouvement();
+		bool dialogueResponse();
 };
 #endif

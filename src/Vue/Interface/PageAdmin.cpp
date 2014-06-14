@@ -138,48 +138,36 @@ void PageAdmin::loadMouv(){
 	}
 }
 
-void PageAdmin::launchEnregistrementSamples(){
+bool PageAdmin::dialogueResponse() {
 	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
-	diag.set_texte("choix");
-	int reponse = diag.run();
-	if(reponse == Gtk::RESPONSE_OK) { 
+	if(diag.run() == Gtk::RESPONSE_OK) { 
 		texteField = diag.get_texte();
-		Of *of = new Of();
-		of->lancementOfRegister();
-		MapGestes::enregistrementGeste(texteField);
+		return true;
 	} else {
-		cout << "Erreur dans le nom du fichier1" << endl;	
+		cout << "Erreur dans le nom du fichier" << endl;
+		return false;
 	}
 }
 
+void PageAdmin::launchEnregistrementSamples(){
+	if(dialogueResponse()) {
+		Of *of = new Of();
+		of->lancementOfRegister();
+		MapGestes::enregistrementGeste(texteField);
+	} 
+}
+
 void PageAdmin::launchEnregistrement(){
-	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
-	//diag->set_texte("choix");
-	int reponse = diag.run();
-	if(reponse == Gtk::RESPONSE_OK) { 
-		texteField = diag.get_texte();
-		diag.hide();
+	if(dialogueResponse()) {
 		Processing *proc = new Processing();
 		proc->lancementProcessingWithMove(texteField);
-	} else {
-		cout << "Erreur dans le nom du fichier2" << endl;	
-		diag.hide();
 	}
 }
 
 void PageAdmin::testerMouvement() {
-	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
-	diag.set_texte("choix");
-	int reponse = diag.run();
-	if(reponse == Gtk::RESPONSE_OK) { 
-		texteField = diag.get_texte();
-
+	if(dialogueResponse()) {
 		ActiviteTestMouv *actMouv = new ActiviteTestMouv();
 		actMouv->testerMouvement(texteField);
-	} else {
-		cout << "Erreur dans le nom du fichier3" << endl;	
 	}
 }
-
-
 
