@@ -1,3 +1,4 @@
+#define PRECISION_RECO 0.2
 /*
  GRT MIT License
  Copyright (c) <2012> <Nicholas Gillian, Media Lab, MIT>
@@ -115,7 +116,7 @@ void testApp::setup()
     //Set the null rejection coefficient to 3, this controls the thresholds for the automatic null rejection
     //You can increase this value if you find that your real-time gestures are not being recognized
     //If you are getting too many false positives then you should decrease this value
-    dtw.setNullRejectionCoeff( 0.2 );
+    dtw.setNullRejectionCoeff( PRECISION_RECO );
 
     //Turn on the automatic data triming, this will remove any sections of none movement from the start and end of the training samples
     dtw.enableTrimTrainingData(true, 0.1, 90);
