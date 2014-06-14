@@ -80,12 +80,17 @@ void Scenario::launch(){
 			of = new Of();
 			of->lancementOfRecognize();
 		}
-		
+		if(b && activites[i]->getName()=="ActiviteObjet"){
+			killOf();
+			b = false;
+		}	
 		cout<<activites[i]->getName()<<", "<<activites[i]->getParam()<<endl;
 		activites[i]->launch();
 	//	sleep(2);
 	}
-	killOf();
+	if(b){
+		killOf();
+	}
 }
 
 int Scenario::getNbActivite(){

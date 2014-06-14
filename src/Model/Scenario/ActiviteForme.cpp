@@ -17,7 +17,6 @@ void ActiviteForme::exec(){
 	Osc *osc = new Osc();
 	int numLabel = MapGestes::getGestByName(getParam());
 	osc->lancerOsc(numLabel, this);
-	
 }
 
 void ActiviteForme::closeAct(){
