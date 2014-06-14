@@ -77,8 +77,8 @@ void ActiviteObjet::exec(){
             if (name == getParam()){
                 alarm(1);
 		cout<<"GAGNE"<<endl;
-                setWellDone( true);
-            } else {
+            	wellDone = true;
+	    } else {
                 alarm(1);
             }
         }
