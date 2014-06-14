@@ -52,7 +52,7 @@ void Activite::setWellDone(bool b){
 }
 
 void Activite::init(){
-	setWellDone(false);
+	wellDone = false;
 }
 
 void Activite::exec(){
