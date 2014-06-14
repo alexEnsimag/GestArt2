@@ -407,8 +407,8 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 
 void testApp::performTrainingLabel()
 {
-    //string gestFileName ="../../../../../../../src/Model/Account/gestFile.txt";
-    string gestFileName = "src/Model/Account/gestFile.txt";
+    //string gestFileName ="../../../../../../../src/Model/Account/gestFile.txt"; // si testé à part
+    string gestFileName = "gestFile.txt";
     ifstream fichier(gestFileName.c_str(), ios::in);
     if(!fichier)
     {
