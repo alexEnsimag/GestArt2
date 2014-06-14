@@ -1,11 +1,13 @@
 
 #include "ActiviteTestMouv.hpp"
+#include "ActiviteInfo.hpp"
 
 using namespace std;
 
 
 void ActiviteTestMouv::testerMouvement(string texteField){
-	setWellDone(false);
+	duration = DUR_TEST_MOUV;
+	wellDone = false;
 	int key = MapGestes::getGestByName(texteField);
 	if(key == -1) {
 		cout << "Geste inexistant" << endl;

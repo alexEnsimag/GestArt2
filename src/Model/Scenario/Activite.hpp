@@ -31,8 +31,11 @@ class Activite {
 		virtual void exec();
 		virtual void closeAct();
 		void afficherMessage(std::string s);
-	private:
+		int getDuration();
+	protected:
 		bool wellDone;
+		int duration; // duree de l'activite avant qu'elle soit considérée comme ratée, durée en ms
+	private:
 		int nbEssai;
 		std::string name;
 		std::string param;

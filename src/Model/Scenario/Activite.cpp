@@ -100,3 +100,7 @@ void Activite::chargerDuree(){
 	fichier.close();
 
 }
+
+int Activite::getDuration() {
+	return duration;
+}

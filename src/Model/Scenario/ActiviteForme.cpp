@@ -1,12 +1,13 @@
 #include "ActiviteForme.hpp"
 #include "../../Controler/Kinect/Osc.hpp"
-
+#include "ActiviteInfo.hpp"
 
 
 using namespace std;
 
 void ActiviteForme::init(){
-	setWellDone(false);
+	wellDone = false;
+	duration = DUR_RECO_GESTES;
 	string uri = "Video/" + getParam() + ".avi";
 	Video::lancerVideo(uri, getDuree());
 	
