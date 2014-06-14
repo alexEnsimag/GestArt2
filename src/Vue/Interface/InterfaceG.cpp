@@ -5,6 +5,9 @@
 * Création d'un jeu, d'un menu et d'une classe admin.
 */
 InterfaceG::InterfaceG(int argc, char** argv) : main(argc, argv) {
+	
+	// initialisation de glut pour la vue opengl
+	glutInit(&argc, argv);
 	jeu = new Game;
 	menu = new Menu(argc, argv, this, jeu);
 	admin = new PageAdmin(this, jeu);

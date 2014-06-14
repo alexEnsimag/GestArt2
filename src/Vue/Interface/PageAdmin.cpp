@@ -184,6 +184,7 @@ void PageAdmin::loadMouv(){
 	int resultat = openf.run();
 	if(resultat == Gtk::RESPONSE_OK) {
 		std::string nomFichier = openf.get_filename();
+		// lance le chargement du squelete et son animation
 		viewerParser->launch(nomFichier);
 	}
 }

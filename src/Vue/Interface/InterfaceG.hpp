@@ -7,6 +7,7 @@
 #define DEF_INTERFACE
 
 #include <gtkmm/main.h>
+#include <GL/glew.h>
 
 class InterfaceG;
 
