@@ -1,4 +1,5 @@
 #include "ActiviteObjet.hpp"
+#include "ActiviteInfo.hpp"
 
 using namespace std;
 // pid du processus fils 
@@ -12,7 +13,8 @@ void kill_child(int sig)
 }
 
 void ActiviteObjet::init(){  
-	setWellDone(false);
+	wellDone = false;
+	duration = DUR_RECO_OBJ;
 	string uri = "Video/" + getParam() + ".avi";
 	Video::lancerVideo(uri, getDuree());
 	string uri2 = "Video/Montre"+getParam()+".avi";
@@ -75,8 +77,8 @@ void ActiviteObjet::exec(){
             if (name == getParam()){
                 alarm(1);
 		cout<<"GAGNE"<<endl;
-                setWellDone( true);
-            } else {
+            	wellDone = true;
+	    } else {
                 alarm(1);
             }
         }

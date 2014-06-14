@@ -14,16 +14,21 @@
 
 
 #define PORT 12346
+#define ACT_DURATION 1000
 
 class ExamplePacketListener : public osc::OscPacketListener {
 public:
-	int temps = 0;
+	int temps;
+	int duration;
+
 	void setS(UdpListeningReceiveSocket *s) {
+		temps = 0;
 		_s = s;
 	}
 
 	void setActivite(Activite *a) {
 		_activite = a;
+		duration = a->getDuration();
 	}
 	
 	void setClassLabel(int num){
@@ -56,17 +61,11 @@ protected:
 				sleep(2);
 				
 				_s->Break();
-				//_activite->killOf();				//socketUdp.Break();
-			}else{
+			}else if(duration != 0) {
 				temps++;
-				if(temps%1000==0){
-					//_activite->decrementEssai();
-					//if(_activite->getEssais()==0){
+				if(temps == duration){
+				    		temps = 0;
 						_s->Break();
-						//_activite->killOf();
-					//}else{
-						//_activite->afficherMessage("Essaie encore!");
-				//	}
 				}
 
 			}
@@ -75,8 +74,7 @@ protected:
         }catch( osc::Exception& e ){
             // any parsing errors such as unexpected argument types, or 
             // missing arguments get thrown as exceptions.
-           // std::cout << "error while parsing message: "
-             //   << m.AddressPattern() << ": " << e.what() << "\n";
+            std::cout << m.AddressPattern() << ": " << e.what() << "\n";
         }
     }
 };

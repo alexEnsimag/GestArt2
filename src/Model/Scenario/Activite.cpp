@@ -52,7 +52,7 @@ void Activite::setWellDone(bool b){
 }
 
 void Activite::init(){
-	setWellDone(false);
+	wellDone = false;
 }
 
 void Activite::exec(){
@@ -99,4 +99,8 @@ void Activite::chargerDuree(){
 		}	
 	fichier.close();
 
+}
+
+int Activite::getDuration() {
+	return duration;
 }

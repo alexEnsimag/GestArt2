@@ -1,3 +1,5 @@
+#define PRECISION_RECO 0.2
+
 /*
  GRT MIT License
  Copyright (c) <2012> <Nicholas Gillian, Media Lab, MIT>
@@ -109,7 +111,7 @@ void testApp::setup(){
     //Set the null rejection coefficient to 3, this controls the thresholds for the automatic null rejection
     //You can increase this value if you find that your real-time gestures are not being recognized
     //If you are getting too many false positives then you should decrease this value
-    dtw.setNullRejectionCoeff( 0.2 );
+    dtw.setNullRejectionCoeff( PRECISION_RECO );
 
     //Turn on the automatic data triming, this will remove any sections of none movement from the start and end of the training samples
     dtw.enableTrimTrainingData(true, 0.1, 90);
@@ -244,40 +246,6 @@ void testApp::draw(){
     textY += 30;
     text = "InfoText: " + infoText;
     ofDrawBitmapString(text, textX,textY);
-
-    //Draw the timeseries data
-    if( record ){
-        ofFill();
-        for(UINT i=0; i<timeseries.getNumRows(); i++){
-            double x = timeseries[i][0];
-            double y = timeseries[i][1];
-            double r = ofMap(i,0,timeseries.getNumRows(),0,255);
-            double g = 0;
-            double b = 255-r;
-
-            ofSetColor(r,g,b);
-            ofEllipse(x,y,5,5);
-        }
-    }
-
-    if( pipeline.getTrained() ){
-        //Draw the data in the DTW input buffer
-        DTW *dtw = pipeline.getClassifier< DTW >();
-
-        if( dtw != NULL ){
-            vector< VectorDouble > inputData = dtw->getInputDataBuffer();
-            for(UINT i=0; i<inputData.size(); i++){
-                double x = inputData[i][0];
-                double y = inputData[i][1];
-                double r = ofMap(i,0,inputData.size(),0,255);
-                double g = 0;
-                double b = 255-r;
-
-                ofSetColor(r,g,b);
-                ofEllipse(x,y,5,5);
-            }
-        }
-    }
 }
 
 //--------------------------------------------------------------

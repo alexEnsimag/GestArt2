@@ -24,7 +24,7 @@ void MapGestes::addGestesFile(){
              fichier >> number;
 		fichier >> name;
 		gests.insert ( std::pair<int,string>(number,name) );
-         }
+	}
      }
 }
 

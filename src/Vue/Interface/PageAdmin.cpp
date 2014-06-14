@@ -110,19 +110,24 @@ void PageAdmin::modifScenarioFunc(){
 * - lancement de open framework et processing
 * - enregistrement du geste et sa classLabel dans un fichier
 */
-void PageAdmin::launchEnregistrementSamples(){
-	Dialogue diag("Choix d'un nom", this, "Veuillez entrer le nom de votre mouvement");
-	int reponse = diag.run();
-	if(reponse == Gtk::RESPONSE_OK) { 
+bool PageAdmin::dialogueResponse() {
+	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
+	if(diag.run() == Gtk::RESPONSE_OK) { 
 		texteField = diag.get_texte();
-		// lancement of et processing
+		return true;
+	} else {
+		cout << "Erreur dans le nom du fichier" << endl;
+		return false;
+	}
+}
+
+void PageAdmin::launchEnregistrementSamples(){
+	if(dialogueResponse()) {
 		Of *of = new Of();
 		of->lancementOfRegister();
 		// enregistrement du geste
 		MapGestes::enregistrementGeste(texteField);
-	} else {
-		cout << "Erreur dans le nom du fichier1" << endl;	
-	}
+	} 
 }
 
 /*
@@ -137,11 +142,10 @@ void PageAdmin::launchEnregistrement(){
 	if(reponse == Gtk::RESPONSE_OK) { 
 		texteField = diag.get_texte();
 		diag.hide();
+	}
+	if(dialogueResponse()) {
 		Processing *proc = new Processing();
 		proc->lancementProcessingWithMove(texteField);
-	} else {
-		cout << "Erreur dans le nom du fichier2" << endl;	
-		diag.hide();
 	}
 }
 
@@ -152,16 +156,9 @@ void PageAdmin::launchEnregistrement(){
 * - lancement d'une fonction pour tester le mouvement
 */ 
 void PageAdmin::testerMouvement() {
-	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
-	diag.set_texte("choix");
-	int reponse = diag.run();
-	if(reponse == Gtk::RESPONSE_OK) { 
-		texteField = diag.get_texte();
-
+	if(dialogueResponse()) {
 		ActiviteTestMouv *actMouv = new ActiviteTestMouv();
 		actMouv->testerMouvement(texteField);
-	} else {
-		cout << "Erreur dans le nom du fichier3" << endl;	
 	}
 }
 

@@ -19,7 +19,7 @@ class ActiviteTestMouv : Activite{
 		virtual void init(){};
 		virtual void exec(){};
 		virtual void closeAct(){};
-		
+		void launch() { cout << "Activite Test, ne peut etre lancee !" << endl; };
 	private:
 };
 
