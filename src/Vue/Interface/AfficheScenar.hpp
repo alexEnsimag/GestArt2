@@ -1,3 +1,9 @@
+/*
+* Classe permettant l'affichage de l'interface de modification
+* des scénarios. C'est une interace fille de l'interface administrateur.
+*
+*/
+
 #ifndef DEF_AFFICHE_SCENAR
 #define DEF_AFFICHE_SCENAR
 
@@ -16,8 +22,6 @@
 class AfficheScenar;
 #include "InterfaceG.hpp"
 
-#include <vector>
-using namespace std;
 
 class AfficheScenar : public Gtk::Window {
 	public : 
@@ -32,12 +36,15 @@ class AfficheScenar : public Gtk::Window {
 		Gtk::Button *retour;
 		Gtk::Button *newScenar;
 
-		Game *jeu;
+		Game *game;
 		InterfaceG *it;
-	
+		// retour vers l'interface pere	
 		void retAdmin();
+		// modification d'un scenario
 		void modifScenar(int i);
+		// ajout d'un scenario
 		void addScenar();
+		// suppression d'un scenario
 		void delScenar(int i);
 };
 #endif

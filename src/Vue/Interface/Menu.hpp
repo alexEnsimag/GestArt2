@@ -1,3 +1,9 @@
+/*
+* Classe permettant l'affichage de la age d'accueil du jeu
+*
+*/
+
+
 #ifndef DEF_MENU
 #define DEF_MENU  
 
@@ -23,7 +29,6 @@
 #include <sys/wait.h>
 #include <unistd.h>
 #include <stdlib.h>
-#include <string>
 #include "../../Controler/Kinect/Of.hpp"
 
 class Menu;
@@ -33,7 +38,6 @@ class Menu : public Gtk::Window {
 	public : 
 		Menu(int argc, char** argv, InterfaceG* const it, Game *g);
 		~Menu();
-		void afficherMessage(string s);
 	private :
 		Gtk::HBox *boxH;
 		Gtk::HBox *boxScenar;
@@ -43,19 +47,22 @@ class Menu : public Gtk::Window {
 		Gtk::Button *login;
 		Gtk::Button *quitter;
 
+		// nom du scenario
 		Gtk::Label *scenarLabel;
+		// passer a scenario suivant
 		Gtk::Button *scenarG;
+		// passer a scenario prec
 		Gtk::Button *scenarD;
 		int selectedScenar;
 
 		Gtk::Image *imgMenu;
 		Gtk::Image *imgSponsor;
-		ViewerJeux *viewerJeux;
-		ViewerTps *viewerTps;
+		// pour la vue opengl
+		//ViewerJeux *viewerJeux;
+		//ViewerTps *viewerTps;
 		InterfaceG *it;
 		Game *jeu;
 	
-		void launchTps();
 		void launch();
 		void identification();
 		void nextScen();

@@ -1,6 +1,12 @@
 #include "ModifScenar.hpp"
 
 
+/*
+* Constructeur: Cree la fenetre de modifications/ajout de scenarios
+* Creer un nouveau scenario consiste a choisir un nom puis
+* a ajouter des activites a ce scenario.
+* Modifier un scenario consiste juste a ajouter des activites a celui-ci
+*/
 ModifScenar::ModifScenar(InterfaceG* const itG, Scenario *s){
 
 	set_title("Gest-Art Application : Modification de scénario");
@@ -32,18 +38,22 @@ ModifScenar::ModifScenar(InterfaceG* const itG, Scenario *s){
 	valider = new Gtk::Button("Valider");
 	valider->signal_clicked().connect(sigc::mem_fun(*this, &ModifScenar::validation));
 
+	// choix d'une activite deja existante 
 	newActivite = new Gtk::Label("Add an Activity:");
 
+	// affichage des activites existantes dans une combo box
 	listeActivite = new Gtk::ComboBoxText;
 	chargerActivites();
 	listeActivite->signal_changed().connect(sigc::mem_fun(*this, &ModifScenar::updateParam));
 
 
+	// ajout de l'activite
 	validerActivite = new Gtk::Button("Ajouter l'activité");
 	validerActivite->signal_clicked().connect(sigc::mem_fun(*this, &ModifScenar::addActivite));
 
 	listeParam = new Gtk::ComboBoxText;
 
+	// choix du nombre d'essai pour l'activite choisit
 	nbEssais = new Gtk::Entry();
 	nbEssais->set_text("nb essais");
 
@@ -92,11 +102,12 @@ ModifScenar::~ModifScenar(){
 	delete listeParam;
 }
 
-
+// Retour aa la page de gestion des scenarios
 void ModifScenar::retAfficheScenar(){
 	it->retFromModifScenar();
 }
 
+// validation des modif
 void ModifScenar::validation(){
 	scenar->setName(nomScenar->get_text());
 	scenar->enregistrer();
@@ -104,11 +115,15 @@ void ModifScenar::validation(){
 	it->retFromModifScenar();
 }
 
+// suppression d'une activite a un scenario
 void ModifScenar::delActivite(int i){
 	scenar->removeActivite(i);
 	reloadPage();
 }
 
+/*
+*  Ajout de l'activite au scenario choisit
+*/
 void ModifScenar::addActivite(){
 	string s = listeActivite->get_active_text();
 
@@ -143,6 +158,9 @@ void ModifScenar::reloadPage(){
 	it->pageModifScenar(scenar);
 }
 
+/*
+* Ajoute à la liste d'activite (combo box) les activites existantes
+*/
 void ModifScenar::chargerActivites(){
 	DIR* rep = opendir("Scenario/Activite/");
 	if(rep == NULL){
@@ -165,6 +183,10 @@ void ModifScenar::chargerActivites(){
 	closedir(rep);
 }
 
+/**
+* Ajoute à la liste de parametre (combo box) les parametres correspondant
+* a l'activite choisie 
+*/
 void ModifScenar::updateParam(){
 	string nomFichier = "Scenario/Activite/" + listeActivite->get_active_text() + ".txt";
 

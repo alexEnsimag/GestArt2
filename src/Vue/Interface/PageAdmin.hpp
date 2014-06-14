@@ -1,3 +1,9 @@
+
+/*
+* classe permettant l'affichage de la fenetre administrateur
+*/
+
+
 #ifndef DEF_ADMIN
 #define DEF_ADMIN 
 
@@ -30,12 +36,7 @@ class PageAdmin : public Gtk::Window {
 		Gtk::HBox *boxH2;
 		Gtk::VBox *boxV;
 		Gtk::Button *quitter;
-		Gtk::Button *modifGeste;
-		Gtk::Button *modifObjet;
-		Gtk::Button *modifAvatar;
 		Gtk::Button *modifScenario;
-		Gtk::Button *modifTheme;
-		Gtk::Button *getData;
 
 		Gtk::Button *mouv;
 		Gtk::Button *newMouvSamples;
@@ -51,12 +52,7 @@ class PageAdmin : public Gtk::Window {
 	
 
 		void retMenu();
-		void modifGesteFunc();
-		void modifObjetFunc();
-		void modifAvatarFunc();
 		void modifScenarioFunc();
-		void modifThemeFunc();
-		void getDataFunc();
 		void loadMouv();
 		void launchEnregistrementSamples();
 		void launchEnregistrement();

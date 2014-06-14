@@ -1,5 +1,9 @@
 #include "AfficheScenar.hpp"
 
+/*
+* Constructeur: Cree la fenetre de gestion des scenarios
+*
+*/
 AfficheScenar::AfficheScenar(InterfaceG* const itG, Game *g){
 
 		set_title("Gest-Art Application : Scénarios");
@@ -12,7 +16,7 @@ AfficheScenar::AfficheScenar(InterfaceG* const itG, Game *g){
 	 	set_position(Gtk::WIN_POS_CENTER);
 		//Link vers le parent
 		it = itG;
-		jeu = g;
+		game = g;
 
 		//Création des widget
 		boxH = new Gtk::HBox(false, 10);
@@ -22,8 +26,10 @@ AfficheScenar::AfficheScenar(InterfaceG* const itG, Game *g){
 		boxVD = new Gtk::VBox(false ,10);
 		boxVED = new Gtk::VBox(false ,10);
 
+		// bouton retour vers page admin
 		retour = new Gtk::Button("Retour");
 		retour->signal_clicked().connect(sigc::mem_fun(*this, &AfficheScenar::retAdmin));
+		// bonton d'ajout d'un nouveau scenario
 		newScenar = new Gtk::Button("New Scénario");
 		newScenar->signal_clicked().connect(sigc::mem_fun(*this, &AfficheScenar::addScenar));
 		
@@ -37,11 +43,14 @@ AfficheScenar::AfficheScenar(InterfaceG* const itG, Game *g){
 		boxVG->pack_start(*retour,Gtk::PACK_SHRINK);
 		boxVG->pack_start(*newScenar,Gtk::PACK_SHRINK);
 
-		for (int i=0; i<jeu->getNbScenar(); i++){
-			Gtk::Label* lab = new Gtk::Label(jeu->getScenar(i)->getName());
+		// Parcourt des scenarios existants
+		for (int i=0; i<game->getNbScenar(); i++){
+			Gtk::Label* lab = new Gtk::Label(game->getScenar(i)->getName());
 
+			// bouton pour modifier chaque scenar existant
 			Gtk::Button* mod = new Gtk::Button("modifier");
 			mod->signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(*this, &AfficheScenar::modifScenar), i));
+			// bouton pour la suppression
 			Gtk::Button* del = new Gtk::Button("-");
 			del->signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(*this, &AfficheScenar::delScenar), i));
 			
@@ -63,20 +72,24 @@ AfficheScenar::~AfficheScenar(){
 	delete newScenar;
 }
 
-
+// Retour a la page admin
 void AfficheScenar::retAdmin(){
 	it->retAdminFromScenar();
 }
 
+// Redirection vers la page d'ajout d'un scenario
 void AfficheScenar::addScenar(){
 	it->pageModifScenar();
 }
 
+// Redirection vers la page de modification d'un scenario
 void AfficheScenar::modifScenar(int i){
-	it->pageModifScenar(jeu->getScenar(i));
+	it->pageModifScenar(game->getScenar(i));
 }
 
+// Supprime un scenario de la liste des scenarios du jeu
+// Maj et retour vers la page de gestion des scenarios
 void AfficheScenar::delScenar(int i){
-	jeu->delScenar(i);
+	game->delScenar(i);
 	it->pageAfficheScenar();
 }

@@ -1,3 +1,9 @@
+/*
+* Classe permettant l'affichage de la fenêtre d'ajout d'un nouveau
+* scénario. Utilisation de la même fenetre pour la modification d'un
+* d'un scenario existant
+*/
+
 #ifndef DEF_MODIF_SCENAR
 #define DEF_MODIF_SCENAR
 
@@ -19,9 +25,6 @@
 class ModifScenar;
 #include "InterfaceG.hpp"
 
-#include <vector>
-using namespace std;
-
 class ModifScenar : public Gtk::Window {
 	public : 
 		ModifScenar(InterfaceG* const it, Scenario *s);
@@ -38,8 +41,11 @@ class ModifScenar : public Gtk::Window {
 		Gtk::Entry *nomScenar;
 		
 		Gtk::Label *newActivite;
+		// nb d'essai de l'activite
 		Gtk::Entry *nbEssais;
+		// liste des activites existantes
 		Gtk::ComboBoxText *listeActivite;
+		// liste des parametres de l'activite choisit
 		Gtk::ComboBoxText *listeParam;
 
 		InterfaceG *it;

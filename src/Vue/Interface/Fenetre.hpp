@@ -1,9 +1,11 @@
+/*
+* Classe permettant l'affichage d'un message dans une fenetre 
+*/
 
 #ifndef DEF_FENETRE
 #define DEF_FENETRE
 
 #include <string>
-//#include <gtkmm/window.h>
 #include <gtkmm.h>
 
 class Fenetre  {

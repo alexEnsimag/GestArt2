@@ -1,9 +1,9 @@
 #include "Menu.hpp"
-//#include "../../Controler/Kinect/Processing.hpp"
 
 
-
-
+/*
+* Constructeur: Cree la fenetre d'accueil du jeu
+*/
 Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 
 		set_title("Gest-Art Application");
@@ -23,8 +23,8 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 		jeu = g;
 		
 		//Creation de la vue openGL
-		viewerJeux = new ViewerJeux(argc, argv);
-		viewerTps = new ViewerTps();
+		//viewerJeux = new ViewerJeux(argc, argv);
+		//viewerTps = new ViewerTps();
 
 		//Création des widget
 		boxH = new Gtk::HBox(false, 10);
@@ -33,6 +33,7 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 		boxVG = new Gtk::VBox(false ,10);
 		boxVD = new Gtk::VBox(false ,10);
 
+		// Affichage des scenarios pouvant etre joues
 		scenarLabel = new Gtk::Label(jeu->getScenar(0)->getName());
 		scenarG = new Gtk::Button ("<");
 		scenarG->signal_clicked().connect(sigc::mem_fun(*this, &Menu::prevScen));
@@ -40,8 +41,10 @@ Menu::Menu(int argc, char** argv, InterfaceG* const itG, Game* g){
 		scenarD->signal_clicked().connect(sigc::mem_fun(*this, &Menu::nextScen));
 
 		
+		// bouton pour jouer le scenario
 		jouer = new Gtk::Button("JOUER");
 		jouer->signal_clicked().connect(sigc::mem_fun(*this, &Menu::launch));
+		// s'identifier cad aller vers pageAdmin
 		login = new Gtk::Button("S'identifier");
 		login->signal_clicked().connect(sigc::mem_fun(*this, &Menu::identification));
 		
@@ -84,16 +87,15 @@ Menu::~Menu(){
 	delete boxH;
 }
 
+// lancement du jeu avec le scenario choisit 
 void Menu::launch(){
 	jeu->launch(selectedScenar);
-	//viewerJeux->launch();
 }
 
-void Menu::launchTps(){
-	viewerTps->launch();
-}
-
-
+/*
+* Affichage d'une fenetre de dialogue pour rentrer le 
+* mdp admin
+*/
 void Menu::identification(){
 	string texteF;
 	Dialogue diag("Acces interface Administrateur", this, "Veuillez entrer le code admministrateur");
@@ -113,20 +115,19 @@ void Menu::identification(){
     	}
 }
 
+// Affichage du scenario suivant
 void Menu::nextScen(){
 	selectedScenar +=1;
 	selectedScenar %= jeu->getNbScenar(); 
 	scenarLabel->set_text(jeu->getScenar(selectedScenar)->getName());
 }
+
+/*
+* Affichage du scenario precedent
+*/
 void Menu::prevScen(){
 	selectedScenar += jeu->getNbScenar() - 1 ;
 	selectedScenar %= jeu->getNbScenar(); 
 	scenarLabel->set_text(jeu->getScenar(selectedScenar)->getName());
-}
-
-void Menu::afficherMessage(string s){
-	Gtk::MessageDialog diagE(*this, s, false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_CLOSE);
-	int reponse = diagE.run();
-
 }
 
