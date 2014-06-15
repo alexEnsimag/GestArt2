@@ -40,6 +40,6 @@ class InterfaceG {
 		// Interface de modifcation des scenarios
 		ModifScenar *modifScenar;
 		// Interface de jeu
-		Game *jeu;
+		Game *game;
 };
 #endif

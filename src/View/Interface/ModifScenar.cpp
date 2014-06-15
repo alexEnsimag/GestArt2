@@ -43,13 +43,13 @@ ModifScenar::ModifScenar(InterfaceG* const itG, Scenario *s){
 
 	// affichage des activites existantes dans une combo box
 	listeActivite = new Gtk::ComboBoxText;
-	chargerActivites();
+	loadActivities();
 	listeActivite->signal_changed().connect(sigc::mem_fun(*this, &ModifScenar::updateParam));
 
 
 	// ajout de l'activite
 	validerActivite = new Gtk::Button("Ajouter l'activité");
-	validerActivite->signal_clicked().connect(sigc::mem_fun(*this, &ModifScenar::addActivite));
+	validerActivite->signal_clicked().connect(sigc::mem_fun(*this, &ModifScenar::addActivity));
 
 	listeParam = new Gtk::ComboBoxText;
 
@@ -79,7 +79,7 @@ ModifScenar::ModifScenar(InterfaceG* const itG, Scenario *s){
 		Gtk::Label* lab = new Gtk::Label(scenar->getActivity(i)->toString());
 
 		Gtk::Button* mod = new Gtk::Button("-");
-		mod->signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(*this, &ModifScenar::delActivite), i));
+		mod->signal_clicked().connect(sigc::bind<int>(sigc::mem_fun(*this, &ModifScenar::delActivity), i));
 
 		boxVM->pack_start(*lab,Gtk::PACK_SHRINK);
 		boxVD->pack_start(*mod,Gtk::PACK_SHRINK);
@@ -116,7 +116,7 @@ void ModifScenar::validation(){
 }
 
 // suppression d'une activite a un scenario
-void ModifScenar::delActivite(int i){
+void ModifScenar::delActivity(int i){
 	scenar->removeActivity(i);
 	reloadPage();
 }
@@ -124,15 +124,15 @@ void ModifScenar::delActivite(int i){
 /*
 *  Ajout de l'activite au scenario choisit
 */
-void ModifScenar::addActivite(){
+void ModifScenar::addActivity(){
 	string s = listeActivite->get_active_text();
 
 	if(s == "ActiviteForme"){
 		ShapeActivity *a = new ShapeActivity(listeParam->get_active_text(), atoi(trialsNumber->get_text().c_str()));
-		scenar->addActivite(a);
+		scenar->addActivity(a);
 	}else if(s== "ActiviteObjet"){
 		ObjectActivity *a = new ObjectActivity(listeParam->get_active_text(), atoi(trialsNumber->get_text().c_str()));
-		scenar->addActivite(a);
+		scenar->addActivity(a);
 	}else{
 		cout << "Ajout d'une activité inconnue" << endl;
 	}
@@ -161,7 +161,7 @@ void ModifScenar::reloadPage(){
 /*
 * Ajoute à la liste d'activite (combo box) les activites existantes
 */
-void ModifScenar::chargerActivites(){
+void ModifScenar::loadActivities(){
 	DIR* rep = opendir("Scenario/Activite/");
 	if(rep == NULL){
 		cout << "ERREUR DOSSIER SCENARIO NOT FOUND" << endl;

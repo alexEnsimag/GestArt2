@@ -29,7 +29,7 @@ class Scenario{
 		void load(std::string fileName);
 
 		//Permet d'ajouter une activite au sénario
-		void addActivite(Activity *a);
+		void addActivity(Activity *a);
 
 		//Permet de récuperer le nom de sénario
 		std::string getName();

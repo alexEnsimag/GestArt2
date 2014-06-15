@@ -54,9 +54,9 @@ class ModifScenar : public Gtk::Window {
 		void updateParam();
 		void retDisplayScenar();
 		void validation();
-		void delActivite(int i);
-		void addActivite();
-		void chargerActivites();
+		void delActivity(int i);
+		void addActivity();
+		void loadActivities();
 		void reloadPage();
 };
 #endif

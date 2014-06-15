@@ -8,9 +8,9 @@ InterfaceG::InterfaceG(int argc, char** argv) : main(argc, argv) {
 	
 	// initialisation de glut pour la vue opengl
 	glutInit(&argc, argv);
-	jeu = new Game;
-	menu = new Menu(argc, argv, this, jeu);
-	admin = new PageAdmin(this, jeu);
+	game = new Game;
+	menu = new Menu(argc, argv, this, game);
+	admin = new PageAdmin(this, game);
         displayScenar = NULL;
 	modifScenar = NULL;
 }
@@ -46,7 +46,7 @@ void InterfaceG::pageDisplayScenar(){
 	admin->hide();
 	maj();
 	// affiche la fenetre de gestion d'un scenario 
-	displayScenar = new DisplayScenar(this, jeu);
+	displayScenar = new DisplayScenar(this, game);
 	displayScenar->show_all();
 	Gtk::Main::run(*displayScenar);
 }
@@ -88,7 +88,7 @@ void InterfaceG::pageModifScenar(Scenario *s){
 
 void InterfaceG::retFromModifScenar(){
 	maj();
-	displayScenar = new DisplayScenar(this, jeu);
+	displayScenar = new DisplayScenar(this, game);
 	modifScenar->hide();
 	displayScenar->show_all();
 	Gtk::Main::run(*displayScenar);
@@ -98,7 +98,7 @@ void InterfaceG::retFromModifScenar(){
 * mise a jour des modifications pour l'affichage
 */
 void InterfaceG::maj(){
-	jeu->updateScenar();
+	game->updateScenar();
 }
 
 InterfaceG::~InterfaceG(){

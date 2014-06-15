@@ -101,15 +101,15 @@ void Menu::identification(){
 	Dialogue diag("Acces interface Administrateur", this, "Veuillez entrer le code admministrateur");
 	diag.setText("admin");
 	diag.textZone.set_visibility(false);
-	int reponse = diag.run();
-	if(reponse == Gtk::RESPONSE_OK) { 
+	int response = diag.run();
+	if(response == Gtk::RESPONSE_OK) { 
         	texteF = diag.getText();
 	if(texteF == "admin"){
 		diag.hide();
 		it->pageAdmin();
 	}else{
 		Gtk::MessageDialog diagE(*this, "Erreur de code", false, Gtk::MESSAGE_ERROR, Gtk::BUTTONS_CLOSE);
-		int reponse = diagE.run();
+		int response = diagE.run();
 		identification();
 	}
     	}

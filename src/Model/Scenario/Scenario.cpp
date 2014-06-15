@@ -2,7 +2,7 @@
 #include "Scenario.hpp"
 using namespace std;
 
-void Scenario::addActivite(Activity *a){
+void Scenario::addActivity(Activity *a){
 	activities.push_back(a);
 }
 
@@ -39,9 +39,9 @@ void Scenario::load(string fileName){
 	while(!file.eof()){
 		file >> mot >> param >> trialsNb;
 		if (mot == "ActiviteObjet"){
-			addActivite(new ObjectActivity(param, trialsNb));
+			addActivity(new ObjectActivity(param, trialsNb));
 		}else if (mot == "ActiviteForme"){
-			addActivite(new ShapeActivity(param, trialsNb));
+			addActivity(new ShapeActivity(param, trialsNb));
 		}else{
 			cout << "Activitée non reconnue" << endl;
 		}
