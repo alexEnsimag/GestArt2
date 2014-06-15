@@ -4,6 +4,9 @@
 Skeleton *squel;
 Parser *parser;
 
+/*
+* Charge les differentes mesh blender
+*/
 bool ViewerParser::InitMesh(){
 	aBrasD = new Mesh();
 	aBrasG = new Mesh();
@@ -43,6 +46,10 @@ bool ViewerParser::InitMesh(){
 	return true;
 }
 
+/*
+* Constructeur : Cree la fenetre et un nouveau parser afin
+* d'animer notre squelette
+*/
 ViewerParser::ViewerParser(){
 
 	glutInitDisplayMode(GLUT_SINGLE | GLUT_RGB); 
@@ -62,6 +69,10 @@ static void sleep2(unsigned int ms){
 	while(goal>clock());
 }
 
+/*
+* Initialise les couleurs et dessine le squelette. Cette fonction est 
+* appele en continue
+*/
 static void RenderSceneCB()
 {
 	sleep2(100000);
@@ -87,6 +98,9 @@ static void InitializeGlutCallbacks()
 	glutDisplayFunc(RenderSceneCB);
 }
 
+/*
+* Affiche la fenetre et lance la boucle qui rend la scene. 
+*/ 
 void ViewerParser::launch(string fileName){
 	glutCreateWindow("Visualisation de mouvement");
 	// Must be done after glut is initialized!

@@ -162,7 +162,7 @@ void ModifScenar::reloadPage(){
 * Ajoute à la liste d'activite (combo box) les activites existantes
 */
 void ModifScenar::loadActivities(){
-	DIR* rep = opendir("Scenario/Activite/");
+	DIR* rep = opendir("Scenario/Activity/");
 	if(rep == NULL){
 		cout << "ERREUR DOSSIER SCENARIO NOT FOUND" << endl;
 		return;
@@ -188,7 +188,7 @@ void ModifScenar::loadActivities(){
 * a l'activite choisie 
 */
 void ModifScenar::updateParam(){
-	string fileName = "Scenario/Activite/" + listeActivite->get_active_text() + ".txt";
+	string fileName = "Scenario/Activity/" + listeActivite->get_active_text() + ".txt";
 
 	ifstream file(fileName.c_str(), ios::in);
 	if(!file){

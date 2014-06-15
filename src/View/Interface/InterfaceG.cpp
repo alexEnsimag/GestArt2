@@ -8,8 +8,11 @@ InterfaceG::InterfaceG(int argc, char** argv) : main(argc, argv) {
 	
 	// initialisation de glut pour la vue opengl
 	glutInit(&argc, argv);
+	// permet de lancer le jeu
 	game = new Game;
+	// fenetre d'accueil du jeu
 	menu = new Menu(argc, argv, this, game);
+	// fenetre administrateur
 	admin = new PageAdmin(this, game);
         displayScenar = NULL;
 	modifScenar = NULL;

@@ -24,7 +24,7 @@ void ShapeActivity::closeAct(){
 	if(getWellDone() == true){
 		Video::launchVideo("Video/Bravo.avi", 3000);
 	}else{
-		Video::launchVideo("Video/Presque.avi", 11000);
+		Video::launchVideo("Video/Presque.avi", 5000);
 	}
 }
 
