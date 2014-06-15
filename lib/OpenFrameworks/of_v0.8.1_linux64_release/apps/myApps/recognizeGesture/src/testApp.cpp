@@ -1,4 +1,7 @@
-#define PRECISION_RECO 0.2
+// PROGRAMME FORTEMENT INSPIRE DES TUTORIELS DE NICK GILLIAN
+// VOIR LE WIKI POUR PLUS D'INFORMATIONS
+
+#define PRECISION_RECO 0.2 // précision du geste, doit être positive
 
 /*
  GRT MIT License
@@ -21,19 +24,7 @@
  */
 
 /*
- DTW Example
-
- This example shows you how to:
- - setup a gesture recognition pipeline
- - record your own dataset and save it to a file
- - load the dataset back from a file
- - train a DTW classification algorithm using the training dataset
- - use the trained DTW algorithm to predict the class of real-time data
-
- This example uses the 2-dimensional [x y] coordinates from your mouse as input, but you can easily change this to whatever sensor input
- you have access to.
-
- To compile this example:
+To compile this example:
  - use the Openframeworks project builder to create a new project
  - when you have created the new project, override the default testApp.h, testApp.cpp, and main.cpp files with the files from this example
  - open the project in your favorite IDE (XCode, Visual Studio, Code Blocks, etc.) and add the main GRT source folder to the project. You
@@ -92,15 +83,16 @@ void testApp::setup(){
     //Open the connection with Synapse
     synapseStreamer.openSynapseConnection();
 
-    //Set which joints we want to track
+    //Set which joints we want to track : we track only the hand joints
     synapseStreamer.trackAllJoints(false);
     synapseStreamer.trackLeftHand(true);
     synapseStreamer.trackRightHand(true);
     synapseStreamer.computeHandDistFeature(true);
 
-    //The input to the training data will be the [x y] from the mouse, so we set the number of dimensions to 2
+    //The input to the training data will be the [x y z] of the two hands
+    //so we set the number of dimensions to 6
     trainingData.setNumDimensions( 6 );
-    trainingClassLabel = 1;
+    trainingClassLabel = 1; // on ne s'occupe pas du trainingClassLabel pour la reconnaissance
 
     //Initialize the DTW classifier
     DTW dtw;
@@ -122,7 +114,7 @@ void testApp::setup(){
     //Add the classifier to the pipeline (after we do this, we don't need the DTW classifier anymore)
     pipeline.setClassifier( dtw );
 
-
+    //Load the data from TrainingData.txt, and train the pipeline
     if( trainingData.loadDatasetFromFile("TrainingData.txt") )
     {
         infoText = "Training data saved to file";
@@ -147,6 +139,8 @@ void testApp::update(){
         leftHand = synapseStreamer.getLeftHandJointBody();
         rightHand = synapseStreamer.getRightHandJointBody();
 
+        //Creation of the vector from the coordinates of the two hands
+        //used to predict the movement
         vector< double > inputVector(6);
         inputVector[0] = leftHand[0];
         inputVector[1] = leftHand[1];
@@ -154,11 +148,6 @@ void testApp::update(){
         inputVector[3] = rightHand[0];
         inputVector[4] = rightHand[1];
         inputVector[5] = rightHand[2];
-
-        // If recording, save hand positions
-        /*if(record) {
-            timeseries.push_back( inputVector );
-        }*/
 
         // If data trained, predict the movement
         if( pipeline.getTrained() ){
@@ -180,7 +169,7 @@ void testApp::draw(){
 
     //Draw the training info
     ofSetColor(255, 255, 255);
-    text = "------------------- TrainingInfo -------------------";
+    text = "---- TrainingInfo ----";
     ofDrawBitmapString(text, textX,textY);
 
     if( record ) ofSetColor(255, 0, 0);
@@ -198,30 +187,9 @@ void testApp::draw(){
     text = "NumTrainingSamples: " + ofToString(trainingData.getNumSamples());
     ofDrawBitmapString(text, textX,textY);
 
-	// Draw instructions
-	/*text = "------- Instructions -------";
-	textY += 30;
-	ofDrawBitmapString(text, textX, textY);
-
-	textY += 15;
-	text = "1) Prenez la position de calibrage jusqu'a ce que votre squelette soit detecte";
-	ofDrawBitmapString(text, textX, textY);
-
-	textY += 15;
-	text = "2) Appuyez sur la touche l pour charger le fichier de donnees";
-	ofDrawBitmapString(text, textX, textY);
-
-	textY += 15;
-	text = "3) Appuyez sur la touche t pour créer le modele de reconnaissance de gestes";
-	ofDrawBitmapString(text, textX, textY);
-
-	textY += 15;
-	text = "4) Effectuez les gestes. Les gestes reconnus sont affiches ci-dessous, a cote du label PredictedClassLabel";
-	ofDrawBitmapString(text, textX, textY);*/
-
     //Draw the prediction info
     textY += 30;
-    text = "------------------- Prediction Info -------------------";
+    text = "---- Prediction Info ----";
     ofDrawBitmapString(text, textX,textY);
 
     textY += 15;
