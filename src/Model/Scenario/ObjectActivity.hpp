@@ -1,3 +1,6 @@
+/*
+*
+*/
 
 #ifndef DEF_OBJECTACTIVITY
 #define DEF_OBJECTACTIVITY

@@ -63,7 +63,7 @@ class Activity {
 		std::string name;
 		// nom du parametre
 		std::string param;
-		// duree
+		// duree de la video
 		int duree;
 		void chargerDuree();
 		

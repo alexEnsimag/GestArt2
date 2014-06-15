@@ -92,6 +92,10 @@ void Activity::displayMessage(string s){
 
 }
 
+
+/*
+* Charge la duree de la video de l'activite a partir d'un fichier
+*/
 void Activity::chargerDuree(){
 	string nomFichier = "Scenario/Activity/" + getName() + ".txt";
 
