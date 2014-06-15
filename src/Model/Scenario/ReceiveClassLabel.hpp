@@ -9,8 +9,8 @@
 #include "../../osc/OscPacketListener.h"
 #include "../../osc/UdpSocket.h"
 
-#include "ActiviteForme.hpp"
-#include "../../Vue/Interface/PageAdmin.hpp"
+#include "ShapeActivity.hpp"
+#include "../../View/Interface/PageAdmin.hpp"
 
 
 #define PORT 12346
@@ -18,16 +18,15 @@
 
 class ExamplePacketListener : public osc::OscPacketListener {
 public:
-	int temps;
+	int time;
 	int duration;
-
 	void setS(UdpListeningReceiveSocket *s) {
-		temps = 0;
+		time = 0;
 		_s = s;
 	}
 
-	void setActivite(Activite *a) {
-		_activite = a;
+	void setActivite(Activity *a) {
+		_activity = a;
 		duration = a->getDuration();
 	}
 	
@@ -37,7 +36,7 @@ public:
 
 protected:
 	UdpListeningReceiveSocket * _s;
-	Activite * _activite;
+	Activity * _activity;
 	int _classLabel;
 
    
@@ -57,14 +56,14 @@ protected:
 			sprintf(s, "%d",_classLabel);
 			if(strcmp(classLabel.c_str(), s) == 0) {
 				std::cout << "ClassLabel : " << classLabel << "\n";
-				_activite->setWellDone(true);
+				_activity->setWellDone(true);
 				sleep(2);
 				
 				_s->Break();
 			}else if(duration != 0) {
-				temps++;
-				if(temps == duration){
-				    		temps = 0;
+				time++;
+				if(time == duration){
+				    		time = 0;
 						_s->Break();
 				}
 
