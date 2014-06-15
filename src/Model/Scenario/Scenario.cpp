@@ -2,53 +2,53 @@
 #include "Scenario.hpp"
 using namespace std;
 
-void Scenario::addActivite(Activite *a){
-	activites.push_back(a);
+void Scenario::addActivite(Activity *a){
+	activities.push_back(a);
 }
 
-void Scenario::enregistrer(){
-	string nomFichier = "Scenario/" + name + ".txt";
-	ofstream fichier(nomFichier.c_str(), ios::out | ios::trunc);
-	if(!fichier){
+void Scenario::record(){
+	string fileName = "Scenario/" + name + ".txt";
+	ofstream file(fileName.c_str(), ios::out | ios::trunc);
+	if(!file){
 		cout << "Erreur a la création du Fichier" << endl;
 		return;
 	}
-	fichier << name << endl;
-	for(int i=0; i<activites.size(); i++){
-		fichier << activites[i]->getName() << endl;
-		fichier << activites[i]->getParam() << endl;
-		fichier << activites[i]->getEssais() << endl;
+	file << name << endl;
+	for(int i=0; i<activities.size(); i++){
+		file << activities[i]->getName() << endl;
+		file << activities[i]->getParam() << endl;
+		file << activities[i]->getTrialsNumber() << endl;
 	}
-	fichier.close();
+	file.close();
 }
 
-void Scenario::charger(string nomFichier){
+void Scenario::load(string fileName){
 	//Ouverture du fichier
-	ifstream fichier(nomFichier.c_str(), ios::in);
-	if(!fichier){
+	ifstream file(fileName.c_str(), ios::in);
+	if(!file){
 		cout << "Erreur à l'ouverture du Fichier" << endl;
 		return;
 	}
 	string mot;
 	string param;
-	fichier >> mot;
+	file >> mot;
 	setName(mot);
-	int nbEssai;
+	int trialsNb;
 
 
-	while(!fichier.eof()){
-		fichier >> mot >> param >> nbEssai;
+	while(!file.eof()){
+		file >> mot >> param >> trialsNb;
 		if (mot == "ActiviteObjet"){
-			addActivite(new ActiviteObjet(param, nbEssai));
+			addActivite(new ObjectActivity(param, trialsNb));
 		}else if (mot == "ActiviteForme"){
-			addActivite(new ActiviteForme(param, nbEssai));
+			addActivite(new ShapeActivity(param, trialsNb));
 		}else{
 			cout << "Activitée non reconnue" << endl;
 		}
 	}
 	//On enleve le doublon de fin
-	activites.pop_back();
-	fichier.close();
+	activities.pop_back();
+	file.close();
 }
 
 void Scenario::setName(string s){
@@ -71,21 +71,21 @@ string Scenario::getName(){
 bool b = false;
 void Scenario::launch(){
 	// lancement video debut
-	Video::lancerVideo("Video/Intro.avi", 7000);
+	Video::launchVideo("Video/Intro.avi", 7000);
 	// lancement processing et of
 
-	for(int i=0; i<activites.size(); i++){
-		if(!b && activites[i]->getName()=="ActiviteForme"){
+	for(int i=0; i<activities.size(); i++){
+		if(!b && activities[i]->getName()=="ActiviteForme"){
 			b = true;
 			of = new Of();
-			of->lancementOfRecognize();
+			of->launchOfRecognize();
 		}
-		if(b && activites[i]->getName()=="ActiviteObjet"){
+		if(b && activities[i]->getName()=="ActiviteObjet"){
 			killOf();
 			b = false;
 		}	
-		cout<<activites[i]->getName()<<", "<<activites[i]->getParam()<<endl;
-		activites[i]->launch();
+		cout<<activities[i]->getName()<<", "<<activities[i]->getParam()<<endl;
+		activities[i]->launch();
 	//	sleep(2);
 	}
 	if(b){
@@ -93,16 +93,16 @@ void Scenario::launch(){
 	}
 }
 
-int Scenario::getNbActivite(){
-	return activites.size();
+int Scenario::getNbActivities(){
+	return activities.size();
 }
 
-Activite* Scenario::getActivite(int i){
-	return(activites[i]);
+Activity* Scenario::getActivity(int i){
+	return(activities[i]);
 }
 
-void Scenario::removeActivite(int i){
-	activites.erase(activites.begin()+i);
+void Scenario::removeActivity(int i){
+	activities.erase(activities.begin()+i);
 }
 
 void Scenario::killOf(){
