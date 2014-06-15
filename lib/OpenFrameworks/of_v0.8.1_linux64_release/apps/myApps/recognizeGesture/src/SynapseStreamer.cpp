@@ -9,28 +9,17 @@ SynapseStreamer::SynapseStreamer(){
     trackAllJoints(true);
 }
 
-SynapseStreamer::~SynapseStreamer(){
+SynapseStreamer::~SynapseStreamer()
+{
 
 }
 
-void SynapseStreamer::sendClassLabel(string classLabel) {
-	/*const unsigned int msgBufferSize = 1024;
-    char buffer[msgBufferSize];
-    osc::OutboundPacketStream p( buffer, msgBufferSize );
-
-
- p << osc::BeginBundleImmediate
-        << osc::BeginMessage( "classLabel" )
-            << classLabel << osc::EndMessage
-        << osc::EndBundle;
-
-	sender.Send(p.Data(), p.Size());*/
- ofxOscMessage myMessage;
-  myMessage.addStringArg(classLabel);
-  //myMessage.addIntArg(classLabel); // add an int to the osc message
+// Création et envoi du message contenant le classLabel
+void SynapseStreamer::sendClassLabel(string classLabel)
+{
+    ofxOscMessage myMessage;
+    myMessage.addStringArg(classLabel);
     sender.sendMessage(myMessage);
-  // send the message
- // oscP5.send(myMessage, myRemoteLocation);
 }
 
 void SynapseStreamer::openSynapseConnection(unsigned int receiverIncomingDataPort, unsigned int senderOutgoingDataPort,string ipAddress){

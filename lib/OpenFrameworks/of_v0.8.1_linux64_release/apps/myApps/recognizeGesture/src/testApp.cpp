@@ -199,6 +199,7 @@ void testApp::draw(){
     textY += 15;
     text = "PredictedClassLabel: " + ofToString(pipeline.getPredictedClassLabel());
     ofDrawBitmapString(text, textX,textY);
+    // Envoi d'un message sur OSC contenant le classLabel
 	synapseStreamer.sendClassLabel(ofToString(pipeline.getPredictedClassLabel()));
 
     textY += 15;

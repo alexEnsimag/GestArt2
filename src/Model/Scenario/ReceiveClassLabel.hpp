@@ -13,8 +13,18 @@
 #include "../../View/Interface/PageAdmin.hpp"
 
 
+/*
+Classe issue d'un example d'oscpack
+
+Récupère les messages envoyés par OpenFrameworks,
+messages correspondant aux gestes reconnus
+
+
+L'écoute des messages est stoppée dès que le geste attendu
+est reçu
+*/
+
 #define PORT 12346
-#define ACT_DURATION 1000
 
 class ExamplePacketListener : public osc::OscPacketListener {
 public:
@@ -36,12 +46,12 @@ public:
 
 protected:
 	UdpListeningReceiveSocket * _s;
-	Activity * _activity;
-	int _classLabel;
-
+	Activity * _activity; // activité attendant une reconnaissance de geste
+	int _classLabel; // numero du geste attendu
+	int time; // temps écoulé depuis le début de l'essai
+	int duration; // durée de l'essai avant qu'il soit considéré comme échoué
    
-
-
+    // Traitement des messages
     virtual void ProcessMessage( const osc::ReceivedMessage& m, 
 				const IpEndpointName& remoteEndpoint )
     {
@@ -50,16 +60,18 @@ protected:
         try{
             // osc::OsckPacketListener handles the bundle traversal.
 			osc::ReceivedMessage::const_iterator arg = m.ArgumentsBegin();
+			// Test de reconnaissance du geste attendu
+			// Récupération du paramètre du message
 			std::string classLabel = (arg++)->AsString();
-
+			// Conversion du _classLabel en string
 			char * s;
 			sprintf(s, "%d",_classLabel);
 			if(strcmp(classLabel.c_str(), s) == 0) {
 				std::cout << "ClassLabel : " << classLabel << "\n";
 				_activity->setWellDone(true);
-				sleep(2);
-				
-				_s->Break();
+				sleep(2); // attente pour laisser le temps au joueur de finir le geste
+				_s->Break(); // arrêt de l'écoute
+			// Test si le temps imparti est terminé
 			}else if(duration != 0) {
 				time++;
 				if(time == duration){
