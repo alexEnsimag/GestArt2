@@ -28,8 +28,6 @@ est reçu
 
 class ExamplePacketListener : public osc::OscPacketListener {
 public:
-	int time;
-	int duration;
 	void setS(UdpListeningReceiveSocket *s) {
 		time = 0;
 		_s = s;
