@@ -1,7 +1,13 @@
 #include "Processing.hpp"
-#include "../../View/Interface/Window.hpp"
 
+/*
+* Lancement de Processing, si le booleen donne en parmametre vaut 
+* true, ceci signifie que processing est lance pour la reconnaissance
+* le programme correspondant est lance avec processing. Sinon le 
+* programme normal est lance.
+*/
 pid_t Processing::launchProcessing(bool recognition){
+	// preparation de la commande
 	char *argProcessing[6];
 	string nameCommand = PROCESSING_PATH;
 	nameCommand = nameCommand + "./processing-java";
@@ -37,7 +43,13 @@ pid_t Processing::launchProcessing(bool recognition){
 }
 
 
+/*
+* Lance Processing puis bouge le fichier ou est enregistre points
+* du mouvement. Le fichier s'appelera text et se trouvera dans 
+* le dossier mouvement a la racine du projet.
+*/
 pid_t Processing::launchProcessingWithMove(string text){
+	// preparation de la commande
 	char *argProcessing[6];
 	string nameCommand = PROCESSING_PATH;
 	nameCommand = nameCommand + "./processing-java";
@@ -60,13 +72,12 @@ pid_t Processing::launchProcessingWithMove(string text){
 	if(pidProcess<0){
 		cerr << "Failed to fork" <<endl;
 	}else if(pidProcess==0){
-		//Fenetre *fen;
-		//fen->afficherMessage("Fin du mouvement");
 		if(execvp(argProcessing[0],argProcessing)){
 			cerr<< "failed execute" <<endl;
 		}
 		
 	}else{			
+		// deplacement du fichier
 		waitpid(pidProcess, NULL, 0);
 		string cmde = FILE_PROCESSING_PATH;
 		cmde = "mv " + cmde + "/positions.txt mouvements/"+text+".txt";

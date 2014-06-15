@@ -1,3 +1,7 @@
+/*
+* Classe permettant de lancr l'application Processing 
+*/
+
 #ifndef DEF_PROCESSING
 #define DEF_PROCESSING
 
@@ -7,6 +11,7 @@
 #include <fstream>
 #include <sys/wait.h>
 #include <unistd.h>
+#include "../../View/Interface/Window.hpp"
 
 
 #include <string>
@@ -21,7 +26,9 @@ using namespace std;
 
 class Processing{
 	public:
+		// lance processing
 		pid_t launchProcessing(bool recognition);
+		// lance processing puis bouge le fichier d'enregistrement du mvt
 		pid_t launchProcessingWithMove(string text);
 	private:
 };

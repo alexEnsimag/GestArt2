@@ -1,3 +1,8 @@
+/*
+* Classe permettant de gerer les scenarios de jeux. 
+* Un scenario contient une liste d'activite
+*/
+
 #ifndef DEF_SENARIO
 #define DEF_SENARIO
 
@@ -16,16 +21,12 @@
 
 class Scenario{
 	public:
-		/*
-		 *Cette fonction enregistre tout les paramètres 
-		 *du sénario dans un fichier. 
-		 */
+		 // Cette fonction enregistre tous les paramètres 
+		 // du sénario dans un fichier. 
 		void record();
-
-		/*
-		 *Cette fonction rempli le sénario avec des activites et 
-		 *un nom issus d'un fichier.
-		 */
+		
+		//Cette fonction rempli le sénario avec des activites et
+		// un nom issus d'un fichier.
 		void load(std::string fileName);
 
 		//Permet d'ajouter une activite au sénario
@@ -49,8 +50,11 @@ class Scenario{
 		//Permet de supprimer une activité au sénario
 		void removeActivity(int i);
 	private:
+		// permettra de lancer Open Framework
 		Of *of;
+		// nom du scenario
 		std::string name;
+		// liste des activites du scenario
 		std::vector<Activity*> activities;
 		void killOf();
 

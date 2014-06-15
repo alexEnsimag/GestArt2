@@ -1,10 +1,14 @@
 #include "Of.hpp"
-#include "Processing.hpp"
 
-#define OF_PATH_RECOGNIZE "lib/OpenFrameworks/of_v0.8.1_linux64_release/apps/myApps/recognizeGesture/bin/"
-#define OF_PATH_REGISTER "lib/OpenFrameworks/of_v0.8.1_linux64_release/apps/myApps/registerGesture/bin/"
+using namespace std;
 
+/*
+* Lance les applications open framework et processing
+* le programme d'open framework lance est celui pour la reconnaissance
+* de gestes
+*/
 void Of::launchOfRecognize(){
+	// preparation commande pour lancer processing
 	char *argOf[2];
 	string nameCommandOf = OF_PATH_RECOGNIZE;
 	nameCommandOf = nameCommandOf + "./recognizeGesture_debug";
@@ -21,19 +25,25 @@ void Of::launchOfRecognize(){
 			cerr<< "failed execute" <<endl;
 		}
 	}else{			
+		// lancement de processing
 		Processing *proc = new Processing();
 	        pidProc = proc->launchProcessing(false);
 	}
 }
 
 
+/*
+* Lance les applications open framework et processing
+* le programme d'open framework lance est celui pour l'enregistrement
+* de gestes
+*/
 void Of::launchOfRegister(){
+	// preparation commande pour lancer processing
 	char *argOf[2];
 	string nameCommandOf = OF_PATH_REGISTER;
 	nameCommandOf = nameCommandOf + "./registerGesture_debug";
 	argOf[0] = (char *) nameCommandOf.c_str();
 	argOf[1] = NULL;
-
 
 	signal(SIGCHLD, SIG_IGN);
 	pidOf = fork();
@@ -44,13 +54,16 @@ void Of::launchOfRegister(){
 			cerr<< "failed execute" <<endl;
 		}
 	}else{			
+		// lancement de procesing
 		Processing *proc = new Processing();
 	        pidProc = proc->launchProcessing(false);
 	}
 }
 
 
-
+/*
+* permet de fermer les applications openframework et processing
+*/
 void Of::killOf(){
 	kill(pidOf, SIGKILL);
 	kill(pidProc, SIGKILL);

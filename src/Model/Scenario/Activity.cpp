@@ -2,6 +2,9 @@
 using namespace std;
 
 
+/*
+* Constructeur : met a jour les attributs d'une activite
+*/
 Activity::Activity(string n, string p, int nb){
 	name = n;
 	param = p;
@@ -32,6 +35,7 @@ void Activity::decrementTrialsNumber(){
 	trialsNumber--;
 }
 
+// transforme l'activite en string
 string Activity::toString(){
 	std::stringstream trialsNb;
 	trialsNb << trialsNumber;
@@ -61,16 +65,24 @@ void Activity::exec(){
 void Activity::closeAct(){
 }
 
+/*
+* Lance l'activite tant que clle-ci n'est pas reussi et que le 
+* nombre d'essai n'a pas encore ete depasse
+*/
 void Activity::launch(){
 	init();
 	int count =0;
 	while (count < trialsNumber && !wellDone){
 		if(count>0){
+			// si rate et nb d'essai pas depasse : lancement
+			// de la video essaie encore
 			Video::launchVideo("Video/EssaieEncore.avi", 5000);
 		}
 		count ++;
+		// execute l'activite
 		exec();
 	}
+	// fermeture de l'activite
 	closeAct();
 }
 

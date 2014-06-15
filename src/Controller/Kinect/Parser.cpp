@@ -1,39 +1,30 @@
 #include "Parser.hpp"
 
 
-#define HEAD "/head_pos_body"
-#define MAING "/lefthand_pos_body"
-#define MAIND "/righthand_pos_body"
-#define SHOULDERL "/leftshoulder_pos_body"
-#define SHOULDERR "/rightshoulder_pos_body"
-#define ELBOWL "/leftelbow_pos_body"
-#define ELBOWR "/rightelbow_pos_body"
-#define TORSO "/torso_pos_body"
-#define HIPR "/righthip_pos_body"
-#define HIPL "/lefthip_pos_body"
-#define KNEER "/rightknee_pos_body"
-#define KNEEL "/leftknee_pos_body"
-#define FOOTR "/rightfoot_pos_body"
-#define FOOTL "/leftfoot_pos_body"
 
-#define NBPOINTS 12
-
+/*
+* Ouvre le fichier a parser
+*/
 void Parser::openFile(string fileName) {
 	file = new ifstream(fileName.c_str(), ios::in);
 }
 
+/*
+* Parse le fichier et met a jour les positions des membres du squelette
+*/
 void Parser::parse(Skeleton *skeleton){
 
 	string mot1;
 	float pos1, pos2, pos3;
 
+	// parse le fichier
 	for(int i=0; i<NBPOINTS; i++){
 		*file >> mot1 >> pos1 >> pos2 >> pos3;
 		Vector3f p;
+		// maj des coordonnes
 		p.x = pos1/1000;
 		p.y = pos2/1000;
 		p.z = (pos3-3000)/1500;
-//		p.z = 0;
 		if(! mot1.compare(MAING)){
 			skeleton->setHandD(p);
 		}else if(! mot1.compare(MAIND)){
@@ -67,6 +58,9 @@ void Parser::parse(Skeleton *skeleton){
 	}
 }
 
+/*
+* Ferme le fichier a parser
+*/
 void Parser::close(){
 	file->close();
 }
