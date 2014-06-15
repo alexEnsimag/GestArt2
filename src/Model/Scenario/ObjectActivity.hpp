@@ -1,5 +1,6 @@
 /*
-*
+* Classe representant une activite objet : activite qui consiste
+* a reconnaitre le QrCode d'un objet presente a la kinect. 
 */
 
 #ifndef DEF_OBJECTACTIVITY
@@ -16,8 +17,11 @@
 class ObjectActivity : public Activity {
 	public: 
 		ObjectActivity(std::string p, int nb) : Activity("ActiviteObjet",p, nb){}
+		// initialisation de l'activite objet
 		virtual void init();
+		// execution de l'activité
 		virtual void exec();
+		// fermeture de l'activite
 		virtual void closeAct();
 
 	private:

@@ -1,19 +1,5 @@
 /*
-
-	Copyright 2010 Etay Meiri
-
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
+* Definit differents types et fonctions pour manipuler les vecteurs
 */
 
 #ifndef MATH_3D_H
@@ -26,11 +12,11 @@
 #else
 #include <math.h>
 #endif
-//#include "Mesh.hpp"
 
 #define ToRadian(x) (float)(((x) * M_PI / 180.0f))
 #define ToDegree(x) (float)(((x) * 180.0f / M_PI))
 
+// point deux d
 struct Vector2i
 {
     int x;
@@ -53,7 +39,7 @@ struct Vector2f
     }
 };
 
-
+// point 3D
 struct Vector3f
 {
     float x;
@@ -71,6 +57,7 @@ struct Vector3f
         z = _z;
     }
 
+	// quelques operations
     Vector3f& operator+=(const Vector3f& r)
     {
         x += r.x;
@@ -180,7 +167,7 @@ public:
     void InitPersProjTransform(float FOV, float Width, float Height, float zNear, float zFar);
 };
 
-
+// quaternion
 struct Quaternion
 {
     float x, y, z, w;
@@ -197,18 +184,24 @@ Quaternion operator*(const Quaternion& l, const Quaternion& r);
 Quaternion operator*(const Quaternion& q, const Vector3f& v);
 
 
+// Quelques fonctions pour des points 3D
+
+// distance entre deux points
 static float distancePoints(Vector3f p1, Vector3f p2){
 	return (sqrt((p1.x+p2.x)*(p1.x+p2.x)+(p1.y+p2.y)*(p1.y+p2.y)+(p1.z+p2.z)*(p1.z+p2.z)));
 }
 
+// produit scalaire
 static float scal(Vector3f p1, Vector3f p2){
 	return p1.x*p2.x+p1.y*p2.y+p1.z*p2.z;
 }
 
+// longueur
 static float longueur(Vector3f p){
 	return sqrt(p.x*p.x+p.y*p.y+p.z*p.z);
 }
 
+// projection
 static Vector3f projection(Vector3f p1, Vector3f p2){
 	float dist = scal(p1,p2)/longueur(p2);
 	Vector3f p;
@@ -219,18 +212,7 @@ static Vector3f projection(Vector3f p1, Vector3f p2){
 	return p;
 }
 
-/*
-class Segment{
-	public:
-	Vertex3f *p1;
-	Vertex3f *p2;
-	vector<Vertex> vertexAssocies;
-	Segment(Vertex3f* a, Vertex3f* b){
-		p1 = a;
-		p2=b;
-	}
-};
-*/
+
 
 #endif	/* MATH_3D_H */
 

@@ -1,3 +1,6 @@
+/*
+* Cette classe définit un squelette opengl pour la visualisation d'un mouvement. 
+*/
 
 #ifndef DEF_SQUELETTE
 #define DEF_SQUELETTE
@@ -14,9 +17,12 @@ class Skeleton {
 	public:
 		Skeleton();
 		Skeleton(Mesh *abd, Mesh* abg, Mesh* bd, Mesh* bg, Mesh* chest, Mesh* tete, Mesh* pelvis, Mesh* jd, Mesh* jg, Mesh* md, Mesh* mg);
+		// dessine le squelette
 		void draw();
+		// vecteur d'os
 		vector<Bone*> os;
-
+		// methode de odification des coordonnees de tous les
+		// membres du squelette
 		void setHead(Vector3f p);		
 		void setNeck(Vector3f p);		
 		void setAss(Vector3f p);		
@@ -35,7 +41,8 @@ class Skeleton {
 		void setFootD(Vector3f p);		
 
 	private:
-
+		
+		// tous les membres du squelettes
 		Vector3f head;
 		Vector3f neck;
 		Vector3f ass;

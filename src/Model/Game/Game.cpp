@@ -11,6 +11,9 @@ int Game::getNbScenar(){
 	return scenar.size();
 }
 
+/*
+*Retourne le scenario numero i
+*/
 Scenario *Game::getScenar(int i){
 	if (i >= scenar.size()){
 		cout << "Erreur, tentative d'acces a un scénario inexistant" << endl;
@@ -19,10 +22,12 @@ Scenario *Game::getScenar(int i){
 	return &(scenar[i]);
 }
 
+// lance le scenario numero i
 void Game::launch(int i){
 	scenar[i].launch();
 }
 
+// maj des scnarios a partir du fichier
 void Game::updateScenar(){
 	scenar.clear();
 	//Parcours du dossier Scenar/ et ajout au jeu
@@ -54,6 +59,7 @@ void Game::updateScenar(){
 	closedir(rep);
 }
 
+// supprime un scnenario
 void Game::delScenar(int i){
 	string fileName = "Scenario/" + scenar[i].getName() + ".txt";
 	int res = remove(fileName.c_str());

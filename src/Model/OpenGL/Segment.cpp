@@ -13,7 +13,7 @@ Bone::Bone(Vector3f* a, Vector3f* b, Mesh* m){
 	mesh = m;
 }
 
-
+// Affichage de l'os avec la mesh
 void Bone::displayMesh(){
 	if (mesh == NULL)
 		return;
@@ -22,13 +22,11 @@ void Bone::displayMesh(){
 	glPushMatrix();
 	glTranslatef(center.x, center.y, center.z);
 	glRotatef(rot.z,0, 0, 1);
-	//printf("rot.y:%f\n", rot.y);
-	//glRotatef(rot.y,0, 1, 0);
-	//glRotatef(rot.x,1, 0, 0);
 	mesh->Render(1.0/2.5);
 	glPopMatrix();
 }
 
+// Affichage de l'os
 void Bone::display(){
 	glBegin(GL_LINES);
 	glVertex3f(p1->x,p1->y,p1->z);

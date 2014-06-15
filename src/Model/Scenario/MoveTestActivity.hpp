@@ -1,3 +1,7 @@
+/*
+* Classe servant pour la reconnaissance d'un mouvement prealablement
+* enregistre par l'administrateur. 
+*/
 
 #ifndef DEF_MOVETESTACTIVITY
 #define DEF_MOVETESTACTIVITY
@@ -15,7 +19,9 @@
 class MoveTestActivity : Activity{
 	public: 
 		MoveTestActivity() : Activity("ActiviteTestMouv", "", 0){};
+		// test si le mouvement gestureName est reconnu
 		void tryGesture(std::string gestureName);
+		// methodes non utiles ici
 		virtual void init(){};
 		virtual void exec(){};
 		virtual void closeAct(){};

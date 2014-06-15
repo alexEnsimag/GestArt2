@@ -12,6 +12,9 @@ void kill_child(int sig)
         kill(pid,SIGKILL);
 }
 
+/*
+* initialisation de l'activite. Lancement des videos
+*/ 
 void ObjectActivity::init(){  
 	wellDone = false;
 	duration = DUR_RECO_OBJ;

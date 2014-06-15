@@ -5,6 +5,9 @@
 
 using namespace std;
 
+/*
+* Initialisation de l'activite. Lancement des videos
+*/
 void ShapeActivity::init(){
 	wellDone = false;
 	duration = DUR_RECO_GESTES;
@@ -14,12 +17,21 @@ void ShapeActivity::init(){
 	Video::launchVideo("Video/RefaireGeste.avi", 8000);
 }
 
+/*
+* Execution de l'activite. Lancement de Osc pour reconnaitre le 
+* mouvement voulu
+*/
 void ShapeActivity::exec(){
 	Osc *osc = new Osc();
+	// recuperation du numero correspondanrt au gest
 	int numLabel = GesturesMap::getGestByName(getParam());
 	osc->launchOsc(numLabel, this);
 }
 
+/*
+* Fermeture de l'activite avec lancement des videos selon la
+* reussite ou l'echec de l'activite
+*/
 void ShapeActivity::closeAct(){
 	if(getWellDone() == true){
 		Video::launchVideo("Video/Bravo.avi", 3000);
@@ -28,17 +40,3 @@ void ShapeActivity::closeAct(){
 	}
 }
 
-/*
-void ShapeActivity::launchOsc(int numLabel){
-	ExamplePacketListener listener;
-	// maj classLabel
-	listener.setClassLabel(numLabel);
-	UdpListeningReceiveSocket s(
-			IpEndpointName( IpEndpointName::ANY_ADDRESS, PORT ),
-			&listener );    
-	listener.setS(&s);
-	listener.setActivite(this);
-	s.Run();
-
-}
-*/

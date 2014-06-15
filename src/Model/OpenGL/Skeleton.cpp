@@ -2,6 +2,10 @@
 #include "Skeleton.hpp"
 
 
+/*
+* Constructeur : defini les coordonnees initiales de tous les membres
+* du squelette puis ajoute les os a la liste d'os.
+*/
 Skeleton::Skeleton(){
 
 
@@ -44,18 +48,11 @@ Skeleton::Skeleton(){
 	kneexD.x = -0.1f;
 	kneexD.z = 2.0f; 
 	kneexD.y = -0.35f;
-/*
-	footG.x = 0.1f;
-	footG.z = 2.0f; 
-	footG.y = -0.7f;
-	footD.x = -0.1f;
-	footD.z = 2.0f; 
-	footD.y = -0.7f;
-*/
+	
+	// Ajoute a la liste d'os tous les os du squelette
 	os.push_back(new Bone(&pelvisD, &pelvisG));	
 	os.push_back(new Bone(&neck, &chest));	
 	os.push_back(new Bone(&chest, &ass));	
-	//os.push_back(new Bone(&head, &neck));	
 	os.push_back(new Bone(&shoulderD, &shoulderG));	
 	os.push_back(new Bone(&shoulderG, &elbowG));	
 	os.push_back(new Bone(&shoulderD, &elbowD));	
@@ -63,11 +60,12 @@ Skeleton::Skeleton(){
 	os.push_back(new Bone(&pelvisD, &kneexD));	
 	os.push_back(new Bone(&elbowG, &handG));	
 	os.push_back(new Bone(&elbowD, &handD));	
-	//os.push_back(new Bone(&kneexG, &footG));	
-	//os.push_back(new Bone(&kneexD, &footD));	
 }
 
 
+/*
+* Autre constructeur, utilise si on charge les mesh blender 
+*/
 Skeleton::Skeleton(Mesh *aBrasD, Mesh* aBrasG, Mesh* brasD, Mesh* brasG, Mesh* torso, Mesh* tete, Mesh* pelvis, Mesh* jambeD, Mesh* jambeG, Mesh* molletD, Mesh* molletG){
 
 	head.x = 0.0f;head.y = 0.8f;head.z = 0.0f;
@@ -82,8 +80,6 @@ Skeleton::Skeleton(Mesh *aBrasD, Mesh* aBrasG, Mesh* brasD, Mesh* brasG, Mesh* t
 	pelvisD.x = -0.1f;pelvisD.y = 0.1f;pelvisD.z = 0.0f; 
 	kneexG.x = 0.1f;kneexG.y = -0.35f;kneexG.z = 0.0f; 
 	kneexD.x = -0.1f;kneexD.y = -0.35f;kneexD.z = 0.0f; 
-	//footG.x = 0.1f;footG.y = -0.7f;footG.z = 0.0f; 
-	//footD.x = -0.1f;footD.y = -0.7f;footD.z = 0.0f; 
 
 	os.push_back(new Bone(&pelvisD, &pelvisG));
 	os.push_back(new Bone(&chest, &ass, pelvis));	
@@ -96,10 +92,9 @@ Skeleton::Skeleton(Mesh *aBrasD, Mesh* aBrasG, Mesh* brasD, Mesh* brasG, Mesh* t
 	os.push_back(new Bone(&elbowD, &handD, aBrasD));	
 	os.push_back(new Bone(&pelvisG, &kneexG, jambeG));	
 	os.push_back(new Bone(&pelvisD, &kneexD, jambeD));	
-	//os.push_back(new Bone(&kneexG, &footG, molletG));	
-	//os.push_back(new Bone(&kneexD, &footD, molletD));	
 }
 
+// Dessine le squelette
 void Skeleton::draw(){
 
 	glLineWidth(6);
@@ -116,19 +111,7 @@ void Skeleton::draw(){
 	pAss.z =  (pelvisG.z+pelvisD.z)/2;
 	setAss(pAss);
 
-	//maj foot et kneex
-	/*
-	kneexD.x = pelvisD.x;
-	kneexD.z = pelvisD.z;
-	kneexG.x = pelvisG.x;
-	kneexG.z = pelvisG.z;
-	footD.x = kneexD.x;
-	footD.z = kneexD.z;
-	footG.x = kneexG.x;
-	footG.z = kneexG.z;
-	*/
-	 
-
+	// affichage de tous les membres
 	for(int i=0; i<os.size(); i++){
 		os[i]->display();
 	}

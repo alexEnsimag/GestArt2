@@ -1,4 +1,6 @@
-
+/*
+* Defition d'une mesh et des fonctions concernant les mesh
+*/
 
 #ifndef DEF_MESH_H
 #define	DEF_MESH_H
@@ -10,9 +12,7 @@
 #include <assimp/scene.h>       // Output data structure
 #include <assimp/postprocess.h> // Post processing flags
 
-//#include "ogldev_util.h"
 #include "math_3d.h"
-//#include "ogldev_texture.h"
 
 struct Vertex
 {
@@ -41,8 +41,10 @@ public:
 
     std::vector<Vertex> Vertices;
 
+    // load une mesh contenu dans filename
     bool LoadMesh(const std::string& Filename);
 
+    // affichage de la mesh
     void Render(float ratio);
 
 private:
@@ -69,7 +71,6 @@ private:
     };
 
     std::vector<MeshEntry> m_Entries;
-    //std::vector<Texture*> m_Textures;
 };
 
 

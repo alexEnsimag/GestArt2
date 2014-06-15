@@ -4,7 +4,6 @@
 
 #include "Mesh.hpp"
 
-//std::vector<Vertex> Vertices;
 std::vector<unsigned int> Indices;
 
 
@@ -66,14 +65,10 @@ Mesh::~Mesh()
 
 void Mesh::Clear()
 {
-	/*
-	   for (unsigned int i = 0 ; i < m_Textures.size() ; i++) {
-	   SAFE_DELETE(m_Textures[i]);
-	   }
-	 */
 }
 
 
+// focntion princiapele qui load une mesh
 bool Mesh::LoadMesh(const std::string& Filename)
 {
 	// Release the previously loaded mesh (if it exists)

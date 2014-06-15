@@ -5,6 +5,10 @@
 using namespace std;
 
 
+/*
+* Lance les applications necessaires afin de savoir si le mouvement
+* appele textField est reconnu ou non
+*/
 void MoveTestActivity::tryGesture(string textField){
 	duration = DUR_TEST_MOV;
 	wellDone = false;
