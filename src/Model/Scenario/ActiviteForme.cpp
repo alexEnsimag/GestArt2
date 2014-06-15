@@ -11,7 +11,7 @@ void ActiviteForme::init(){
 	string uri = "Video/" + getParam() + ".avi";
 	Video::lancerVideo(uri, getDuree());
 	
-	Video::lancerVideo("Video/RefaireGeste.avi", 8000);
+	Video::lancerVideo("Video/RefaireGeste.avi", 5000);
 }
 
 void ActiviteForme::exec(){
@@ -22,9 +22,9 @@ void ActiviteForme::exec(){
 
 void ActiviteForme::closeAct(){
 	if(getWellDone() == true){
-		Video::lancerVideo("Video/Bravo.avi", 3000);
+		Video::lancerVideo("Video/Bravo.avi", 6000);
 	}else{
-		Video::lancerVideo("Video/Presque.avi", 11000);
+		Video::lancerVideo("Video/Presque.avi", 5000);
 	}
 }
 

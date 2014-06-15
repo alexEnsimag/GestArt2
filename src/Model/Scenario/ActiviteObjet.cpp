@@ -89,8 +89,8 @@ void ActiviteObjet::exec(){
 // Affiche un message indiquant l'echec ou la réussite de l'activité
 void ActiviteObjet::closeAct(){
     if(getWellDone() == true){
-	Video::lancerVideo("Video/Bravo.avi", 2000);
+	Video::lancerVideo("Video/Bravo.avi", 6000);
     }else{
-	Video::lancerVideo("Video/Presque.avi",11000);
+	Video::lancerVideo("Video/Presque.avi",5000);
     }
 }
