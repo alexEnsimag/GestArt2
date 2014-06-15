@@ -104,8 +104,8 @@ void testApp::setup()
 
     //The input to the training data will be the [x y] from the mouse, so we set the number of dimensions to 2
     trainingData.setNumDimensions( 6 );
-    //performTrainingLabel();
-    trainingClassLabel = 1;
+    performTrainingLabel();
+    //trainingClassLabel = 1;
 
     //Initialize the DTW classifier
     DTW dtw;
@@ -127,6 +127,7 @@ void testApp::setup()
     //Add the classifier to the pipeline (after we do this, we don't need the DTW classifier anymore)
     pipeline.setClassifier( dtw );
 
+    //Chargement des données déjà sauvegardées
     if( trainingData.loadDatasetFromFile("TrainingData.txt") )
     {
         infoText = "Training data saved to file";
@@ -182,41 +183,9 @@ void testApp::draw()
 
     ofSetColor(255, 255, 255);
 
-    // Draw instructions
-    /*text = "------ Instructions ------";
-    ofDrawBitmapString(text, textX,textY);
-
-    textY += 15;
-    text = "1) Prenez la position de calibrage jusqu'à ce que votre squelette soit détecté";
-    	ofDrawBitmapString(text, textX,textY);
-
-    textY += 15;
-    text = "2) Le label TrainingClassLabel correspond au geste en cours d'enregistrement, et le label NumTrainingSamples correspond au nombre d'enregistrements pour ce geste";
-    	ofDrawBitmapString(text, textX,textY);
-
-    textY += 15;
-    text = "3) Pour effectuer un enregistrement : \n- appuyez sur la touche r \n- effectuez votre geste \n- appuyez à nouveau sur r";
-    	ofDrawBitmapString(text, textX,textY);
-
-    textY += 15;
-    text = "4) Pour passer au geste suivant : appuyez sur la touche ]";
-    	ofDrawBitmapString(text, textX,textY);
-
-    textY += 15;
-    text = "5) Pour revenir sur un geste : appuyez sur la touche [";
-    	ofDrawBitmapString(text, textX,textY);
-
-    textY += 15;
-    text = "6) Pour recommencez au début : appuyez sur la touche c";
-    	ofDrawBitmapString(text, textX,textY);
-
-    textY += 15;
-    text = "7) Une fois terminé, appuyez sur la touche s pour sauvegarder les données";
-    	ofDrawBitmapString(text, textX,textY);*/
-
     //Draw the training info
     textY += 30;
-    text = "------------------- TrainingInfo -------------------";
+    text = "---- TrainingInfo ----";
     ofDrawBitmapString(text, textX,textY);
 
     if( record ) ofSetColor(255, 0, 0);
@@ -367,6 +336,7 @@ void testApp::dragEvent(ofDragInfo dragInfo)
 
 }
 
+// Place le trainingClassLabel sur le numéro du geste où enregistrer les échantillons
 void testApp::performTrainingLabel()
 {
     //string gestFileName ="../../../../../../../src/Model/Account/gestFile.txt"; // si testé à part
@@ -387,10 +357,11 @@ void testApp::performTrainingLabel()
             cout << buffer << endl;
             nbGestures++;
         }
-        trainingClassLabel = nbGestures - 1; // on retire la dernière ligne
-        cout << trainingClassLabel << " gestes charges" << endl;
-        trainingClassLabel++; // on incrémente pour l'enregistrement du nouveau geste
+        if(nbGestures > 0) { // si fichier vide, on ne fait rien
+            trainingClassLabel = nbGestures - 2; // on retire la dernière ligne + la ligne du geste déjà écrit avant l'ouverture de ce programme
+            cout << trainingClassLabel << " gestes charges" << endl;
+            trainingClassLabel++; // on incrémente pour l'enregistrement du nouveau geste
+        }
     }
     fichier.close();
-
 }
