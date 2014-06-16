@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<project name="Gest-art" company="Scrum" manager="" phase="" project-start="20140526T000000Z" mrproject-version="2" calendar="1">
+  <properties/>
+  <phases/>
+  <calendars>
+    <day-types>
+      <day-type id="0" name="Working" description="A default working day"/>
+      <day-type id="1" name="Nonworking" description="A default non working day"/>
+      <day-type id="2" name="Use base" description="Use day from base calendar"/>
+    </day-types>
+    <calendar id="1" name="Default">
+      <default-week mon="0" tue="0" wed="0" thu="0" fri="0" sat="1" sun="1"/>
+      <overridden-day-types>
+        <overridden-day-type id="0">
+          <interval start="0800" end="1200"/>
+          <interval start="1300" end="1700"/>
+        </overridden-day-type>
+      </overridden-day-types>
+      <days>
+        <day date="20150509" type="day-type" id="0"/>
+        <day date="20140621" type="day-type" id="0"/>
+        <day date="20140531" type="day-type" id="0"/>
+        <day date="20140510" type="day-type" id="0"/>
+        <day date="20150627" type="day-type" id="1"/>
+        <day date="20150606" type="day-type" id="0"/>
+        <day date="20150516" type="day-type" id="0"/>
+        <day date="20140628" type="day-type" id="0"/>
+        <day date="20140607" type="day-type" id="0"/>
+        <day date="20140517" type="day-type" id="0"/>
+        <day date="20150613" type="day-type" id="0"/>
+        <day date="20150523" type="day-type" id="0"/>
+        <day date="20150502" type="day-type" id="0"/>
+        <day date="20140726" type="day-type" id="0"/>
+        <day date="20140614" type="day-type" id="0"/>
+        <day date="20140524" type="day-type" id="0"/>
+        <day date="20140503" type="day-type" id="0"/>
+        <day date="20150620" type="day-type" id="0"/>
+        <day date="20150530" type="day-type" id="0"/>
+      </days>
+    </calendar>
+  </calendars>
+  <tasks>
+    <task id="1" name="Installations" note="" work="86400" start="20140526T000000Z" end="20140528T170000Z" work-start="20140526T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+    <task id="2" name="Animation 3D" note="" work="312300" start="20140528T170000Z" end="20140607T154500Z" work-start="20140529T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="1" type="FS"/>
+      </predecessors>
+      <task id="3" name="Cr&#xE9;ation d'un mod&#xE8;le 3D sous Blender" note="" work="57600" start="20140528T170000Z" end="20140530T170000Z" work-start="20140529T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="4" name="Animation d'un mod&#xE8;le 3D avec Blender et Nimate" note="" work="28800" start="20140530T170000Z" end="20140531T170000Z" work-start="20140531T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="1" type="FS"/>
+          <predecessor id="1" predecessor-id="3" type="FS"/>
+        </predecessors>
+      </task>
+      <task id="5" name="Cr&#xE9;tion des videos avec Blender et Nimate" note="" work="57600" start="20140528T170000Z" end="20140530T170000Z" work-start="20140529T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="6" name="Cr&#xE9;ation et animation d'un mod&#xE8;le 3D en OpenGL" note="" work="168300" start="20140531T170000Z" end="20140607T154500Z" work-start="20140602T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="4" type="FS"/>
+        </predecessors>
+        <task id="7" name="Squelette" note="" work="24300" start="20140531T170000Z" end="20140602T154500Z" work-start="20140602T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+        <task id="8" name="importation du mod&#xE8;le Blender" note="" work="57600" start="20140602T154500Z" end="20140604T154500Z" work-start="20140602T154500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="7" type="FS"/>
+          </predecessors>
+        </task>
+        <task id="9" name="Animation du mod&#xE8;le Blender" note="" work="86400" start="20140604T154500Z" end="20140607T154500Z" work-start="20140604T154500Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+          <predecessors>
+            <predecessor id="1" predecessor-id="8" type="FS"/>
+          </predecessors>
+        </task>
+      </task>
+    </task>
+    <task id="10" name="Interface" note="" work="86400" start="20140528T170000Z" end="20140531T170000Z" work-start="20140529T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="1" type="FS"/>
+      </predecessors>
+    </task>
+    <task id="11" name="reconaissnce de geste" note="" work="316800" start="20140528T170000Z" end="20140610T170000Z" work-start="20140529T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="1" type="FS"/>
+      </predecessors>
+      <task id="12" name="Impl&#xE9;mentation" note="" work="115200" start="20140528T170000Z" end="20140602T170000Z" work-start="20140529T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="13" name="Int&#xE9;gation" note="" work="201600" start="20140602T170000Z" end="20140610T170000Z" work-start="20140603T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="12" type="FS"/>
+        </predecessors>
+      </task>
+    </task>
+    <task id="14" name="reconaissance d'objet" note="" work="115200" start="20140528T170000Z" end="20140602T170000Z" work-start="20140529T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="1" type="FS"/>
+      </predecessors>
+      <task id="15" name="Recherche" note="" work="28800" start="20140528T170000Z" end="20140529T170000Z" work-start="20140529T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work"/>
+      <task id="16" name="Integration" note="" work="86400" start="20140529T170000Z" end="20140602T170000Z" work-start="20140530T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+        <predecessors>
+          <predecessor id="1" predecessor-id="15" type="FS"/>
+        </predecessors>
+      </task>
+    </task>
+    <task id="17" name="Cr&#xE9;ation de sc&#xE9;nario" note="" work="86400" start="20140610T170000Z" end="20140613T170000Z" work-start="20140611T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="14" type="FS"/>
+        <predecessor id="1" predecessor-id="11" type="FS"/>
+        <predecessor id="1" predecessor-id="2" type="FS"/>
+      </predecessors>
+    </task>
+    <task id="18" name="Documentation" note="" work="57600" start="20140613T170000Z" end="20140616T170000Z" work-start="20140614T080000Z" percent-complete="0" priority="0" type="normal" scheduling="fixed-work">
+      <predecessors>
+        <predecessor id="1" predecessor-id="17" type="FS"/>
+      </predecessors>
+    </task>
+  </tasks>
+  <resource-groups default_group="1">
+    <group id="1" name="Gest-art" admin-name="" admin-phone="" admin-email=""/>
+  </resource-groups>
+  <resources/>
+  <allocations/>
+</project>
