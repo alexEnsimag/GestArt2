@@ -16,10 +16,10 @@ void kill_child(int sig)
 * initialisation de l'activite. Lancement des videos
 */ 
 void ObjectActivity::init(){  
-	wellDone = false;
+	//wellDone = false;
 	duration = DUR_RECO_OBJ;
-	string uri = "Video/" + getParam() + ".avi";
-	Video::launchVideo(uri, getDuree());
+	//string uri = "Video/" + getParam() + ".avi";
+	//Video::launchVideo(uri, getDuree());
 	string uri2 = "Video/Montre"+getParam()+".avi";
 	Video::launchVideo(uri2, 8000);
 }

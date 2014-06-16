@@ -27,7 +27,7 @@ void Of::launchOfRecognize(){
 	}else{			
 		// lancement de processing
 		Processing *proc = new Processing();
-	        pidProc = proc->launchProcessing(false);
+	        pidProc = proc->launchProcessing(true);
 	}
 }
 

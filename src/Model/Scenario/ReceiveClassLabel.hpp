@@ -83,7 +83,7 @@ protected:
         }catch( osc::Exception& e ){
             // any parsing errors such as unexpected argument types, or 
             // missing arguments get thrown as exceptions.
-            std::cout << m.AddressPattern() << ": " << e.what() << "\n";
+            //std::cout << m.AddressPattern() << ": " << e.what() << "\n";
         }
     }
 };

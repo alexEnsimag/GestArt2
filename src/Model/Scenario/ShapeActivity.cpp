@@ -9,10 +9,10 @@ using namespace std;
 * Initialisation de l'activite. Lancement des videos
 */
 void ShapeActivity::init(){
-	wellDone = false;
+	//wellDone = false;
 	duration = DUR_RECO_GESTES;
-	string uri = "Video/" + getParam() + ".avi";
-	Video::launchVideo(uri, getDuree());
+	//string uri = "Video/" + getParam() + ".avi";
+	//Video::launchVideo(uri, getDuree());
 	
 	Video::launchVideo("Video/RefaireGeste.avi", 8000);
 }

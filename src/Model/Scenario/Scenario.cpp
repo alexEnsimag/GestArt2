@@ -90,6 +90,10 @@ void Scenario::launch(){
 	Video::launchVideo("Video/Intro.avi", 7000);
 	// parcourt de la liste des activités
 	for(int i=0; i<activities.size(); i++){
+		activities[i]->setWellDone(false);
+		string uri = "Video/" + activities[i]->getParam() + ".avi";
+		Video::launchVideo(uri, activities[i]->getDuree());
+
 		// si c'est une activité forme 
 		if(!b && activities[i]->getName()=="ActiviteForme"){
 			b = true;
