@@ -52,7 +52,6 @@ void Activity::setWellDone(bool b){
 	if(name == "ActiviteTestMouv" && b){
 		displayMessage("Mouvement reconnu");		
 	}	
-	cout << "Activite : " << name << endl;
 }
 
 void Activity::init(){
