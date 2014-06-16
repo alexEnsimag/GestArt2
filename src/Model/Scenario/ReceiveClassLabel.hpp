@@ -62,6 +62,7 @@ protected:
 			// Récupération du paramètre du message
 			std::string classLabel = (arg++)->AsString();
 			// Conversion du _classLabel en string
+			cout << "Geste detecte : " << classLabel << endl;
 			char * s;
 			sprintf(s, "%d",_classLabel);
 			if(strcmp(classLabel.c_str(), s) == 0) {
