@@ -99,7 +99,7 @@ void Scenario::launch(){
 			b = true;
 			// lancement of et processing
 			of = new Of();
-			of->launchOfRecognize();
+			of->launchOfRecognize(true, false);
 		}
 		// si c'est une activite objet, et que b vaut true
 		if(b && activities[i]->getName()=="ActiviteObjet"){

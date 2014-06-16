@@ -111,7 +111,7 @@ void PageAdmin::modifScenarioFunc(){
 * - enregistrement du geste et sa classLabel dans un fichier
 */
 bool PageAdmin::dialogueResponse() {
-	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
+	Dialogue diag("Choix d'un geste", this, "Veuillez entrer le nom du geste");
 	if(diag.run() == Gtk::RESPONSE_OK) { 
 		textField = diag.getText();
 		return true;

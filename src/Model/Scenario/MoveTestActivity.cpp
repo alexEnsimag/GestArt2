@@ -20,7 +20,7 @@ void MoveTestActivity::tryGesture(string textField){
 
 		cout << "ClassLabel du geste : " << key << endl;		
 		Of *of = new Of();
-		of->launchOfRecognize(); 
+		of->launchOfRecognize(false, true); 
 
 
 		Osc *ocs = new Osc();

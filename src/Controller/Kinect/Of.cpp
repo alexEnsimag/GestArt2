@@ -6,15 +6,22 @@ using namespace std;
 * Lance les applications open framework et processing
 * le programme d'open framework lance est celui pour la reconnaissance
 * de gestes
+* showSkel : true si on affiche le squelette, faux si instructions de jeu
+* showOF   : true si on affiche OF
 */
-void Of::launchOfRecognize(){
+void Of::launchOfRecognize(bool showSkel, bool showOF){
 	// preparation commande pour lancer processing
 	char *argOf[2];
-	string nameCommandOf = OF_PATH_RECOGNIZE;
-	nameCommandOf = nameCommandOf + "./recognizeGesture_debug";
+	string nameCommandOf;
+	if(showOF) {
+	    nameCommandOf = OF_PATH_RECOGNIZE;
+	    nameCommandOf = nameCommandOf + "./recognizeGesture_debug";
+	} else {
+	    nameCommandOf = OF_PATH_RECOGNIZE_HIDE;
+	    nameCommandOf = nameCommandOf + "./recognizeGestureHide_debug";	
+	}
 	argOf[0] = (char *) nameCommandOf.c_str();
 	argOf[1] = NULL;
-
 
 	signal(SIGCHLD, SIG_IGN);
 	pidOf = fork();
@@ -27,7 +34,7 @@ void Of::launchOfRecognize(){
 	}else{			
 		// lancement de processing
 		Processing *proc = new Processing();
-	        pidProc = proc->launchProcessing(true);
+	        pidProc = proc->launchProcessing(showSkel);
 	}
 }
 
