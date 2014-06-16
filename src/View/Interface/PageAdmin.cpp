@@ -137,12 +137,6 @@ void PageAdmin::launchSamplesRecord(){
 * dans le bon repertoire 
 */
 void PageAdmin::launchRecord(){
-	Dialogue diag("Choix d'un dossier", this, "Veuillez entrer le nom de fichier");
-	int reponse = diag.run();
-	if(reponse == Gtk::RESPONSE_OK) { 
-		textField = diag.getText();
-		diag.hide();
-	}
 	if(dialogueResponse()) {
 		Processing *proc = new Processing();
 		proc->launchProcessingWithMove(textField);
